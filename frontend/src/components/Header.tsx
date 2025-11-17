@@ -3,9 +3,12 @@
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { Menu, Scale, Search, UserRound } from 'lucide-react';
+import { Menu, Scale, Search } from 'lucide-react';
 
 const navLinks = [
+  { href: '/dashboard', label: 'Dashboard' },
+  { href: '/vehicles', label: 'Vehicles' },
+  { href: '/marketplace', label: 'Marketplace' },
   { href: '/new-vehicles', label: 'New Vehicles' },
   { href: '/used-vehicles', label: 'Used Vehicles (AutoUsed)' },
   { href: '/services', label: 'Services' },
@@ -56,10 +59,22 @@ export default function Header() {
             <Scale className="w-4 h-4" />
             Compare ({compareCount})
           </button>
-          <Link href="/profile" className="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full hover:bg-white/20 transition-colors">
-            <UserRound className="w-4 h-4" />
-            <span>Login</span>
-          </Link>
+          <div className="flex items-center gap-3 rounded-full border border-white/10 bg-white/10 px-4 py-2 text-sm text-white">
+            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-600 text-xs font-semibold uppercase">
+              AU
+            </div>
+            <div className="flex flex-col leading-tight">
+              <span className="font-semibold">Guest</span>
+              <span className="text-xs text-white/70">Owner account</span>
+            </div>
+          </div>
+          <button
+            type="button"
+            onClick={() => router.push('/login')}
+            className="btn-secondary px-4 py-2 text-sm"
+          >
+            Logout
+          </button>
         </div>
 
         <button
@@ -115,6 +130,18 @@ export default function Header() {
               </li>
             ))}
           </ul>
+          <div className="border-t border-white/10 px-4 pb-4 pt-2">
+            <button
+              type="button"
+              onClick={() => {
+                router.push('/login');
+                setIsMenuOpen(false);
+              }}
+              className="w-full rounded-full border border-white/30 px-4 py-2 text-sm text-white"
+            >
+              Logout
+            </button>
+          </div>
         </nav>
       )}
     </header>

@@ -1,30 +1,16 @@
-export const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:5000';
-
-export const fetcher = async <T>(path: string, init?: RequestInit): Promise<T> => {
-  const response = await fetch(`${API_BASE_URL}${path}`, {
-    ...init,
-    headers: {
-      'Content-Type': 'application/json',
-      ...(init?.headers || {})
-    },
-    cache: init?.cache ?? 'no-store'
-  });
-
-  if (!response.ok) {
-    throw new Error(`Request failed: ${response.status}`);
-  }
-
-  return response.json();
-};
+export const API_BASE_URL =
+  process.env.NEXT_PUBLIC_API_URL ||
+  process.env.REACT_APP_API_URL ||
+  'http://localhost:8000/api';
 
 export const formatCurrency = (value?: number, currency = 'INR') => {
-  if (!value) return 'Rs —';
+  if (value == null) return 'Rs --';
   const formatter = new Intl.NumberFormat('en-IN', {
     style: 'currency',
     currency,
     maximumFractionDigits: 0
   });
-  return formatter.format(value).replace('₹', 'Rs');
+  return formatter.format(value);
 };
 
 export const formatPriceRange = (min?: number, max?: number, currency?: string) => {

@@ -2,19 +2,27 @@ export type VehicleType = 'new' | 'used';
 
 export interface Vehicle {
   id: number;
-  name: string;
-  brand: string;
-  segment?: string;
-  type: VehicleType;
+  owner?: number;
+  make: string;
+  model: string;
+  year?: number;
+  vin?: string;
   fuel_type?: string;
   body_type?: string;
   transmission?: string;
-  seating_capacity?: number;
+  registration_doc?: string;
+  created_at?: string;
+  image_url?: string;
+  status?: string;
+  next_service_date?: string;
+  last_service_date?: string;
+  // legacy fields that may still be referenced across the UI
+  name?: string;
+  brand?: string;
   price_min?: number;
   price_max?: number;
   currency?: string;
   rating?: number;
-  image_url?: string;
   thumbnail_url?: string;
   specs?: Record<string, unknown>;
   features?: Record<string, unknown>;
@@ -23,6 +31,7 @@ export interface Vehicle {
   safety_rating?: number;
   categories?: string[];
   is_featured?: boolean;
+  insurance_status?: string;
 }
 
 export interface VehicleListing {
