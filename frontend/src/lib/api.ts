@@ -1,107 +1,62 @@
-import axios, { AxiosError, AxiosRequestConfig } from 'axios';
+import axios from 'axios';
 
-import { API_BASE_URL } from './utils';
-import {
-  getAccessToken,
-  getRefreshToken,
-  redirectToLogin,
-  registerAuthChangeHandler,
-  setAuthTokens,
-} from './auth';
-
-const apiClient = axios.create({
-  baseURL: API_BASE_URL,
-  headers: {
-    'Content-Type': 'application/json'
-  }
+const api = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api',
+  timeout: 10000,
 });
 
-const syncAuthHeader = () => {
-  const token = getAccessToken();
-  if (token) {
-    apiClient.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-  } else {
-    delete apiClient.defaults.headers.common['Authorization'];
-  }
-};
-
-registerAuthChangeHandler(syncAuthHeader);
-
-interface RetryRequestConfig extends AxiosRequestConfig {
-  _retry?: boolean;
-}
-
-let refreshPromise: Promise<string> | null = null;
-
-const attachAccessToken = (config: AxiosRequestConfig) => {
-  const token = getAccessToken();
-  if (token) {
-    config.headers = {
-      ...(config.headers || {}),
-      Authorization: `Bearer ${token}`
-    };
-  }
-  return config;
-};
-
-const refreshAccessToken = async (): Promise<string> => {
-  if (refreshPromise) {
-    return refreshPromise;
-  }
-
-  const refreshToken = getRefreshToken();
-  if (!refreshToken) {
-    throw new Error('Missing refresh token');
-  }
-
-  refreshPromise = axios
-    .post(
-      `${API_BASE_URL}/auth/token/refresh/`,
-      { refresh: refreshToken },
-      { headers: { 'Content-Type': 'application/json' } }
-    )
-    .then(response => {
-      const { access, refresh } = response.data;
-      if (!access || !refresh) {
-        throw new Error('Unable to refresh token');
-      }
-      setAuthTokens(access, refresh);
-      return access;
-    })
-    .finally(() => {
-      refreshPromise = null;
-    });
-
-  return refreshPromise;
-};
-
-apiClient.interceptors.request.use(attachAccessToken);
-
-apiClient.interceptors.response.use(
-  response => response,
-  async (error: AxiosError) => {
-    const originalRequest = error.config as RetryRequestConfig | undefined;
-    if (error.response?.status === 401 && originalRequest && !originalRequest._retry) {
-      try {
-        const newAccessToken = await refreshAccessToken();
-        originalRequest._retry = true;
-        originalRequest.headers = {
-          ...(originalRequest.headers || {}),
-          Authorization: `Bearer ${newAccessToken}`
-        };
-        return apiClient(originalRequest);
-      } catch {
-        redirectToLogin();
-        return Promise.reject(error);
-      }
+// Request interceptor
+api.interceptors.request.use(
+  (config) => {
+    // Add auth token if available
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
     }
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
 
-    if (error.response?.status === 403) {
-      redirectToLogin();
+// Response interceptor
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      // Handle unauthorized
+      localStorage.removeItem('authToken');
+      window.location.href = '/login';
     }
-
     return Promise.reject(error);
   }
 );
 
-export default apiClient;
+export default api;
+
+// Journal API functions
+export const journalApi = {
+  // List journal entries
+  getEntries: (params?: { page?: number; limit?: number; search?: string }) =>
+    api.get('/journal', { params }),
+
+  // Get single entry
+  getEntry: (id: string) => api.get(`/journal/${id}`),
+
+  // Create new entry
+  createEntry: (data: any) => api.post('/journal', data),
+
+  // Update entry
+  updateEntry: (id: string, data: any) => api.put(`/journal/${id}`, data),
+
+  // Delete entry
+  deleteEntry: (id: string) => api.delete(`/journal/${id}`),
+
+  // Upload files
+  uploadFiles: (files: File[]) => {
+    const formData = new FormData();
+    files.forEach(file => formData.append('files', file));
+    return api.post('/upload', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    });
+  },
+};

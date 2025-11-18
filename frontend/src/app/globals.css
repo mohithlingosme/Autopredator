@@ -37,7 +37,10 @@ body {
 .text-neon-green { color: var(--highlight); }
 
 .card {
-  @apply bg-white rounded-xl shadow-lg border border-gray-100;
+  background-color: #ffffff;
+  border-radius: var(--card-radius);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(226, 232, 240, 0.8);
 }
 
 .card-grid {
@@ -47,9 +50,25 @@ body {
 }
 
 .btn-primary {
-  @apply bg-blue text-white px-4 py-2 rounded-md hover:bg-blue/90 transition-colors;
+  background-color: var(--accent);
+  color: #ffffff;
+  padding: 0.5rem 1rem;
+  border-radius: 0.75rem;
+  transition: background-color 0.2s ease;
+}
+
+.btn-primary:hover {
+  background-color: rgba(0, 123, 255, 0.9);
 }
 
 .btn-secondary {
-  @apply bg-gray-200 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-300 transition-colors;
+  background-color: #e2e8f0;
+  color: #1f2937;
+  padding: 0.5rem 1rem;
+  border-radius: 0.75rem;
+  transition: background-color 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background-color: #cbd5f5;
 }
