@@ -1,10 +1,19 @@
 from datetime import timedelta
+from unittest.mock import patch
+
 from django.contrib.auth import get_user_model
+from django.core.management import call_command
 from django.urls import reverse
 from django.utils import timezone
 from rest_framework.test import APITestCase
 
-from core.models import MaintenanceLog, Vehicle
+from core.models import (
+    FeatureUsageLog,
+    MaintenanceLog,
+    Notification,
+    Vehicle,
+    VehicleCountSnapshot,
+)
 
 class AuthTests(APITestCase):
     def test_register_login_and_me(self):
@@ -95,3 +104,52 @@ class VehicleTests(APITestCase):
         self.assertIn('summary', response.data)
         self.assertEqual(response.data['summary']['vehicle_count'], 1)
         self.assertGreaterEqual(response.data['summary']['total_maintenance_cost'], 1200)
+        self.assertTrue(
+            VehicleCountSnapshot.objects.filter(user=self.vehicle.owner, count=1).exists()
+        )
+
+    def test_predict_endpoint_logs_usage(self):
+        response = self.client.post(
+            reverse('predict'),
+            {
+                'vehicle_id': self.vehicle.id,
+                'mileage': 45000,
+                'vehicle_type': 'truck',
+                'last_service_days': 45,
+            },
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('next_service_date', response.data)
+        self.assertTrue(FeatureUsageLog.objects.filter(feature_name='maintenance_prediction').exists())
+
+
+class NotificationCommandTests(APITestCase):
+    def test_notify_due_creates_notifications(self):
+        register_url = reverse('register')
+        self.client.post(register_url, {'username': 'notify', 'email': 'notify@example.com', 'password': 'Notify123!'})
+        token_response = self.client.post(reverse('token_obtain_pair'), {'username': 'notify', 'password': 'Notify123!'})
+        token = token_response.data['access']
+        self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {token}')
+        owner = get_user_model().objects.get(username='notify')
+        vehicle = Vehicle.objects.create(
+            owner=owner,
+            make='Tesla',
+            model='Model S',
+            year=2023,
+            vin='TSLA1234567890',
+            fuel_type='Electric',
+            mileage=12000,
+            vehicle_type='sedan'
+        )
+        today = timezone.now().date()
+        MaintenanceLog.objects.create(
+            vehicle=vehicle,
+            description='Coolant check',
+            cost=300,
+            date=today - timedelta(days=60),
+            next_due_date=today + timedelta(days=5)
+        )
+        with patch('core.management.commands.notify_due.send_mail') as mock_send:
+            call_command('notify_due')
+            self.assertGreaterEqual(Notification.objects.filter(user=owner).count(), 1)
+            mock_send.assert_called()

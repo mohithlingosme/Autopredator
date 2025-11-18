@@ -7,6 +7,7 @@ import { FormEvent, useState } from 'react';
 
 import apiClient from '@/lib/api';
 import { setAuthTokens } from '@/lib/auth';
+import { trackEvent } from '@/lib/analytics';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -26,6 +27,7 @@ export default function LoginPage() {
         password
       });
       setAuthTokens(response.data.access, response.data.refresh);
+      trackEvent('login_success', { email });
 
       router.push('/dashboard');
     } catch (err) {
@@ -33,6 +35,7 @@ export default function LoginPage() {
         err instanceof AxiosError && err.response?.data?.detail
           ? `Login failed: ${err.response.data.detail}`
           : 'Unable to log you in right now.';
+      trackEvent('login_failed', { email, reason: message });
       setError(message);
     } finally {
       setLoading(false);
@@ -51,6 +54,7 @@ export default function LoginPage() {
             Email
             <input
               type="email"
+              autoComplete="email"
               value={email}
               onChange={event => setEmail(event.target.value)}
               required
@@ -63,12 +67,13 @@ export default function LoginPage() {
             Password
             <input
               type="password"
+              autoComplete="current-password"
               value={password}
               onChange={event => setPassword(event.target.value)}
               required
               minLength={8}
               className="mt-2 w-full rounded-2xl border border-gray-300 px-4 py-3 focus:border-blue focus:outline-none"
-              placeholder="••••••••"
+              placeholder="Enter your password"
             />
           </label>
 

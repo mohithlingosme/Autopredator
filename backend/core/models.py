@@ -97,3 +97,43 @@ class PaymentTransaction(models.Model):
 
     def __str__(self):
         return f"{self.user.email} - {self.status} ({self.amount} {self.currency})"
+
+
+class ApiUsageLog(models.Model):
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, related_name='api_logs', null=True, blank=True)
+    path = models.CharField(max_length=255)
+    method = models.CharField(max_length=10)
+    status_code = models.PositiveSmallIntegerField()
+    ip_address = models.GenericIPAddressField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f"{self.method} {self.path} ({self.status_code})"
+
+
+class FeatureUsageLog(models.Model):
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, related_name='feature_logs', null=True, blank=True)
+    feature_name = models.CharField(max_length=120)
+    metadata = models.JSONField(blank=True, default=dict)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f"{self.feature_name} by {self.user or 'anonymous'}"
+
+
+class VehicleCountSnapshot(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='vehicle_snapshots')
+    count = models.PositiveIntegerField()
+    recorded_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-recorded_at']
+
+    def __str__(self):
+        return f"{self.user.email}: {self.count} vehicles"

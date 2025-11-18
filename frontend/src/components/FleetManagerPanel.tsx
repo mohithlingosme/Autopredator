@@ -5,12 +5,10 @@ import { useMemo } from 'react';
 interface FleetVehicle {
   id: number;
   name: string;
-  driver: string;
-  status: 'active' | 'available' | 'due' | 'offline';
-  fuelUsage: string;
-  location?: string;
-  distanceToday?: number;
-  costPerKm?: number;
+  status: string;
+  mileage: number;
+  vehicle_type?: string;
+  next_service_date?: string;
 }
 
 interface FleetAnalyticsPoint {
@@ -25,21 +23,20 @@ interface FleetManagerPanelProps {
 
 export default function FleetManagerPanel({ fleetVehicles, analytics }: FleetManagerPanelProps) {
   const summary = useMemo(() => {
-    const totalFuel = fleetVehicles.reduce((sum, vehicle) => sum + Number(vehicle.costPerKm ?? 0), 0);
+    const totalMileage = fleetVehicles.reduce((sum, vehicle) => sum + (vehicle.mileage || 0), 0);
     return {
       vehicleCount: fleetVehicles.length,
-      avgUsage: fleetVehicles.length ? totalFuel / fleetVehicles.length : 0
+      avgMileage: fleetVehicles.length ? Math.round(totalMileage / fleetVehicles.length) : 0,
+      dueSoon: fleetVehicles.filter(vehicle => vehicle.status === 'due').length,
     };
   }, [fleetVehicles]);
 
   const handleExportCsv = () => {
-    const headers = ['Name', 'Driver', 'Status', 'Fuel usage', 'Location'];
+    const headers = ['Vehicle', 'Status', 'Mileage'];
     const rows = fleetVehicles.map(vehicle => [
       vehicle.name,
-      vehicle.driver,
       vehicle.status,
-      vehicle.fuelUsage,
-      vehicle.location || 'N/A'
+      `${vehicle.mileage.toLocaleString()} km`
     ]);
     const csvContent = [headers, ...rows].map(row => row.join(',')).join('\n');
     const blob = new Blob([csvContent], { type: 'text/csv' });
@@ -73,16 +70,14 @@ export default function FleetManagerPanel({ fleetVehicles, analytics }: FleetMan
           <p className="text-3xl font-semibold text-charcoal mt-2">{summary.vehicleCount}</p>
         </div>
         <div className="rounded-2xl border border-gray-200 bg-white p-5">
-          <p className="text-xs uppercase tracking-[0.3em] text-gray-400">Avg cost per km</p>
+          <p className="text-xs uppercase tracking-[0.3em] text-gray-400">Avg mileage</p>
           <p className="text-3xl font-semibold text-charcoal mt-2">
-            Rs {summary.avgUsage.toFixed(2)}
+            {summary.avgMileage.toLocaleString()} km
           </p>
         </div>
         <div className="rounded-2xl border border-gray-200 bg-white p-5">
-          <p className="text-xs uppercase tracking-[0.3em] text-gray-400">Last 24h usage</p>
-          <p className="text-3xl font-semibold text-charcoal mt-2">
-            {fleetVehicles.reduce((sum, vehicle) => sum + (vehicle.distanceToday ?? 0), 0)} km
-          </p>
+          <p className="text-xs uppercase tracking-[0.3em] text-gray-400">Due soon</p>
+          <p className="text-3xl font-semibold text-charcoal mt-2">{summary.dueSoon}</p>
         </div>
       </section>
 
@@ -92,18 +87,16 @@ export default function FleetManagerPanel({ fleetVehicles, analytics }: FleetMan
             <thead className="text-gray-500 uppercase text-xs tracking-[0.3em] border-b">
               <tr>
                 <th className="py-3 pr-3">Vehicle</th>
-                <th className="py-3 pr-3">Driver</th>
                 <th className="py-3 pr-3">Status</th>
-                <th className="py-3 pr-3">Fuel usage</th>
-                <th className="py-3 pr-3">Location</th>
-                <th className="py-3 pr-3">Today</th>
+                <th className="py-3 pr-3">Mileage</th>
+                <th className="py-3 pr-3">Type</th>
+                <th className="py-3 pr-3">Next service</th>
               </tr>
             </thead>
             <tbody>
               {fleetVehicles.map(vehicle => (
                 <tr key={vehicle.id} className="border-b last:border-b-0">
                   <td className="py-3 pr-3 font-semibold text-charcoal">{vehicle.name}</td>
-                  <td className="py-3 pr-3 text-gray-600">{vehicle.driver}</td>
                   <td className="py-3 pr-3 capitalize">
                     <span
                       className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold ${
@@ -117,9 +110,9 @@ export default function FleetManagerPanel({ fleetVehicles, analytics }: FleetMan
                       {vehicle.status}
                     </span>
                   </td>
-                  <td className="py-3 pr-3 text-gray-600">{vehicle.fuelUsage}</td>
-                  <td className="py-3 pr-3 text-gray-600">{vehicle.location || 'GPS off'}</td>
-                  <td className="py-3 pr-3 text-gray-600">{vehicle.distanceToday ?? 0} km</td>
+                  <td className="py-3 pr-3 text-gray-600">{vehicle.mileage.toLocaleString()} km</td>
+                  <td className="py-3 pr-3 text-gray-600">{vehicle.vehicle_type ?? '—'}</td>
+                  <td className="py-3 pr-3 text-gray-600">{vehicle.next_service_date ?? 'TBD'}</td>
                 </tr>
               ))}
             </tbody>
@@ -129,7 +122,7 @@ export default function FleetManagerPanel({ fleetVehicles, analytics }: FleetMan
 
       <section className="rounded-3xl border border-gray-200 bg-white p-6 space-y-4">
         <h2 className="text-xl font-semibold text-charcoal">Insights</h2>
-        <div className="grid gap-4 md:grid-cols-3">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {analytics.map(point => (
             <div key={point.label} className="rounded-2xl border border-gray-100 p-4 bg-gray-50">
               <p className="text-xs uppercase tracking-[0.3em] text-gray-400">{point.label}</p>

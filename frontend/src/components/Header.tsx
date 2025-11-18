@@ -8,13 +8,9 @@ import { Menu, Scale, Search } from 'lucide-react';
 const navLinks = [
   { href: '/dashboard', label: 'Dashboard' },
   { href: '/vehicles', label: 'Vehicles' },
+  { href: '/fleet', label: 'Fleet' },
   { href: '/marketplace', label: 'Marketplace' },
-  { href: '/new-vehicles', label: 'New Vehicles' },
-  { href: '/used-vehicles', label: 'Used Vehicles (AutoUsed)' },
-  { href: '/services', label: 'Services' },
-  { href: '/blog', label: 'Blog' },
-  { href: '/forum', label: 'Forum' },
-  { href: '/insights', label: 'AI Insights' }
+  { href: '/insights', label: 'Insights' }
 ];
 
 export default function Header() {

@@ -1,7 +1,13 @@
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 
 import { API_BASE_URL } from './utils';
-import { getAccessToken, getRefreshToken, redirectToLogin, setAuthTokens } from './auth';
+import {
+  getAccessToken,
+  getRefreshToken,
+  redirectToLogin,
+  registerAuthChangeHandler,
+  setAuthTokens,
+} from './auth';
 
 const apiClient = axios.create({
   baseURL: API_BASE_URL,
@@ -9,6 +15,17 @@ const apiClient = axios.create({
     'Content-Type': 'application/json'
   }
 });
+
+const syncAuthHeader = () => {
+  const token = getAccessToken();
+  if (token) {
+    apiClient.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+  } else {
+    delete apiClient.defaults.headers.common['Authorization'];
+  }
+};
+
+registerAuthChangeHandler(syncAuthHeader);
 
 interface RetryRequestConfig extends AxiosRequestConfig {
   _retry?: boolean;

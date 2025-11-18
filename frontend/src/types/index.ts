@@ -34,6 +34,22 @@ export interface Vehicle {
   insurance_status?: string;
 }
 
+export interface FleetRecord {
+  id: number;
+  name: string;
+  vehicles: number[];
+}
+
+export interface Product {
+  id: number;
+  name: string;
+  category: string;
+  description: string;
+  price: number;
+  image?: string;
+  created_at?: string;
+}
+
 export interface VehicleListing {
   id: number;
   vehicle_id: number;

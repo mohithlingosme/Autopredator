@@ -15,6 +15,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.parsers import FormParser, MultiPartParser
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from .analytics import record_feature_usage, snapshot_vehicle_count
 from .models import (
     Fleet,
     MaintenanceLog,
@@ -154,35 +155,63 @@ class PredictMaintenanceView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
-        usage = float(request.data.get('usage', 0))
         vehicle_id = request.data.get('vehicle_id')
+        vehicle = Vehicle.objects.filter(id=vehicle_id, owner=request.user).first() if vehicle_id else None
+        mileage = request.data.get('mileage')
+        mileage = float(mileage) if mileage is not None else (float(vehicle.mileage) if vehicle else 0.0)
+        vehicle_type = request.data.get('vehicle_type') or (vehicle.vehicle_type or 'sedan')
+
+        last_service_days = request.data.get('last_service_days')
+        if last_service_days is None and vehicle:
+            latest_log = vehicle.maintenance_logs.order_by('-date').first()
+            if latest_log:
+                last_service_days = (date.today() - latest_log.date).days
+        last_service_days = float(last_service_days) if last_service_days is not None else 30.0
+
         window = float(request.data.get('window', 1000))
         next_service = None
         message = 'Maintain regularly'
         source = 'heuristic'
+        confidence = 0.6
 
         model_path = settings.BASE_DIR / 'model.pkl'
+        feature_vector = [[mileage, vehicle_type, last_service_days]]
         if model_path.exists():
             try:
                 model = load(model_path)
-                prediction = model.predict([[usage, window]])
+                prediction = model.predict(feature_vector)
                 estimated_days = int(round(float(prediction[0])))
-                next_service = date.today() + timedelta(days=estimated_days)
+                next_service = date.today() + timedelta(days=max(1, estimated_days))
                 source = 'ml'
                 message = 'Predicted by ML model'
+                confidence = 0.85
             except Exception:
                 next_service = None
 
         if not next_service:
-            next_service = date.today() + timedelta(days=int(30 if usage < window else 15))
+            fallback_days = 30 if mileage < window else 15
+            next_service = date.today() + timedelta(days=fallback_days)
             message = 'Heuristic estimation'
-        if usage >= window:
+            confidence = 0.5
+        if mileage >= window:
             message = 'Schedule service soon'
+            confidence = 0.4
+
+        record_feature_usage(
+            request.user,
+            'maintenance_prediction',
+            {
+                'vehicle_id': vehicle_id,
+                'vehicle_type': vehicle_type,
+                'mileage': mileage,
+                'last_service_days': last_service_days,
+            }
+        )
 
         return Response(
             {
                 'next_service_date': next_service,
-                'confidence': 0.8,
+                'confidence': confidence,
                 'message': message,
                 'vehicle_id': vehicle_id,
                 'source': source,
@@ -255,21 +284,28 @@ class DashboardAnalyticsView(APIView):
             .first()
         )
 
+        summary = {
+            'vehicle_count': vehicles.count(),
+            'maintenance_due': logs.filter(next_due_date__lte=due_threshold).count(),
+            'total_maintenance_cost': round(total_cost, 2),
+            'avg_service_cost': round(avg_cost, 2),
+            'most_expensive_vehicle': {
+                'id': most_expensive_vehicle.id if most_expensive_vehicle else None,
+                'name': str(most_expensive_vehicle) if most_expensive_vehicle else None,
+                'total_spent': round(
+                    most_expensive_vehicle.total_spent if most_expensive_vehicle else 0, 2
+                ),
+            },
+        }
+
+        record_feature_usage(request.user, 'dashboard_analytics', {'items': len(cost_trend)})
+        snapshot_vehicle_count(request.user, summary['vehicle_count'])
+
         return Response(
             {
                 'cost_trend': cost_trend[-6:],
                 'summary': {
-                    'vehicle_count': vehicles.count(),
-                    'maintenance_due': logs.filter(next_due_date__lte=due_threshold).count(),
-                    'total_maintenance_cost': round(total_cost, 2),
-                    'avg_service_cost': round(avg_cost, 2),
-                    'most_expensive_vehicle': {
-                        'id': most_expensive_vehicle.id if most_expensive_vehicle else None,
-                        'name': str(most_expensive_vehicle) if most_expensive_vehicle else None,
-                        'total_spent': round(
-                            most_expensive_vehicle.total_spent if most_expensive_vehicle else 0, 2
-                        ),
-                    },
+                    **summary,
                 },
             }
         )

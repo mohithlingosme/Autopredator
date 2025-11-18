@@ -1,213 +1,89 @@
-# 🚘 Autopredator
+# Autopredator
 
-**Autopredator** is a unified **vehicle management and e-commerce platform** designed to simplify and centralize every aspect of vehicle ownership and operation — for personal, commercial, agricultural, and construction vehicles.  
-The platform integrates **AI, IoT, and telematics** to provide intelligent insights, predictive maintenance, compliance tracking, and streamlined purchasing processes.
+Autopredator pairs a React/Next.js control panel with a Django REST backend so fleets can manage vehicles, predictive maintenance, analytics, notifications, and monetisation flows from one stack.
 
----
+## Architecture at a glance
+- **Frontend**: Next.js 16 with the app router, Tailwind-inspired UI, and `axios`-backed API client that attaches JWT tokens stored in `localStorage`. PostHog is wired via `posthog-js` for feature analytics.
+- **Backend**: Django 5 REST API with JWT auth, analytics logging middleware, feature/vehicle snapshot models, email notification jobs, and a linear regression prediction pipeline exported via `joblib`.
+- **ML & AI**: A lightweight `backend/scripts/train_model.py` script generates `model.pkl` from synthetic data; the `/api/predict/` endpoint loads it to estimate the next service window and logs usage.
+- **Notifications**: `core/management/commands/notify_due.py` scans vehicles for service and document due dates, dispatches SMTP/SendGrid emails (configurable via `.env`), and records `Notification` entries.
 
-## 🧭 Objective
+## Features
+1. JWT login with `auto` redirect on 401/403 and global Axios headers.
+2. Dashboard that aggregates vehicles, reminders, cost analytics, predictions, marketplace items, and fleet insights.
+3. Fleet panel showing vehicle status, mileage, and CSV exports.
+4. Marketplace, blog, community, and compare pages repurposed to work against the Django APIs or static data.
+5. Background analytics models tracking API usage, feature adoption, and vehicle counts for each user.
+6. Open API, ERD, and Postman artifacts under `docs/`.
 
-To build an **end-to-end ecosystem** that enables users and businesses to:
-- Manage their vehicles’ lifecycle — from purchase to resale.  
-- Track performance, compliance, and expenses in real time.  
-- Access financing, insurance, maintenance, and documentation digitally.  
-- Utilize **AI-driven insights** for cost optimization and decision-making.
+## Environment configuration
+### Backend
+Copy `backend/.env.example` to `backend/.env` and update:
+```
+DEBUG=False
+SECRET_KEY=your-production-key
+ALLOWED_HOSTS=api.autopredator.com,localhost,127.0.0.1
+EMAIL_BACKEND=django.core.mail.backends.smtp.EmailBackend
+EMAIL_HOST=smtp.sendgrid.net
+EMAIL_PORT=587
+EMAIL_USE_TLS=True
+EMAIL_HOST_USER=apikey
+EMAIL_HOST_PASSWORD=your-sendgrid-api-key
+DEFAULT_FROM_EMAIL=noreply@autopredator.com
+```
+Additional database settings (DB Engine/User/Auth) follow existing keys.
 
----
+### Frontend
+Copy `frontend/.env.example` to `frontend/.env` for local work:
+```
+NEXT_PUBLIC_API_URL=http://localhost:8000/api
+REACT_APP_API_URL=http://localhost:8000/api
+NEXT_PUBLIC_POSTHOG_API_KEY=your-posthog-key
+NEXT_PUBLIC_POSTHOG_HOST=https://app.posthog.com
+```
+`NEXT_PUBLIC_POSTHOG_*` values point to PostHog or another compatible analytics collector.
 
-## ⚙️ Key Features
+## Getting started
+### Backend
+1. `python -m venv .venv && source .venv/bin/activate` (or equivalent on Windows)
+2. `pip install -r requirements.txt`
+3. `python manage.py migrate`
+4. `python manage.py createsuperuser`
+5. `python manage.py train_model` *(optional — regenerates `model.pkl` for predictions)*
+6. `python manage.py runserver`
 
-### 🧩 Unified Vehicle Management
-- Centralized vehicle dashboard (registration, licensing, insurance, and maintenance).  
-- Document storage for titles, warranties, and service history.  
-- Smart notifications for renewals, recalls, and inspections.  
+### Frontend
+1. `cd frontend`
+2. `npm install` (or `npm install --legacy-peer-deps` where needed)
+3. `npm run dev`
 
-### 🚛 Fleet Management
-- Real-time GPS & telematics tracking.  
-- Driver performance and safety analytics.  
-- Fuel efficiency optimization and maintenance scheduling.  
+## Docker & Compose
+1. `docker-compose up --build`
+   - Backend on port `8000`, frontend on port `3000`
+   - Environment arises from each service’s Dockerfile plus `.env` files.
+2. Apply migrations inside the backend container: `docker-compose exec backend python manage.py migrate`
 
-### 💸 Simplified Purchasing Process
-- Integrated marketplace for new and used vehicles.  
-- Financing & leasing calculators.  
-- Automated documentation and ownership transfer.  
+## Testing & QA
+- Backend: `python manage.py test`
+- Frontend: `npm run test` (uses Vitest with `jsdom`, React Testing Library, and three sanity tests covering login, fleet panel, and prediction card).
 
-### 📊 Cost Tracking & Analytics
-- Comprehensive total cost of ownership (TCO) dashboard.  
-- Predictive maintenance using machine learning.  
-- Expense and fuel performance insights.  
+## Deployment guidance
+- **Frontend**: Push `frontend/.next` build to Netlify, Vercel, or S3+CloudFront. Point `NEXT_PUBLIC_API_URL` to the hosted backend.
+- **Backend**: Deploy Django to Render, Railway, or EC2; connect to Postgres via ElephantSQL, Supabase, or Railway-managed database.
+- **HTTPS**: Always serve both tiers over HTTPS behind valid domains (e.g., `app.autopredator.com`, `api.autopredator.com`). Use CORS settings to allow approved origins.
+- **Email**: Configure SMTP/SendGrid credentials in `.env` and ensure `DEFAULT_FROM_EMAIL` matches your sending domain.
+- **Analytics**: PostHog events flow from the frontend and Django logs into the `ApiUsageLog`/`FeatureUsageLog` models. Export analytics as needed.
+- **Payment/Plans**: The backend exposes `/api/payment/create-checkout-session/` to initiate Stripe sessions. Add UI around `Free`, `Pro`, and `Fleet Enterprise` plans as desired.
 
-### ⚖️ Legal & Compliance Tools
-- Automated alerts for legal deadlines.  
-- Traffic violation and insurance claim management.  
-- Integration with RTO and emission compliance APIs.  
+## Documentation & Assets
+- ERD: `docs/ERD.md`
+- Swagger/OpenAPI: `docs/openapi.yaml`
+- Postman collection: `docs/postman_collection.json`
 
----
+## Additional scripts
+- `backend/scripts/train_model.py`: regenerates `model.pkl` using mileage, vehicle type, and service interval samples.
+- `core/management/commands/notify_due.py`: send upcoming service/document notifications (run via cron or scheduler).
 
-## 🧠 AI & Machine Learning Modules
-
-| Area | AI Functionality |
-|------|------------------|
-| Vehicle Research | Smart comparisons, reviews & recommendations |
-| Finance | Loan predictions, ROI calculations |
-| Insurance | Risk profiling & claims automation |
-| Maintenance | Predictive diagnostics |
-| Fleet | Route optimization, driver scoring |
-| EVs | Battery health, sustainability tracking |
-
----
-
-## 🌐 Technology Stack
-
-**Frontend:** React.js, Next.js, Tailwind CSS  
-**Backend:** Node.js / Express / PHP (API-based architecture)  
-**Database:** MySQL, MongoDB, Redis (caching)  
-**Cloud:** AWS / Google Cloud / Azure  
-**Telematics Integration:** MQTT, GPS SDKs, IoT APIs  
-**AI/ML:** Python, TensorFlow, scikit-learn, FastAPI  
-**Security:** JWT Authentication, AES encryption, SSL, GDPR compliance  
-
----
-
-## 🧩 Modular Architecture
-
-| Module | Description |
-|--------|-------------|
-| Vehicle Data Management | Stores all vehicle and user data |
-| Insurance & Finance | Loan, EMI, and insurance APIs |
-| Telematics | Real-time monitoring and driver data |
-| Maintenance & Repairs | Scheduling, service tracking |
-| Compliance | RTO, environmental, and tax compliance |
-| Marketplace | E-commerce for parts, vehicles, and services |
-
----
-
-## 📈 Development Phases (Milestones)
-
-| Phase | Duration | Key Deliverables |
-|-------|-----------|------------------|
-| **1. MVP Development** | 0–3 months | Core platform, login, vehicle registration |
-| **2. Beta Launch** | 4–6 months | Fleet, telematics, cost tracking |
-| **3. Full Launch** | 7–9 months | EV support, analytics, e-commerce |
-| **4. Expansion** | 10–12 months | AI models, personalization, rural reach |
-| **5. Monetization** | 13–18 months | Premium plans, B2B services |
-
----
-
-## 💰 Monetization & Revenue Model
-
-- Vehicle marketplace commissions  
-- Premium & subscription plans  
-- Insurance & financing partnerships  
-- B2B telematics and data analytics  
-- Advertisement & affiliate revenues  
-
----
-
-## 🔐 Data Privacy & Security
-
-- End-to-end encryption for sensitive data  
-- Compliance with **GDPR** and Indian IT Act  
-- Role-based access control  
-- Regular vulnerability scanning and penetration testing  
-
----
-
-## 🧩 HR and Team Requirements
-
-| Role | Responsibility |
-|------|----------------|
-| Project Manager | Oversee timeline & milestones |
-| Frontend Developer | Build responsive UI |
-| Backend Developer | API & database management |
-| Data Scientist | AI model design & optimization |
-| Legal Counsel | Regulatory compliance |
-| Marketing Manager | Branding & user acquisition |
-| UX/UI Designer | Visual and accessibility design |
-
----
-
-## 🌍 Partnerships and Tie-ups
-
-- **Telematics Providers:** Mapbox, TomTom, or GPS Insight  
-- **Insurance & Financial Partners:** ICICI, HDFC, SBI  
-- **E-commerce Partners:** Amazon Auto, Flipkart Auto Parts  
-- **EV Charging Providers:** Tata Power, Ather Grid  
-- **Legal Data APIs:** Gov.in, Parivahan, MoRTH  
-
----
-
-## 🎨 UI/UX Design Principles
-
-- Mobile-first responsive design  
-- Intuitive dashboards and visual analytics  
-- Automotive-themed color palette:  
-  - **Primary:** #007BFF (Electric Blue), #2C2C2C (Charcoal Black)  
-  - **Accent:** #39FF14 (Neon Green), #FF1C1C (Racing Red)  
-- Clean typography and accessible layouts  
-
----
-
-## 🧾 Future Expansion
-
-- AI-driven **predictive accident prevention**  
-- EV charging network integration  
-- Global vehicle data aggregation  
-- Integration with smart cities and connected car ecosystems  
-
----
-
-## 📘 License
-
-This project is proprietary to **Autopredator Inc.**  
-Unauthorized reproduction or distribution of this content is prohibited.
-
----
-
-## ✉️ Contact
-
-**Project Owner:** Mohith  
-**Role:** Developer & Law Student  
-**Email:** [your.email@example.com]  
-**LinkedIn:** [https://linkedin.com/in/your-profile](https://linkedin.com/in/your-profile)
-
-https://chatgpt.com/c/68fbc569-14ec-8323-89e5-6e0a28825f88
-
-## Data Infrastructure
-
-### Database setup
-- Configure PostgreSQL in `backend/.env` by toggling `DB_ENGINE=django.db.backends.postgresql` and providing `DB_NAME`, `DB_USER`, `DB_PASSWORD`, `DB_HOST`, `DB_PORT`. When Postgres is unavailable (local dev), the project falls back to SQLite (`DB_ENGINE=django.db.backends.sqlite3` and `DB_NAME=db.sqlite3`).  
-- Run `python backend/manage.py makemigrations` and `python backend/manage.py migrate` whenever models change, then create an admin user via `python backend/manage.py createsuperuser`.
-
-### Models & upload handling
-- The `Vehicle`, `MaintenanceLog`, `Fleet`, `Product`, `Notification`, and `PaymentTransaction` models live in `backend/core/models.py`. Vehicles now track mileage and vehicle type, expose computed maintenance totals/averages, and validate document uploads through `backend/core/validators.py` (PDF/JPEG/PNG, 5 MB max, stored under `media/docs/`).
-- REST endpoints (`backend/core/serializers.py`, `backend/core/views.py`) cover CRUD plus analytics: `/api/vehicles/`, `/api/maintenance/`, `/api/fleet/`, `/api/products/`, `/api/reminders/`, `/api/analytics/cost/`, `/api/vehicles/<id>/cost-summary/`, `/api/predict/`.
-- Filtering/search is enforced via `django-filter` (see `VehicleViewSet`), while the shared Axios client in the frontend attaches JWTs and uses these endpoints.
-
-### Analytics & AI pipeline
-- Aggregated metrics (total/average maintenance cost, most expensive vehicle, monthly trends) power the dashboard and fleet views (`backend/core/views.py:180+`).  
-- Export training data with `python backend/manage.py export_maintenance_csv` (outputs `data/maintenance_dataset.csv`).  
-- Drop `model.pkl` at the project root (use `joblib.dump()` from your training notebook) and `/api/predict/` will load it to estimate the next service date.
-
-### Backups & production notes
-- In production, run PostgreSQL backups via `pg_dump` (or hosted platform snapshots) and push them to secure storage such as AWS S3 or Railway’s backup feature.  
-- Keep media uploads behind signed URLs or storage buckets, enable HTTPS, and rotate secret keys/DB credentials in each deployment environment.
-
-## Integration & Deployment Notes
-
-### Environment configuration
-- Frontend reads `NEXT_PUBLIC_API_URL`/`REACT_APP_API_URL` from `frontend/.env` and `frontend/.env.production` (the compose setup includes `frontend/.env` by default). Update those files before running `docker build`.
-- The Django backend now loads `backend/.env` with `DEBUG=False`, a secure `SECRET_KEY`, and `ALLOWED_HOSTS`; Docker also injects this file so the container picks up the production values.
-- JWT tokens are stored in `localStorage`; the shared Axios client automatically attaches `Authorization: Bearer …` headers and refreshes/redirects on 401/403 responses.
-
-### API highlights
-- Login/register flows (`/api/auth/token/`, `/api/auth/register/`) now persist tokens immediately and redirect to `/dashboard`.
-- Dashboard data is pulled from `/api/vehicles/`, `/api/reminders/`, and `/api/analytics/cost/`.
-- Vehicle details rely on `/api/vehicles/:id/`, `/api/maintenance/?vehicle=<id>`, `/api/vehicles/:id/cost-summary/`, and `/api/predict/`.
-
-### Docker & local execution
-- Build and run everything with `docker-compose up --build`. Frontend is exposed on `localhost:3000`, backend on `localhost:8000`.
-- The Node image installs dependencies via `npm install`, builds with `npm run build`, and serves with `npm run start`. The Python image installs requirements and runs `python manage.py runserver 0.0.0.0:8000`.
-
-### Testing
-- `python backend/manage.py test` (reports zero discovered tests in this scaffold). Consider adding DRF/Pytest coverage for future release gates.
+## Notes
+- Clear auth tokens via the login page or on API 401/403 responses to enforce reauthentication.
+- Keep `model.pkl` in sync with training data before deploying new models; the API gracefully falls back to heuristics if loading fails.
