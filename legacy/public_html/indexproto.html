@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autopredator - Vehicle Management</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="assets/css/Autopredator.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+</head>
+<body>
+    <?php include 'includes/header.php'; ?>
+
+    <?php include 'includes/sidebar.php'; ?>
+
+    <div class="search-container">
+        <input type="text" id="search-bar" class="search-bar" placeholder="Search Autopredator">
+        <button class="search-button" onclick="searchfunction()">Search</button>
+    </div>
+
+    <section class="hero" id="home">
+        <h1>Manage Your Vehicles Efficiently</h1>
+        <p>Track, maintain, and optimize your vehicle fleet with AI-powered analytics.</p>
+        <button class="cta-button">Get Started</button>
+    </section>
+
+    <section>
+        <h1 class="section-heading">Cars Listing</h1>
+        <hr>
+        <div class="text-center car-listing-link">
+            <a href="http://127.0.0.1/Autopredator/car-lisiting.php?search=&sort=price_asc" class="btn btn-outline-primary">View Car Listings</a>
+        </div>
+        <hr>
+    </section>
+
+    <section name ="features-section">
+        <h1 class="section-heading" id="features">Our Services</h1>
+        <hr>
+        <section class="features">
+            <div  class="feature" data-aos="fade-up">
+                <a href="#">
+                <img src="icons/documentation.jpg" alt="Vehicle Documentation Icon">
+                <h2>Vehicle Documentation</h2>
+                <p>Centralize all vehicle documents and history.</p>
+                </a>
+            </div>
+            
+            <div  class="feature" data-aos="fade-up">
+            <a href="Fleetoptimization.php">
+                <img src="icons/fleet.jpg" alt="Fleet Optimization Icon">
+                <h2>Fleet Optimization</h2>
+                <p>Optimize routes and monitor driver performance.</p>
+            </a>
+            </div>
+            
+            <div class="feature" data-aos="fade-up">
+            <a href="Financialinsight.php">
+                <img src="icons/finance.jpg" alt="Financial Insights Icon">
+                <h2>Financial Insights</h2>
+                <p>Track expenses for strategic planning.</p>
+            </a>
+            </div>
+            
+            <div class="feature" data-aos="fade-up">
+            <a href="insurancefinance.php">
+                <img src="icons/insurance.jpg" alt="Insurance Management Icon">
+                <h2>Insurance Management</h2>
+                <p>Manage and remind about insurance renewals.</p>
+            </a>
+            </div>
+            
+            <div class="feature" data-aos="fade-up">
+            <a href="vechiclemaintenance.php">
+                <img src="icons/maintenance.jpg" alt="Vehicle Maintenance Icon">
+                <h2>Vehicle Maintenance</h2>
+                <p>Schedule maintenance proactively.</p>
+            </a>
+            </div>
+            
+            <div class="feature" data-aos="fade-up">
+            <a href="Fuelandexpensestracking.php">
+                <img src="icons/fuel.jpg" alt="Fuel & Expense Tracking Icon">
+                <h2>Fuel & Expense Tracking</h2>
+                <p>Monitor fuel use and manage costs.</p>
+            </a>
+            </div>
+            
+            <div class="feature" data-aos="fade-up">
+            <a href="GPSandtelematics.php">
+                <img src="icons/gps.jpg" alt="GPS & Telematics Icon">
+                <h2>GPS & Telematics</h2>
+                <p>Real-time vehicle tracking.</p>
+            </a>
+            </div>
+            
+            <div class="feature" data-aos="fade-up">
+            <a href="Driversafety.php">
+                <img src="icons/safety.jpg" alt="Driver Safety Icon">
+                <h2>Driver Safety</h2>
+                <p>Monitor driver behavior for safety.</p>
+            </a>
+            </div>
+            
+            <div class="feature" data-aos="fade-up">
+            <a href="EVtools.php">
+                <img src="icons/EV tools.jpg" alt="EV Tools Icon" width="auto" height="auto">
+                <h2>EV Tools</h2>
+                <p>Monitor and manage electric vehicles with specialized tools.</p>
+                <button class="cta-button">Get Started</button>
+            </a>
+            </div>
+            
+            <div class="feature" data-aos="fade-up">
+            <a href="Compliance%20and%20regulations.php">
+                <img src="icons/Compliance and regulatory.jpg" alt="Compliance and Regulations Icon" width="auto" height="auto">
+                <h2>Compliance & Regulations</h2>
+                <p>Keep abreast of regulatory changes and ensure compliance.</p>
+                <button class="cta-button">Get Started</button>
+            </a>
+            </div>
+            
+            <div class="feature" data-aos="fade-up">
+            <a href="Vechicleresearch.php">
+                <img src="icons/vechile search.jpg" alt="Vehicle Search Icon" width="auto" height="auto">
+                <h2>Vehicle Search</h2>
+                <p>Identify ideal vehicles tailored to specific requirements.</p>
+                <button class="cta-button">Get Started</button>
+            </a>
+            </div>
+            
+            <div class="feature" data-aos="fade-up">
+            <a href="fleetmanagementandvechilesearch.php">
+                <img src="icons/Vehicle feet management.jpg" alt="Fleet Management Icon" width="auto" height="auto">
+                <h2>Fleet Management</h2>
+                <p>Efficiently manage your entire fleet with comprehensive tools.</p>
+                <button class="cta-button">Get Started</button>
+            </a>
+            </div>
+            
+            <div class="feature" data-aos="fade-up">
+            <a href="Logistics%20and%20delivery.php">
+                <img src="icons/logistics and delivery.jpg" alt="Logistics and Delivery Icon" width="auto" height="auto">
+                <h2>Logistics and Delivery</h2>
+                <p>Enhance delivery operations with state-of-the-art logistics tools.</p>
+                <button class="cta-button">Get Started</button>
+            </a>
+            </div>
+            
+            <div class="feature" data-aos="fade-up">
+            <a href="Agricultural.php">
+                <img src="icons/Agricultural tools.jpg" alt="Agricultural Tools Icon" width="auto" height="auto">
+                <h2>Agricultural Tools</h2>
+                <p>Utilize tools specifically designed for the agricultural industry.</p>
+                <button class="cta-button">Get Started</button>
+            </a>
+            </div>
+            
+            <div class="feature" data-aos="fade-up">
+            <a href="Ecom.php">
+                <img src="icons/E-commerce integration for automobile products.jpg" alt="E-commerce Integration Icon" width="auto" height="auto">
+                <h2>E-commerce Integration</h2>
+                <p>Seamlessly integrate with e-commerce for vehicle sales and parts.</p>
+                <button class="cta-button">Get Started</button>
+            </a>
+            </div>
+            
+            <div class="feature" data-aos="fade-up">
+            <a href="Finance@AP.php">
+                <img src="icons/finance.jpg" alt="Financial Services Icon">
+                <h2>Financial Services</h2>
+                <p>Access vehicle loans and other financial products.</p>
+                <button class="cta-button">Get Started</button>
+            </a>
+            </div>
+            
+            <div class="feature" data-aos="fade-up">
+            <a href="valuation.php">
+                <img src="icons/valuation services.jpg" alt="Valuation Services Icon">
+                <h2>Valuation Services</h2>
+                <p>Get accurate market valuations and trade-in options for used vehicles.</p>
+                <button class="cta-button">Get Started</button>
+            </a>
+            </div>
+            
+            <div class="feature" data-aos="fade-up">
+            <a href="legal.php">
+                <img src="icons/legal services.jpg" alt="Legal Services Icon" width="auto" height="auto">
+                <h2>Legal Services</h2>
+                <p>Receive legal support for vehicle compliance and issues.</p>
+                <button class="cta-button">Get Started</button>
+            </a>
+            </div>
+            
+            <div class="feature" data-aos="fade-up">
+            <a href="trafficmanagement.php">
+                <img src="icons/traffic management.jpg" alt="Traffic Management Icon">
+                <h2>Traffic Management</h2>
+                <p>Handle traffic violations and fines with effective tools.</p>
+                <button class="cta-button">Get Started</button>
+            </a>
+            </div>
+            
+            <div class="feature" data-aos="fade-up">
+            <a href="delaerhsip%20search.php">
+                <img src="icons/Automobile dealership search.jpg" alt="Dealership Search Icon">
+                <h2>Dealership Search</h2>
+                <p>Find authorized dealers and service centers easily.</p>
+                <button class="cta-button">Get Started</button>
+            </a>
+            </div>
+            
+            <div class="feature" data-aos="fade-up">
+            <a href="bankauction.php">
+                <img src="icons/Automobile bank auction.jpg" alt="Bank Auctions Icon">
+                <h2>Bank Auctions</h2>
+                <p>Participate in bank-hosted vehicle auctions.</p>
+                <button class="cta-button">Get Started</button>
+            </a>
+            </div>
+            
+            <div class="feature" data-aos="fade-up">
+            <a href="customersupport.php">
+                <img src="icons/customer_support.jpg" alt="Customer Support Icon" width="auto" height="auto">
+                <h2>Customer Support</h2>
+                <p>Provide 24/7 support to address any client queries or issues.</p>
+                <button class="cta-button">Get Started</button>
+            </a>
+            </div>
+            
+            <div class="feature" data-aos="fade-up">
+            <a href="markettrends.php">
+                <img src="icons/market trends and research.jpg" alt="Market Trends Icon">
+                <h2>Market Trends</h2>
+                <p>Access up-to-date vehicle market trends and forecasts.</p>
+                <button class="cta-button">Get Started</button>
+            </a>
+            </div>
+            
+            <div class="feature" data-aos="fade-up">
+            <a href="Custom.php">
+                <img src="icons/customization tools.jpg" alt="Customization Tools Icon" width="auto" height="auto">
+                <h2>Customization Tools</h2>
+                <p>Customize your vehicles to meet specific needs.</p>
+                <button class="cta-button">Get Started</button>
+            </a>
+            </div>
+            
+            <div class="feature" data-aos="fade-up">
+            <a href="VechicleResale.php">
+                <img src="icons/Vehicle resale.jpg" alt="Vehicle Resale Icon" width="auto" height="auto">
+                <h2>Vehicle Resale</h2>
+                <p>Assist with selling vehicles at optimal prices.</p>
+                <button class="cta-button">Get Started</button>
+            </a>
+            </div>
+            
+            <div class="feature" data-aos="fade-up">
+            <a href="parts&accessroy.php">
+                <img src="icons/Parts inventory.jpg" alt="Parts Inventory Icon" width="auto" height="auto">
+                <h2>Parts Inventory</h2>
+                <p>Track and manage parts inventory for repairs and maintenance.</p>
+                <button class="cta-button">Get Started</button>
+            </a>
+            </div>
+            
+            <div class="feature" data-aos="fade-up">
+            <a href="rideshareing.php">
+                <img src="icons/Ridesharing.jpg" alt="Ridesharing Icon" width="auto" height="auto">
+                <h2>Ridesharing</h2>
+                <p>Offer solutions for ridesharing to maximize vehicle utilization.</p>
+                <button class="cta-button">Get Started</button>
+            </a>
+            </div>
+            
+            <div class="feature" data-aos="fade-up">
+            <a href="app.php">
+                <img src="icons/Apps.jpg" alt="Mobile App Icon" width="auto" height="auto">
+                <h2>Mobile App</h2>
+                <p>Manage all features from a dedicated mobile app.</p>
+                <button class="cta-button">Get Started</button>
+            </a>
+            </div>
+            
+            <div class="feature" data-aos="fade-up">
+            <a href="telematics.php">
+                <img src="icons/Telematics analysis.jpg" alt="Telematics Analysis Icon" width="auto" height="auto">
+                <h2>Telematics Analysis</h2>
+                <p>Utilize analytics for detailed telematics insights.</p>
+                <button class="cta-button">Get Started</button>
+            </a>
+            </div>
+            
+            <div class="feature" data-aos="fade-up">
+            <a href="FM.php">
+                <img src="icons/Fleet.jpg" alt="Fleet Renewal Icon" width="auto" height="auto">
+                <h2>Fleet Renewal</h2>
+                <p>Receive advice on renewing your fleet for optimal performance.</p>
+                <button class="cta-button">Get Started</button>
+            </a>
+            </div>
+            
+            <div class="feature" data-aos="fade-up">
+            <a href="SafetyTraning.php">
+                <img src="icons/safety.jpg" alt="Safety Training Icon">
+                <h2>Safety Training</h2>
+                <p>Offer training for driver safety and compliance.</p>
+                <button class="cta-button">Get Started</button>
+            </a>
+            </div>
+            
+            <div class="feature" data-aos="fade-up">
+            <a href="TP.php">
+                <img src="icons/transportation permits.jpg" alt="Transport Permits Icon">
+                <h2>Transport Permits</h2>
+                <p>Help with obtaining and managing transport permits.</p>
+                <button class="cta-button">Get Started</button>
+            </a>
+            </div>
+            
+            <div class="feature" data-aos="fade-up">
+                <a href="reporting.php">
+                <img src="icons/reporting tools.jpg" alt="Reporting Tools Icon">
+                <h2>Reporting Tools</h2>
+                <p>Create custom reports for audits and insights.</p>
+                <button class="cta-button">Get Started</button>
+            </div>
+            
+            <div class="feature" data-aos="fade-up">
+                <img src="icons/Emergency services.jpg" alt="Emergency Services Icon" width="auto" height="auto">
+                <h2>Emergency Services</h2>
+                <p>Quickly access emergency roadside assistance.</p>
+                <button class="cta-button">Get Started</button>
+            </div>
+            <div class="feature" data-aos="fade-up">
+                <img src="icons/vehicle and operator hiring.jpg" alt="Vehicle and Operator Hiring Icon" width="" height="">
+                <h2>Vechile and Operator Hiring</h2>
+                <p>A digital platform within AutoPredator that enables farmers, contractors, and fleet owners to hire vehicles and certified operators on-demand for agriculture, logistics, and construction needs</p>
+                <button class="cta-button">Get Started</button>
+            </div>
+            <div class="feature" data-aos="fade-up">
+                <img src="icons/user feedback.jpg" alt="User Feedback Icon" width="auto" height="auto">
+                <h2>User Feedback</h2>
+                <p>Collect and analyze user feedback for continuous improvement.</p>
+                <button class="cta-button">Get Started</button>
+            </div>
+        </section>
+    </section>
+
+    <?php include 'includes/footer.php'; ?>
+
+    <script>
+        function scrollCarousel(carouselId, direction) {
+            const carousel = document.getElementById(carouselId);
+            carousel.scrollBy({ left: direction, behavior: 'smooth' });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeToggle = document.getElementById('theme-toggle');
+            const savedTheme = localStorage.getItem('theme');
+
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+            }
+
+            themeToggle.addEventListener('click', () => {
+                document.body.classList.toggle('dark-mode');
+                const currentTheme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
+                localStorage.setItem('theme', currentTheme);
+            });
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
+</body>
+</html>

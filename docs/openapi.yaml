@@ -1,0 +1,74 @@
+openapi: 3.1.0
+info:
+  title: Autopredator API
+  version: '1.0'
+  description: Django REST API that drives vehicle management, analytics, notifications, and predictives.
+servers:
+  - url: http://localhost:8000/api
+paths:
+  /auth/token/:
+    post:
+      summary: Obtain JWT pair
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Access and refresh tokens
+  /vehicles/:
+    get:
+      summary: List vehicles for the authenticated user
+      responses:
+        '200':
+          description: Vehicle list
+  /fleets/:
+    get:
+      summary: Fleets owned by the authenticated manager
+  /products/:
+    get:
+      summary: Catalog of products
+  /reminders/:
+    get:
+      summary: Upcoming maintenance reminders for the user
+  /analytics/cost/:
+    get:
+      summary: Cost trend analytics and summary metrics
+  /predict/:
+    post:
+      summary: Estimate the next service date using mileage, vehicle type, and last service interval
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                vehicle_id:
+                  type: integer
+                mileage:
+                  type: number
+                vehicle_type:
+                  type: string
+                last_service_days:
+                  type: number
+      responses:
+        '200':
+          description: Prediction with next_service_date, confidence, and message
+  /payment/create-checkout-session/:
+    post:
+      summary: Creates a Stripe checkout session for payments
+security:
+  - bearerAuth: []
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+

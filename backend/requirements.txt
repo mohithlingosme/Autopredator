@@ -1,0 +1,12 @@
+﻿django>=5.0
+djangorestframework
+djangorestframework-simplejwt
+django-cors-headers
+stripe
+pytest
+pytest-django
+pillow
+django-filter
+joblib
+scikit-learn
+python-dotenv
