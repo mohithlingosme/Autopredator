@@ -1,6 +1,11 @@
 <?php
 declare(strict_types=1);
 
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+require_once __DIR__ . '/includes/config.php';
 require_once __DIR__ . '/includes/helpers.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -14,6 +19,7 @@ $phone = trim($_POST['phone'] ?? '');
 $company = trim($_POST['company'] ?? '');
 $fleetSize = trim($_POST['fleet_size'] ?? '');
 $message = trim($_POST['message'] ?? '');
+$sourcePage = 'contact_page';
 
 $errors = [];
 if ($name === '') {
@@ -22,27 +28,30 @@ if ($name === '') {
 if ($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $errors[] = 'A valid email is required.';
 }
-if ($message === '') {
-    $errors[] = 'Message is required.';
-}
 
-if (count($errors) === 0) {
-    $saved = create_lead([
-        'name' => $name,
-        'email' => $email,
-        'phone' => $phone,
-        'company' => $company,
-        'fleet_size' => $fleetSize,
-        'message' => $message,
-        'source' => 'contact-form',
-    ]);
+if (empty($errors)) {
+    try {
+        $pdo = get_db_connection();
+        $stmt = $pdo->prepare(
+            'INSERT INTO leads (name, email, phone, company, fleet_size, message, source_page)
+             VALUES (:name, :email, :phone, :company, :fleet_size, :message, :source_page)'
+        );
+        $stmt->execute([
+            'name' => $name,
+            'email' => $email,
+            'phone' => $phone,
+            'company' => $company,
+            'fleet_size' => $fleetSize,
+            'message' => $message,
+            'source_page' => $sourcePage,
+        ]);
 
-    if ($saved) {
         header('Location: thank-you.php');
         exit;
+    } catch (PDOException $e) {
+        error_log('Lead insert failed: ' . $e->getMessage());
+        $errors[] = 'We could not save your request. Please try again.';
     }
-
-    $errors[] = 'We could not save your request. Please try again.';
 }
 
 $pageTitle = "Contact Submitted | Autopredator";

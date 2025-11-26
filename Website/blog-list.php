@@ -1,17 +1,17 @@
 <?php
+declare(strict_types=1);
+
 $pageTitle = "Blog | Autopredator";
 $pageDescription = "Autopredator blog articles.";
 include 'includes/header.php';
 
 $posts = [];
-$pdo = get_db_connection();
-if ($pdo) {
-    try {
-        $stmt = $pdo->query('SELECT id, title, slug, excerpt, created_at FROM blog_posts ORDER BY created_at DESC');
-        $posts = $stmt->fetchAll();
-    } catch (PDOException $e) {
-        error_log('Failed to load blog posts: ' . $e->getMessage());
-    }
+try {
+    $pdo = get_db_connection();
+    $stmt = $pdo->query('SELECT id, title, slug, excerpt, published_at FROM blog_posts WHERE is_published = 1 ORDER BY published_at DESC');
+    $posts = $stmt->fetchAll();
+} catch (PDOException $e) {
+    error_log('Failed to load blog posts: ' . $e->getMessage());
 }
 ?>
 <section class="section">
@@ -33,17 +33,18 @@ if ($pdo) {
             $title = escape_html($post['title'] ?? '');
             $excerpt = escape_html($post['excerpt'] ?? '');
             $date = '';
-            if (!empty($post['created_at'])) {
-                $date = date('M j, Y', strtotime($post['created_at']));
+            if (!empty($post['published_at'])) {
+                $date = date('M j, Y', strtotime((string)$post['published_at']));
             }
             $id = (int)($post['id'] ?? 0);
-            $link = $id > 0 ? "blog-post.php?id={$id}" : '#';
+            $slug = trim((string)($post['slug'] ?? ''));
+            $link = $slug !== '' ? "blog-post.php?slug=" . urlencode($slug) : ($id > 0 ? "blog-post.php?id={$id}" : '#');
           ?>
           <article class="surface stack">
             <h2 class="text-emphasis"><?= $title; ?></h2>
             <?php if ($date): ?><p class="text-small muted"><?= escape_html($date); ?></p><?php endif; ?>
             <p class="muted"><?= $excerpt; ?></p>
-            <a class="text-emphasis" href="<?= $link; ?>">Read more →</a>
+            <a class="text-emphasis" href="<?= $link; ?>">Read more -></a>
           </article>
         <?php endforeach; ?>
       </div>

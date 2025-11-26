@@ -1,35 +1,11 @@
 <?php
 declare(strict_types=1);
 
+require_once __DIR__ . '/config.php';
+
 /**
  * Shared helpers for DB access and output safety.
  */
-
-function get_db_connection(): ?PDO
-{
-    static $pdo = null;
-    if ($pdo instanceof PDO) {
-        return $pdo;
-    }
-
-    require __DIR__ . '/config.php';
-
-    $dsn = sprintf('mysql:host=%s;dbname=%s;charset=utf8mb4', $db_host, $db_name);
-    $options = [
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-        PDO::ATTR_EMULATE_PREPARES => false,
-    ];
-
-    try {
-        $pdo = new PDO($dsn, $db_user, $db_pass, $options);
-    } catch (PDOException $e) {
-        error_log('Database connection failed: ' . $e->getMessage());
-        return null;
-    }
-
-    return $pdo;
-}
 
 function escape_html(?string $str): string
 {
@@ -57,7 +33,7 @@ function create_lead(array $data): bool
         return false;
     }
 
-    $allowed = ['name', 'email', 'company', 'phone', 'fleet_size', 'message', 'source'];
+    $allowed = ['name', 'email', 'company', 'phone', 'fleet_size', 'message', 'source', 'source_page'];
     $payload = [];
     foreach ($allowed as $field) {
         if (array_key_exists($field, $data)) {
@@ -67,6 +43,12 @@ function create_lead(array $data): bool
 
     if (empty($payload)) {
         return false;
+    }
+
+    // Ensure a source_page is present for analytics.
+    if (empty($payload['source_page']) && !empty($payload['source'])) {
+        $payload['source_page'] = $payload['source'];
+        unset($payload['source']);
     }
 
     $columns = array_keys($payload);

@@ -83,7 +83,8 @@
   function initLoginValidation() {
     const form =
       document.getElementById('login-form') ||
-      document.querySelector('form[action$="login.php"]');
+      document.querySelector('form[action$="login.php"]') ||
+      document.querySelector('form[action$="auth-process.php"]');
     if (!form) return;
 
     const errorsContainer =

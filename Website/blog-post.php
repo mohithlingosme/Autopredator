@@ -1,26 +1,26 @@
 <?php
 declare(strict_types=1);
 
+require_once __DIR__ . '/includes/config.php';
 require_once __DIR__ . '/includes/helpers.php';
 
-$identifier = $_GET['id'] ?? '';
 $post = null;
-$pdo = get_db_connection();
+$identifier = $_GET['id'] ?? null;
+$slug = $_GET['slug'] ?? null;
 
-if ($pdo && $identifier !== '') {
-    try {
-        if (ctype_digit((string)$identifier)) {
-            $stmt = $pdo->prepare('SELECT * FROM blog_posts WHERE id = :id LIMIT 1');
-            $stmt->execute(['id' => (int)$identifier]);
-            $post = $stmt->fetch();
-        } else {
-            $stmt = $pdo->prepare('SELECT * FROM blog_posts WHERE slug = :slug LIMIT 1');
-            $stmt->execute(['slug' => $identifier]);
-            $post = $stmt->fetch();
-        }
-    } catch (PDOException $e) {
-        error_log('Failed to load blog post: ' . $e->getMessage());
+try {
+    $pdo = get_db_connection();
+    if ($slug !== null && $slug !== '') {
+        $stmt = $pdo->prepare('SELECT * FROM blog_posts WHERE slug = :slug AND is_published = 1 LIMIT 1');
+        $stmt->execute(['slug' => $slug]);
+        $post = $stmt->fetch();
+    } elseif ($identifier !== null && ctype_digit((string)$identifier)) {
+        $stmt = $pdo->prepare('SELECT * FROM blog_posts WHERE id = :id AND is_published = 1 LIMIT 1');
+        $stmt->execute(['id' => (int)$identifier]);
+        $post = $stmt->fetch();
     }
+} catch (PDOException $e) {
+    error_log('Failed to load blog post: ' . $e->getMessage());
 }
 
 $pageTitle = $post && !empty($post['title'])
@@ -37,17 +37,17 @@ include 'includes/header.php';
     <?php if (!$post): ?>
       <div class="surface">
         <p class="muted">Post not found.</p>
-        <a class="text-emphasis" href="blog-list.php">← Back to blog</a>
+        <a class="text-emphasis" href="blog-list.php">Back to blog</a>
       </div>
     <?php else: ?>
       <?php
         $title = escape_html($post['title'] ?? '');
         $excerpt = escape_html($post['excerpt'] ?? '');
-        $content = nl2br(escape_html($post['content'] ?? ''));
         $featured = escape_html($post['featured_image'] ?? '');
+        $content = $post['content'] ?? '';
         $date = '';
-        if (!empty($post['created_at'])) {
-            $date = date('M j, Y', strtotime($post['created_at']));
+        if (!empty($post['published_at'])) {
+            $date = date('M j, Y', strtotime((string)$post['published_at']));
         }
       ?>
       <div class="surface stack">
@@ -58,12 +58,14 @@ include 'includes/header.php';
       </div>
       <article class="card stack">
         <?php if ($featured): ?>
-          <img src="<?= $featured; ?>" alt="<?= $title; ?>" style="width:100%;border-radius:10px;border:1px solid var(--ap-border);">
+          <img src="<?= $featured; ?>" alt="<?= $title; ?>" class="featured-image">
         <?php endif; ?>
-        <div><?= $content; ?></div>
+        <div class="stack">
+          <?= $content !== '' ? $content : '<p class="muted">No content available.</p>'; ?>
+        </div>
       </article>
       <div>
-        <a class="text-emphasis" href="blog-list.php">← Back to blog</a>
+        <a class="text-emphasis" href="blog-list.php">Back to blog</a>
       </div>
     <?php endif; ?>
   </div>
