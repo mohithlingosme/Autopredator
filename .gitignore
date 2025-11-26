@@ -14,6 +14,7 @@ media/
 staticfiles/
 
 # Local database artifacts
+db.sqlite3
 *.sqlite3
 database/*.sql
 
