@@ -144,7 +144,7 @@
   <section class="hero">
     <h1>Secure Your Fleet & Finances</h1>
     <p>Explore insurance tools tailored for vehicle owners, drivers, and businesses.</p>
-    <a class="cta" href="insurancefinance.html">Go to Dashboard</a>
+    <a class="cta" href="insurance-finance.php">Go to Dashboard</a>
   </section>
 
   <section class="tools-grid">
@@ -205,3 +205,4 @@
   </footer>
 </body>
 </html>
+

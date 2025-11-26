@@ -13,6 +13,10 @@ legacy/php_app/uploads/
 media/
 staticfiles/
 
+# Local database artifacts
+*.sqlite3
+database/*.sql
+
 # OS / editor
 .DS_Store
 Thumbs.db
