@@ -104,7 +104,7 @@ body {
         <div class="hero-grid">
             <div>
                 <p class="badge badge-info" style="display:inline-flex;">Autopredator Research</p>
-                <h1 style="margin:12px 0 8px;font-size:2.4rem;color:#fff;">Redefine your next ride</h1>
+                <h1 style="margin:12px 0 8px;font-size:2.4rem;color:#fff;">Research New & Used Cars – Compare Prices & Specs</h1>
                 <p style="color: var(--text-light); max-width: 640px;">Browse Indian-market cars, compare real variants, and see pricing in seconds.</p>
                 <form action="search.php" method="get" class="search-form" style="margin-top:18px;">
                     <input type="search" name="q" placeholder="Search by brand, model or keyword" aria-label="Search cars">
@@ -117,6 +117,10 @@ body {
                     <a class="pill" href="search.php?body_type=SUV">SUV</a>
                     <a class="pill" href="search.php?body_type=Hatchback">Hatchback</a>
                     <a class="pill" href="search.php?fuel_type=Electric">Electric</a>
+                </div>
+                <div style="margin-top: 16px;">
+                    <a class="btn btn-primary" href="search.php" style="margin-right: 12px;">Find a Car</a>
+                    <a class="btn btn-outline" href="compare.php">Compare Cars</a>
                 </div>
             </div>
             <div class="panel">
@@ -142,7 +146,7 @@ body {
 
 <section class="section container">
     <div class="section-header">
-        <h2>Manufacturers</h2>
+        <h2>Popular Brands</h2>
         <p>Active brands in the database</p>
     </div>
     <div class="grid-cards">

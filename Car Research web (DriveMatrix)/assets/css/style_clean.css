@@ -200,6 +200,11 @@ li { margin-bottom: 0.5em; }
     transition: color 0.2s;
 }
 
+.nav-links a.active {
+    color: var(--primary);
+    text-decoration: underline;
+}
+
 .nav-links a:hover {
     color: var(--primary);
     text-decoration: none;
