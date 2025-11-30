@@ -7,7 +7,7 @@ declare(strict_types=1);
  */
 
 require_once __DIR__ . '/../includes/config.php';
-require_once __DIR__ . '/../includes/db.php';
+require_once __DIR__ . '/../includes/repository.php';
 
 header('Content-Type: application/json; charset=utf-8');
 
@@ -18,42 +18,40 @@ if (strlen($query) < 2) {
 }
 
 try {
-    $pdo = get_db();
-    
-    // Search manufacturers and models
-    $sql = '
-        SELECT DISTINCT
-            "manufacturer" AS type,
-            m.name AS value,
-            m.id AS id
-        FROM manufacturers m
-        WHERE m.name LIKE :query
-        UNION
-        SELECT DISTINCT
-            "model" AS type,
-            CONCAT(man.name, " ", mf.nameplate) AS value,
-            mf.id AS id
-        FROM model_families mf
-        JOIN manufacturers man ON mf.manufacturer_id = man.id
-        WHERE mf.nameplate LIKE :query OR man.name LIKE :query
-        LIMIT 10
-    ';
-    
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute(['query' => '%' . $query . '%']);
-    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    
     $output = [];
-    foreach ($results as $row) {
-        $output[] = [
-            'label' => $row['value'],
-            'value' => $row['value'],
-            'type' => $row['type'],
-        ];
+
+    // Search manufacturers
+    $manufacturers = get_all_manufacturers();
+    foreach ($manufacturers as $man) {
+        if (stripos($man['name'], $query) !== false) {
+            $output[] = [
+                'label' => $man['name'],
+                'value' => $man['name'],
+                'type' => 'manufacturer',
+            ];
+        }
     }
-    
+
+    // Search model families
+    foreach ($manufacturers as $man) {
+        $families = get_model_families_by_manufacturer($man['id']);
+        foreach ($families as $family) {
+            $label = $man['name'] . ' ' . $family['nameplate'];
+            if (stripos($family['nameplate'], $query) !== false || stripos($man['name'], $query) !== false) {
+                $output[] = [
+                    'label' => $label,
+                    'value' => $label,
+                    'type' => 'model',
+                ];
+            }
+        }
+    }
+
+    // Limit to 10
+    $output = array_slice($output, 0, 10);
+
     json_response($output);
-    
+
 } catch (Exception $e) {
     json_response(['error' => 'Search failed'], 500);
 }

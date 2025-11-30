@@ -7,9 +7,9 @@ declare(strict_types=1);
  */
 
 require_once __DIR__ . '/../includes/auth.php';
-require_once __DIR__ . '/../includes/car_repository.php';
 require_once __DIR__ . '/../includes/config.php';
-require_once __DIR__ . '/../includes/db.php';
+// require_once __DIR__ . '/../includes/car_repository.php'; // Disabled for JSON mode
+// require_once __DIR__ . '/../includes/db.php'; // Disabled for JSON mode
 
 header('Content-Type: application/json; charset=utf-8');
 
@@ -19,17 +19,13 @@ $variantId = (int) ($_GET['variant_id'] ?? $_POST['variant_id'] ?? 0);
 auth_session_start();
 
 if ($action === 'add' && $variantId > 0) {
-    fav_add($variantId);
-    json_response(['success' => true, 'message' => 'Added to favorites']);
+    json_response(['success' => false, 'message' => 'Favorites disabled in JSON mode']);
 } elseif ($action === 'remove' && $variantId > 0) {
-    fav_remove($variantId);
-    json_response(['success' => true, 'message' => 'Removed from favorites']);
+    json_response(['success' => false, 'message' => 'Favorites disabled in JSON mode']);
 } elseif ($action === 'list') {
-    $favorites = fav_get_list();
-    json_response(['success' => true, 'favorites' => $favorites]);
+    json_response(['success' => true, 'favorites' => []]);
 } elseif ($action === 'check' && $variantId > 0) {
-    $favorites = fav_get_list();
-    json_response(['success' => true, 'is_favorite' => in_array($variantId, $favorites)]);
+    json_response(['success' => true, 'is_favorite' => false]);
 } else {
     json_response(['success' => false, 'error' => 'Invalid request'], 400);
 }
