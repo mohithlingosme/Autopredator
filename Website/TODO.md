@@ -1,228 +1,211 @@
-## 1. Structure & Tech Setup
+# TODO – Autopredator Business Website (`/Website`)
 
-- [x] Decide final tech stack for the business website (pure HTML/CSS/JS, PHP templates, or React/Next.js) and stick to one approach.
-- [x] Clearly separate **Business Website** vs **Car Research App**:
-  - [x] Keep marketing/business site in `Website/`.
-  - [x] Link out to the car research platform (DriveMatrix/product UI) via a "Launch Platform / Beta" button instead of mixing code.
-- [x] Create a clean folder structure inside `Website/`:
-  - [x] `Website/assets/css/` for stylesheets.
-  - [x] `Website/assets/js/` for scripts.
-  - [x] `Website/assets/img/` for logos, illustrations, and screenshots.
-- [x] `Website/pages/` (or `src/pages/` if using React/Next) for main pages.
-- [x] `Website/partials/` for shared header, footer, and layout components.
-- [x] Implement a **single shared layout** (header + footer + base structure) as a partial/template and use it across all pages.
+Status (Dec 2025):  
+- ✅ Tech stack decided: PHP with shared partials (`partials/header.php`, `partials/footer.php`, `partials/layout.php`).  
+- ✅ Structure in place: `assets/`, `pages/`, `products/`, `solutions/`, `api/`, `includes/`.  
+- ✅ Core pages implemented: Home, Solutions + subpages, Product Suite, Resources, About, Contact, Login, Dashboard placeholder.  
+- ✅ Lead + newsletter APIs wired (`api/api-lead-create.php`, `api/api-newsletter.php`).  
 
-## 2. Navigation & Page Map
+This TODO focuses on **remaining work, polish, and production-readiness**.
 
-- [x] Finalize top navigation items:
-  - [x] Home
-  - [x] Solutions
-  - [x] Product Suite / Apps
-  - [x] For Fleets
-  - [x] For Individuals
-  - [x] For Partners
-  - [x] Resources / Blog
-  - [x] About
-  - [x] Contact / Request Demo
-- [x] Ensure all navbar links point to real pages (or clearly marked "Coming soon").
+---
 
-### 2.1 Home Page
+## 1. Navigation, Footer & Page Inventory
 
-- [x] Build a **hero section** with:
-  - [x] Clear one-line pitch for Autopredator (unified vehicle intelligence & management).
-  - [x] 2-3 line supporting description.
-  - [x] Primary CTA button (e.g., "Request Demo" or "Join Waitlist").
-- [x] Add a "Who it's for" section:
-  - [x] Individuals
-  - [x] Fleet owners / operators
-  - [x] Dealers & brokers
-  - [x] Banks & insurers
-- [x] Add a "Core modules / apps" section:
-  - [x] Fleet Pro
-  - [x] AutoMart
-  - [x] Service & Maintenance
-  - [x] Finance Desk / Loan & Lease Hub
-  - [x] Compliance & Safety
-  - [x] EV Center
-  - [x] Data & Intelligence / Analytics
-- [x] Add a "Key benefits" section (3-4 bullets/cards) highlighting:
-  - [x] Reduced downtime.
-  - [x] Lower operating costs.
-  - [x] Automatic compliance & reminders.
-  - [x] Better data & insights.
-- [x] Add a simple "Vision / Roadmap teaser" section.
+- [ ] **Decide what to do with footer-only pages that don’t exist yet:**
+  - [ ] `industries.php` – either:
+    - [ ] Create a dedicated Industries page **or**
+    - [ ] Remove the footer link or point it to an existing section (e.g., `solutions.php#who-for`).
+  - [ ] `how-it-works.php` – either:
+    - [ ] Create a “How it works” page describing data sources, workflow, and value **or**
+    - [ ] Point this link to a section on the home page (e.g., “vision” / “how it works” block) and use an anchor.
+  - [ ] `pricing.php` – either:
+    - [ ] Create a simple pricing / “Talk to sales for pricing” page **or**
+    - [ ] Hide/remove this link until you’re ready to publish pricing.
+- [ ] Verify every link in:
+  - [ ] Header nav (from `$navItems` in `partials/header.php`).
+  - [ ] Footer “Quick links”, “Company”, and “Contact” sections.
+  - [ ] Buttons and CTAs in `pages/home.php`, `pages/solutions/*.php`, `pages/product-suite.php`, `pages/resources.php`, etc.
+  - [ ] Ensure no link points to a non-existent `.php` or wrong anchor.
+- [ ] Confirm the **sitemap (`sitemap.xml`) matches final navigation:**
+  - [ ] Add/remove URLs to match whatever you decide about `industries.php`, `how-it-works.php`, `pricing.php`.
+  - [ ] Verify every `<loc>` URL has a corresponding `.php` file / route.
 
-### 2.2 Solutions Pages
+---
 
-- [x] Create `/solutions/individuals` page with:
-  - [x] Problem statement for individual vehicle owners.
-  - [x] How Autopredator solves it.
-  - [x] 3-5 feature highlights.
-  - [x] Use cases.
-  - [x] CTA (Request demo / Join waitlist).
-- [x] Create `/solutions/fleet-owners` page similarly tailored to fleets.
-- [x] Create `/solutions/dealers-and-brokers` page.
-- [x] Create `/solutions/banks-and-insurers` page.
+## 2. Content & Copy Polish
 
-### 2.3 Product Suite / Apps
+- [ ] Do a pass on **all marketing copy** for clarity and consistency:
+  - [ ] Home (`pages/home.php`).
+  - [ ] Solutions overview (`pages/solutions.php`).
+  - [ ] Individual solutions (`pages/solutions/*.php`).
+  - [ ] Product suite + each product page (`pages/product-suite.php`, `pages/products/*.php`).
+  - [ ] For Fleets / Individuals / Partners (`pages/for-*.php`).
+  - [ ] About (`pages/about.php`).
+  - [ ] Resources (`pages/resources.php`).
+- [ ] Standardise language & tone:
+  - [ ] Use one consistent way to describe Autopredator (e.g., “unified vehicle intelligence & management platform”).
+  - [ ] Ensure “DriveMatrix” vs “Autopredator” usage is clear (product vs company vs platform).
+- [ ] Replace any placeholder / “coming soon” text where you now have more concrete messaging:
+  - [ ] `pages/product-suite.php` (“Coming soon” titles/descriptions for modules).
+  - [ ] `pages/for-individuals.php`, `pages/for-partners.php`, `pages/dashboard-placeholder.php`.
+  - [ ] `pages/resources.php` cards (blog/resource teasers).
+- [ ] Run a final **spelling/grammar** check across all pages.
 
-- [x] Create a **Product Suite** page listing all key apps as cards:
-  - [x] Fleet Pro
-  - [x] AutoMart
-  - [x] Service & Maintenance
-  - [x] Finance Desk / Loan & Lease Hub
-  - [x] Compliance & Safety
-  - [x] EV Center
-  - [x] Data & Intelligence / Analytics
-- [x] For each app card:
-  - [x] Add icon/illustration.
-  - [x] Add a 1-2 line description.
-  - [x] Add a "Learn more" or "Coming soon" link.
+---
 
-### 2.4 Detailed Product Pages (V2, plan now)
+## 3. Lead Capture, Contact Form & Newsletter
 
-- [x] Create placeholder detailed pages (even if minimal copy for now):
-  - [x] `/products/fleet-pro`
-  - [x] `/products/automart`
-  - [x] `/products/finance-desk`
-  - [x] `/products/ev-center`
-- [x] Add basic structure (problem, features, screenshots, CTA) for each.
+### 3.1 Database & Helpers
 
-### 2.5 About & Vision
+- [ ] Ensure the database `autopredator_site` exists with tables that match the PHP helpers:
+  - [ ] `leads` table (for `create_lead(...)`):
+    - [ ] Columns to support: `name`, `email`, `phone`, `company`, `fleet_size`, `notes`, `source_page`, plus standard meta (`created_at` etc.).
+  - [ ] `newsletter_subscribers` table (for `create_newsletter_subscriber(...)`):
+    - [ ] At minimum: `id`, `email`, `created_at`, optional `is_confirmed`.
+- [ ] Optionally add a **simple admin view** (even unlinked URL) to confirm leads/newsletter entries are being stored.
 
-- [x] Create an **About** page with:
-  - [x] Story of Autopredator.
-  - [x] Vision & mission statements.
-  - [x] "Why now / market gap" explanation.
-  - [x] High-level roadmap (Phase 1, 2, 3).
-  - [x] Short founder section (photo optional).
+### 3.2 Contact Form (`pages/contact.php` / `contact-submit.php`)
 
-### 2.6 Contact / Request Demo
+- [ ] Confirm `contact-submit.php` correctly:
+  - [ ] Validates required fields.
+  - [ ] Creates lead via `create_lead(...)` **or** falls back to email + `error_log`.
+  - [ ] Redirects or renders a clear success/failure message.
+- [ ] Ensure **frontend UX** is smooth:
+  - [ ] `#contact-form` is correctly handled in `assets/js/main.js` (AJAX vs normal POST).
+  - [ ] Status messages (e.g., `.form-status`) update on success/failure.
+  - [ ] Required fields are marked and show errors on invalid input.
 
-- [x] Create a **Contact / Request Demo** page with form:
-  - [x] Name
-  - [x] Email
-  - [x] Phone
-  - [x] Company / Organization
-  - [x] Fleet size or vehicle use-case (dropdown or input)
-  - [x] Message / Requirements
-- [x] Implement success state (thank-you message or redirect to "Thank you" page).
-- [x] Implement basic validation for required fields.
+### 3.3 Inline / Mini Lead Forms
 
-### 2.7 Resources / Blog
+- [ ] In `main.js`, either **use or remove** the mini lead form logic:
+  - [ ] If you want mini lead forms (“Get early access” sections on pages):
+    - [ ] Add markup with `data-lead-form`, input fields, and `.form-status` where needed.
+    - [ ] Confirm the JS selector and action URL (`api/api-lead-create.php`) are correct.
+  - [ ] If not needed, simplify/remove `initMiniLeadForms()` to reduce dead code.
 
-- [x] Create a **Resources / Blog** page:
-  - [x] Add "Coming soon" message.
-  - [x] Optionally add 1-2 dummy blog cards with placeholder titles & excerpts.
+### 3.4 Newsletter Form (Footer)
 
-## 3. Design System & Branding
+- [ ] Confirm `<form data-newsletter-form>` in `partials/footer.php`:
+  - [ ] Posts to `api/api-newsletter.php`.
+  - [ ] Shows loading / success / error states via `.form-status` in the footer.
+  - [ ] Validates email on the client before firing the request.
 
-- [x] Define brand identity for Autopredator:
-  - [x] Choose primary color (for CTAs).
-  - [x] Choose accent color.
-  - [x] Choose neutral background/base color.
-  - [x] Choose font pair (headings + body).
-- [x] Implement a **global stylesheet** with:
-  - [x] Typography scale (H1–H6, body, caption).
-  - [x] Button styles (primary, secondary, ghost).
-  - [x] Card styles (padding, border-radius, shadow).
-  - [x] Section spacing (consistent padding/margin).
-- [x] Replace all placeholder/lorem-ipsum text with real Autopredator copy.
-- [x] Ensure layout is responsive:
-  - [x] Mobile-friendly navbar (hamburger if needed).
-  - [x] Sections stack vertically on small screens.
-  - [x] Check readability on phone/tablet/desktop.
+---
 
-## 4. Content & Messaging Alignment
+## 4. Blog & Resources
 
-- [x] Review the business plan and extract **core value propositions** for the website.
-- [x] Ensure Home + Solutions pages clearly convey:
-  - [x] Single pane of glass for vehicle operations.
-  - [x] Works across personal, commercial, agricultural, and construction vehicles.
-  - [x] Focus on cost savings, uptime, compliance, safety, and financing.
-- [x] Add a “Who is this for?” section to Home with audience cards.
-- [x] Add specific benefit sections:
-  - [x] “Reduce downtime.”
-  - [x] “Cut hidden vehicle costs.”
-  - [x] “Never miss renewals & compliances.”
-  - [x] “Get more from every vehicle asset.”
-- [x] Add UI screenshots or mockups:
-  - [x] Capture product/DriveMatrix UI screens.
-  - [x] Place screenshots in hero/product sections as static images.
+- [ ] Finalise **blog data model** (used in `blog-list.php` and `blog-post.php`):
+  - [ ] `blog_posts` table with at least: `id`, `title`, `slug`, `excerpt`, `content`, `featured_image`, `published_at`, `is_published`.
+- [ ] Confirm `blog-list.php`:
+  - [ ] Queries published posts from `blog_posts`.
+  - [ ] Passes `$posts` into `pages/blog-list.php`.
+  - [ ] Displays a “No posts yet” state if DB is empty (already present – just test).
+- [ ] Confirm `blog-post.php`:
+  - [ ] Supports loading by `slug` or ID from query string.
+  - [ ] Handles “not found / unpublished” posts with a friendly message instead of a fatal error.
+- [ ] When you’re ready:
+  - [ ] Seed DB with 2–3 real posts about predictive maintenance, data, etc.
+  - [ ] Link relevant cards in `pages/resources.php` to actual `blog-post.php?slug=...` URLs.
 
-## 5. Forms, Backend Hooks & Tracking
+---
 
-- [x] Implement lead capture across key pages:
-  - [x] CTA on Home hero leads to demo/contact form.
-  - [x] Solutions pages include a mini-form or CTA linking to contact.
-- [x] Decide form handling strategy:
-  - [x] Simple PHP mailer script (if using PHP).
-  - [x] Or third-party form service (Formspree, etc.).
-- [x] Implement clear error handling for forms:
-  - [x] Show messages for missing/invalid fields.
-  - [x] Provide user-friendly success confirmation.
-- [x] Add optional newsletter/waitlist:
-  - [x] Simple email-only input for “Get early access”.
-  - [x] Decide where to store or send these emails (DB or email service).
-- [x] Integrate basic analytics:
-  - [x] Add Google Analytics / Plausible / similar.
-  - [x] Verify tracking of page views and CTA clicks.
+## 5. Auth, Portal & Session Handling
 
-## 8. Final QA & Deployment
+- [ ] Ensure `users` table exists for login (`auth-process.php`):
+  - [ ] Columns: `id`, `name`, `email`, `password_hash`, `role`, `created_at`, `updated_at`.
+- [ ] Confirm **login flow**:
+  - [ ] Validates email/password on `auth-process.php`.
+  - [ ] On success, sets `$_SESSION['user_id']`, `$_SESSION['user_name']`, `$_SESSION['user_role']`.
+  - [ ] Redirects to `dashboard-placeholder.php`.
+  - [ ] On failure, redirects back to `login.php?error=1` and shows the error banner in `pages/login.php`.
+- [ ] Confirm **logout**:
+  - [ ] `logout.php` properly clears session and redirects to `index.php` or `login.php`.
+- [ ] Harden sessions for production:
+  - [ ] Use secure session cookies (`session.cookie_secure`, `session.cookie_httponly`, `session.use_strict_mode`).
+  - [ ] Consider CSRF tokens for login and lead forms if you expose them publicly.
+- [ ] Plan next steps for replacing `dashboard-placeholder.php`:
+  - [ ] Decide whether to keep it as a “coming soon” page or connect it later to a real portal app.
 
-- [ ] Test navigation:
-  - [ ] All navbar links work.
-  - [ ] No dead links in buttons/CTAs.
-- [ ] Check for 404s and fix/update routes/links.
-- [ ] Test on multiple viewports:
-  - [ ] Small phone (~360–400px).
+---
+
+## 6. Design, Layout & Responsiveness
+
+- [ ] Run through all pages on:
+  - [ ] Mobile (~360–400px width).
   - [ ] Tablet (~768px).
   - [ ] Desktop (≥1366px).
-- [ ] Proofread all visible text:
-  - [ ] Fix spelling/grammar.
-  - [ ] Ensure consistent naming (“Autopredator”, module names, etc.).
-- [ ] Deploy the website to hosting:
-  - [ ] Choose hosting (Netlify/Vercel/shared hosting etc.).
-  - [ ] Point domain (e.g., `autopredator.in`) to the deployed site.
-  - [ ] Verify HTTPS/SSL is working.
-- [ ] Do a final live-site check:
-  - [ ] Forms submit correctly.
-  - [ ] Analytics records visits.
-  - [ ] Site loads correctly on mobile & desktop over real internet.
+- [ ] Fix any layout issues:
+  - [ ] Overflow or horizontal scrolling on small screens.
+  - [ ] Cards or grids breaking at awkward breakpoints.
+  - [ ] Hero image (`mock-dashboard.svg`) scaling on mobile.
+- [ ] Check buttons & CTAs:
+  - [ ] All buttons have clear hover/focus states.
+  - [ ] Tap targets are large enough on touch devices.
+- [ ] Ensure typography is consistent:
+  - [ ] Same font sizes / line heights for section headings, body text, captions.
+  - [ ] Consistent usage of `.muted`, `.text-small`, `.tagline`, `.pill` etc.
 
-## 7. Repo Cleanup & Dev Experience
+---
 
-- [x] Delete unused/demo/template HTML/PHP/JS files that are not part of the final sitemap.
-- [x] Remove old CSS files not referenced anywhere in the site.
-- [x] Standardize file naming:
-  - [x] `index.*` for Home.
-  - [x] `solutions-fleets.*` or `/solutions/fleets/index.*` etc.
-  - [x] `contact.*` for contact page.
-- [x] Add a `README.md` inside `Website/` explaining:
-  - [x] Purpose of this folder (business/marketing site).
-  - [x] Tech stack used.
-  - [x] How to run locally.
-  - [x] How to build (if applicable).
-  - [x] How to deploy.
-- [x] Add simple scripts or documented commands:
-  - [x] For local dev (`npm run dev` / `php -S` / etc.).
-  - [x] For build (`npm run build` etc.) if using a bundler/framework.
+## 7. Analytics, Tracking & Config
 
-## 6. SEO, Meta & Performance
+- [ ] Replace **Google Analytics placeholder** in `partials/header.php`:
+  - [ ] Set the real `GA_MEASUREMENT_ID`.
+  - [ ] Or remove GA entirely if you’re not using it.
+- [ ] Verify `initCTATracking()` in `assets/js/main.js`:
+  - [ ] All key CTAs (`data-cta="..."`) are tagged:
+    - [ ] Hero buttons.
+    - [ ] Nav actions (Launch Beta, Book a demo).
+    - [ ] Footer newsletter button.
+    - [ ] Any “Learn more” / “Talk to us” buttons you care about.
+  - [ ] Confirm events appear in GA (if configured).
+- [ ] Consider basic **privacy / cookie** note if required for your region.
 
-- [x] Set unique `<title>` and `<meta description>` for each page.
-- [x] Use proper heading hierarchy (one H1 per page; logical H2/H3).
-- [x] Add descriptive `alt` text for all key images.
-- [x] Create and serve `robots.txt`.
-- [x] Create and serve `sitemap.xml` with all important URLs.
-- [x] Ensure URLs are clean and readable (avoid messy query strings when possible).
-- [x] Add Open Graph tags to main pages:
-  - [x] `og:title`
-  - [x] `og:description`
-  - [x] `og:image`
-  - [x] `og:url`
-- [x] Optimize images:
-  - [x] Compress large graphics.
-  - [x] Prefer `.webp` where supported.
-  - [x] Lazy-load below-the-fold images.
-- [x] Remove unused CSS/JS from old templates to improve load speed.
+---
+
+## 8. Configuration, Security & Cleanup
+
+- [ ] Review **DB config** in `includes/config.php`:
+  - [ ] Move credentials (`$db_host`, `$db_name`, `$db_user`, `$db_pass`) to environment variables or a config not committed to Git.
+  - [ ] Document required DB setup in `README.md` (database name, tables).
+- [ ] Clean up unused files:
+  - [ ] `includes/nav.php` is currently empty – either wire it up or remove it.
+  - [ ] Remove any old / unused prototypes if they creep back in future.
+- [ ] Error handling:
+  - [ ] Make sure DB errors are `error_log`’d but not exposed to the user.
+  - [ ] Add simple user-friendly messages where appropriate (“Something went wrong, please try again”).
+- [ ] Make sure `robots.txt` and `sitemap.xml` are updated and deployed from the correct document root.
+
+---
+
+## 9. Final QA & Launch Checklist
+
+- [ ] Click-through test:
+  - [ ] Manually click every header and footer link.
+  - [ ] Check all in-page anchor links (`#demo`, etc.).
+- [ ] Forms:
+  - [ ] Submit contact form with valid/invalid data and verify:
+    - [ ] DB/lead entry or email log.
+    - [ ] User feedback on success/failure.
+  - [ ] Submit newsletter form and verify subscription is stored.
+- [ ] SEO basics:
+  - [ ] Unique `<title>` and `<meta name="description">` for each page.
+  - [ ] Proper `<h1>` usage per page.
+- [ ] Deployment:
+  - [ ] Sync `/Website` to your hosting.
+  - [ ] Configure domain (e.g., `autopredator.in`) to point to this folder.
+  - [ ] Verify HTTPS/SSL.
+- [ ] Live-site smoke test:
+  - [ ] Test from mobile and desktop over real mobile data / Wi-Fi.
+  - [ ] Check load time and basic Lighthouse scores (performance, accessibility, SEO).
+
+---
+
+## 10. Future Enhancements (Nice-to-have)
+
+- [ ] Add a simple **admin dashboard** to view leads and newsletter subscribers.
+- [ ] Add a small CMS or markdown-based system for blog posts.
+- [ ] Add testimonials / case studies once you have early users.
+- [ ] Multi-language support if needed in future.
+
