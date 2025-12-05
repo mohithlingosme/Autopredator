@@ -4,6 +4,10 @@
     initSmoothScroll();
     initNavToggle();
     initActiveLinks();
+    initContactForm();
+    initMiniLeadForms();
+    initNewsletterForm();
+    initCTATracking();
   });
 
   // Smooth scroll for in-page anchors
@@ -101,5 +105,104 @@
         });
       });
     }
+  }
+
+  function initContactForm() {
+    const form = document.querySelector('#contact-form');
+    const errorBox = document.querySelector('#contact-errors');
+    if (!form) return;
+
+    form.addEventListener('submit', function (e) {
+      const name = form.querySelector('#name');
+      const email = form.querySelector('#email');
+      const message = form.querySelector('#message');
+      const errors = [];
+      if (name && !name.value.trim()) errors.push('Name is required.');
+      if (email && !email.value.trim()) errors.push('Email is required.');
+      if (email && email.value && !email.validity.valid) errors.push('Enter a valid email.');
+      if (message && !message.value.trim()) errors.push('Message is required.');
+      if (errors.length) {
+        e.preventDefault();
+        if (errorBox) {
+          errorBox.innerHTML = errors.map((err) => `<div class="alert alert-error">${err}</div>`).join('');
+        }
+      }
+    });
+  }
+
+  function initMiniLeadForms() {
+    const forms = Array.from(document.querySelectorAll('[data-mini-lead-form]'));
+    if (!forms.length || !window.fetch) return;
+
+    forms.forEach((form) => {
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const formData = new FormData(form);
+        const statusEl = form.querySelector('.form-status');
+        statusEl && (statusEl.textContent = 'Submitting...');
+
+        fetch(form.getAttribute('action') || '/api/api-lead-create.php', {
+          method: 'POST',
+          body: formData,
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.success) {
+              statusEl && (statusEl.textContent = data.message || 'Thanks! We will reach out.');
+              form.reset();
+            } else {
+              statusEl && (statusEl.textContent = data.message || 'We could not submit this form.');
+            }
+          })
+          .catch(() => {
+            statusEl && (statusEl.textContent = 'Network error. Please try again.');
+          });
+      });
+    });
+  }
+
+  function initNewsletterForm() {
+    const form = document.querySelector('[data-newsletter-form]');
+    if (!form || !window.fetch) return;
+    const statusEl = form.querySelector('.form-status');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const formData = new FormData(form);
+      statusEl && (statusEl.textContent = 'Submitting...');
+
+      fetch(form.getAttribute('action') || '/api/api-newsletter.php', {
+        method: 'POST',
+        body: formData,
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.success) {
+            statusEl && (statusEl.textContent = data.message || 'Thanks! You are on the list.');
+            form.reset();
+          } else {
+            statusEl && (statusEl.textContent = data.message || 'We could not save your email.');
+          }
+        })
+        .catch(() => {
+          statusEl && (statusEl.textContent = 'Network error. Please try again.');
+        });
+    });
+  }
+
+  function initCTATracking() {
+    const ctas = Array.from(document.querySelectorAll('[data-cta]'));
+    if (!ctas.length) return;
+
+    ctas.forEach((cta) => {
+      cta.addEventListener('click', () => {
+        const label = cta.getAttribute('data-cta') || 'cta';
+        if (typeof gtag === 'function') {
+          gtag('event', 'cta_click', { event_category: 'engagement', event_label: label });
+        } else {
+          console.debug('[CTA]', label);
+        }
+      });
+    });
   }
 })();

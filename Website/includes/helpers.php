@@ -79,3 +79,21 @@ function create_newsletter_subscriber(string $email): bool
         return false;
     }
 }
+
+function send_lead_notification(array $lead): bool
+{
+    $email = $lead['email'] ?? '';
+    $name = $lead['name'] ?? '';
+    $source = $lead['source_page'] ?? 'website';
+    $subject = 'New Autopredator lead';
+    $message = "Lead source: {$source}\nName: {$name}\nEmail: {$email}\n";
+
+    if (function_exists('mail')) {
+        // Basic mail attempt; failure will fall back to logging.
+        @mail('hello@autopredator.com', $subject, $message);
+    }
+
+    // Always log for traceability, even if mail is disabled in the environment.
+    error_log('Lead capture: ' . $message);
+    return true;
+}

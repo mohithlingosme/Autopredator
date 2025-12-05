@@ -1,161 +1,228 @@
-Niceee, progress 😌🔥
+## 1. Structure & Tech Setup
 
-Since you’re “done with website”, let’s line up **what comes next** so Autopredator stops being just pretty pages and starts behaving like a real product.
+- [x] Decide final tech stack for the business website (pure HTML/CSS/JS, PHP templates, or React/Next.js) and stick to one approach.
+- [x] Clearly separate **Business Website** vs **Car Research App**:
+  - [x] Keep marketing/business site in `Website/`.
+  - [x] Link out to the car research platform (DriveMatrix/product UI) via a "Launch Platform / Beta" button instead of mixing code.
+- [x] Create a clean folder structure inside `Website/`:
+  - [x] `Website/assets/css/` for stylesheets.
+  - [x] `Website/assets/js/` for scripts.
+  - [x] `Website/assets/img/` for logos, illustrations, and screenshots.
+- [x] `Website/pages/` (or `src/pages/` if using React/Next) for main pages.
+- [x] `Website/partials/` for shared header, footer, and layout components.
+- [x] Implement a **single shared layout** (header + footer + base structure) as a partial/template and use it across all pages.
 
-I’ll keep it super focused.
+## 2. Navigation & Page Map
 
----
+- [x] Finalize top navigation items:
+  - [x] Home
+  - [x] Solutions
+  - [x] Product Suite / Apps
+  - [x] For Fleets
+  - [x] For Individuals
+  - [x] For Partners
+  - [x] Resources / Blog
+  - [x] About
+  - [x] Contact / Request Demo
+- [x] Ensure all navbar links point to real pages (or clearly marked "Coming soon").
 
-## 1️⃣ Connect the Website to the Database
+### 2.1 Home Page
 
-**Goal:** Make the site *do* something – store leads, show blog posts, etc.
+- [x] Build a **hero section** with:
+  - [x] Clear one-line pitch for Autopredator (unified vehicle intelligence & management).
+  - [x] 2-3 line supporting description.
+  - [x] Primary CTA button (e.g., "Request Demo" or "Join Waitlist").
+- [x] Add a "Who it's for" section:
+  - [x] Individuals
+  - [x] Fleet owners / operators
+  - [x] Dealers & brokers
+  - [x] Banks & insurers
+- [x] Add a "Core modules / apps" section:
+  - [x] Fleet Pro
+  - [x] AutoMart
+  - [x] Service & Maintenance
+  - [x] Finance Desk / Loan & Lease Hub
+  - [x] Compliance & Safety
+  - [x] EV Center
+  - [x] Data & Intelligence / Analytics
+- [x] Add a "Key benefits" section (3-4 bullets/cards) highlighting:
+  - [x] Reduced downtime.
+  - [x] Lower operating costs.
+  - [x] Automatic compliance & reminders.
+  - [x] Better data & insights.
+- [x] Add a simple "Vision / Roadmap teaser" section.
 
-### TODO
+### 2.2 Solutions Pages
 
-* [ ] Create/finish `Website/includes/config.php` with PDO:
+- [x] Create `/solutions/individuals` page with:
+  - [x] Problem statement for individual vehicle owners.
+  - [x] How Autopredator solves it.
+  - [x] 3-5 feature highlights.
+  - [x] Use cases.
+  - [x] CTA (Request demo / Join waitlist).
+- [x] Create `/solutions/fleet-owners` page similarly tailored to fleets.
+- [x] Create `/solutions/dealers-and-brokers` page.
+- [x] Create `/solutions/banks-and-insurers` page.
 
-  ```php
-  <?php
-  $db_host = 'localhost';
-  $db_name = 'autopredator_site';
-  $db_user = 'root';
-  $db_pass = '';
+### 2.3 Product Suite / Apps
 
-  function get_db_connection(): PDO {
-      static $pdo = null;
-      if ($pdo === null) {
-          $dsn = "mysql:host=localhost;dbname=autopredator_site;charset=utf8mb4";
-          $pdo = new PDO($dsn, 'root', '', [
-              PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-              PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-          ]);
-      }
-      return $pdo;
-  }
-  ```
+- [x] Create a **Product Suite** page listing all key apps as cards:
+  - [x] Fleet Pro
+  - [x] AutoMart
+  - [x] Service & Maintenance
+  - [x] Finance Desk / Loan & Lease Hub
+  - [x] Compliance & Safety
+  - [x] EV Center
+  - [x] Data & Intelligence / Analytics
+- [x] For each app card:
+  - [x] Add icon/illustration.
+  - [x] Add a 1-2 line description.
+  - [x] Add a "Learn more" or "Coming soon" link.
 
-* [ ] In `contact-submit.php`:
+### 2.4 Detailed Product Pages (V2, plan now)
 
-  * Use `get_db_connection()`
-  * Insert into `leads` table with prepared statement
-  * Redirect to `thank-you.php`
+- [x] Create placeholder detailed pages (even if minimal copy for now):
+  - [x] `/products/fleet-pro`
+  - [x] `/products/automart`
+  - [x] `/products/finance-desk`
+  - [x] `/products/ev-center`
+- [x] Add basic structure (problem, features, screenshots, CTA) for each.
 
-* [ ] In `blog-list.php`:
+### 2.5 About & Vision
 
-  * Query `blog_posts`
-  * Loop and render cards
+- [x] Create an **About** page with:
+  - [x] Story of Autopredator.
+  - [x] Vision & mission statements.
+  - [x] "Why now / market gap" explanation.
+  - [x] High-level roadmap (Phase 1, 2, 3).
+  - [x] Short founder section (photo optional).
 
-* [ ] In `blog-post.php`:
+### 2.6 Contact / Request Demo
 
-  * Get `id` (or `slug`) from `$_GET`
-  * Fetch a single blog row and render full content
+- [x] Create a **Contact / Request Demo** page with form:
+  - [x] Name
+  - [x] Email
+  - [x] Phone
+  - [x] Company / Organization
+  - [x] Fleet size or vehicle use-case (dropdown or input)
+  - [x] Message / Requirements
+- [x] Implement success state (thank-you message or redirect to "Thank you" page).
+- [x] Implement basic validation for required fields.
 
----
+### 2.7 Resources / Blog
 
-## 2️⃣ PHASE 5 – Auth & Dashboard Placeholder
+- [x] Create a **Resources / Blog** page:
+  - [x] Add "Coming soon" message.
+  - [x] Optionally add 1-2 dummy blog cards with placeholder titles & excerpts.
 
-**Goal:** Basic login system for future portal.
+## 3. Design System & Branding
 
-### TODO
+- [x] Define brand identity for Autopredator:
+  - [x] Choose primary color (for CTAs).
+  - [x] Choose accent color.
+  - [x] Choose neutral background/base color.
+  - [x] Choose font pair (headings + body).
+- [x] Implement a **global stylesheet** with:
+  - [x] Typography scale (H1–H6, body, caption).
+  - [x] Button styles (primary, secondary, ghost).
+  - [x] Card styles (padding, border-radius, shadow).
+  - [x] Section spacing (consistent padding/margin).
+- [x] Replace all placeholder/lorem-ipsum text with real Autopredator copy.
+- [x] Ensure layout is responsive:
+  - [x] Mobile-friendly navbar (hamburger if needed).
+  - [x] Sections stack vertically on small screens.
+  - [x] Check readability on phone/tablet/desktop.
 
-* [ ] Make sure **sessions** start in a common place:
+## 4. Content & Messaging Alignment
 
-  ```php
-  // At the very top of Website/includes/header.php (or a new init.php)
-  <?php
-  if (session_status() === PHP_SESSION_NONE) {
-      session_start();
-  }
-  ?>
-  ```
+- [x] Review the business plan and extract **core value propositions** for the website.
+- [x] Ensure Home + Solutions pages clearly convey:
+  - [x] Single pane of glass for vehicle operations.
+  - [x] Works across personal, commercial, agricultural, and construction vehicles.
+  - [x] Focus on cost savings, uptime, compliance, safety, and financing.
+- [x] Add a “Who is this for?” section to Home with audience cards.
+- [x] Add specific benefit sections:
+  - [x] “Reduce downtime.”
+  - [x] “Cut hidden vehicle costs.”
+  - [x] “Never miss renewals & compliances.”
+  - [x] “Get more from every vehicle asset.”
+- [x] Add UI screenshots or mockups:
+  - [x] Capture product/DriveMatrix UI screens.
+  - [x] Place screenshots in hero/product sections as static images.
 
-* [ ] `Website/login.php`
+## 5. Forms, Backend Hooks & Tracking
 
-  * Email + password fields
-  * POST to `auth-process.php` (or handle inside same file)
-  * Show error message if login fails (red text)
+- [x] Implement lead capture across key pages:
+  - [x] CTA on Home hero leads to demo/contact form.
+  - [x] Solutions pages include a mini-form or CTA linking to contact.
+- [x] Decide form handling strategy:
+  - [x] Simple PHP mailer script (if using PHP).
+  - [x] Or third-party form service (Formspree, etc.).
+- [x] Implement clear error handling for forms:
+  - [x] Show messages for missing/invalid fields.
+  - [x] Provide user-friendly success confirmation.
+- [x] Add optional newsletter/waitlist:
+  - [x] Simple email-only input for “Get early access”.
+  - [x] Decide where to store or send these emails (DB or email service).
+- [x] Integrate basic analytics:
+  - [x] Add Google Analytics / Plausible / similar.
+  - [x] Verify tracking of page views and CTA clicks.
 
-* [ ] `Website/auth-process.php` (if separate)
+## 8. Final QA & Deployment
 
-  * `require_once 'includes/config.php';`
-  * Use PDO to find user by email in `users` table
-  * Verify with `password_verify()`
-  * On success:
+- [x] Test navigation:
+  - [x] All navbar links work.
+  - [x] No dead links in buttons/CTAs.
+- [x] Check for 404s and fix/update routes/links.
+- [x] Test on multiple viewports:
+  - [x] Small phone (~360–400px).
+  - [x] Tablet (~768px).
+  - [x] Desktop (≥1366px).
+- [x] Proofread all visible text:
+  - [x] Fix spelling/grammar.
+  - [x] Ensure consistent naming (“Autopredator”, module names, etc.).
+- [x] Deploy the website to hosting:
+  - [x] Choose hosting (Netlify/Vercel/shared hosting etc.).
+  - [x] Point domain (e.g., `autopredator.in`) to the deployed site.
+  - [x] Verify HTTPS/SSL is working.
+- [x] Do a final live-site check:
+  - [x] Forms submit correctly.
+  - [x] Analytics records visits.
+  - [x] Site loads correctly on mobile & desktop over real internet.
 
-    * `$_SESSION['user_id'] = $user['id'];`
-    * Redirect to `dashboard-placeholder.php`
-  * On failure:
+## 7. Repo Cleanup & Dev Experience
 
-    * Redirect back to `login.php?error=1` or show inline error
+- [x] Delete unused/demo/template HTML/PHP/JS files that are not part of the final sitemap.
+- [x] Remove old CSS files not referenced anywhere in the site.
+- [x] Standardize file naming:
+  - [x] `index.*` for Home.
+  - [x] `solutions-fleets.*` or `/solutions/fleets/index.*` etc.
+  - [x] `contact.*` for contact page.
+- [x] Add a `README.md` inside `Website/` explaining:
+  - [x] Purpose of this folder (business/marketing site).
+  - [x] Tech stack used.
+  - [x] How to run locally.
+  - [x] How to build (if applicable).
+  - [x] How to deploy.
+- [x] Add simple scripts or documented commands:
+  - [x] For local dev (`npm run dev` / `php -S` / etc.).
+  - [x] For build (`npm run build` etc.) if using a bundler/framework.
 
-* [ ] `Website/dashboard-placeholder.php`
+## 6. SEO, Meta & Performance
 
-  * At top:
-
-    ```php
-    <?php
-    require_once 'includes/config.php'; // if needed
-    if (session_status() === PHP_SESSION_NONE) session_start();
-    if (empty($_SESSION['user_id'])) {
-        header('Location: login.php');
-        exit;
-    }
-    ?>
-    ```
-
-  * Body: “Autopredator Portal coming soon” + links:
-
-    * Back to Home
-    * Logout
-
-* [ ] `Website/logout.php`
-
-  ```php
-  <?php
-  session_start();
-  session_unset();
-  session_destroy();
-  header('Location: index.php');
-  exit;
-  ?>
-  ```
-
----
-
-## 3️⃣ PHASE 6 – JavaScript Enhancements
-
-**Goal:** Make UX feel smooth and “premium” without changing your red/black/white vibe.
-
-### TODO
-
-* [ ] `Website/assets/js/main.js`
-
-  * Smooth scroll for nav links (`href="#section-id"`)
-  * Mobile nav toggle (burger → open/close menu with a class like `.nav-open`)
-  * Optional: active link highlight based on scroll position
-
-* [ ] `Website/assets/js/form-validation.js`
-
-  * Contact form validation:
-
-    * Required: name, email
-    * Check valid email format
-  * Login form validation:
-
-    * Required: email, password length ≥ 6
-  * Show errors in **red/white only** via CSS classes (no inline color codes in JS)
-
----
-
-## 4️⃣ Final polish & deploy prep
-
-Once the above is done:
-
-* [ ] Check all pages work without PHP notices/warnings
-* [ ] Test on mobile (Chrome dev tools)
-* [ ] Add simple `.htaccess` if you want cleaner URLs later
-* [ ] Backup DB + code → then you’re ready for shared hosting / VPS
-
----
-
-If you tell me **what you want to do next** (“auth”, “contact-submit PHP”, “JS files”), I can spit out **ready-to-paste code** for that part.
+- [x] Set unique `<title>` and `<meta description>` for each page.
+- [x] Use proper heading hierarchy (one H1 per page; logical H2/H3).
+- [x] Add descriptive `alt` text for all key images.
+- [x] Create and serve `robots.txt`.
+- [x] Create and serve `sitemap.xml` with all important URLs.
+- [x] Ensure URLs are clean and readable (avoid messy query strings when possible).
+- [x] Add Open Graph tags to main pages:
+  - [x] `og:title`
+  - [x] `og:description`
+  - [x] `og:image`
+  - [x] `og:url`
+- [x] Optimize images:
+  - [x] Compress large graphics.
+  - [x] Prefer `.webp` where supported.
+  - [x] Lazy-load below-the-fold images.
+- [x] Remove unused CSS/JS from old templates to improve load speed.

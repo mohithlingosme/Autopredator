@@ -1,38 +1,15 @@
 <?php
 declare(strict_types=1);
 
+require_once __DIR__ . '/partials/layout.php';
+
 $loginError = isset($_GET['error']) && $_GET['error'] === '1';
 
-$pageTitle = "Login | Autopredator";
-$pageDescription = "Login to Autopredator.";
-include 'includes/header.php';
-?>
-<section class="section">
-  <div class="container auth-wrapper">
-    <div class="card auth-card stack">
-      <div class="section-heading">
-        <div class="tagline">Portal access</div>
-        <h1>Login</h1>
-        <p class="muted">Secure access to your Autopredator portal.</p>
-      </div>
-      <?php if ($loginError): ?>
-        <div class="alert alert-error">
-          <div>Invalid email or password.</div>
-        </div>
-      <?php endif; ?>
-      <form class="form" id="login-form" action="auth-process.php" method="post" novalidate>
-        <div>
-          <label for="email">Email</label>
-          <input class="input" type="email" id="email" name="email" placeholder="you@company.com" required>
-        </div>
-        <div>
-          <label for="password">Password</label>
-          <input class="input" type="password" id="password" name="password" placeholder="********" required>
-        </div>
-        <button class="btn btn-primary" type="submit">Sign in</button>
-        <div class="form-errors" id="login-errors"></div>
-      </form>
-    </div>
-  </div>
-</section>
-<?php include 'includes/footer.php'; ?>
+renderPage([
+    'title' => 'Login | Autopredator',
+    'description' => 'Login to Autopredator.',
+    'content' => __DIR__ . '/pages/login.php',
+    'platformUrl' => '../Car Research web (DriveMatrix)/index.html',
+    'bodyClass' => 'page-login',
+    'data' => ['loginError' => $loginError],
+]);

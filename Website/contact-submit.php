@@ -1,12 +1,7 @@
 <?php
 declare(strict_types=1);
 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
-require_once __DIR__ . '/includes/config.php';
-require_once __DIR__ . '/includes/helpers.php';
+require_once __DIR__ . '/partials/layout.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: contact.php');
@@ -46,6 +41,16 @@ if (empty($errors)) {
             'source_page' => $sourcePage,
         ]);
 
+        send_lead_notification([
+            'name' => $name,
+            'email' => $email,
+            'phone' => $phone,
+            'company' => $company,
+            'fleet_size' => $fleetSize,
+            'message' => $message,
+            'source_page' => $sourcePage,
+        ]);
+
         header('Location: thank-you.php');
         exit;
     } catch (PDOException $e) {
@@ -54,24 +59,11 @@ if (empty($errors)) {
     }
 }
 
-$pageTitle = "Contact Submitted | Autopredator";
-$pageDescription = "Contact form submission status.";
-include 'includes/header.php';
-?>
-<section class="section">
-  <div class="container surface stack">
-    <h1>Contact submission</h1>
-    <?php if (!empty($errors)): ?>
-      <p class="muted">We encountered some issues:</p>
-      <ul class="list">
-        <?php foreach ($errors as $error): ?>
-          <li><span class="bullet"></span><span><?= escape_html($error); ?></span></li>
-        <?php endforeach; ?>
-      </ul>
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="contact.php">Back to contact</a>
-      </div>
-    <?php endif; ?>
-  </div>
-</section>
-<?php include 'includes/footer.php'; ?>
+renderPage([
+    'title' => 'Contact Submitted | Autopredator',
+    'description' => 'Contact form submission status.',
+    'content' => __DIR__ . '/pages/contact-submit.php',
+    'platformUrl' => '../Car Research web (DriveMatrix)/index.html',
+    'bodyClass' => 'page-contact-submission',
+    'data' => ['errors' => $errors],
+]);
