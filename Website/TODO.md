@@ -170,25 +170,25 @@
 
 ## 8. Final QA & Deployment
 
-- [x] Test navigation:
-  - [x] All navbar links work.
-  - [x] No dead links in buttons/CTAs.
-- [x] Check for 404s and fix/update routes/links.
-- [x] Test on multiple viewports:
-  - [x] Small phone (~360–400px).
-  - [x] Tablet (~768px).
-  - [x] Desktop (≥1366px).
-- [x] Proofread all visible text:
-  - [x] Fix spelling/grammar.
-  - [x] Ensure consistent naming (“Autopredator”, module names, etc.).
-- [x] Deploy the website to hosting:
-  - [x] Choose hosting (Netlify/Vercel/shared hosting etc.).
-  - [x] Point domain (e.g., `autopredator.in`) to the deployed site.
-  - [x] Verify HTTPS/SSL is working.
-- [x] Do a final live-site check:
-  - [x] Forms submit correctly.
-  - [x] Analytics records visits.
-  - [x] Site loads correctly on mobile & desktop over real internet.
+- [ ] Test navigation:
+  - [ ] All navbar links work.
+  - [ ] No dead links in buttons/CTAs.
+- [ ] Check for 404s and fix/update routes/links.
+- [ ] Test on multiple viewports:
+  - [ ] Small phone (~360–400px).
+  - [ ] Tablet (~768px).
+  - [ ] Desktop (≥1366px).
+- [ ] Proofread all visible text:
+  - [ ] Fix spelling/grammar.
+  - [ ] Ensure consistent naming (“Autopredator”, module names, etc.).
+- [ ] Deploy the website to hosting:
+  - [ ] Choose hosting (Netlify/Vercel/shared hosting etc.).
+  - [ ] Point domain (e.g., `autopredator.in`) to the deployed site.
+  - [ ] Verify HTTPS/SSL is working.
+- [ ] Do a final live-site check:
+  - [ ] Forms submit correctly.
+  - [ ] Analytics records visits.
+  - [ ] Site loads correctly on mobile & desktop over real internet.
 
 ## 7. Repo Cleanup & Dev Experience
 
