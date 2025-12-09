@@ -2,10 +2,43 @@
 declare(strict_types=1);
 
 require_once __DIR__ . '/includes/header.php';
-require_once __DIR__ . '/includes/car_repository.php';
+require_once __DIR__ . '/includes/config.php';
+
+if ($USE_JSON) {
+    require_once __DIR__ . '/includes/json_car_repository.php';
+} else {
+    require_once __DIR__ . '/includes/car_repository.php';
+}
 
 $manufacturerId = (int) ($_GET['manufacturer_id'] ?? 0);
-$manufacturer = $manufacturerId > 0 ? get_manufacturer_by_id($manufacturerId) : null;
+$manufacturerName = trim($_GET['manufacturer_name'] ?? '');
+$manufacturer = null;
+
+if ($manufacturerId > 0 && !$USE_JSON) {
+    $manufacturer = get_manufacturer_by_id($manufacturerId);
+} elseif ($manufacturerName !== '' && $USE_JSON) {
+    // For JSON mode, create a fake manufacturer object
+    $manufacturer = [
+        'id' => 1, // Placeholder
+        'name' => $manufacturerName,
+        'country' => 'Germany', // Default
+        'description' => null
+    ];
+} elseif ($manufacturerId > 0 && $USE_JSON) {
+    // Fallback: try to get manufacturer name from brands list
+    $brands = json_get_brands();
+    foreach ($brands as $brand) {
+        if ($brand['id'] == $manufacturerId) {
+            $manufacturer = [
+                'id' => $brand['id'],
+                'name' => $brand['name'],
+                'country' => $brand['country'] ?? 'India',
+                'description' => null
+            ];
+            break;
+        }
+    }
+}
 $page_title = $manufacturer ? ($manufacturer['name'] . ' Cars & Models | Autopredator') : 'Manufacturers | Autopredator';
 $page_description = $manufacturer
     ? 'Browse all ' . e($manufacturer['name']) . ' vehicles, compare models and find the best car for your budget.'
@@ -36,6 +69,9 @@ if ($manufacturer === null) {
             <div class="grid grid-responsive">
                 <?php foreach ($manufacturers as $man): ?>
                     <article class="card model-card">
+                        <div class="card-image">
+                            <img src="assets/img/placeholder-brand.png" alt="<?= e($man['name']) ?> logo" loading="lazy">
+                        </div>
                         <div class="card-header">
                             <h3><?= e($man['name']) ?></h3>
                             <?php if (!empty($man['country'])): ?>
@@ -60,7 +96,16 @@ if ($manufacturer === null) {
     exit;
 }
 
-$families = get_model_families_by_manufacturer($manufacturerId);
+if ($USE_JSON) {
+    $models = json_get_models_by_brand($manufacturer['name']);
+} else {
+    $families = get_model_families_by_manufacturer($manufacturerId);
+    $models = [];
+    foreach ($families as $family) {
+        $familyModels = get_models_by_family($family['id']);
+        $models = array_merge($models, $familyModels);
+    }
+}
 ?>
 
 <section class="breadcrumb-nav">
@@ -79,32 +124,39 @@ $families = get_model_families_by_manufacturer($manufacturerId);
 <div class="container">
     <section class="section">
         <div class="section-header">
-            <h2>Model Families</h2>
-            <p><?= count($families) ?> model families available</p>
+            <h2>Models</h2>
+            <p><?= count($models) ?> models available</p>
         </div>
 
-        <?php if (empty($families)): ?>
+        <?php if (empty($models)): ?>
             <div class="empty-state">
                 <p>No models found for this manufacturer.</p>
             </div>
         <?php else: ?>
             <div class="grid grid-responsive">
-                <?php foreach ($families as $family): ?>
+                <?php foreach ($models as $model): ?>
                     <article class="card model-card">
                         <div class="card-header">
-                            <h3><?= e($family['nameplate']) ?></h3>
-                            <span class="badge badge-info"><?= e($family['body_type'] ?? 'Car') ?></span>
+                            <h3><?= e($model['name']) ?></h3>
+                            <span class="badge badge-info"><?= e($model['segment'] ?? 'Car') ?></span>
                         </div>
                         <div class="card-body">
-                            <?php if (!empty($family['segment'])): ?>
-                                <p class="small">Segment: <?= e($family['segment']) ?></p>
+                            <?php if (!empty($model['launch_year'])): ?>
+                                <p class="small">Launch Year: <?= e((string) $model['launch_year']) ?></p>
                             <?php endif; ?>
-                            <?php if (!empty($family['fuel_scope'])): ?>
-                                <p class="small">Fuel: <?= e($family['fuel_scope']) ?></p>
+                            <?php if (!empty($model['fuel_types'])): ?>
+                                <p class="small">Fuel: <?= e(implode(', ', $model['fuel_types'])) ?></p>
+                            <?php endif; ?>
+                            <?php if (!empty($model['price_range'])): ?>
+                                <p class="small">Price: ₹<?= number_format($model['price_range']['min']) ?> - ₹<?= number_format($model['price_range']['max']) ?></p>
                             <?php endif; ?>
                         </div>
                         <div class="card-footer">
-                            <a href="model.php?family_id=<?= (int) $family['id'] ?>" class="btn btn-primary">View Models</a>
+                            <?php if ($USE_JSON): ?>
+                                <a href="model.php?model_name=<?= urlencode($model['name']) ?>" class="btn btn-primary">View Variants</a>
+                            <?php else: ?>
+                                <a href="model.php?model_id=<?= (int) $model['id'] ?>" class="btn btn-primary">View Variants</a>
+                            <?php endif; ?>
                         </div>
                     </article>
                 <?php endforeach; ?>

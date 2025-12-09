@@ -2,27 +2,55 @@
 declare(strict_types=1);
 
 require_once __DIR__ . '/includes/header.php';
-require_once __DIR__ . '/includes/car_repository.php';
+require_once __DIR__ . '/includes/config.php';
 require_once __DIR__ . '/includes/auth.php';
 
-$familyId = (int) ($_GET['family_id'] ?? 0);
+if ($USE_JSON) {
+    require_once __DIR__ . '/includes/json_car_repository.php';
+} else {
+    require_once __DIR__ . '/includes/car_repository.php';
+}
+
+$modelName = trim($_GET['model_name'] ?? '');
 $modelId = (int) ($_GET['model_id'] ?? 0);
 
-if ($familyId > 0 && $modelId === 0) {
-    $models = get_models_by_family($familyId);
-    if ($models === []) {
+if ($USE_JSON) {
+    if (empty($modelName)) {
         redirect('index.php');
     }
-    $modelId = (int) $models[0]['id'];
-}
+    $model = [
+        'name' => $modelName,
+        'manufacturer_name' => '', // Will be set from variants
+        'segment' => '',
+        'launch_year' => 2023,
+        'body_type' => 'Car',
+        'fuel_scope' => 'All'
+    ];
+    $variants = json_get_variants_by_model($modelName);
+    if (!empty($variants)) {
+        $model['manufacturer_name'] = $variants[0]['brand'];
+        $model['segment'] = $variants[0]['segment'];
+    }
+    $familyModels = []; // Not applicable in JSON mode
+} else {
+    $familyId = (int) ($_GET['family_id'] ?? 0);
 
-$model = $modelId > 0 ? get_model_by_id($modelId) : null;
-if ($model === null) {
-    redirect('index.php');
-}
+    if ($familyId > 0 && $modelId === 0) {
+        $models = get_models_by_family($familyId);
+        if ($models === []) {
+            redirect('index.php');
+        }
+        $modelId = (int) $models[0]['id'];
+    }
 
-$variants = get_variants_by_model($modelId);
-$familyModels = get_models_by_family((int) $model['family_id']);
+    $model = $modelId > 0 ? get_model_by_id($modelId) : null;
+    if ($model === null) {
+        redirect('index.php');
+    }
+
+    $variants = get_variants_by_model($modelId);
+    $familyModels = get_models_by_family((int) $model['family_id']);
+}
 $page_title = $model['name'] . ' Models & Variants | Autopredator';
 ?>
 
@@ -109,7 +137,12 @@ $page_title = $model['name'] . ' Models & Variants | Autopredator';
                                 <tbody>
                                     <?php foreach ($variants as $variant): ?>
                                         <tr>
-                                            <td><?= e($variant['variant_name']) ?></td>
+                                            <td>
+                                                <div class="variant-name">
+                                                    <img src="assets/img/placeholder-car.png" alt="<?= e($variant['variant_name']) ?>" class="variant-thumb" loading="lazy">
+                                                    <?= e($variant['variant_name']) ?>
+                                                </div>
+                                            </td>
                                             <td>
                                                 <?php if (!empty($variant['fuel_type'])): ?>
                                                     <span class="badge badge-info"><?= e($variant['fuel_type']) ?></span>
@@ -125,8 +158,11 @@ $page_title = $model['name'] . ' Models & Variants | Autopredator';
                                             </td>
                                             <td class="table-actions">
                                                 <a href="variant.php?variant_id=<?= (int) $variant['id'] ?>" class="btn btn-sm btn-primary">
-                                                    View
+                                                    View Details
                                                 </a>
+                                                <button class="btn btn-sm btn-outline compare-toggle" data-variant-id="<?= (int) $variant['id'] ?>">
+                                                    Compare
+                                                </button>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>

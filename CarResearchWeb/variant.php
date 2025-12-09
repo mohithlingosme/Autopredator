@@ -2,19 +2,51 @@
 declare(strict_types=1);
 
 require_once __DIR__ . '/includes/header.php';
-require_once __DIR__ . '/includes/car_repository.php';
+require_once __DIR__ . '/includes/config.php';
 require_once __DIR__ . '/includes/auth.php';
 
-$variantId = (int) ($_GET['variant_id'] ?? 0);
-$variant = $variantId > 0 ? get_variant_by_id($variantId) : null;
-
-if ($variant === null) {
-    redirect('index.php');
+if (USE_JSON) {
+    require_once __DIR__ . '/includes/json_car_repository.php';
+} else {
+    require_once __DIR__ . '/includes/car_repository.php';
 }
 
-$specs = get_specs_for_variant($variantId);
-$features = get_grouped_features_for_variant($variantId);
-$prices = get_prices_for_variant($variantId);
+$variantId = (int) ($_GET['variant_id'] ?? 0);
+$variantSlug = trim($_GET['variant'] ?? '');
+
+if (USE_JSON) {
+    if (!empty($variantSlug)) {
+        $variant = json_get_car($variantSlug);
+    } elseif ($variantId > 0) {
+        $variant = json_get_car($variantId);
+    } else {
+        redirect('index.php');
+    }
+
+    if ($variant === null) {
+        redirect('index.php');
+    }
+
+    // Add missing fields for JSON mode
+    $variant['manufacturer_id'] = 1; // Placeholder
+    $variant['model_id'] = 1; // Placeholder
+    $variant['body_type'] = $variant['segment'];
+    $variant['ex_showroom_price'] = $variant['price_numeric'];
+
+    $specs = null; // No specs in JSON
+    $features = []; // No features in JSON
+    $prices = []; // No pricing history in JSON
+} else {
+    $variant = $variantId > 0 ? get_variant_by_id($variantId) : null;
+
+    if ($variant === null) {
+        redirect('index.php');
+    }
+
+    $specs = get_specs_for_variant($variantId);
+    $features = get_grouped_features_for_variant($variantId);
+    $prices = get_prices_for_variant($variantId);
+}
 $favorites = fav_get_list();
 $isFavorite = in_array($variantId, $favorites, true);
 $page_title = $variant['variant_name'] . ' - ' . $variant['manufacturer_name'] . ' | Autopredator';

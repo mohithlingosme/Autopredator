@@ -4,7 +4,13 @@ declare(strict_types=1);
 session_start();
 
 require_once __DIR__ . '/includes/header.php';
-require_once __DIR__ . '/includes/repository.php';
+require_once __DIR__ . '/includes/config.php';
+
+if (USE_JSON) {
+    require_once __DIR__ . '/includes/json_car_repository.php';
+} else {
+    require_once __DIR__ . '/includes/repository.php';
+}
 
 $ids = [];
 if (!empty($_GET['ids'])) {
