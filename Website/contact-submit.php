@@ -26,33 +26,31 @@ if ($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
 
 if (empty($errors)) {
     try {
-        $pdo = get_db_connection();
-        $stmt = $pdo->prepare(
-            'INSERT INTO leads (name, email, phone, company, fleet_size, message, source_page)
-             VALUES (:name, :email, :phone, :company, :fleet_size, :message, :source_page)'
-        );
-        $stmt->execute([
+        $saved = create_lead([
             'name' => $name,
             'email' => $email,
             'phone' => $phone,
             'company' => $company,
             'fleet_size' => $fleetSize,
-            'message' => $message,
+            'notes' => $message,
             'source_page' => $sourcePage,
         ]);
 
-        send_lead_notification([
-            'name' => $name,
-            'email' => $email,
-            'phone' => $phone,
-            'company' => $company,
-            'fleet_size' => $fleetSize,
-            'message' => $message,
-            'source_page' => $sourcePage,
-        ]);
+        if ($saved) {
+            send_lead_notification([
+                'name' => $name,
+                'email' => $email,
+                'phone' => $phone,
+                'company' => $company,
+                'fleet_size' => $fleetSize,
+                'message' => $message,
+                'source_page' => $sourcePage,
+            ]);
 
-        header('Location: thank-you.php');
-        exit;
+            header('Location: thank-you.php');
+            exit;
+        }
+        $errors[] = 'We could not save your request. Please try again.';
     } catch (PDOException $e) {
         error_log('Lead insert failed: ' . $e->getMessage());
         $errors[] = 'We could not save your request. Please try again.';

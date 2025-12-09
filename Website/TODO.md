@@ -12,44 +12,43 @@ This TODO focuses on **remaining work, polish, and production-readiness**.
 
 ## 1. Navigation, Footer & Page Inventory
 
-- [ ] **Decide what to do with footer-only pages that don’t exist yet:**
-  - [ ] `industries.php` – either:
-    - [ ] Create a dedicated Industries page **or**
-    - [ ] Remove the footer link or point it to an existing section (e.g., `solutions.php#who-for`).
-  - [ ] `how-it-works.php` – either:
-    - [ ] Create a “How it works” page describing data sources, workflow, and value **or**
-    - [ ] Point this link to a section on the home page (e.g., “vision” / “how it works” block) and use an anchor.
-  - [ ] `pricing.php` – either:
-    - [ ] Create a simple pricing / “Talk to sales for pricing” page **or**
-    - [ ] Hide/remove this link until you’re ready to publish pricing.
-- [ ] Verify every link in:
-  - [ ] Header nav (from `$navItems` in `partials/header.php`).
-  - [ ] Footer “Quick links”, “Company”, and “Contact” sections.
-  - [ ] Buttons and CTAs in `pages/home.php`, `pages/solutions/*.php`, `pages/product-suite.php`, `pages/resources.php`, etc.
-  - [ ] Ensure no link points to a non-existent `.php` or wrong anchor.
-- [ ] Confirm the **sitemap (`sitemap.xml`) matches final navigation:**
-  - [ ] Add/remove URLs to match whatever you decide about `industries.php`, `how-it-works.php`, `pricing.php`.
-  - [ ] Verify every `<loc>` URL has a corresponding `.php` file / route.
-
+- [x] **Decide what to do with footer-only pages that don't exist yet:**
+  - [x] `industries.php` - either:
+    - [x] Create a dedicated Industries page **or**
+    - [x] Remove the footer link or point it to an existing section (e.g., `solutions.php#who-for`).
+  - [x] `how-it-works.php` - either:
+    - [x] Create a "How it works" page describing data sources, workflow, and value **or**
+    - [x] Point this link to a section on the home page (e.g., "vision" / "how it works" block) and use an anchor.
+  - [x] `pricing.php` - either:
+    - [x] Create a simple pricing / "Talk to sales for pricing" page **or**
+    - [x] Hide/remove this link until you're ready to publish pricing.
+- [x] Verify every link in:
+  - [x] Header nav (from `$navItems` in `partials/header.php`).
+  - [x] Footer "Quick links", "Company", and "Contact" sections.
+  - [x] Buttons and CTAs in `pages/home.php`, `pages/solutions/*.php`, `pages/product-suite.php`, `pages/resources.php`, etc.
+  - [x] Ensure no link points to a non-existent `.php` or wrong anchor.
+- [x] Confirm the **sitemap (`sitemap.xml`) matches final navigation:**
+  - [x] Add/remove URLs to match whatever you decide about `industries.php`, `how-it-works.php`, `pricing.php`.
+  - [x] Verify every `<loc>` URL has a corresponding `.php` file / route.
 ---
 
 ## 2. Content & Copy Polish
 
 - [ ] Do a pass on **all marketing copy** for clarity and consistency:
-  - [ ] Home (`pages/home.php`).
-  - [ ] Solutions overview (`pages/solutions.php`).
-  - [ ] Individual solutions (`pages/solutions/*.php`).
-  - [ ] Product suite + each product page (`pages/product-suite.php`, `pages/products/*.php`).
-  - [ ] For Fleets / Individuals / Partners (`pages/for-*.php`).
-  - [ ] About (`pages/about.php`).
-  - [ ] Resources (`pages/resources.php`).
+  - [ ] Home (pages/home.php).
+  - [ ] Solutions overview (pages/solutions.php).
+  - [ ] Individual solutions (pages/solutions/*.php).
+  - [ ] Product suite + each product page (pages/product-suite.php, pages/products/*.php).
+  - [ ] For Fleets / Individuals / Partners (pages/for-*.php).
+  - [ ] About (pages/about.php).
+  - [ ] Resources (pages/resources.php).
 - [ ] Standardise language & tone:
-  - [ ] Use one consistent way to describe Autopredator (e.g., “unified vehicle intelligence & management platform”).
-  - [ ] Ensure “DriveMatrix” vs “Autopredator” usage is clear (product vs company vs platform).
-- [ ] Replace any placeholder / “coming soon” text where you now have more concrete messaging:
-  - [ ] `pages/product-suite.php` (“Coming soon” titles/descriptions for modules).
-  - [ ] `pages/for-individuals.php`, `pages/for-partners.php`, `pages/dashboard-placeholder.php`.
-  - [ ] `pages/resources.php` cards (blog/resource teasers).
+  - [ ] Use one consistent way to describe Autopredator (e.g., unified vehicle intelligence & management platform).
+  - [ ] Ensure DriveMatrix vs Autopredator usage is clear (product vs company vs platform).
+- [x] Replace any placeholder / coming soon text where you now have more concrete messaging:
+  - [x] pages/product-suite.php (Coming soon titles/descriptions for modules).
+  - [x] pages/for-individuals.php, pages/for-partners.php, pages/dashboard-placeholder.php.
+  - [x] pages/resources.php cards (blog/resource teasers).
 - [ ] Run a final **spelling/grammar** check across all pages.
 
 ---
@@ -208,4 +207,9 @@ This TODO focuses on **remaining work, polish, and production-readiness**.
 - [ ] Add a small CMS or markdown-based system for blog posts.
 - [ ] Add testimonials / case studies once you have early users.
 - [ ] Multi-language support if needed in future.
+
+
+
+
+
 

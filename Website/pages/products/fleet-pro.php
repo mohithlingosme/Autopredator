@@ -3,7 +3,7 @@
     <div class="section-heading">
       <div class="tagline">Fleet Pro</div>
       <h1>Predictive fleet operations without the guesswork</h1>
-      <p class="muted">Reactive maintenance and scattered data keep fleets exposed. Fleet Pro unifies signals, automates workflows, and proves ROI.</p>
+      <p class="muted">Reactive maintenance and scattered data keep fleets exposed. Fleet Pro is the DriveMatrix view of our unified vehicle intelligence &amp; management platform that unifies signals, automates workflows, and proves ROI.</p>
     </div>
     <div class="surface stack">
       <h3>Problem</h3>

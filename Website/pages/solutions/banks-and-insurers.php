@@ -3,7 +3,7 @@
     <div class="section-heading">
       <div class="tagline">Banks &amp; insurers</div>
       <h1>Lower portfolio risk with live vehicle intelligence</h1>
-      <p class="muted">Financing and underwriting vehicles without real-time health data creates blind spots. Autopredator surfaces risk signals before losses occur.</p>
+      <p class="muted">Financing and underwriting vehicles without real-time health data creates blind spots. Our unified vehicle intelligence &amp; management platform surfaces risk signals in DriveMatrix before losses occur.</p>
     </div>
     <div class="surface stack">
       <h3>How Autopredator helps</h3>

@@ -1,9 +1,9 @@
 <section class="hero" id="hero">
   <div class="container hero-grid">
     <div class="hero-content">
-      <div class="tagline">Unified intelligence</div>
-      <h1>Unified vehicle intelligence &amp; management for modern mobility.</h1>
-      <p>Autopredator connects vehicle, telematics, and service data into a single pane of glass so every trip, inspection, and repair is predictable.</p>
+      <div class="tagline">Unified platform</div>
+      <h1>Unified vehicle intelligence &amp; management platform.</h1>
+      <p>Autopredator connects vehicle, telematics, and service data into one DriveMatrix interface so every trip, inspection, and repair is predictable.</p>
       <p>Predict issues early, automate workflows, and prove ROI across personal, commercial, agricultural, and construction vehicles.</p>
       <div class="hero-actions">
         <a class="btn btn-primary" data-cta="hero-request-demo" href="contact.php#demo">Request Demo</a>
@@ -21,7 +21,7 @@
     <div class="section-heading">
       <div class="tagline">Value</div>
       <h2>Clarity, automation, and ROI in one view</h2>
-      <p class="muted">Single pane of glass for every vehicle, with automation to cut costs, prevent downtime, and stay compliant.</p>
+      <p class="muted">One DriveMatrix view for every vehicle with automation to cut costs, prevent downtime, and stay compliant.</p>
     </div>
     <div class="grid grid-4">
       <div class="card card-contrast card-underline">
@@ -77,7 +77,7 @@
     <div class="section-heading">
       <div class="tagline">Core modules / apps</div>
       <h2>Everything in one platform</h2>
-      <p class="muted">Modular apps that plug into your stack, each focused on a key outcome.</p>
+      <p class="muted">Modular apps inside DriveMatrix, each focused on uptime, compliance, finance, and analytics outcomes.</p>
     </div>
     <div class="grid grid-3">
       <div class="card card-underline card-accent">
@@ -117,7 +117,7 @@
     <div class="section-heading">
       <div class="tagline">Key benefits</div>
       <h2>Outcomes you can measure</h2>
-      <p class="muted">Every module is built to reduce risk, save time, and drive profit.</p>
+      <p class="muted">Every module is built to reduce risk, save time, and improve total cost of ownership.</p>
     </div>
     <div class="grid grid-4">
       <div class="card card-contrast card-underline">
@@ -145,7 +145,7 @@
     <div class="section-heading">
       <div class="tagline">Vision</div>
       <h2>Roadmap to predictive mobility</h2>
-      <p class="muted">We're building the operating system for vehicles: seamless data, automated decisions, and an ecosystem of apps that keep every journey predictable and profitable.</p>
+      <p class="muted">We're building the operating system for predictable vehicles: seamless data, automated decisions, and an ecosystem of apps that keep every journey profitable.</p>
     </div>
     <div class="hero-actions">
       <a class="btn btn-primary" data-cta="vision-join-roadmap" href="contact.php#demo">Join the roadmap</a>
@@ -159,7 +159,7 @@
     <div class="section-heading">
       <div class="tagline">Book time</div>
       <h2>See Autopredator in action</h2>
-      <p class="muted">Tell us about your fleet and we'll tailor a live walkthrough.</p>
+      <p class="muted">Tell us about your fleet and we'll tailor a live walkthrough in DriveMatrix.</p>
     </div>
     <form class="form" id="lead-capture-form">
       <div class="form-row">

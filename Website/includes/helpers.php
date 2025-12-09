@@ -33,7 +33,8 @@ function create_lead(array $data): bool
         return false;
     }
 
-    $allowed = ['name', 'email', 'company', 'phone', 'fleet_size', 'message', 'source', 'source_page'];
+    // Map incoming fields to DB columns.
+    $allowed = ['name', 'email', 'company', 'phone', 'fleet_size', 'notes', 'source_page'];
     $payload = [];
     foreach ($allowed as $field) {
         if (array_key_exists($field, $data)) {
@@ -41,15 +42,21 @@ function create_lead(array $data): bool
         }
     }
 
+    // Support legacy "message" field by mapping to notes.
+    if (empty($payload['notes']) && !empty($data['message'])) {
+        $payload['notes'] = $data['message'];
+    }
+
+    if (empty($payload['source_page']) && !empty($data['source'])) {
+        $payload['source_page'] = $data['source'];
+    }
+
     if (empty($payload)) {
         return false;
     }
 
-    // Ensure a source_page is present for analytics.
-    if (empty($payload['source_page']) && !empty($payload['source'])) {
-        $payload['source_page'] = $payload['source'];
-        unset($payload['source']);
-    }
+    $payload['created_at'] = date('Y-m-d H:i:s');
+    $payload['updated_at'] = $payload['created_at'];
 
     $columns = array_keys($payload);
     $placeholders = array_map(fn($c) => ':' . $c, $columns);
@@ -72,8 +79,8 @@ function create_newsletter_subscriber(string $email): bool
     }
 
     try {
-        $stmt = $pdo->prepare('INSERT INTO newsletter_subscribers (email) VALUES (:email)');
-        return $stmt->execute(['email' => $email]);
+        $stmt = $pdo->prepare('INSERT INTO newsletter_subscribers (email, created_at) VALUES (:email, :created_at)');
+        return $stmt->execute(['email' => $email, 'created_at' => date('Y-m-d H:i:s')]);
     } catch (PDOException $e) {
         error_log('Failed to create newsletter subscriber: ' . $e->getMessage());
         return false;

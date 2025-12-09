@@ -3,7 +3,7 @@
     <div class="section-heading">
       <div class="tagline">Fleet owners</div>
       <h1>Predictable uptime for every vehicle in your fleet</h1>
-      <p class="muted">Fragmented data, reactive maintenance, and compliance risk drive costs. Autopredator gives fleets proactive control with automation and analytics.</p>
+      <p class="muted">Fragmented data, reactive maintenance, and compliance risk drive costs. Our unified vehicle intelligence &amp; management platform gives fleets proactive control with automation and analytics in DriveMatrix.</p>
     </div>
     <div class="surface stack">
       <h3>How Autopredator helps</h3>

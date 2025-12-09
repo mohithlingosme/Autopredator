@@ -3,7 +3,7 @@
     <div class="section-heading">
       <div class="tagline">Product Suite / Apps</div>
       <h1>Everything you need to predict, automate, and optimize</h1>
-      <p class="muted">Explore modular apps built for uptime, compliance, and profitable operations.</p>
+      <p class="muted">Explore modular apps built for uptime, compliance, and profitable operations across our unified vehicle intelligence &amp; management platform.</p>
     </div>
     <div class="grid grid-3">
       <div class="card card-underline card-accent">
@@ -21,8 +21,8 @@
       <div class="card card-underline card-accent">
         <div class="pill">SM</div>
         <h3>Service &amp; Maintenance</h3>
-        <p class="muted">Preventive schedules, work orders, and shop coordination.</p>
-        <span class="text-small muted">Coming soon</span>
+        <p class="muted">Preventive schedules, work orders, bay planning, and shop coordination in one view.</p>
+        <a class="text-emphasis" href="contact.php#demo">Join the beta</a>
       </div>
       <div class="card card-underline card-accent">
         <div class="pill">FD</div>
@@ -33,8 +33,8 @@
       <div class="card card-underline card-accent">
         <div class="pill">CS</div>
         <h3>Compliance &amp; Safety</h3>
-        <p class="muted">Inspections, licensing, DVIR, and driver coaching automated.</p>
-        <span class="text-small muted">Coming soon</span>
+        <p class="muted">Inspections, licensing, DVIR, and driver coaching with automated reminders and proof.</p>
+        <a class="text-emphasis" href="contact.php#demo">Request access</a>
       </div>
       <div class="card card-underline card-accent">
         <div class="pill">EV</div>
@@ -45,8 +45,8 @@
       <div class="card card-underline card-accent">
         <div class="pill">DI</div>
         <h3>Data &amp; Intelligence / Analytics</h3>
-        <p class="muted">Unified analytics with anomaly detection and ROI reporting.</p>
-        <span class="text-small muted">Coming soon</span>
+        <p class="muted">Unified analytics with anomaly detection, ROI reporting, and asset-level scorecards.</p>
+        <a class="text-emphasis" href="contact.php#demo">See dashboards</a>
       </div>
     </div>
     <div class="hero-actions">

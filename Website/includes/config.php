@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-// Database credentials for the PHP site.
-$db_host = 'localhost';
-$db_name = 'autopredator_site';
-$db_user = 'root';
-$db_pass = '';
+// Database credentials for the PHP site (prefer environment variables, fallback to local defaults).
+$db_host = getenv('AP_DB_HOST') ?: 'localhost';
+$db_name = getenv('AP_DB_NAME') ?: 'autopredator_site';
+$db_user = getenv('AP_DB_USER') ?: 'root';
+$db_pass = getenv('AP_DB_PASS') ?: '';
 
 /**
  * Shared PDO connection (singleton per request).

@@ -3,7 +3,7 @@
     <div class="section-heading">
       <div class="tagline">Individuals</div>
       <h1>Control every vehicle detail before it becomes a hassle</h1>
-      <p class="muted">Maintenance, compliance, and cost surprises hit personal budgets hard. Autopredator keeps you ahead with clear reminders and simple workflows.</p>
+      <p class="muted">Maintenance, compliance, and cost surprises hit personal budgets hard. Our unified vehicle intelligence &amp; management platform keeps you ahead with clear reminders and simple workflows in DriveMatrix.</p>
     </div>
     <div class="surface stack">
       <h3>How Autopredator helps</h3>
@@ -21,7 +21,7 @@
       </div>
       <div class="card card-underline">
         <h3>One view of costs</h3>
-        <p class="muted">Track spend, warranties, and parts replacements.</p>
+        <p class="muted">Track spend, warranties, and parts replacements in one DriveMatrix view.</p>
       </div>
       <div class="card card-underline">
         <h3>Compliance-ready</h3>

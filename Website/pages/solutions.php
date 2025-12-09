@@ -2,8 +2,8 @@
   <div class="container stack">
     <div class="section-heading">
       <div class="tagline">Solutions</div>
-      <h1>Everything you need to predict, automate, and control fleet outcomes</h1>
-      <p class="muted">Four core solutions to unify your data, automate tasks, and keep every vehicle compliant and cost-efficient.</p>
+      <h1>Predict, automate, and control every vehicle outcome</h1>
+      <p class="muted">Four solutions in our unified vehicle intelligence &amp; management platform to keep every asset compliant, profitable, and ready.</p>
     </div>
     <div class="grid grid-4">
       <div class="card card-underline card-accent">

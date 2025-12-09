@@ -3,7 +3,7 @@
     <div class="section-heading">
       <div class="tagline">Dealers &amp; brokers</div>
       <h1>Inventory clarity and ready-to-sell vehicles</h1>
-      <p class="muted">Hidden issues, incomplete histories, and slow turn times reduce margins. Autopredator gives you clean data and workflows to move inventory faster.</p>
+      <p class="muted">Hidden issues, incomplete histories, and slow turn times reduce margins. Our unified vehicle intelligence &amp; management platform gives you clean data and workflows in DriveMatrix to move inventory faster.</p>
     </div>
     <div class="surface stack">
       <h3>How Autopredator helps</h3>
