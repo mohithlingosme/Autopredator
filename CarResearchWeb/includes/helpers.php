@@ -78,15 +78,16 @@ function format_price(float $price): string
     }
 
     if ($price >= 10000000) {
-        return '₹' . number_format($price / 10000000, 1) . ' Cr';
+        $value = $price / 10000000;
+        return 'Rs.' . number_format($value, $value >= 10 ? 0 : 1) . ' Cr';
     }
 
     if ($price >= 100000) {
-        return '₹' . number_format($price / 100000, 1) . ' L';
+        $value = $price / 100000;
+        return 'Rs.' . number_format($value, $value >= 10 ? 0 : 1) . ' L';
     }
 
-    // Format numbers below 1 lakh with Indian numbering system
-    return '₹' . number_format_indian($price);
+    return 'Rs.' . number_format_indian($price);
 }
 
 /**
@@ -94,14 +95,13 @@ function format_price(float $price): string
  */
 function number_format_indian(float $number): string
 {
-    $number = (int) $number; // Remove decimals for whole rupee amounts
+    $number = (int) $number;
     $number_str = (string) $number;
 
     if ($number < 1000) {
         return $number_str;
     }
 
-    // Split into parts
     $last_three = substr($number_str, -3);
     $remaining = substr($number_str, 0, -3);
 
@@ -109,7 +109,6 @@ function number_format_indian(float $number): string
         return $last_three;
     }
 
-    // Add commas every 2 digits from the right for remaining part
     $remaining = strrev($remaining);
     $formatted_remaining = '';
     for ($i = 0; $i < strlen($remaining); $i++) {

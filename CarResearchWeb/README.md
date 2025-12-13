@@ -1,247 +1,96 @@
-````markdown
-# Autopredator – Car Research Platform (Used & New Cars)
+# Autopredator Car Research Web (PHP)
 
-A data-driven **research platform for buying used and new cars** in India – inspired by portals like CarWale / CarDekho, but designed to plug into the larger Autopredator ecosystem. :contentReference[oaicite:0]{index=0}  
-
----
-
-## 🔍 What This Project Is
-
-This repo is the **product + engineering implementation** of one slice of the full Autopredator vision:
-
-> **Help users research, compare, and shortlist the right car (used or new) – with transparent data on specs, variants, pricing, total cost of ownership, and owner experiences.**
-
-No financing, insurance or fleet tools are required to start – those are **Phase 2+** integrations.
+Lightweight PHP build for researching new and used cars in India. The current version runs entirely from JSON data (no DB required) and ships with brand, model, variant, search, and comparison pages that mirror the Autopredator UX.
 
 ---
 
-## 🎯 Core Objectives
+## What's Included
 
-- Give users **clean, structured data** for every car sold in India (current + discontinued).
-- Treat each **generation, facelift and variant** as a separate, researchable entity.
-- Let users **compare** cars by specs, features, safety, cost of ownership, and user ratings. :contentReference[oaicite:1]{index=1}  
-- Provide **research tools** first; buying, financing, insurance etc. can be added later as separate services.
-
----
-
-## 🧩 Key Features (MVP)
-
-### 1. Vehicle Discovery
-
-- Browse **new and used** cars by:
-  - Brand, model, generation, fuel type, body style
-  - City / state and price range
-  - Transmission, safety rating, mileage, seating capacity
-- SEO-friendly listing pages per:
-  - Manufacturer
-  - Model family (e.g., “Swift”)
-  - Specific generation + year (e.g., “Swift 2018–2021 facelift”)
-
-### 2. Variant-Level Detail Pages
-
-Each variant page includes:
-
-- Engine, transmission, drivetrain
-- Dimensions, boot space, ground clearance
-- Safety features (airbags, ABS, ESP, NCAP rating if available)
-- Comfort & convenience features (AC type, infotainment, connectivity, etc.)
-- Real-world and ARAI mileage
-- **On-road price** by city (if available) + historical pricing where possible
-
-### 3. Comparison Tools
-
-- Side-by-side comparison for up to **4 cars/variants**:
-  - Specs & features
-  - Safety & ratings
-  - Ownership cost estimates
-- Highlight **differences** automatically (e.g., missing features, lower power).
-
-### 4. Ownership Cost & Analytics
-
-- Estimated **total cost of ownership**:
-  - Ex-showroom / on-road price
-  - Insurance estimate (3rd party + comprehensive)
-  - Maintenance & consumables estimate
-  - Fuel cost (based on user’s city & running)
-- “Is it worth upgrading?” calculators (e.g., petrol → CNG, NA → turbo). :contentReference[oaicite:2]{index=2}  
-
-### 5. User Tools
-
-- Save favourite cars / variants
-- Build custom **shortlists** (e.g., “city hatchbacks under 8L”)
-- Simple account system (email/password or OAuth)
+- Brand, model, and variant listings with price ranges and fuel types.
+- Search with filters for brand, body type, fuel, transmission, budget, and text queries.
+- Model/variant detail views wired to the JSON dataset.
+- Compare flow for side-by-side variants.
+- Basic auth scaffold (login/register), header nav, and shared layout/styles.
+- JSON-first repository layer with schema validation and caching.
 
 ---
 
-## 🚗 Future / Optional Features
+## Tech Overview
 
-These are mentioned in the wider business plan and can come later: :contentReference[oaicite:3]{index=3}  
-
-- **Used car marketplace integration** (partner inventory or your own listings)
-- **Finance & loan** pre-approval or lead-generation
-- **Insurance quote comparison**
-- **Telematics-based insights** for real-world mileage & running cost
-- Integration with full **Autopredator Vehicle Management Platform**
-  - Ownership tracking, maintenance, reminders, etc.
+- PHP 8+, no framework required; works with Apache (XAMPP) or `php -S`.
+- Data source: `mocks/new_carset.json` (primary) and `mocks/data.json` (legacy, converted from spreadsheet via script).
+- Repository: `includes/json_car_repository.php` plus thin wrappers in `includes/repository.php` and `includes/car_repository.php` to keep existing pages working.
+- Config: `includes/config.php` with `APP_ENV` and `USE_JSON` switches. Default is `USE_JSON=true` and no database connection.
 
 ---
 
-## 🏗 High-Level Architecture
+## Quick Start (local)
 
-This README is tech-stack agnostic. You can adapt it to your current setup.
-
-### Suggested Architecture
-
-- **Frontend**
-  - React / Next.js (SPA or SSR)
-  - TailwindCSS for styling
-  - Component-based design (ModelCard, VariantTable, CompareView, FilterSidebar)
-- **Backend API**
-  - FastAPI / Node.js (Express / NestJS)
-  - REST or GraphQL
-  - JWT-based auth for users and admin panel
-- **Database**
-  - PostgreSQL / MariaDB / MySQL
-  - Core tables (aligned with your SQL dump):
-    - `manufacturers`
-    - `model_families`
-    - `models` (per generation / facelift)
-    - `variants`
-    - `vehicle_specs`
-    - `prices`
-    - `features` & `variant_features` mapping
-- **Search & Filters**
-  - SQL indexed search, or
-  - Elasticsearch / Meilisearch for advanced filters & full-text
-
----
-
-## 📂 Suggested Folder Structure
-
-```text
-.
-├── backend/
-│   ├── src/
-│   │   ├── api/
-│   │   ├── models/
-│   │   ├── services/
-│   │   └── tests/
-│   └── pyproject.toml / package.json
-├── frontend/
-│   ├── src/
-│   │   ├── components/
-│   │   ├── pages/ or app/
-│   │   ├── hooks/
-│   │   └── lib/
-│   └── package.json
-├── db/
-│   ├── schema.sql
-│   ├── seed/
-│   └── migrations/
-├── docs/
-│   ├── business-plan.pdf
-│   └── api-spec.md
-└── README.md
-````
-
----
-
-## ⚙️ Getting Started
-
-### 1. Prerequisites
-
-* Node.js (LTS)
-* Python 3.11+ or latest LTS Node backend
-* PostgreSQL / MariaDB
-* Git
-
-### 2. Clone the Repository
-
+1) Prerequisites: PHP 8+, Python 3.10+ (only if you need to regenerate JSON), a web server (Apache/XAMPP) or PHP built-in server.  
+2) Install: Place the repo under your doc root (e.g., `C:\xampp\htdocs\Autopredator\CarResearchWeb`).  
+3) Run (built-in server):  
 ```bash
-git clone https://github.com/<your-username>/<your-repo>.git
-cd <your-repo>
+cd C:\xampp\htdocs\Autopredator\CarResearchWeb
+set APP_ENV=local
+set USE_JSON=true
+php -S localhost:8000
 ```
-
-### 3. Backend Setup (example: FastAPI + PostgreSQL)
-
-```bash
-cd backend
-cp .env.example .env   # set DB creds, JWT secret, etc.
-pip install -r requirements.txt
-alembic upgrade head   # or run migrations
-uvicorn app.main:app --reload
-```
-
-### 4. Frontend Setup (example: Next.js)
-
-```bash
-cd frontend
-cp .env.example .env.local   # set NEXT_PUBLIC_API_URL
-npm install
-npm run dev
-```
-
-Frontend runs at `http://localhost:3000`, backend at `http://localhost:8000` (adjust as needed).
+Visit http://localhost:8000 in your browser. For Apache/XAMPP, point a virtual host to this directory instead of using `php -S`.
 
 ---
 
-## 🗺 Product Roadmap (Summarised)
+## Configuration
 
-Based on the broader Autopredator roadmap, focused only on **car research**: 
-
-### Phase 1 – MVP (Research Only)
-
-* [ ] Brand, model, variant database
-* [ ] Basic search & filters
-* [ ] Variant detail pages
-* [ ] Comparison tool (2 cars)
-* [ ] Simple auth + favourites
-
-### Phase 2 – Advanced Research
-
-* [ ] Full comparison (3–4 cars)
-* [ ] TCO calculators & analytics
-* [ ] “Alternatives you should consider” suggestions
-* [ ] Basic admin panel for data management
-
-### Phase 3 – Monetisation-Ready
-
-* [ ] Lead-gen integration (dealers / partners)
-* [ ] Optional used-car inventory integration
-* [ ] Finance & insurance lead flows
-* [ ] SEO optimisation & content (reviews, guides)
+- `APP_ENV` (default `local`): controls environment-specific behaviors you add later.
+- `USE_JSON` (default `true`): keep this `true` for the current build. Setting `false` will require wiring a MySQL-backed repository; only JSON is implemented today.
+- Database constants live in `includes/config.php`, but DB code paths are not active in this build.
 
 ---
 
-## 🤝 Contributing
+## Data
 
-1. Fork the repo
-2. Create a feature branch: `git checkout -b feature/your-feature`
-3. Commit changes: `git commit -m "Add your feature"`
-4. Push: `git push origin feature/your-feature`
-5. Open a Pull Request
+- Primary dataset: `mocks/new_carset.json` (make, model, segment, variants with price/fuel/transmission/engine/horsepower).  
+- Legacy/raw: `mocks/data.json` plus `mocks/data.original.txt`.  
+- Conversion utility: `scripts/convert_data_to_json.py` converts the raw tabular file from the DriveMatrix source into clean JSON (backs up the original as `data.original.txt`).
 
----
-
-## 📜 License
-
-Choose a license and update:
-
-```text
-This project is licensed under the MIT License – see the LICENSE file for details.
-```
+Validation and parsing are handled in `includes/json_car_repository.php` (schema checks, price parsing, search helpers, and pagination). All pages use this repository via `includes/repository.php`.
 
 ---
 
-## 📎 References
+## Key Pages
 
-* Full **Autopredator Business Plan** and technical vision are documented in `docs/autopredator.pdf`. 
+- `index.php`: landing with featured brands/models/variants.  
+- `brand.php`: brand listing and brand-specific model grid.  
+- `model.php`: model detail with variants.  
+- `variant.php`: variant detail scaffold (specs/features placeholders until data is added).  
+- `search.php`: filterable search results with pagination and sorting.  
+- `compare.php`: simple comparison view for selected variants.  
+- `login.php`, `register.php`, `my_garage.php`, `favourites.php`: auth/UI scaffolding (session-based).
 
-```
+---
 
-If you tell me:
-- what tech stack you’ve already chosen (React/Next, FastAPI/Node, DB),
-- and your current repo link for this specific app,
+## Structure
 
-I can customise this README to match **exact commands, env variables and folder names** used in your project.
-```
+- `includes/`: config, auth, helpers, repositories, header/footer partials.  
+- `mocks/`: JSON datasets.  
+- `assets/`: CSS, images, fonts.  
+- `api/` and `mocks/` (root): API stubs and sample data if you extend to AJAX.  
+- `scripts/`: data conversion utilities.  
+- `docs/`: product and API notes.
+
+---
+
+## Development Notes
+
+- Keep `USE_JSON=true` unless you add a MySQL repository; the legacy DB tables are not currently read.  
+- Price parsing currently expects Indian-style strings with "L"/"Cr" suffixes; adjust `json_parse_price` in `includes/json_car_repository.php` if your data changes.  
+- If you import new data, run the Python converter or drop clean JSON into `mocks/new_carset.json` and reload.
+
+---
+
+## Future Work
+
+- Swap-in MySQL repository with the same interface as `json_*` functions.  
+- Enrich specs/features/pricing history and surface them on variant pages.  
+- Harden auth (password hashing, validation, CSRF) and add user garage persistence.  
+- Add automated tests for repository functions and search filters.

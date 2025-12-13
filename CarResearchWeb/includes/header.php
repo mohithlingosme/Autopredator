@@ -29,7 +29,7 @@ $current_user = auth_current_user();
         </button>
         <div class="nav-search">
             <form action="search.php" method="get" class="search-form" id="header-search-form">
-                <input type="search" name="q" aria-label="Search cars" placeholder="Search by brand, model or keyword">
+                <input type="search" name="q" aria-label="Search cars" placeholder="Search by brand, model or keyword" value="<?= e(get_query('q')) ?>">
                 <button type="submit" class="btn btn-primary">Search</button>
             </form>
         </div>

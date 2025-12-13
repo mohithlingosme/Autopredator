@@ -1338,10 +1338,18 @@ body {
     margin: 0.5rem 0;
 }
 
+.grid-cards .card,
+.grid > .card,
+.grid.grid-responsive .card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
 .result-card {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    min-height: 100%;
     gap: 1rem;
 }
 
@@ -1349,13 +1357,21 @@ body {
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
+    flex: 1;
 }
 
 .result-card .actions {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    align-items: flex-end;
+    align-items: flex-start;
+    margin-top: auto;
+}
+
+.empty-state {
+    text-align: center;
+    align-items: center;
+    gap: 0.75rem;
 }
 
 .price {

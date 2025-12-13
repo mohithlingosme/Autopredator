@@ -47,11 +47,28 @@ for ln in data_lines:
         parts.append("")
     s_no, make, model, price, power, rng, fuel, notes = [p.strip() for p in parts[:8]]
     # Some lines may have misplaced make (e.g., blank make because group header existed). Attempt to fill from model column if make missing and model seems like make+model
+    def parse_price(value: str) -> int | None:
+        cleaned = value.replace("₹", "").replace("Rs.", "").replace("INR", "").strip()
+        if not cleaned:
+            return None
+        if "Cr" in cleaned:
+            cleaned = cleaned.replace("Cr", "").strip()
+            return int(float(cleaned) * 10000000)
+        if "L" in cleaned:
+            cleaned = cleaned.replace("L", "").strip()
+            return int(float(cleaned) * 100000)
+        try:
+            return int(float(cleaned))
+        except ValueError:
+            return None
+
     records.append({
         "s_no": s_no,
         "make": make,
         "model": model,
         "price": price,
+        "price_display": price,
+        "price_numeric": parse_price(price),
         "power_bhp": power,
         "range_mileage": rng,
         "fuel_type": fuel,

@@ -24,12 +24,10 @@ function load_car_dataset(): array {
     if ($dataset === null) {
         $jsonPath = JSON_DATA_DIR . JSON_CARSET_FILE;
 
-        // Check if file exists
         if (!file_exists($jsonPath)) {
             throw new RuntimeException("Car dataset JSON file not found: $jsonPath");
         }
 
-        // Check if file is readable
         if (!is_readable($jsonPath)) {
             throw new RuntimeException("Car dataset JSON file is not readable: $jsonPath");
         }
@@ -39,12 +37,16 @@ function load_car_dataset(): array {
             throw new RuntimeException("Failed to read car dataset JSON file: $jsonPath");
         }
 
-        $dataset = json_decode($jsonContent, true);
-        if (json_last_error() !== JSON_ERROR_NONE) {
-            throw new RuntimeException("Invalid JSON in car dataset file: " . json_last_error_msg());
+        try {
+            $dataset = json_decode($jsonContent, true, 512, JSON_THROW_ON_ERROR);
+        } catch (\JsonException $e) {
+            throw new RuntimeException(
+                "Invalid JSON in car dataset file: " . $e->getMessage(),
+                0,
+                $e
+            );
         }
 
-        // Validate JSON structure
         validate_car_dataset_schema($dataset);
     }
 
@@ -68,6 +70,10 @@ function validate_car_dataset_schema(array $dataset): void {
             throw new RuntimeException("Car entry at index $index must be an object");
         }
 
+        $carMake = trim((string) ($car['make'] ?? ''));
+        $carModel = trim((string) ($car['model'] ?? ''));
+        $carSegment = trim((string) ($car['segment'] ?? ''));
+
         // Required fields validation
         $requiredFields = ['make', 'model', 'segment', 'variants'];
         foreach ($requiredFields as $field) {
@@ -77,15 +83,15 @@ function validate_car_dataset_schema(array $dataset): void {
         }
 
         // Validate make and model are non-empty strings
-        if (!is_string($car['make']) || trim($car['make']) === '') {
+        if ($carMake === '') {
             throw new RuntimeException("Car entry at index $index: 'make' must be a non-empty string");
         }
 
-        if (!is_string($car['model']) || trim($car['model']) === '') {
+        if ($carModel === '') {
             throw new RuntimeException("Car entry at index $index: 'model' must be a non-empty string");
         }
 
-        if (!is_string($car['segment']) || trim($car['segment']) === '') {
+        if ($carSegment === '') {
             throw new RuntimeException("Car entry at index $index: 'segment' must be a non-empty string");
         }
 
@@ -107,16 +113,19 @@ function validate_car_dataset_schema(array $dataset): void {
                 }
             }
 
-            // Validate variant fields are strings
-            if (!is_string($variant['name']) || trim($variant['name']) === '') {
+            $variantName = trim((string) ($variant['name'] ?? ''));
+            $variantPrice = trim((string) ($variant['price'] ?? ''));
+            $variantFuel = trim((string) ($variant['fuel_type'] ?? ''));
+
+            if ($variantName === '') {
                 throw new RuntimeException("Variant at index $variantIndex in car $index: 'name' must be a non-empty string");
             }
 
-            if (!is_string($variant['price']) || trim($variant['price']) === '') {
+            if ($variantPrice === '') {
                 throw new RuntimeException("Variant at index $variantIndex in car $index: 'price' must be a non-empty string");
             }
 
-            if (!is_string($variant['fuel_type']) || trim($variant['fuel_type']) === '') {
+            if ($variantFuel === '') {
                 throw new RuntimeException("Variant at index $variantIndex in car $index: 'fuel_type' must be a non-empty string");
             }
         }
@@ -126,18 +135,24 @@ function validate_car_dataset_schema(array $dataset): void {
 /**
  * Parse price string to float
  */
-function json_parse_price(string $price): float {
-    $price = str_replace('₹', '', $price);
-    $price = str_replace(' ', '', $price);
-    if (strpos($price, 'L') !== false) {
-        $price = str_replace('L', '', $price);
-        return (float) $price * 100000;
-    } elseif (strpos($price, 'Cr') !== false) {
-        $price = str_replace('Cr', '', $price);
-        return (float) $price * 10000000;
-    } else {
-        return (float) $price;
+function json_parse_price(?string $price): float {
+    $normalized = str_replace(['₹', 'Rs.', 'INR', ' ', ','], '', (string) ($price ?? ''));
+
+    if ($normalized === '') {
+        return 0.0;
     }
+
+    if (strpos($normalized, 'L') !== false) {
+        $normalized = str_replace('L', '', $normalized);
+        return (float) $normalized * 100000;
+    }
+
+    if (strpos($normalized, 'Cr') !== false) {
+        $normalized = str_replace('Cr', '', $normalized);
+        return (float) $normalized * 10000000;
+    }
+
+    return (float) $normalized;
 }
 
 /**
@@ -149,23 +164,26 @@ function json_get_brands(): array {
     $seen = [];
 
     foreach ($dataset as $car) {
-        $brandName = trim($car['make']);
-        if (!in_array(strtolower($brandName), array_map('strtolower', $seen))) {
+        $brandName = trim((string) ($car['make'] ?? ''));
+        if ($brandName === '') {
+            continue;
+        }
+
+        if (!in_array(strtolower($brandName), array_map('strtolower', $seen), true)) {
             $seen[] = $brandName;
             $brands[] = [
-                'id' => count($brands) + 1, // Generate sequential ID
+                'id' => count($brands) + 1,
                 'name' => $brandName,
                 'slug' => strtolower(str_replace(' ', '-', $brandName)),
-                'country' => 'India', // Default for Indian market
-                'logo' => null, // No logo in JSON
-                'model_count' => 0, // Will be calculated below
+                'country' => 'India',
+                'logo' => null,
+                'model_count' => 0,
                 'min_price' => null,
-                'max_price' => null
+                'max_price' => null,
             ];
         }
     }
 
-    // Calculate model counts and price ranges
     foreach ($brands as &$brand) {
         $brandModels = json_get_models_by_brand($brand['name']);
         $brand['model_count'] = count($brandModels);
@@ -173,17 +191,17 @@ function json_get_brands(): array {
         if (!empty($brandModels)) {
             $prices = [];
             foreach ($brandModels as $model) {
-                foreach ($model['variants'] as $variant) {
-                    $prices[] = json_parse_price($variant['price']);
+                $variantList = $model['variants'] ?? [];
+                foreach ($variantList as $variant) {
+                    $prices[] = $variant['price_numeric'] ?? json_parse_price($variant['price'] ?? '');
                 }
             }
-            $brand['min_price'] = min($prices);
-            $brand['max_price'] = max($prices);
+            $brand['min_price'] = !empty($prices) ? min($prices) : null;
+            $brand['max_price'] = !empty($prices) ? max($prices) : null;
         }
     }
 
-    // Sort alphabetically
-    usort($brands, fn($a, $b) => strcmp($a['name'], $b['name']));
+    usort($brands, static fn($a, $b) => strcmp($a['name'], $b['name']));
 
     return $brands;
 }
@@ -199,56 +217,61 @@ function json_get_models_by_brand(string $brandName): array {
     $brandName = trim($brandName);
 
     foreach ($dataset as $car) {
-        if (strcasecmp(trim($car['make']), $brandName) === 0) {
-            $modelName = trim($car['model']);
-            if (!in_array(strtolower($modelName), array_map('strtolower', $seen))) {
-                $seen[] = $modelName;
+        $carMake = trim((string) ($car['make'] ?? ''));
+        $carModel = trim((string) ($car['model'] ?? ''));
+        $carSegment = trim((string) ($car['segment'] ?? ''));
 
-                // Get variants for this model
+        if ($carMake === '' || $carModel === '') {
+            continue;
+        }
+
+        if (strcasecmp($carMake, $brandName) === 0) {
+            if (!in_array(strtolower($carModel), array_map('strtolower', $seen), true)) {
+                $seen[] = $carModel;
+
                 $variants = [];
                 foreach ($dataset as $car2) {
-                    if (strcasecmp(trim($car2['make']), $brandName) === 0 &&
-                        strcasecmp(trim($car2['model']), $modelName) === 0) {
-                        foreach ($car2['variants'] as $variant) {
+                    $car2Make = trim((string) ($car2['make'] ?? ''));
+                    $car2Model = trim((string) ($car2['model'] ?? ''));
+                    if (strcasecmp($car2Make, $brandName) === 0 && strcasecmp($car2Model, $carModel) === 0) {
+                        foreach (($car2['variants'] ?? []) as $variant) {
                             $variants[] = [
                                 'id' => count($variants) + 1,
-                                'name' => trim($variant['name']),
-                                'fuel_type' => trim($variant['fuel_type']),
-                                'transmission' => trim($variant['transmission'] ?? 'Manual'),
-                                'price' => trim($variant['price']),
-                                'price_numeric' => json_parse_price($variant['price']),
-                                'engine_size' => trim($variant['engine_size'] ?? ''),
-                                'horsepower' => trim($variant['horsepower'] ?? '')
+                                'name' => trim((string) ($variant['name'] ?? '')),
+                                'fuel_type' => trim((string) ($variant['fuel_type'] ?? '')),
+                                'transmission' => trim((string) ($variant['transmission'] ?? 'Manual')),
+                                'price' => trim((string) ($variant['price'] ?? '')),
+                                'price_numeric' => $variant['price_numeric'] ?? json_parse_price($variant['price'] ?? ''),
+                                'engine_size' => trim((string) ($variant['engine_size'] ?? '')),
+                                'horsepower' => trim((string) ($variant['horsepower'] ?? '')),
                             ];
                         }
                     }
                 }
 
-                // Sort variants by price
-                usort($variants, fn($a, $b) => $a['price_numeric'] <=> $b['price_numeric']);
+                usort($variants, static fn($a, $b) => $a['price_numeric'] <=> $b['price_numeric']);
 
                 $models[] = [
                     'id' => count($models) + 1,
-                    'name' => $modelName,
-                    'slug' => strtolower(str_replace(' ', '-', $modelName)),
-                    'brand' => $brandName,
-                    'segment' => trim($car['segment']),
-                    'launch_year' => 2023, // Default
+                    'name' => $carModel,
+                    'slug' => strtolower(str_replace(' ', '-', $carModel)),
+                    'brand' => $carMake,
+                    'segment' => $carSegment,
+                    'launch_year' => 2023,
                     'variants' => $variants,
                     'variant_count' => count($variants),
-                    'fuel_types' => array_unique(array_column($variants, 'fuel_type')),
+                    'fuel_types' => array_values(array_unique(array_column($variants, 'fuel_type'))),
                     'price_range' => [
                         'min' => !empty($variants) ? min(array_column($variants, 'price_numeric')) : 0,
-                        'max' => !empty($variants) ? max(array_column($variants, 'price_numeric')) : 0
+                        'max' => !empty($variants) ? max(array_column($variants, 'price_numeric')) : 0,
                     ],
-                    'image' => null // No image in JSON
+                    'image' => null,
                 ];
             }
         }
     }
 
-    // Sort models alphabetically
-    usort($models, fn($a, $b) => strcmp($a['name'], $b['name']));
+    usort($models, static fn($a, $b) => strcmp($a['name'], $b['name']));
 
     return $models;
 }
@@ -263,27 +286,31 @@ function json_get_variants_by_model(string $modelName): array {
     $modelName = trim($modelName);
 
     foreach ($dataset as $car) {
-        if (strcasecmp(trim($car['model']), $modelName) === 0) {
-            foreach ($car['variants'] as $variant) {
+        $carModel = trim((string) ($car['model'] ?? ''));
+        if ($carModel === '') {
+            continue;
+        }
+
+        if (strcasecmp($carModel, $modelName) === 0) {
+            foreach (($car['variants'] ?? []) as $variant) {
                 $variants[] = [
                     'id' => count($variants) + 1,
-                    'name' => trim($variant['name']),
+                    'name' => trim((string) ($variant['name'] ?? '')),
                     'model' => $modelName,
-                    'brand' => trim($car['make']),
-                    'fuel_type' => trim($variant['fuel_type']),
-                    'transmission' => trim($variant['transmission'] ?? 'Manual'),
-                    'price' => trim($variant['price']),
-                    'price_numeric' => json_parse_price($variant['price']),
-                    'engine_size' => trim($variant['engine_size'] ?? ''),
-                    'horsepower' => trim($variant['horsepower'] ?? ''),
-                    'segment' => trim($car['segment'])
+                    'brand' => trim((string) ($car['make'] ?? '')),
+                    'fuel_type' => trim((string) ($variant['fuel_type'] ?? '')),
+                    'transmission' => trim((string) ($variant['transmission'] ?? 'Manual')),
+                    'price' => trim((string) ($variant['price'] ?? '')),
+                    'price_numeric' => $variant['price_numeric'] ?? json_parse_price($variant['price'] ?? ''),
+                    'engine_size' => trim((string) ($variant['engine_size'] ?? '')),
+                    'horsepower' => trim((string) ($variant['horsepower'] ?? '')),
+                    'segment' => trim((string) ($car['segment'] ?? '')),
                 ];
             }
         }
     }
 
-    // Sort by price
-    usort($variants, fn($a, $b) => $a['price_numeric'] <=> $b['price_numeric']);
+    usort($variants, static fn($a, $b) => $a['price_numeric'] <=> $b['price_numeric']);
 
     return $variants;
 }
@@ -295,53 +322,68 @@ function json_search(array $filters = []): array {
     $dataset = load_car_dataset();
     $results = [];
 
+    $limit = isset($filters['limit']) ? max(1, (int) $filters['limit']) : 12;
+    $offset = isset($filters['offset']) ? max(0, (int) $filters['offset']) : 0;
+
+    $filterBrand = strtolower(trim((string) ($filters['brand'] ?? '')));
+    $filterModel = strtolower(trim((string) ($filters['model'] ?? '')));
+    $filterSearch = strtolower(trim((string) ($filters['search'] ?? '')));
+
+    $filterFuelTypes = array_filter(array_map(
+        static fn($val) => strtolower(trim((string) $val)),
+        (array) ($filters['fuel_type'] ?? [])
+    ));
+    $filterTransmissions = array_filter(array_map(
+        static fn($val) => strtolower(trim((string) $val)),
+        (array) ($filters['transmission'] ?? [])
+    ));
+
+    $minPrice = isset($filters['min_price']) && $filters['min_price'] !== '' ? (float) $filters['min_price'] : null;
+    $maxPrice = isset($filters['max_price']) && $filters['max_price'] !== '' ? (float) $filters['max_price'] : null;
+
     foreach ($dataset as $car) {
-        foreach ($car['variants'] as $variant) {
+        $carMake = strtolower(trim((string) ($car['make'] ?? '')));
+        $carModel = strtolower(trim((string) ($car['model'] ?? '')));
+        $carSegment = strtolower(trim((string) ($car['segment'] ?? '')));
+
+        foreach (($car['variants'] ?? []) as $variant) {
+            $variantName = strtolower(trim((string) ($variant['name'] ?? '')));
+            $variantFuel = strtolower(trim((string) ($variant['fuel_type'] ?? '')));
+            $variantTransmission = strtolower(trim((string) ($variant['transmission'] ?? 'Manual')));
+            $variantPrice = isset($variant['price_numeric'])
+                ? (float) $variant['price_numeric']
+                : json_parse_price($variant['price'] ?? '');
+
             $match = true;
 
-            // Brand filter
-            if (!empty($filters['brand']) && strcasecmp(trim($car['make']), trim($filters['brand'])) !== 0) {
+            if ($filterBrand !== '' && $carMake !== $filterBrand) {
                 $match = false;
             }
 
-            // Model filter
-            if (!empty($filters['model']) && strcasecmp(trim($car['model']), trim($filters['model'])) !== 0) {
+            if ($filterModel !== '' && $carModel !== $filterModel) {
                 $match = false;
             }
 
-            // Fuel type filter
-            if (!empty($filters['fuel_type'])) {
-                $fuelTypes = is_array($filters['fuel_type']) ? $filters['fuel_type'] : [$filters['fuel_type']];
-                if (!in_array(trim($variant['fuel_type']), array_map('trim', $fuelTypes))) {
+            if (!empty($filterFuelTypes) && !in_array($variantFuel, $filterFuelTypes, true)) {
+                $match = false;
+            }
+
+            if (!empty($filterTransmissions) && !in_array($variantTransmission, $filterTransmissions, true)) {
+                $match = false;
+            }
+
+            if ($match && ($minPrice !== null || $maxPrice !== null)) {
+                if ($minPrice !== null && $variantPrice < $minPrice) {
+                    $match = false;
+                }
+                if ($maxPrice !== null && $variantPrice > $maxPrice) {
                     $match = false;
                 }
             }
 
-            // Transmission filter
-            if (!empty($filters['transmission'])) {
-                $transmissions = is_array($filters['transmission']) ? $filters['transmission'] : [$filters['transmission']];
-                $variantTransmission = trim($variant['transmission'] ?? 'Manual');
-                if (!in_array($variantTransmission, array_map('trim', $transmissions))) {
-                    $match = false;
-                }
-            }
-
-            // Price range filter
-            if ($match && (!empty($filters['min_price']) || !empty($filters['max_price']))) {
-                $price = json_parse_price($variant['price']);
-                if (!empty($filters['min_price']) && $price < (float) $filters['min_price']) {
-                    $match = false;
-                }
-                if (!empty($filters['max_price']) && $price > (float) $filters['max_price']) {
-                    $match = false;
-                }
-            }
-
-            // Text search
-            if (!empty($filters['search'])) {
-                $search = strtolower(trim($filters['search']));
-                $searchable = strtolower($car['make'] . ' ' . $car['model'] . ' ' . $car['segment'] . ' ' . $variant['name']);
-                if (strpos($searchable, $search) === false) {
+            if ($filterSearch !== '') {
+                $searchable = $carMake . ' ' . $carModel . ' ' . $carSegment . ' ' . $variantName;
+                if (strpos($searchable, $filterSearch) === false) {
                     $match = false;
                 }
             }
@@ -349,40 +391,35 @@ function json_search(array $filters = []): array {
             if ($match) {
                 $results[] = [
                     'id' => count($results) + 1,
-                    'brand' => trim($car['make']),
-                    'model' => trim($car['model']),
-                    'variant' => trim($variant['name']),
-                    'segment' => trim($car['segment']),
-                    'fuel_type' => trim($variant['fuel_type']),
-                    'transmission' => trim($variant['transmission'] ?? 'Manual'),
-                    'price' => trim($variant['price']),
-                    'price_numeric' => json_parse_price($variant['price']),
-                    'engine_size' => trim($variant['engine_size'] ?? ''),
-                    'horsepower' => trim($variant['horsepower'] ?? '')
+                    'brand' => trim((string) ($car['make'] ?? '')),
+                    'model' => trim((string) ($car['model'] ?? '')),
+                    'variant' => trim((string) ($variant['name'] ?? '')),
+                    'segment' => trim((string) ($car['segment'] ?? '')),
+                    'fuel_type' => trim((string) ($variant['fuel_type'] ?? '')),
+                    'transmission' => trim((string) ($variant['transmission'] ?? 'Manual')),
+                    'price' => trim((string) ($variant['price'] ?? '')),
+                    'price_numeric' => $variantPrice,
+                    'engine_size' => trim((string) ($variant['engine_size'] ?? '')),
+                    'horsepower' => trim((string) ($variant['horsepower'] ?? '')),
                 ];
             }
         }
     }
 
-    // Sorting
     $sortBy = $filters['sort_by'] ?? 'price_asc';
     switch ($sortBy) {
         case 'price_desc':
-            usort($results, fn($a, $b) => $b['price_numeric'] <=> $a['price_numeric']);
+            usort($results, static fn($a, $b) => $b['price_numeric'] <=> $a['price_numeric']);
             break;
         case 'name_asc':
-            usort($results, fn($a, $b) => strcmp($a['model'], $b['model']));
+            usort($results, static fn($a, $b) => strcmp($a['model'], $b['model']));
             break;
         case 'name_desc':
-            usort($results, fn($a, $b) => strcmp($b['model'], $a['model']));
+            usort($results, static fn($a, $b) => strcmp($b['model'], $a['model']));
             break;
-        default: // price_asc
-            usort($results, fn($a, $b) => $a['price_numeric'] <=> $b['price_numeric']);
+        default:
+            usort($results, static fn($a, $b) => $a['price_numeric'] <=> $b['price_numeric']);
     }
-
-    // Pagination
-    $limit = $filters['limit'] ?? 20;
-    $offset = $filters['offset'] ?? 0;
 
     return array_slice($results, $offset, $limit);
 }
@@ -393,26 +430,25 @@ function json_search(array $filters = []): array {
 function json_get_car(string|int $identifier): ?array {
     $dataset = load_car_dataset();
 
-    // Try by ID (if numeric)
     if (is_numeric($identifier)) {
         $id = (int) $identifier;
         $counter = 1;
         foreach ($dataset as $car) {
-            foreach ($car['variants'] as $variant) {
+            foreach (($car['variants'] ?? []) as $variant) {
                 if ($counter === $id) {
                     return [
                         'id' => $id,
-                        'brand' => trim($car['make']),
-                        'model' => trim($car['model']),
-                        'variant' => trim($variant['name']),
-                        'segment' => trim($car['segment']),
-                        'fuel_type' => trim($variant['fuel_type']),
-                        'transmission' => trim($variant['transmission'] ?? 'Manual'),
-                        'price' => trim($variant['price']),
-                        'price_numeric' => json_parse_price($variant['price']),
-                        'engine_size' => trim($variant['engine_size'] ?? ''),
-                        'horsepower' => trim($variant['horsepower'] ?? ''),
-                        'specs' => [] // No specs in JSON
+                        'brand' => trim((string) ($car['make'] ?? '')),
+                        'model' => trim((string) ($car['model'] ?? '')),
+                        'variant' => trim((string) ($variant['name'] ?? '')),
+                        'segment' => trim((string) ($car['segment'] ?? '')),
+                        'fuel_type' => trim((string) ($variant['fuel_type'] ?? '')),
+                        'transmission' => trim((string) ($variant['transmission'] ?? 'Manual')),
+                        'price' => trim((string) ($variant['price'] ?? '')),
+                        'price_numeric' => $variant['price_numeric'] ?? json_parse_price($variant['price'] ?? ''),
+                        'engine_size' => trim((string) ($variant['engine_size'] ?? '')),
+                        'horsepower' => trim((string) ($variant['horsepower'] ?? '')),
+                        'specs' => [],
                     ];
                 }
                 $counter++;
@@ -420,25 +456,28 @@ function json_get_car(string|int $identifier): ?array {
         }
     }
 
-    // Try by slug (brand-model-variant format)
-    $slug = trim($identifier);
+    $slug = trim((string) $identifier);
     foreach ($dataset as $car) {
-        foreach ($car['variants'] as $variant) {
-            $expectedSlug = strtolower(str_replace(' ', '-', $car['make'] . '-' . $car['model'] . '-' . $variant['name']));
+        foreach (($car['variants'] ?? []) as $variant) {
+            $expectedSlug = strtolower(str_replace(
+                ' ',
+                '-',
+                ($car['make'] ?? '') . '-' . ($car['model'] ?? '') . '-' . ($variant['name'] ?? '')
+            ));
             if ($expectedSlug === strtolower($slug)) {
                 return [
-                    'id' => 1, // Placeholder
-                    'brand' => trim($car['make']),
-                    'model' => trim($car['model']),
-                    'variant' => trim($variant['name']),
-                    'segment' => trim($car['segment']),
-                    'fuel_type' => trim($variant['fuel_type']),
-                    'transmission' => trim($variant['transmission'] ?? 'Manual'),
-                    'price' => trim($variant['price']),
-                    'price_numeric' => json_parse_price($variant['price']),
-                    'engine_size' => trim($variant['engine_size'] ?? ''),
-                    'horsepower' => trim($variant['horsepower'] ?? ''),
-                    'specs' => [] // No specs in JSON
+                    'id' => 1,
+                    'brand' => trim((string) ($car['make'] ?? '')),
+                    'model' => trim((string) ($car['model'] ?? '')),
+                    'variant' => trim((string) ($variant['name'] ?? '')),
+                    'segment' => trim((string) ($car['segment'] ?? '')),
+                    'fuel_type' => trim((string) ($variant['fuel_type'] ?? '')),
+                    'transmission' => trim((string) ($variant['transmission'] ?? 'Manual')),
+                    'price' => trim((string) ($variant['price'] ?? '')),
+                    'price_numeric' => $variant['price_numeric'] ?? json_parse_price($variant['price'] ?? ''),
+                    'engine_size' => trim((string) ($variant['engine_size'] ?? '')),
+                    'horsepower' => trim((string) ($variant['horsepower'] ?? '')),
+                    'specs' => [],
                 ];
             }
         }

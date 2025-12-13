@@ -90,6 +90,7 @@ function auth_login(string $email, string $password): ?string
     $users = auth_user_store();
     foreach ($users as $user) {
         if (($user['email'] ?? '') === $email && password_verify($password, $user['password_hash'] ?? '')) {
+            session_regenerate_id(true);
             $_SESSION['user'] = $user;
             return null;
         }

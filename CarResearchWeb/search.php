@@ -3,13 +3,8 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/includes/header.php';
 require_once __DIR__ . '/includes/config.php';
-
-if (USE_JSON) {
-    require_once __DIR__ . '/includes/json_car_repository.php';
-} else {
-    require_once __DIR__ . '/includes/car_repository.php';
-    require_once __DIR__ . '/includes/search_helpers.php';
-}
+require_once __DIR__ . '/includes/search_helpers.php';
+require_once __DIR__ . '/includes/repository.php';
 
 $filters = build_search_filters($_GET);
 $results = search_cars($filters);
@@ -91,8 +86,8 @@ function checked_in(string $value, array $haystack): bool
                 </label>
 
                 <div class="input-row">
-                    <input type="number" name="min_budget" placeholder="Min ₹" value="<?= $filters['min_budget'] ?? '' ?>">
-                    <input type="number" name="max_budget" placeholder="Max ₹" value="<?= $filters['max_budget'] ?? '' ?>">
+                    <input type="number" name="min_budget" placeholder="Min Rs." value="<?= e((string) ($filters['min_budget'] ?? '')) ?>">
+                    <input type="number" name="max_budget" placeholder="Max Rs." value="<?= e((string) ($filters['max_budget'] ?? '')) ?>">
                 </div>
 
                 <div class="filter-actions">
@@ -104,8 +99,24 @@ function checked_in(string $value, array $haystack): bool
 
         <div class="grid" style="gap: 1rem;">
             <?php if (empty($results)): ?>
-                <article class="card">
-                    <p>No cars found. Try adjusting filters.</p>
+                <article class="card empty-state">
+                    <h3>No cars match these filters</h3>
+                    <p>We couldn’t find results<?= $filters['search_text'] ? ' for "' . e($filters['search_text']) . '"' : '' ?>. Try clearing filters or widening the budget range.</p>
+                    <div class="badge-row">
+                        <?php if ($filters['manufacturer_id']): ?>
+                            <span class="badge badge-info">Brand selected</span>
+                        <?php endif; ?>
+                        <?php if (!empty($filters['body_type'])): ?>
+                            <span class="badge badge-success">Body: <?= e(implode(', ', $filters['body_type'])) ?></span>
+                        <?php endif; ?>
+                        <?php if (!empty($filters['fuel_type'])): ?>
+                            <span class="badge badge-warning">Fuel: <?= e(implode(', ', $filters['fuel_type'])) ?></span>
+                        <?php endif; ?>
+                    </div>
+                    <div class="actions">
+                        <a class="btn btn-primary" href="search.php">Reset filters</a>
+                        <a class="btn btn-outline" href="index.php">Back to home</a>
+                    </div>
                 </article>
             <?php endif; ?>
 
