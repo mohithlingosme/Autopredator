@@ -5,20 +5,33 @@ declare(strict_types=1);
  * JSON-based Car Repository
  *
  * Provides functions to access car data from JSON files without database queries.
- * Uses static caching for performance.
+ * Uses static caching for performance and includes schema validation.
  */
 
 /**
- * Load car dataset from JSON file with caching
+ * Configuration for JSON data paths
+ */
+const JSON_DATA_DIR = __DIR__ . '/../mocks/';
+const JSON_CARSET_FILE = 'new_carset.json';
+const JSON_DATA_FILE = 'data.json';
+
+/**
+ * Load and validate car dataset from JSON file with caching
  */
 function load_car_dataset(): array {
     static $dataset = null;
 
     if ($dataset === null) {
-        $jsonPath = __DIR__ . '/../mocks/new_carset.json';
+        $jsonPath = JSON_DATA_DIR . JSON_CARSET_FILE;
 
+        // Check if file exists
         if (!file_exists($jsonPath)) {
             throw new RuntimeException("Car dataset JSON file not found: $jsonPath");
+        }
+
+        // Check if file is readable
+        if (!is_readable($jsonPath)) {
+            throw new RuntimeException("Car dataset JSON file is not readable: $jsonPath");
         }
 
         $jsonContent = file_get_contents($jsonPath);
@@ -31,12 +44,83 @@ function load_car_dataset(): array {
             throw new RuntimeException("Invalid JSON in car dataset file: " . json_last_error_msg());
         }
 
-        if (!is_array($dataset)) {
-            throw new RuntimeException("Car dataset JSON root must be an array");
-        }
+        // Validate JSON structure
+        validate_car_dataset_schema($dataset);
     }
 
     return $dataset;
+}
+
+/**
+ * Validate the car dataset JSON schema
+ */
+function validate_car_dataset_schema(array $dataset): void {
+    if (!is_array($dataset)) {
+        throw new RuntimeException("Car dataset JSON root must be an array");
+    }
+
+    if (empty($dataset)) {
+        throw new RuntimeException("Car dataset JSON cannot be empty");
+    }
+
+    foreach ($dataset as $index => $car) {
+        if (!is_array($car)) {
+            throw new RuntimeException("Car entry at index $index must be an object");
+        }
+
+        // Required fields validation
+        $requiredFields = ['make', 'model', 'segment', 'variants'];
+        foreach ($requiredFields as $field) {
+            if (!array_key_exists($field, $car)) {
+                throw new RuntimeException("Car entry at index $index missing required field: $field");
+            }
+        }
+
+        // Validate make and model are non-empty strings
+        if (!is_string($car['make']) || trim($car['make']) === '') {
+            throw new RuntimeException("Car entry at index $index: 'make' must be a non-empty string");
+        }
+
+        if (!is_string($car['model']) || trim($car['model']) === '') {
+            throw new RuntimeException("Car entry at index $index: 'model' must be a non-empty string");
+        }
+
+        if (!is_string($car['segment']) || trim($car['segment']) === '') {
+            throw new RuntimeException("Car entry at index $index: 'segment' must be a non-empty string");
+        }
+
+        // Validate variants array
+        if (!is_array($car['variants']) || empty($car['variants'])) {
+            throw new RuntimeException("Car entry at index $index: 'variants' must be a non-empty array");
+        }
+
+        // Validate each variant
+        foreach ($car['variants'] as $variantIndex => $variant) {
+            if (!is_array($variant)) {
+                throw new RuntimeException("Variant at index $variantIndex in car $index must be an object");
+            }
+
+            $requiredVariantFields = ['name', 'price', 'fuel_type'];
+            foreach ($requiredVariantFields as $field) {
+                if (!array_key_exists($field, $variant)) {
+                    throw new RuntimeException("Variant at index $variantIndex in car $index missing required field: $field");
+                }
+            }
+
+            // Validate variant fields are strings
+            if (!is_string($variant['name']) || trim($variant['name']) === '') {
+                throw new RuntimeException("Variant at index $variantIndex in car $index: 'name' must be a non-empty string");
+            }
+
+            if (!is_string($variant['price']) || trim($variant['price']) === '') {
+                throw new RuntimeException("Variant at index $variantIndex in car $index: 'price' must be a non-empty string");
+            }
+
+            if (!is_string($variant['fuel_type']) || trim($variant['fuel_type']) === '') {
+                throw new RuntimeException("Variant at index $variantIndex in car $index: 'fuel_type' must be a non-empty string");
+            }
+        }
+    }
 }
 
 /**

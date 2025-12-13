@@ -1,26 +1,60 @@
 <?php
 declare(strict_types=1);
 
-// require_once __DIR__ . '/db.php'; // Commented out as we're switching to JSON
+require_once __DIR__ . '/config.php';
+require_once __DIR__ . '/json_car_repository.php';
 
 /**
- * Load car data from JSON file
+ * Repository functions for JSON-based car data
+ * Simplified to work exclusively with JSON data source
+ */
+
+/**
+ * Get all brands/manufacturers
+ */
+function getBrands(): array {
+    return json_get_brands();
+}
+
+/**
+ * Get models by brand name
+ */
+function getModelsByBrand(string $brandName): array {
+    return json_get_models_by_brand($brandName);
+}
+
+/**
+ * Get variants by model name
+ */
+function getVariantsByModel(string $modelName): array {
+    return json_get_variants_by_model($modelName);
+}
+
+/**
+ * Search cars with filters
+ */
+function searchCars(array $filters = []): array {
+    return json_search($filters);
+}
+
+/**
+ * Get car by ID or slug
+ */
+function getCar(string|int $identifier): ?array {
+    return json_get_car($identifier);
+}
+
+/**
+ * Legacy compatibility functions - these maintain the old interface
+ * while internally using the new abstraction layer
+ */
+
+/**
+ * Load car data from JSON file (legacy function)
  */
 function load_car_data(): array
 {
-    static $data = null;
-    if ($data === null) {
-        $jsonPath = __DIR__ . '/../mocks/new_carset.json';
-        if (!file_exists($jsonPath)) {
-            throw new RuntimeException("Car data JSON file not found: $jsonPath");
-        }
-        $jsonContent = file_get_contents($jsonPath);
-        $data = json_decode($jsonContent, true);
-        if (json_last_error() !== JSON_ERROR_NONE) {
-            throw new RuntimeException("Invalid JSON in car data file: " . json_last_error_msg());
-        }
-    }
-    return $data;
+    return load_car_dataset();
 }
 
 /**

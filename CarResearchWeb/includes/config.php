@@ -15,6 +15,7 @@ $APP_ENV = getenv('APP_ENV') !== false ? getenv('APP_ENV') : 'local';
  * You can override via an environment variable USE_JSON if desired.
  */
 $USE_JSON = getenv('USE_JSON') !== false ? filter_var(getenv('USE_JSON'), FILTER_VALIDATE_BOOLEAN) : true;
+define('USE_JSON', $USE_JSON);
 
 // Database credentials.
 const DB_HOST = 'localhost';

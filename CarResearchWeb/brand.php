@@ -148,7 +148,7 @@ if ($USE_JSON) {
                                 <p class="small">Fuel: <?= e(implode(', ', $model['fuel_types'])) ?></p>
                             <?php endif; ?>
                             <?php if (!empty($model['price_range'])): ?>
-                                <p class="small">Price: ₹<?= number_format($model['price_range']['min']) ?> - ₹<?= number_format($model['price_range']['max']) ?></p>
+                                <p class="small">Price: <?= format_price((float) $model['price_range']['min']) ?> - <?= format_price((float) $model['price_range']['max']) ?></p>
                             <?php endif; ?>
                         </div>
                         <div class="card-footer">

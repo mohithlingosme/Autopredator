@@ -69,7 +69,7 @@ function post_param(string $key, string $default = ''): string
 }
 
 /**
- * Format price in Indian Rupees.
+ * Format price in Indian Rupees with Indian numbering system.
  */
 function format_price(float $price): string
 {
@@ -85,7 +85,42 @@ function format_price(float $price): string
         return '₹' . number_format($price / 100000, 1) . ' L';
     }
 
-    return '₹' . number_format($price);
+    // Format numbers below 1 lakh with Indian numbering system
+    return '₹' . number_format_indian($price);
+}
+
+/**
+ * Format number with Indian numbering system (commas every 2 digits after thousands).
+ */
+function number_format_indian(float $number): string
+{
+    $number = (int) $number; // Remove decimals for whole rupee amounts
+    $number_str = (string) $number;
+
+    if ($number < 1000) {
+        return $number_str;
+    }
+
+    // Split into parts
+    $last_three = substr($number_str, -3);
+    $remaining = substr($number_str, 0, -3);
+
+    if ($remaining === '') {
+        return $last_three;
+    }
+
+    // Add commas every 2 digits from the right for remaining part
+    $remaining = strrev($remaining);
+    $formatted_remaining = '';
+    for ($i = 0; $i < strlen($remaining); $i++) {
+        if ($i > 0 && $i % 2 === 0) {
+            $formatted_remaining .= ',';
+        }
+        $formatted_remaining .= $remaining[$i];
+    }
+    $formatted_remaining = strrev($formatted_remaining);
+
+    return $formatted_remaining . ',' . $last_three;
 }
 
 /**
