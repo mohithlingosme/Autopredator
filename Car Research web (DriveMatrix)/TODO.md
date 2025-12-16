@@ -1,55 +1,159 @@
-# Project Roadmap & Todo
+🚗 Car Research Platform - Development Roadmap
 
-## 🚨 Phase 1: Critical Security & Stability (Immediate)
-*These tasks fix vulnerabilities and prevent the app from crashing.*
+This project aims to build a modern car research application that ingests unstructured brochure data (PDF/Text) via Google AI Studio, converts it into structured JSON, and serves it via a PostgreSQL (Hybrid SQL/JSON) database.
 
-- [ ] **Fix Session Fixation Vulnerability** (`login.php`)
-    - [ ] Add `session_regenerate_id(true);` immediately after successful password verification.
-- [ ] **Prevent XSS Attacks** (All View Files)
-    - [ ] Audit `search.php`, `variant.php`, and `index.php`.
-    - [ ] Ensure every `echo $variable` is wrapped in `htmlspecialchars($variable)`.
-- [ ] **Hardening JSON Parsing** (`includes/json_car_repository.php`)
-    - [ ] Implement Null Coalescing (`??`) for optional fields (e.g., `$car['price'] ?? 'N/A'`) to prevent "Undefined Array Key" warnings.
-    - [ ] Add `try-catch` blocks around `json_decode` to handle corrupt data files gracefully.
+📌 Phase 1: Project Initialization & Architecture
 
-## ⚡ Phase 2: Data Pipeline & Performance
-*Optimizing the JSON logic to stop the app from slowing down as data grows.*
+[ ] Tech Stack Selection
 
-- [ ] **Refactor Price Data** (`scripts/convert_data_to_json.py`)
-    - [ ] Update Python script to save a `price_numeric` (int) field alongside the display string.
-    - [ ] Example: `{"price_display": "15.5 L", "price_numeric": 1550000}`.
-- [ ] **Optimize Search Logic** (`includes/json_car_repository.php`)
-    - [ ] Switch price filtering to use the new `price_numeric` field (integer comparison instead of string parsing).
-    - [ ] Implement `strtolower()` on both query and data for case-insensitive search.
-- [ ] **Implement Server-Side Pagination**
-    - [ ] Stop sending all 500+ cars to the view. Use `array_slice()` in the repository to return only the requested page (e.g., 12 items).
+[ ] Frontend: Next.js (React) - Selected for SEO & Server Side Rendering.
 
-## 🎨 Phase 3: UI/UX Improvements
-*Fixing the interface issues to make the site feel professional.*
+[ ] Backend: Node.js (Express) OR Python (FastAPI) - Node.js recommended for native JSON handling.
 
-- [ ] **Fix "Form Amnesia"** (`search.php`)
-    - [ ] Ensure filter inputs (dropdowns/checkboxes) retain their selected value after page reload.
-    - [ ] Implementation: `<option value="SUV" <?php echo ($_GET['type'] == 'SUV') ? 'selected' : ''; ?>>`.
-- [ ] **Unified Card Heights** (`css/style.css`)
-    - [ ] Use CSS Flexbox to force car cards to equal height, ensuring "View Details" buttons align at the bottom.
-- [ ] **Add "Empty State" UI**
-    - [ ] Create a specific design for when `count($results) === 0` (e.g., "No cars found with these filters").
-- [ ] **Formatting Helpers**
-    - [ ] Create a PHP helper function to format currency (Lakhs/Crores) dynamically for the view layer.
+[ ] Database: PostgreSQL (v14+) - Required for robust JSONB support.
 
-## 🛠 Phase 4: Architecture & Refactoring (Tech Debt)
-*Preparing the codebase for future growth (MySQL) and easier maintenance.*
+[ ] AI Provider: Google Gemini API (AI Studio).
 
-- [ ] **Adopt Composer**
-    - [ ] Initialize `composer.json`.
-    - [ ] Set up PSR-4 Autoloading (replace manual `include` statements with `use App\Repository\CarRepository`).
-- [ ] **Strict Typing**
-    - [ ] Add `declare(strict_types=1);` to the top of all PHP files.
-    - [ ] Add return types to functions (e.g., `function getById(int $id): ?array`).
-- [ ] **Environment Security**
-    - [ ] Ensure `mocks/` and `includes/` directories are protected from direct browser access (via `.htaccess`).
+[ ] Repo Setup
 
-## 🔮 Phase 5: Future Features
-- [ ] **User Garage Persistence:** Allow users to save favorites to a user-specific JSON file (or SQLite).
-- [ ] **Comparison Matrix:** Enhance `compare.php` to highlight differences (e.g., green text for better specs).
-- [ ] **Migration to SQLite:** Replace JSON repository with a SQLite implementation using the same interface.
+[ ] Initialize Git repository.
+
+[ ] Set up Monorepo structure (optional) or separate /client and /server folders.
+
+[ ] Configure .env files (DB credentials, Gemini API Keys).
+
+🤖 Phase 2: The AI Ingestion Pipeline (The Core)
+
+Goal: Convert raw brochure text into the "Strict Mode" JSON format we designed.
+
+[ ] Prompt Engineering
+
+[ ] Save the "Strict Mode" System Prompt (from our previous chat) into a constant file (prompts/carSpecsPrompt.ts).
+
+[ ] Implement the "Polymorphic Logic" (Detect ICE vs EV first).
+
+[ ] Brochure Processing Script
+
+[ ] Create a script to accept text input (OCR output from PDF).
+
+[ ] Connect to Google Gemini API (gemini-pro model).
+
+[ ] Validation Layer: Write a function to validate the AI's output:
+
+[ ] Check if common_specs exists.
+
+[ ] Ensure variants is an array.
+
+[ ] Verify true/false booleans (reject "Yes"/"No" strings).
+
+[ ] Testing
+
+[ ] Run the pipeline with the Hyundai i20 brochure text.
+
+[ ] Verify handling of null values for missing data.
+
+🗄️ Phase 3: Database Implementation (PostgreSQL)
+
+Goal: Store the JSON efficiently while allowing SQL-speed querying.
+
+[ ] Schema Design
+
+[ ] Create car_models table:
+
+CREATE TABLE car_models (
+    id SERIAL PRIMARY KEY,
+    brand VARCHAR(50) NOT NULL,
+    model_name VARCHAR(100) NOT NULL,
+    brochure_version VARCHAR(50),
+    created_at TIMESTAMP DEFAULT NOW(),
+    specs JSONB NOT NULL -- The massive JSON object goes here
+);
+
+
+[ ] Indexing Strategy
+
+[ ] Create GIN Index for fast JSON searching:
+CREATE INDEX idx_car_specs ON car_models USING GIN (specs);
+
+[ ] Seed Data
+
+[ ] Manually insert the cleaned Hyundai i20 JSON as the first record for testing.
+
+🔌 Phase 4: Backend API Development
+
+[ ] Basic Endpoints
+
+[ ] GET /api/cars - List all available cars (Brand + Model).
+
+[ ] GET /api/cars/:id - Fetch the full JSON for a specific car.
+
+[ ] Advanced Filtering (The "Magic" Queries)
+
+[ ] Implement Query: Find cars by Feature (e.g., Sunroof = true).
+
+-- Concept
+SELECT * FROM car_models 
+WHERE specs @> '{"variants": [{"features": {"sunroof": true}}]}';
+
+
+[ ] Implement Query: Find cars by Power (e.g., > 100 PS).
+
+[ ] Admin Ingestion Endpoint
+
+[ ] POST /api/admin/ingest - Accepts raw text, calls AI, returns JSON for review.
+
+[ ] POST /api/admin/save - Saves the approved JSON to DB.
+
+💻 Phase 5: Frontend Development (Next.js)
+
+[ ] Components Construction
+
+[ ] VariantSelector: A tab or dropdown component to switch between "Sportz", "Asta", etc.
+
+[ ] SpecTable: A component that takes common_specs + variant.features and renders a clean table.
+
+[ ] FeatureBadge: Visual pills for key features (e.g., "Sunroof", "6 Airbags").
+
+[ ] Pages
+
+[ ] Home: Search bar + Brand grid.
+
+[ ] Model Details:
+
+[ ] Header (Car Name, Price Range).
+
+[ ] "Common Specs" Section (Dimensions, Engine).
+
+[ ] Interactive Variant comparison section (The Logic: mergedData = { ...common, ...selectedVariant }).
+
+[ ] Comparison Tool (Side-by-Side):
+
+[ ] Select Car A -> Select Variant.
+
+[ ] Select Car B -> Select Variant.
+
+[ ] Render two columns comparing keys.
+
+🛠️ Phase 6: Internal Tools (Admin Dashboard)
+
+Goal: Speed up adding new cars.
+
+[ ] Build a simple "Paste & Convert" page.
+
+[ ] Text Area: Paste copied text from PDF.
+
+[ ] Button: "Generate Specs".
+
+[ ] JSON Editor: View the AI output, fix any hallucinations manually.
+
+[ ] Save Button: Push to PostgreSQL.
+
+🚀 Phase 7: Polish & Launch
+
+[ ] Data Sanitization: Ensure null values display as "-" or "N/A" on the UI, not empty space.
+
+[ ] Unit Conversion: Helper function to convert mm to ft or PS to BHP if needed on the frontend.
+
+[ ] SEO: Generate dynamic meta tags based on model_info.
+
+[ ] Deployment: Vercel (Frontend) + Supabase/Render 
