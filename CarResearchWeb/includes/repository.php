@@ -15,7 +15,7 @@ function car_service(): CarService
     static $service = null;
 
     if ($service === null) {
-        $dataDir = __DIR__ . '/../data';
+        $dataDir = defined('DATA_DIR') ? DATA_DIR : (__DIR__ . '/../data');
         $repo = new JsonCarRepository($dataDir);
         $service = new CarService($repo);
     }

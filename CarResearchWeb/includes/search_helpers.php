@@ -52,6 +52,8 @@ function build_search_filters(array $input): array
 
     $filters['min_budget'] = isset($input['min_budget']) && $input['min_budget'] !== '' ? (float) $input['min_budget'] : null;
     $filters['max_budget'] = isset($input['max_budget']) && $input['max_budget'] !== '' ? (float) $input['max_budget'] : null;
+    $filters['min_price'] = $filters['min_budget'];
+    $filters['max_price'] = $filters['max_budget'];
 
     $filters['seats'] = isset($input['seats']) && $input['seats'] !== '' ? (int) $input['seats'] : null;
 

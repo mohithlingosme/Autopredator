@@ -6,6 +6,7 @@ session_start();
 require_once __DIR__ . '/includes/header.php';
 require_once __DIR__ . '/includes/config.php';
 require_once __DIR__ . '/includes/repository.php';
+require_once __DIR__ . '/views/partials/empty_state.php';
 
 $ids = [];
 if (!empty($_GET['ids'])) {
@@ -94,67 +95,68 @@ function build_remove_url(int $removeId): string
 }
 ?>
 
-<section class="section container">
-    <div class="section-header">
-        <h1>Compare Cars</h1>
-    </div>
-
-    <?php if (empty($variants)): ?>
-        <article class="card">
-            <p>No variants selected. Add cars to compare from the model or search pages.</p>
-        </article>
-    <?php else: ?>
-        <div class="compare-header">
-            <?php foreach ($variants as $id => $v): ?>
-                <div class="compare-card">
-                    <div class="badge badge-info">Variant</div>
-                    <h3><?= e($v['info']['variant_name'] ?? 'Variant') ?></h3>
-                    <p><?= e(($v['info']['manufacturer_name'] ?? '') . ' ' . ($v['info']['model_name'] ?? '')) ?></p>
-                    <?php if (isset($v['info']['ex_showroom_price'])): ?>
-                        <p class="price"><?= format_price((float) $v['info']['ex_showroom_price']) ?></p>
-                    <?php endif; ?>
-                    <div class="badge-row">
-                        <?php if (!empty($v['info']['fuel_type'])): ?>
-                            <span class="badge badge-success"><?= e($v['info']['fuel_type']) ?></span>
-                        <?php endif; ?>
-                        <?php if (!empty($v['info']['transmission'])): ?>
-                            <span class="badge badge-warning"><?= e($v['info']['transmission']) ?></span>
-                        <?php endif; ?>
-                    </div>
-                    <div class="compare-card-actions">
-                        <a class="btn btn-outline" href="variant.php?variant_id=<?= (int) $id ?>">View</a>
-                        <a class="btn btn-outline" href="<?= e(build_remove_url((int) $id)) ?>" aria-label="Remove from comparison">Remove</a>
-                    </div>
-                </div>
-            <?php endforeach; ?>
+<section class="hero">
+    <div class="container">
+        <div class="hero-card">
+            <p class="badge badge-soft">Compare</p>
+            <h1>Compare up to 4 variants</h1>
+            <p>Differences are highlighted so you can decide faster.</p>
+            <form class="search-form" action="search.php" method="get">
+                <input type="search" name="q" placeholder="Search more variants to add" aria-label="Search variants">
+                <button class="btn btn-primary" type="submit">Find variants</button>
+            </form>
         </div>
+    </div>
+</section>
 
-        <div class="card">
-            <table class="table table-compare">
-                <thead>
-                <tr>
-                    <th>Specs</th>
-                    <?php foreach ($variants as $v): ?>
-                        <th><?= e($v['info']['variant_name'] ?? 'Variant') ?></th>
-                    <?php endforeach; ?>
-                </tr>
-                </thead>
-                <tbody>
-                <?php foreach ($attributes as $key => $label): ?>
-                    <?php $mask = difference_mask($variants, $key); ?>
+<section class="section">
+    <div class="container">
+        <?php if (empty($variants)): ?>
+            <?php render_empty_state('No variants selected', 'Add variants from search or model pages to compare', 'Browse cars', 'search.php'); ?>
+        <?php else: ?>
+            <div class="card compare-grid">
+                <table class="compare-table">
+                    <thead>
                     <tr>
-                        <th><?= e($label) ?></th>
+                        <th>Specs</th>
                         <?php foreach ($variants as $id => $v): ?>
-                            <?php $val = spec_value($v, $key); ?>
-                            <td class="<?= !empty($mask[$id]) ? 'highlight-diff' : '' ?>"><?= e($val) ?></td>
+                            <th>
+                                <p class="muted">Variant</p>
+                                <strong><?= e($v['info']['variant_name'] ?? 'Variant') ?></strong><br>
+                                <span class="muted"><?= e(($v['info']['manufacturer_name'] ?? '') . ' ' . ($v['info']['model_name'] ?? '')) ?></span><br>
+                                <?php if (isset($v['info']['ex_showroom_price'])): ?>
+                                    <span class="muted"><?= format_price((float) $v['info']['ex_showroom_price']) ?></span>
+                                <?php endif; ?>
+                                <div style="margin-top:8px; display:flex; gap:6px; flex-wrap:wrap;">
+                                    <?php if (!empty($v['info']['fuel_type'])): ?><span class="badge badge-success"><?= e($v['info']['fuel_type']) ?></span><?php endif; ?>
+                                    <?php if (!empty($v['info']['transmission'])): ?><span class="badge badge-warning"><?= e($v['info']['transmission']) ?></span><?php endif; ?>
+                                </div>
+                                <div style="margin-top:8px;">
+                                    <a class="btn btn-outline btn-sm" href="variant.php?variant_id=<?= (int) $id ?>">Open</a>
+                                    <a class="btn btn-ghost btn-sm" href="<?= e(build_remove_url((int) $id)) ?>">Remove</a>
+                                </div>
+                            </th>
                         <?php endforeach; ?>
                     </tr>
-                <?php endforeach; ?>
-                </tbody>
-            </table>
-        </div>
-    <?php endif; ?>
+                    </thead>
+                    <tbody>
+                    <?php foreach ($attributes as $key => $label): ?>
+                        <?php $mask = difference_mask($variants, $key); ?>
+                        <tr>
+                            <th><?= e($label) ?></th>
+                            <?php foreach ($variants as $id => $v): ?>
+                                <?php $val = spec_value($v, $key); ?>
+                                <td class="<?= !empty($mask[$id]) ? 'highlight' : '' ?>"><?= e($val !== '' ? $val : '—') ?></td>
+                            <?php endforeach; ?>
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        <?php endif; ?>
+    </div>
 </section>
 
 <?php
 require_once __DIR__ . '/includes/footer.php';
+?>

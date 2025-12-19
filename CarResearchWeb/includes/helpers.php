@@ -10,15 +10,15 @@ declare(strict_types=1);
  */
 function e($value): string
 {
-    if (is_bool($value)) {
-        $value = $value ? '1' : '0';
-    } elseif (is_numeric($value)) {
-        $value = (string) $value;
-    } elseif ($value === null) {
+    if ($value === null) {
         $value = '';
-    } elseif (!is_string($value)) {
-        $value = (string) @json_encode($value);
     }
+
+    if (is_array($value) || is_object($value)) {
+        $value = json_encode($value, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?: '';
+    }
+
+    $value = (string) $value;
 
     return htmlspecialchars($value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 }
@@ -157,7 +157,7 @@ function truncate(string $text, int $length = 100): string
  *
  * @param mixed $value
  */
-function display_value($value, string $fallback = '—'): string
+function display_value($value, string $fallback = '-'): string
 {
     if ($value === null) {
         return $fallback;

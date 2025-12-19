@@ -5,6 +5,7 @@ require_once __DIR__ . '/includes/header.php';
 require_once __DIR__ . '/includes/config.php';
 require_once __DIR__ . '/includes/auth.php';
 require_once __DIR__ . '/includes/repository.php';
+require_once __DIR__ . '/views/partials/empty_state.php';
 
 $variantId = (int) ($_GET['variant_id'] ?? 0);
 $modelName = trim($_GET['model_name'] ?? '');
@@ -47,147 +48,98 @@ $isFavorite = in_array($variantId, $favorites, true);
 $page_title = ($variant['variant_name'] ?? 'Variant') . ' - ' . ($variant['manufacturer_name'] ?? '') . ' | Autopredator';
 ?>
 
-<section class="breadcrumb-nav">
+<section class="hero">
     <div class="container">
-        <a href="index.php">Home</a> /
-        <a href="brand.php?manufacturer_id=<?= (int) $manufacturerId ?>"><?= e($variant['manufacturer_name'] ?? 'Brand') ?></a> /
-        <a href="model.php?model_name=<?= urlencode($variant['model_name'] ?? '') ?>"><?= e($variant['model_name'] ?? '') ?></a> /
-        <span><?= e($variant['variant_name'] ?? '') ?></span>
-    </div>
-</section>
-
-<section class="hero hero-small">
-    <div class="container">
-        <h1><?= e(($variant['manufacturer_name'] ?? '') . ' ' . ($variant['model_name'] ?? '') . ' ' . ($variant['variant_name'] ?? '')) ?></h1>
-        <p>Complete specifications, features, and pricing.</p>
-    </div>
-</section>
-
-<div class="container">
-    <section class="section">
-        <div class="card variant-header">
-            <div class="variant-info">
-                <div>
-                    <h2><?= e($variant['variant_name'] ?? '') ?></h2>
-                    <div class="badges">
-                        <?php if (!empty($variant['fuel_type'])): ?>
-                            <span class="badge badge-info"><?= e($variant['fuel_type']) ?></span>
-                        <?php endif; ?>
-                        <?php if (!empty($variant['transmission'])): ?>
-                            <span class="badge badge-success"><?= e($variant['transmission']) ?></span>
-                        <?php endif; ?>
-                    </div>
-                    <?php if (!empty($variant['body_type'])): ?>
-                        <p class="small">Body: <?= e($variant['body_type']) ?></p>
-                    <?php endif; ?>
-                </div>
-                <div class="variant-actions">
-                    <button class="btn btn-outline fav-button"
-                            data-variant-id="<?= (int) $variantId ?>"
-                            data-is-favorite="<?= $isFavorite ? '1' : '0' ?>">
-                        <?= $isFavorite ? '✖ Remove' : '★ Save' ?>
-                    </button>
-                    <a href="compare.php?ids=<?= (int) $variantId ?>" class="btn btn-outline">Compare</a>
-                </div>
+        <div class="hero-card">
+            <p class="badge badge-soft">Variant</p>
+            <h1><?= e(($variant['manufacturer_name'] ?? '') . ' ' . ($variant['model_name'] ?? '') . ' ' . ($variant['variant_name'] ?? '')) ?></h1>
+            <p>Complete specifications, features, and pricing.</p>
+            <div class="pill-row">
+                <?php if (!empty($variant['fuel_type'])): ?><span class="pill">Fuel: <?= e($variant['fuel_type']) ?></span><?php endif; ?>
+                <?php if (!empty($variant['transmission'])): ?><span class="pill">Transmission: <?= e($variant['transmission']) ?></span><?php endif; ?>
+                <?php if (!empty($variant['body_type'])): ?><span class="pill">Body: <?= e($variant['body_type']) ?></span><?php endif; ?>
             </div>
+        </div>
+    </div>
+</section>
+
+<div class="container" style="padding: 0 0 32px;">
+    <div class="filter-shell" style="grid-template-columns: 320px 1fr;">
+        <aside class="sticky-summary">
             <?php if (!empty($variant['ex_showroom_price'])): ?>
-                <div class="variant-price">
-                    <p class="price-label">Ex-Showroom Price</p>
-                    <p class="price"><?= format_price((float) $variant['ex_showroom_price']) ?></p>
-                </div>
+                <p class="muted">Ex-showroom</p>
+                <h3><?= format_price((float) $variant['ex_showroom_price']) ?></h3>
             <?php endif; ?>
-        </div>
-    </section>
-
-    <section class="section">
-        <div class="tabs">
-            <button class="tab-button active" data-tab="specifications">Specifications</button>
-            <button class="tab-button" data-tab="features">Features</button>
-            <button class="tab-button" data-tab="pricing">Pricing</button>
-        </div>
-
-        <div class="tab-panel active" id="specifications">
-            <div class="card">
-                <h3>Technical Specifications</h3>
-                <p>Detailed specs are not available for this variant yet.</p>
+            <div class="card-footer" style="padding:0; margin-top:12px;">
+                <button class="btn btn-primary" type="button" data-compare-add="<?= e($variant['model_name'] ?? '') ?>" data-compare-label="<?= e($variant['variant_name'] ?? '') ?>">Add to Compare</button>
+                <button class="btn btn-outline" type="button" data-fav-toggle data-id="<?= (int) $variantId ?>" data-active="<?= $isFavorite ? '1' : '0' ?>"><?= $isFavorite ? 'Remove Favorite' : 'Save Favorite' ?></button>
             </div>
-        </div>
-
-        <div class="tab-panel" id="features">
-            <div class="card">
-                <h3>Features & Amenities</h3>
-                <p>Features not available.</p>
-            </div>
-        </div>
-
-        <div class="tab-panel" id="pricing">
-            <div class="card">
-                <h3>Pricing</h3>
-                <?php if (!empty($variant['ex_showroom_price'])): ?>
-                    <p class="price"><?= format_price((float) $variant['ex_showroom_price']) ?></p>
+            <div style="margin-top:16px;">
+                <p class="muted">Other variants</p>
+                <?php
+                $otherVariants = array_values(array_filter($modelVariants, static fn($v, $idx) => ($idx + 1) !== $variantId, ARRAY_FILTER_USE_BOTH));
+                if (empty($otherVariants)):
+                ?>
+                    <p class="muted">No other variants listed.</p>
                 <?php else: ?>
-                    <p>Pricing information not available.</p>
+                    <ul style="padding-left:16px;">
+                        <?php foreach ($otherVariants as $idx => $other): $otherId = $idx + 1; ?>
+                            <li><a class="muted" href="variant.php?variant_id=<?= (int) $otherId ?>&model_name=<?= urlencode($variant['model_name'] ?? '') ?>"><?= e($other['name'] ?? '') ?></a></li>
+                        <?php endforeach; ?>
+                    </ul>
                 <?php endif; ?>
             </div>
-        </div>
-    </section>
+        </aside>
 
-    <section class="section">
-        <div class="section-header">
-            <h2>Other Variants</h2>
-        </div>
-        <div class="grid grid-responsive">
-            <?php
-            $otherVariants = array_values(array_filter($modelVariants, static fn($v, $idx) => ($idx + 1) !== $variantId, ARRAY_FILTER_USE_BOTH));
-            if (!empty($otherVariants)):
-                foreach (array_slice($otherVariants, 0, 3) as $idx => $other):
-                    $otherId = $idx + 1;
-            ?>
-                <article class="card">
-                    <h4><?= e($other['name'] ?? '') ?></h4>
-                    <p class="small"><?= e($other['fuel_type'] ?? 'Petrol') ?> · <?= e($other['transmission'] ?? 'MT') ?></p>
-                    <?php if (!empty($other['price_numeric'])): ?>
-                        <p class="price"><?= format_price((float) $other['price_numeric']) ?></p>
+        <main>
+            <section class="section" style="padding-top:0;">
+                <div class="card">
+                    <h2>Key Specs</h2>
+                    <div class="spec-grid">
+                        <div class="spec-item"><p class="muted">Fuel</p><strong><?= e(display_value($variant['fuel_type'] ?? null)) ?></strong></div>
+                        <div class="spec-item"><p class="muted">Transmission</p><strong><?= e(display_value($variant['transmission'] ?? null)) ?></strong></div>
+                        <div class="spec-item"><p class="muted">Body</p><strong><?= e(display_value($variant['body_type'] ?? null)) ?></strong></div>
+                        <div class="spec-item"><p class="muted">Engine</p><strong><?= e(display_value($variant['engine_size'] ?? $variant['engine_displacement_cc'] ?? null)) ?></strong></div>
+                        <div class="spec-item"><p class="muted">Power</p><strong><?= e(display_value($variant['max_power_bhp'] ?? $variant['horsepower'] ?? null)) ?></strong></div>
+                        <div class="spec-item"><p class="muted">Mileage</p><strong><?= e(display_value($variant['mileage_city_kmpl'] ?? $variant['range_mileage'] ?? null)) ?></strong></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" style="padding-top:16px;">
+                <div class="card">
+                    <h2>Pricing</h2>
+                    <?php if (!empty($variant['ex_showroom_price'])): ?>
+                        <p class="muted">Ex-Showroom Price</p>
+                        <p class="price"><?= format_price((float) $variant['ex_showroom_price']) ?></p>
+                    <?php else: ?>
+                        <p class="muted">Pricing information not available.</p>
                     <?php endif; ?>
-                    <a href="variant.php?variant_id=<?= (int) $otherId ?>&model_name=<?= urlencode($variant['model_name'] ?? '') ?>" class="btn btn-outline">View</a>
-                </article>
-            <?php
-                endforeach;
-            else:
-                ?>
-                <p>No other variants available.</p>
-            <?php endif; ?>
-        </div>
-    </section>
+                </div>
+            </section>
+        </main>
+    </div>
 </div>
 
 <script>
-document.querySelector('.fav-button')?.addEventListener('click', function() {
-    const variantId = this.dataset.variantId;
-    const isFavorite = this.dataset.isFavorite === '1';
-    const action = isFavorite ? 'remove' : 'add';
-
-    fetch(`api/favorites.php?action=${action}&variant_id=${variantId}`)
-        .then(r => r.json())
-        .then(data => {
-            if (data.success) {
-                this.dataset.isFavorite = action === 'add' ? '1' : '0';
-                this.textContent = action === 'add' ? '✖ Remove' : '★ Save';
-            }
-        });
-});
-
-document.querySelectorAll('.tab-button').forEach(button => {
-    button.addEventListener('click', function() {
-        const tabName = this.dataset.tab;
-        document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-        document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
-
-        document.getElementById(tabName)?.classList.add('active');
-        this.classList.add('active');
+(function(){
+    const favBtn = document.querySelector('[data-fav-toggle]');
+    favBtn?.addEventListener('click', function(){
+        const active = this.getAttribute('data-active') === '1';
+        const action = active ? 'remove' : 'add';
+        const id = this.getAttribute('data-id');
+        fetch(`api/favorites.php?action=${action}&variant_id=${id}`)
+            .then(r => r.json())
+            .then(data => {
+                if (data.success) {
+                    this.setAttribute('data-active', active ? '0' : '1');
+                    this.textContent = active ? 'Save Favorite' : 'Remove Favorite';
+                }
+            });
     });
-});
+})();
 </script>
 
 <?php
 require_once __DIR__ . '/includes/footer.php';
+?>

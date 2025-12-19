@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Repositories;
 
+use App\Data\JsonLoader;
 use App\Support\Logger;
 
 /**
@@ -26,9 +27,12 @@ class JsonCarRepository
 
     private string $dataDir;
 
-    public function __construct(string $dataDir)
+    private JsonLoader $loader;
+
+    public function __construct(string $dataDir, ?JsonLoader $loader = null)
     {
-        $this->dataDir = $dataDir;
+        $this->dataDir = rtrim($dataDir, '/\\');
+        $this->loader = $loader ?? new JsonLoader($this->dataDir);
     }
 
     /**
@@ -74,11 +78,17 @@ class JsonCarRepository
         $this->bootstrap();
 
         $key = strtolower(trim($make));
-        if (!isset($this->modelsByMake[$key])) {
-            return [];
+        $models = $this->modelsByMake[$key] ?? [];
+
+        if ($models === [] && $key !== '') {
+            foreach ($this->dataset as $row) {
+                if (strtolower(trim($row['make'] ?? '')) === $key) {
+                    $models[] = $row;
+                }
+            }
         }
 
-        return $this->modelsByMake[$key];
+        return $models;
     }
 
     /**
@@ -90,7 +100,11 @@ class JsonCarRepository
         $key = strtolower(trim($modelName));
 
         foreach ($this->dataset as $model) {
-            if (strtolower($model['model']) === $key) {
+            $name = $model['model'] ?? null;
+            if (!is_string($name)) {
+                continue;
+            }
+            if (strtolower($name) === $key) {
                 return $model;
             }
         }
@@ -107,8 +121,13 @@ class JsonCarRepository
         $key = strtolower(trim($modelName));
 
         foreach ($this->dataset as $model) {
-            if (strtolower($model['model']) === $key) {
-                return $model['variants'];
+            $name = $model['model'] ?? null;
+            if (!is_string($name)) {
+                continue;
+            }
+
+            if (strtolower($name) === $key) {
+                return is_array($model['variants'] ?? null) ? $model['variants'] : [];
             }
         }
 
@@ -134,14 +153,21 @@ class JsonCarRepository
         $maxPrice = isset($filters['max_price']) && $filters['max_price'] !== '' ? (float) $filters['max_price'] : null;
 
         foreach ($this->dataset as $model) {
-            $modelMake = strtolower($model['make']);
-            $modelName = strtolower($model['model']);
-            $modelSegment = strtolower($model['segment'] ?? '');
+            if (!isset($model['variants']) || !is_array($model['variants']) || $model['variants'] === []) {
+                continue;
+            }
+
+            $modelMake = strtolower(trim((string) ($model['make'] ?? '')));
+            $modelName = strtolower(trim((string) ($model['model'] ?? '')));
+            $modelSegment = strtolower(trim((string) ($model['segment'] ?? '')));
 
             foreach ($model['variants'] as $variant) {
-                $variantName = strtolower($variant['name'] ?? '');
-                $variantFuel = strtolower($variant['fuel_type'] ?? '');
-                $variantTransmission = strtolower($variant['transmission'] ?? '');
+                if (!is_array($variant)) {
+                    continue;
+                }
+                $variantName = strtolower(trim((string) ($variant['name'] ?? '')));
+                $variantFuel = strtolower(trim((string) ($variant['fuel_type'] ?? '')));
+                $variantTransmission = strtolower(trim((string) ($variant['transmission'] ?? '')));
                 $variantPrice = (float) ($variant['price_numeric'] ?? 0);
 
                 $match = true;
@@ -176,13 +202,13 @@ class JsonCarRepository
                 if ($match) {
                     $results[] = [
                         'id' => count($results) + 1,
-                        'brand' => $model['make'],
-                        'model' => $model['model'],
-                        'variant' => $variant['name'],
-                        'segment' => $model['segment'],
-                        'fuel_type' => $variant['fuel_type'],
-                        'transmission' => $variant['transmission'],
-                        'price' => $variant['price_raw'],
+                        'brand' => $model['make'] ?? '',
+                        'model' => $model['model'] ?? '',
+                        'variant' => $variant['name'] ?? '',
+                        'segment' => $model['segment'] ?? '',
+                        'fuel_type' => $variant['fuel_type'] ?? '',
+                        'transmission' => $variant['transmission'] ?? '',
+                        'price' => $variant['price_raw'] ?? '',
                         'price_numeric' => $variantPrice,
                         'engine_size' => $variant['engine_size'] ?? '',
                         'horsepower' => $variant['horsepower'] ?? '',
@@ -265,31 +291,12 @@ class JsonCarRepository
      */
     private function loadJsonFile(string $filename): array
     {
-        $path = rtrim($this->dataDir, '/\\') . DIRECTORY_SEPARATOR . $filename;
-        if (!is_file($path) || !is_readable($path)) {
-            Logger::error('JSON file missing or unreadable', ['file' => $path]);
+        $data = $this->loader->load($filename);
+        if (!is_array($data)) {
             return [];
         }
 
-        $content = file_get_contents($path);
-        if ($content === false) {
-            Logger::error('Failed to read JSON file', ['file' => $path]);
-            return [];
-        }
-
-        try {
-            $decoded = json_decode($content, true, 512, JSON_THROW_ON_ERROR);
-        } catch (\JsonException $e) {
-            Logger::error('Invalid JSON content', ['file' => $path, 'error' => $e->getMessage()]);
-            return [];
-        }
-
-        if (!is_array($decoded)) {
-            Logger::error('JSON root must be an array', ['file' => $path]);
-            return [];
-        }
-
-        return $decoded;
+        return $data;
     }
 
     /**
@@ -403,7 +410,13 @@ class JsonCarRepository
     private function buildIndexes(): void
     {
         foreach ($this->dataset as $model) {
-            $makeKey = strtolower($model['make']);
+            $makeKey = strtolower(trim($model['make'] ?? ''));
+            $modelName = trim($model['model'] ?? '');
+            if ($makeKey === '' || $modelName === '') {
+                Logger::error('Skipping model with missing make or model', ['model' => $model]);
+                continue;
+            }
+
             $this->modelsByMake[$makeKey] ??= [];
             $this->modelsByMake[$makeKey][] = $model;
 

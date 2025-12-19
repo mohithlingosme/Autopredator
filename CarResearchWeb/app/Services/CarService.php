@@ -33,7 +33,7 @@ final class CarService
             if ($id > 0 && $brand['id'] === $id) {
                 return $brand;
             }
-            if ($needleName !== '' && strtolower($brand['name']) === $needleName) {
+            if ($needleName !== '' && strtolower(trim($brand['name'] ?? '')) === $needleName) {
                 return $brand;
             }
         }

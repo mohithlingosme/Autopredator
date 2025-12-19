@@ -13,7 +13,7 @@
   "range_mileage": "15.0-17.0 kmpl",
   "fuel_type": "Petrol/Diesel",
   "notes": "Current generation",
-  "data": "C:\\xampp\\htdocs\\Autopredator\\CarResearchWeb\\mocks\\XUV700.json"
+  "details_file": "XUV700.json"
 }
 
     "s_no": "147",

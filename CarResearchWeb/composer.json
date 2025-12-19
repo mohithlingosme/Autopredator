@@ -1,0 +1,14 @@
+{
+  "name": "autopredator/carresearchweb",
+  "description": "Autopredator car research web app",
+  "require-dev": {
+    "phpunit/phpunit": "^10.5"
+  },
+  "autoload": {
+    "files": [
+      "app/Support/Autoload.php",
+      "includes/helpers.php",
+      "includes/repository.php"
+    ]
+  }
+}

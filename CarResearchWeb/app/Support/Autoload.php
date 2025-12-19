@@ -10,9 +10,17 @@ spl_autoload_register(static function (string $class): void {
     }
 
     $relative = str_replace('\\', '/', substr($class, 4));
-    $path = __DIR__ . '/../' . $relative . '.php';
 
-    if (is_file($path)) {
-        require_once $path;
+    $baseDirs = [
+        __DIR__ . '/../',            // existing App classes
+        dirname(__DIR__, 2) . '/src/', // new data layer
+    ];
+
+    foreach ($baseDirs as $base) {
+        $path = rtrim($base, '/\\') . '/' . $relative . '.php';
+        if (is_file($path)) {
+            require_once $path;
+            return;
+        }
     }
 });

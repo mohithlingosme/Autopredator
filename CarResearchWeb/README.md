@@ -1,96 +1,61 @@
-# Autopredator Car Research Web (PHP)
+# Autopredator Car Research Web
 
-Lightweight PHP build for researching new and used cars in India. The current version runs entirely from JSON data (no DB required) and ships with brand, model, variant, search, and comparison pages that mirror the Autopredator UX.
+Lightweight PHP app for researching Indian-market cars. Ships with brand/model/variant listings, search and comparison flows, and a JSON-first data layer.
 
----
+## Prerequisites
+- PHP 8.1+ (CLI and web SAPI). Works with XAMPP/Apache or `php -S`.
+- Composer (for installing and running the PHPUnit test suite).
+- Optional: Python 3.10+ if you want to regenerate legacy JSON from tabular data.
 
-## What's Included
-
-- Brand, model, and variant listings with price ranges and fuel types.
-- Search with filters for brand, body type, fuel, transmission, budget, and text queries.
-- Model/variant detail views wired to the JSON dataset.
-- Compare flow for side-by-side variants.
-- Basic auth scaffold (login/register), header nav, and shared layout/styles.
-- JSON-first repository layer with schema validation and caching.
-
----
-
-## Tech Overview
-
-- PHP 8+, no framework required; works with Apache (XAMPP) or `php -S`.
-- Data source: `mocks/new_carset.json` (primary) and `mocks/data.json` (legacy, converted from spreadsheet via script).
-- Repository: `includes/json_car_repository.php` plus thin wrappers in `includes/repository.php` and `includes/car_repository.php` to keep existing pages working.
-- Config: `includes/config.php` with `APP_ENV` and `USE_JSON` switches. Default is `USE_JSON=true` and no database connection.
-
----
-
-## Quick Start (local)
-
-1) Prerequisites: PHP 8+, Python 3.10+ (only if you need to regenerate JSON), a web server (Apache/XAMPP) or PHP built-in server.  
-2) Install: Place the repo under your doc root (e.g., `C:\xampp\htdocs\Autopredator\CarResearchWeb`).  
-3) Run (built-in server):  
-```bash
-cd C:\xampp\htdocs\Autopredator\CarResearchWeb
-set APP_ENV=local
-set USE_JSON=true
-php -S localhost:8000
-```
-Visit http://localhost:8000 in your browser. For Apache/XAMPP, point a virtual host to this directory instead of using `php -S`.
-
----
+## Run Locally
+1) Place the project under your web root (e.g., `C:\xampp\htdocs\Autopredator\CarResearchWeb`) or clone anywhere and use `php -S`.  
+2) Configure env (optional):
+   ```bash
+   set APP_ENV=local
+   set USE_JSON=true
+   ```  
+3) Start the app:
+   ```bash
+   cd C:\xampp\htdocs\Autopredator\CarResearchWeb
+   php -S localhost:8000
+   ```  
+   or point Apache/XAMPP to this folder as the document root.
 
 ## Configuration
+- `config.php` defines `BASE_PATH`, `DATA_DIR`, `APP_ENV`, and `USE_JSON` (JSON is the primary source). Production mode disables display_errors.  
+- `includes/config.php` simply loads the shared config for legacy includes.
+- Logs: `storage/logs/app.log` (auto-created).  
+- Database constants live in `config.php`, but JSON is the active datastore.
 
-- `APP_ENV` (default `local`): controls environment-specific behaviors you add later.
-- `USE_JSON` (default `true`): keep this `true` for the current build. Setting `false` will require wiring a MySQL-backed repository; only JSON is implemented today.
-- Database constants live in `includes/config.php`, but DB code paths are not active in this build.
+## Data Layout
+- `data/new_carset.json` — primary dataset (make/model/segment/variants with pricing and fuel).  
+- `data/data.json` — legacy dataset merged in for backward compatibility.  
+- `data/details_index.json` — allowlist mapping `slug -> detail file` (e.g., `xuv700` -> `XUV700.json`).  
+- `data/XUV700.json` — example detail sheet referenced via the allowlist.  
+- `scripts/convert_data_to_json.py` — regenerates `mocks/data.json` from the original spreadsheet; now uses project-relative paths for portability.
 
----
+### Adding Data
+1) Drop new model entries into `data/new_carset.json` (or legacy `data/data.json`).  
+2) If you add a per-model detail sheet, place it under `data/` and register it in `data/details_index.json` with a slug matching `/^[a-z0-9]+(?:-[a-z0-9]+)*$/`.  
+3) Clear PHP opcache if enabled, then reload the page.
 
-## Data
+## Routes & Pages
+- `index.php` — landing with featured brands/families/variants.  
+- `brand.php` — all manufacturers and per-brand model listings.  
+- `model.php` — model overview and variants.  
+- `variant.php` — variant details.  
+- `search.php` — filterable search (brand, body type, fuel, transmission, budget, text).  
+- `compare.php` — side-by-side comparison.  
+- API: `api/autocomplete.php` (search suggestions), `api/details.php?slug=xuv700` (safe detail fetch via allowlist).
 
-- Primary dataset: `mocks/new_carset.json` (make, model, segment, variants with price/fuel/transmission/engine/horsepower).  
-- Legacy/raw: `mocks/data.json` plus `mocks/data.original.txt`.  
-- Conversion utility: `scripts/convert_data_to_json.py` converts the raw tabular file from the DriveMatrix source into clean JSON (backs up the original as `data.original.txt`).
+## Testing
+1) Install dev tools: `composer install`  
+2) Run the suite: `./vendor/bin/phpunit`  
 
-Validation and parsing are handled in `includes/json_car_repository.php` (schema checks, price parsing, search helpers, and pagination). All pages use this repository via `includes/repository.php`.
+Tests cover JSON loading, regression for BMW model counts, JSON error handling, and traversal protection on detail slugs.
 
----
-
-## Key Pages
-
-- `index.php`: landing with featured brands/models/variants.  
-- `brand.php`: brand listing and brand-specific model grid.  
-- `model.php`: model detail with variants.  
-- `variant.php`: variant detail scaffold (specs/features placeholders until data is added).  
-- `search.php`: filterable search results with pagination and sorting.  
-- `compare.php`: simple comparison view for selected variants.  
-- `login.php`, `register.php`, `my_garage.php`, `favourites.php`: auth/UI scaffolding (session-based).
-
----
-
-## Structure
-
-- `includes/`: config, auth, helpers, repositories, header/footer partials.  
-- `mocks/`: JSON datasets.  
-- `assets/`: CSS, images, fonts.  
-- `api/` and `mocks/` (root): API stubs and sample data if you extend to AJAX.  
-- `scripts/`: data conversion utilities.  
-- `docs/`: product and API notes.
-
----
-
-## Development Notes
-
-- Keep `USE_JSON=true` unless you add a MySQL repository; the legacy DB tables are not currently read.  
-- Price parsing currently expects Indian-style strings with "L"/"Cr" suffixes; adjust `json_parse_price` in `includes/json_car_repository.php` if your data changes.  
-- If you import new data, run the Python converter or drop clean JSON into `mocks/new_carset.json` and reload.
-
----
-
-## Future Work
-
-- Swap-in MySQL repository with the same interface as `json_*` functions.  
-- Enrich specs/features/pricing history and surface them on variant pages.  
-- Harden auth (password hashing, validation, CSRF) and add user garage persistence.  
-- Add automated tests for repository functions and search filters.
+## Security & Reliability Notes
+- All template output flows through `e()` (UTF-8, `ENT_QUOTES|ENT_SUBSTITUTE`); defaults handle `null`/ints cleanly.  
+- Security headers added globally: `X-Content-Type-Options`, `X-Frame-Options`, and `Referrer-Policy`.  
+- JSON loading is centralized in `src/Data/JsonLoader` with readability checks, JSON exceptions trapped, and logging.  
+- Detail JSON is served only via the slug allowlist in `data/details_index.json` with strict slug validation and path whitelisting.

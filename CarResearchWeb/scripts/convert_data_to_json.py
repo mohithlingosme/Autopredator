@@ -3,7 +3,8 @@ import json
 import re
 from pathlib import Path
 
-infile = Path(r"c:\xampp\htdocs\Autopredator\Car Research web (DriveMatrix)\mocks\data.json")
+BASE_DIR = Path(__file__).resolve().parent.parent
+infile = BASE_DIR / "mocks" / "data.json"
 if not infile.exists():
     raise SystemExit(f"Input file not found: {infile}")
 
