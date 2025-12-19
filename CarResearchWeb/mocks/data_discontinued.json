@@ -1,0 +1,2002 @@
+[
+  {
+    "s_no": "2",
+    "make": "Hyundai",
+    "model": "Grand i10",
+    "price": "₹6.50 - 7.60 Lakh",
+    "power_bhp": "82 bhp",
+    "range_mileage": "18.9 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "5",
+    "make": "Hyundai",
+    "model": "i-10",
+    "price": "₹4.50 - 5.50 Lakh",
+    "power_bhp": "68 bhp",
+    "range_mileage": "20.3 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "7",
+    "make": "Hyundai",
+    "model": "Santro",
+    "price": "₹4.89 - 6.42 Lakh",
+    "power_bhp": "68 bhp",
+    "range_mileage": "20.3 kmpl",
+    "fuel_type": "Petrol/CNG",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "10",
+    "make": "Hyundai",
+    "model": "Xcent",
+    "price": "₹6.20 - 9.20 Lakh",
+    "power_bhp": "82-74 bhp",
+    "range_mileage": "20.1-24.4 kmpl",
+    "fuel_type": "Petrol/Diesel",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "11",
+    "make": "Hyundai",
+    "model": "Elantra",
+    "price": "₹17.86 - 21.23 Lakh",
+    "power_bhp": "150 bhp",
+    "range_mileage": "14.6 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "14",
+    "make": "Hyundai",
+    "model": "Eon",
+    "price": "₹3.30 - 4.70 Lakh",
+    "power_bhp": "55-68 bhp",
+    "range_mileage": "20.3-21.1 kmpl",
+    "fuel_type": "Petrol/LPG",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "16",
+    "make": "Hyundai",
+    "model": "i10 Active",
+    "price": "₹6.70 - 7.60 Lakh",
+    "power_bhp": "82 bhp",
+    "range_mileage": "18.9 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "18",
+    "make": "Hyundai",
+    "model": "Accent",
+    "price": "₹5.00 - 7.00 Lakh",
+    "power_bhp": "93 bhp",
+    "range_mileage": "13.0 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "20",
+    "make": "Hyundai",
+    "model": "Santa Fe",
+    "price": "₹27.00 - 32.00 Lakh",
+    "power_bhp": "194 bhp",
+    "range_mileage": "13.1 kmpl",
+    "fuel_type": "Diesel",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "22",
+    "make": "Hyundai",
+    "model": "Sonata",
+    "price": "₹19.00 - 20.00 Lakh",
+    "power_bhp": "175 bhp",
+    "range_mileage": "12.9 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "24",
+    "make": "Hyundai",
+    "model": "Getz",
+    "price": "₹4.00 - 5.50 Lakh",
+    "power_bhp": "81 bhp",
+    "range_mileage": "15.3 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "25",
+    "make": "Hyundai",
+    "model": "Terracan",
+    "price": "₹18.00 - 20.00 Lakh",
+    "power_bhp": "148 bhp",
+    "range_mileage": "11.0 kmpl",
+    "fuel_type": "Diesel",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "35",
+    "make": "Mercedes-Benz",
+    "model": "CLA",
+    "price": "₹36.00 - 40.00 Lakh",
+    "power_bhp": "134-181 bhp",
+    "range_mileage": "15.0-17.9 kmpl",
+    "fuel_type": "Petrol/Diesel",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "39",
+    "make": "Mercedes-Benz",
+    "model": "V-Class",
+    "price": "₹71.10 Lakh - 1.46 Crore",
+    "power_bhp": "161 bhp",
+    "range_mileage": "16.0 kmpl",
+    "fuel_type": "Diesel",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "40",
+    "make": "Mercedes-Benz",
+    "model": "B-Class",
+    "price": "₹30.00 - 35.00 Lakh",
+    "power_bhp": "120-134 bhp",
+    "range_mileage": "14.8 kmpl",
+    "fuel_type": "Petrol/Diesel",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "41",
+    "make": "Mercedes-Benz",
+    "model": "M-Class",
+    "price": "₹60.00 - 70.00 Lakh",
+    "power_bhp": "258 bhp",
+    "range_mileage": "15.0 kmpl",
+    "fuel_type": "Diesel",
+    "notes": "Discontinued (replaced by GLE)"
+  },
+  {
+    "s_no": "43",
+    "make": "Mercedes-Benz",
+    "model": "GL-Class",
+    "price": "₹77.00 - 80.00 Lakh",
+    "power_bhp": "258 bhp",
+    "range_mileage": "12.0 kmpl",
+    "fuel_type": "Diesel",
+    "notes": "Discontinued (replaced by GLS)"
+  },
+  {
+    "s_no": "45",
+    "make": "Mercedes-Benz",
+    "model": "CLS",
+    "price": "₹86.39 Lakh",
+    "power_bhp": "245 bhp",
+    "range_mileage": "16.0 kmpl",
+    "fuel_type": "Diesel",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "47",
+    "make": "Mercedes-Benz",
+    "model": "C-Class Cabriolet",
+    "price": "₹72.00 Lakh",
+    "power_bhp": "258 bhp",
+    "range_mileage": "14.0 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "52",
+    "make": "Mercedes-Benz",
+    "model": "SLK-Class",
+    "price": "₹60.00 - 70.00 Lakh",
+    "power_bhp": "184-306 bhp",
+    "range_mileage": "15.0 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued (replaced by SLC)"
+  },
+  {
+    "s_no": "57",
+    "make": "Mercedes-Benz",
+    "model": "E-Class Cabriolet",
+    "price": "N/A",
+    "power_bhp": "N/A",
+    "range_mileage": "N/A",
+    "fuel_type": "N/A",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "63",
+    "make": "Mercedes-Benz",
+    "model": "SLC",
+    "price": "₹80.00 Lakh",
+    "power_bhp": "245 bhp",
+    "range_mileage": "14.0 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "68",
+    "make": "Mercedes-Benz",
+    "model": "E-Class All-Terrain",
+    "price": "₹75.00 Lakh",
+    "power_bhp": "194 bhp",
+    "range_mileage": "15.0 kmpl",
+    "fuel_type": "Diesel",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "70",
+    "make": "Mercedes-Benz",
+    "model": "EQC",
+    "price": "₹99.50 Lakh",
+    "power_bhp": "402 bhp",
+    "range_mileage": "450 km/charge",
+    "fuel_type": "Electric",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "71",
+    "make": "Mercedes-Benz",
+    "model": "R-Class",
+    "price": "₹60.00 - 70.00 Lakh",
+    "power_bhp": "268 bhp",
+    "range_mileage": "10.0 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "72",
+    "make": "Mercedes-Benz",
+    "model": "S-Class Cabriolet",
+    "price": "₹2.25 - 2.50 Crore",
+    "power_bhp": "449-603 bhp",
+    "range_mileage": "10.0 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "74",
+    "make": "Mercedes-Benz",
+    "model": "Viano",
+    "price": "₹50.00 - 60.00 Lakh",
+    "power_bhp": "204 bhp",
+    "range_mileage": "12.0 kmpl",
+    "fuel_type": "Diesel",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "91",
+    "make": "Honda",
+    "model": "Brio",
+    "price": "₹4.90 - 6.80 Lakh",
+    "power_bhp": "87 bhp",
+    "range_mileage": "18.5-20.0 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "92",
+    "make": "Honda",
+    "model": "Jazz",
+    "price": "₹8.00 - 10.30 Lakh",
+    "power_bhp": "89 bhp",
+    "range_mileage": "16.6-17.1 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "93",
+    "make": "Honda",
+    "model": "WR-V",
+    "price": "₹9.00 - 12.00 Lakh",
+    "power_bhp": "89 bhp",
+    "range_mileage": "16.5-23.7 kmpl",
+    "fuel_type": "Petrol/Diesel",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "94",
+    "make": "Honda",
+    "model": "Civic",
+    "price": "₹18.00 - 22.50 Lakh",
+    "power_bhp": "140 bhp",
+    "range_mileage": "16.5-26.8 kmpl",
+    "fuel_type": "Petrol/Diesel",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "95",
+    "make": "Honda",
+    "model": "CR-V",
+    "price": "₹28.00 - 33.00 Lakh",
+    "power_bhp": "152-187 bhp",
+    "range_mileage": "14.4 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "96",
+    "make": "Honda",
+    "model": "Mobilio",
+    "price": "₹7.00 - 12.00 Lakh",
+    "power_bhp": "118-99 bhp",
+    "range_mileage": "17.3-24.5 kmpl",
+    "fuel_type": "Petrol/Diesel",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "97",
+    "make": "Honda",
+    "model": "Accord",
+    "price": "₹45.00 Lakh",
+    "power_bhp": "212 bhp",
+    "range_mileage": "23.1 kmpl",
+    "fuel_type": "Hybrid (Petrol)",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "98",
+    "make": "Honda",
+    "model": "BR-V",
+    "price": "₹9.00 - 13.00 Lakh",
+    "power_bhp": "118-99 bhp",
+    "range_mileage": "16.0-21.9 kmpl",
+    "fuel_type": "Petrol/Diesel",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "106",
+    "make": "Toyota",
+    "model": "Corolla Altis",
+    "price": "₹16.00 - 20.00 Lakh",
+    "power_bhp": "138 bhp",
+    "range_mileage": "16.7 kmpl",
+    "fuel_type": "Petrol/Diesel",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "109",
+    "make": "Toyota",
+    "model": "Etios",
+    "price": "₹7.00 - 9.00 Lakh",
+    "power_bhp": "89-67 bhp",
+    "range_mileage": "16.7-23.5 kmpl",
+    "fuel_type": "Petrol/Diesel",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "110",
+    "make": "Toyota",
+    "model": "Yaris",
+    "price": "₹9.00 - 14.00 Lakh",
+    "power_bhp": "106 bhp",
+    "range_mileage": "17.1-18.0 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "111",
+    "make": "Toyota",
+    "model": "Etios Liva",
+    "price": "₹5.50 - 8.00 Lakh",
+    "power_bhp": "79-67 bhp",
+    "range_mileage": "17.7-23.5 kmpl",
+    "fuel_type": "Petrol/Diesel",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "112",
+    "make": "Toyota",
+    "model": "Urban Cruiser",
+    "price": "₹9.00 - 11.73 Lakh",
+    "power_bhp": "103 bhp",
+    "range_mileage": "17.0-18.7 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued (rebadged Vitara Brezza)"
+  },
+  {
+    "s_no": "115",
+    "make": "Toyota",
+    "model": "Innova",
+    "price": "₹13.00 - 17.00 Lakh",
+    "power_bhp": "100-137 bhp",
+    "range_mileage": "11.0-13.0 kmpl",
+    "fuel_type": "Petrol/Diesel",
+    "notes": "Discontinued, last known data (original Innova)"
+  },
+  {
+    "s_no": "122",
+    "make": "Toyota",
+    "model": "Prius",
+    "price": "₹40.00 - 45.00 Lakh",
+    "power_bhp": "121 bhp",
+    "range_mileage": "26.2 kmpl",
+    "fuel_type": "Hybrid (Petrol)",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "123",
+    "make": "Toyota",
+    "model": "Qualis",
+    "price": "₹5.00 - 8.00 Lakh",
+    "power_bhp": "75 bhp",
+    "range_mileage": "12.0 kmpl",
+    "fuel_type": "Diesel",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "124",
+    "make": "Toyota",
+    "model": "Corolla",
+    "price": "N/A",
+    "power_bhp": "N/A",
+    "range_mileage": "N/A",
+    "fuel_type": "N/A",
+    "notes": "Discontinued in India, replaced by Altis"
+  },
+  {
+    "s_no": "144",
+    "make": "Mahindra",
+    "model": "XUV500",
+    "price": "₹12.00 - 20.00 Lakh",
+    "power_bhp": "153 bhp",
+    "range_mileage": "15.1 kmpl",
+    "fuel_type": "Diesel",
+    "notes": "Discontinued (replaced by XUV700)"
+  },
+  {
+    "s_no": "147",
+    "make": "Mahindra",
+    "model": "TUV300",
+    "price": "₹8.50 - 10.50 Lakh",
+    "power_bhp": "100 bhp",
+    "range_mileage": "18.4 kmpl",
+    "fuel_type": "Diesel",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "149",
+    "make": "Mahindra",
+    "model": "Marazzo",
+    "price": "₹14.00 - 16.00 Lakh",
+    "power_bhp": "121 bhp",
+    "range_mileage": "17.3 kmpl",
+    "fuel_type": "Diesel",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "150",
+    "make": "Mahindra",
+    "model": "KUV100",
+    "price": "₹6.00 - 8.00 Lakh",
+    "power_bhp": "82-77 bhp",
+    "range_mileage": "18.1-25.3 kmpl",
+    "fuel_type": "Petrol/Diesel",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "151",
+    "make": "Mahindra",
+    "model": "Alturas G4",
+    "price": "₹30.00 - 32.00 Lakh",
+    "power_bhp": "178 bhp",
+    "range_mileage": "12.0 kmpl",
+    "fuel_type": "Diesel",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "152",
+    "make": "Mahindra",
+    "model": "Nuvosport",
+    "price": "₹7.50 - 10.50 Lakh",
+    "power_bhp": "100 bhp",
+    "range_mileage": "17.4 kmpl",
+    "fuel_type": "Diesel",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "154",
+    "make": "Mahindra",
+    "model": "Xylo",
+    "price": "₹9.00 - 12.00 Lakh",
+    "power_bhp": "118-120 bhp",
+    "range_mileage": "14.0 kmpl",
+    "fuel_type": "Diesel",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "155",
+    "make": "Mahindra",
+    "model": "Quanto",
+    "price": "₹6.50 - 8.50 Lakh",
+    "power_bhp": "100 bhp",
+    "range_mileage": "17.2 kmpl",
+    "fuel_type": "Diesel",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "158",
+    "make": "Mahindra",
+    "model": "e2o Plus",
+    "price": "₹7.50 - 11.50 Lakh",
+    "power_bhp": "25-40 bhp",
+    "range_mileage": "110-140 km/charge",
+    "fuel_type": "Electric",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "159",
+    "make": "Mahindra",
+    "model": "Verito",
+    "price": "₹7.00 - 10.00 Lakh",
+    "power_bhp": "65-85 bhp",
+    "range_mileage": "21.0 kmpl",
+    "fuel_type": "Petrol/Diesel",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "161",
+    "make": "Mahindra",
+    "model": "Reva",
+    "price": "₹3.50 - 4.50 Lakh",
+    "power_bhp": "17 bhp",
+    "range_mileage": "80 km/charge",
+    "fuel_type": "Electric",
+    "notes": "Discontinued, last known data (original Reva)"
+  },
+  {
+    "s_no": "169",
+    "make": "BMW",
+    "model": "3 Series GT",
+    "price": "₹50.00 - 60.00 Lakh",
+    "power_bhp": "188-252 bhp",
+    "range_mileage": "15.0-21.0 kmpl",
+    "fuel_type": "Petrol/Diesel",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "187",
+    "make": "BMW",
+    "model": "1 Series",
+    "price": "₹30.00 - 35.00 Lakh",
+    "power_bhp": "136-184 bhp",
+    "range_mileage": "16.0-20.0 kmpl",
+    "fuel_type": "Petrol/Diesel",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "188",
+    "make": "BMW",
+    "model": "M6",
+    "price": "N/A",
+    "power_bhp": "N/A",
+    "range_mileage": "N/A",
+    "fuel_type": "N/A",
+    "notes": "Discontinued, not officially sold in India"
+  },
+  {
+    "s_no": "192",
+    "make": "BMW",
+    "model": "X3M",
+    "price": "₹1.30 Crore",
+    "power_bhp": "473 bhp",
+    "range_mileage": "10.0 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "196",
+    "make": "BMW",
+    "model": "i8",
+    "price": "₹2.14 Crore",
+    "power_bhp": "357 bhp",
+    "range_mileage": "37 km (electric only)",
+    "fuel_type": "Plug-in Hybrid",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "207",
+    "make": "Tata",
+    "model": "Hexa",
+    "price": "₹14.00 - 20.00 Lakh",
+    "power_bhp": "148-154 bhp",
+    "range_mileage": "14.4 kmpl",
+    "fuel_type": "Diesel",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "208",
+    "make": "Tata",
+    "model": "Zest",
+    "price": "₹5.80 - 9.00 Lakh",
+    "power_bhp": "89-74 bhp",
+    "range_mileage": "17.6-23.0 kmpl",
+    "fuel_type": "Petrol/Diesel",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "212",
+    "make": "Tata",
+    "model": "Bolt",
+    "price": "₹5.50 - 8.00 Lakh",
+    "power_bhp": "89-74 bhp",
+    "range_mileage": "17.6-22.9 kmpl",
+    "fuel_type": "Petrol/Diesel",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "213",
+    "make": "Tata",
+    "model": "Manza",
+    "price": "₹6.00 - 8.50 Lakh",
+    "power_bhp": "89-88 bhp",
+    "range_mileage": "16.1-21.2 kmpl",
+    "fuel_type": "Petrol/Diesel",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "216",
+    "make": "Tata",
+    "model": "Sumo",
+    "price": "₹6.00 - 8.00 Lakh",
+    "power_bhp": "84 bhp",
+    "range_mileage": "14.0 kmpl",
+    "fuel_type": "Diesel",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "217",
+    "make": "Tata",
+    "model": "Nano",
+    "price": "₹2.50 - 3.50 Lakh",
+    "power_bhp": "37 bhp",
+    "range_mileage": "23.6 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "218",
+    "make": "Tata",
+    "model": "Indica",
+    "price": "₹3.00 - 5.00 Lakh",
+    "power_bhp": "60-70 bhp",
+    "range_mileage": "17.0-25.0 kmpl",
+    "fuel_type": "Petrol/Diesel",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "219",
+    "make": "Tata",
+    "model": "Indigo",
+    "price": "₹5.00 - 7.00 Lakh",
+    "power_bhp": "60-70 bhp",
+    "range_mileage": "18.0-25.0 kmpl",
+    "fuel_type": "Petrol/Diesel",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "220",
+    "make": "Tata",
+    "model": "Aria",
+    "price": "₹12.00 - 16.00 Lakh",
+    "power_bhp": "138-148 bhp",
+    "range_mileage": "15.0 kmpl",
+    "fuel_type": "Diesel",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "222",
+    "make": "Tata",
+    "model": "Xenon",
+    "price": "₹8.00 - 10.00 Lakh",
+    "power_bhp": "140 bhp",
+    "range_mileage": "13.0 kmpl",
+    "fuel_type": "Diesel",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "223",
+    "make": "Tata",
+    "model": "Venture",
+    "price": "₹5.00 - 6.00 Lakh",
+    "power_bhp": "70 bhp",
+    "range_mileage": "15.0 kmpl",
+    "fuel_type": "Diesel",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "225",
+    "make": "Tata",
+    "model": "Tiago JTP",
+    "price": "₹6.60 Lakh",
+    "power_bhp": "112 bhp",
+    "range_mileage": "23.8 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "226",
+    "make": "Tata",
+    "model": "Indica Vista",
+    "price": "₹5.00 - 7.00 Lakh",
+    "power_bhp": "74-89 bhp",
+    "range_mileage": "19.0-22.3 kmpl",
+    "fuel_type": "Petrol/Diesel",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "227",
+    "make": "Tata",
+    "model": "Tigor JTP",
+    "price": "₹7.50 Lakh",
+    "power_bhp": "112 bhp",
+    "range_mileage": "21.0 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "228",
+    "make": "Tata",
+    "model": "Grande",
+    "price": "N/A",
+    "power_bhp": "N/A",
+    "range_mileage": "N/A",
+    "fuel_type": "N/A",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "234",
+    "make": "Ford",
+    "model": "EcoSport",
+    "price": "₹8.00 - 11.50 Lakh",
+    "power_bhp": "99-121 bhp",
+    "range_mileage": "14.8-21.7 kmpl",
+    "fuel_type": "Petrol/Diesel",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "235",
+    "make": "Ford",
+    "model": "Endeavour",
+    "price": "₹30.00 - 35.00 Lakh",
+    "power_bhp": "168-210 bhp",
+    "range_mileage": "12.9-14.0 kmpl",
+    "fuel_type": "Diesel",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "236",
+    "make": "Ford",
+    "model": "Figo",
+    "price": "₹5.50 - 8.00 Lakh",
+    "power_bhp": "95-99 bhp",
+    "range_mileage": "18.5-24.4 kmpl",
+    "fuel_type": "Petrol/Diesel",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "237",
+    "make": "Ford",
+    "model": "Aspire",
+    "price": "₹6.00 - 9.00 Lakh",
+    "power_bhp": "95-99 bhp",
+    "range_mileage": "18.5-24.4 kmpl",
+    "fuel_type": "Petrol/Diesel",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "238",
+    "make": "Ford",
+    "model": "Mustang",
+    "price": "₹74.62 Lakh",
+    "power_bhp": "396 bhp",
+    "range_mileage": "7.9 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "239",
+    "make": "Ford",
+    "model": "Freestyle",
+    "price": "₹7.00 - 9.00 Lakh",
+    "power_bhp": "95-99 bhp",
+    "range_mileage": "18.5-24.4 kmpl",
+    "fuel_type": "Petrol/Diesel",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "241",
+    "make": "Ford",
+    "model": "Fiesta",
+    "price": "₹8.00 - 10.00 Lakh",
+    "power_bhp": "89-89 bhp",
+    "range_mileage": "17.0-23.5 kmpl",
+    "fuel_type": "Petrol/Diesel",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "242",
+    "make": "Ford",
+    "model": "Fiesta Classic",
+    "price": "₹5.00 - 7.00 Lakh",
+    "power_bhp": "100-68 bhp",
+    "range_mileage": "17.0-22.7 kmpl",
+    "fuel_type": "Petrol/Diesel",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "244",
+    "make": "Ford",
+    "model": "Ikon",
+    "price": "₹5.00 - 7.00 Lakh",
+    "power_bhp": "70-91 bhp",
+    "range_mileage": "12.0-15.0 kmpl",
+    "fuel_type": "Petrol/Diesel",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "246",
+    "make": "Ford",
+    "model": "Mondeo",
+    "price": "N/A",
+    "power_bhp": "N/A",
+    "range_mileage": "N/A",
+    "fuel_type": "N/A",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "247",
+    "make": "Ford",
+    "model": "Fusion",
+    "price": "N/A",
+    "power_bhp": "N/A",
+    "range_mileage": "N/A",
+    "fuel_type": "N/A",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "253",
+    "make": "Renault",
+    "model": "Duster",
+    "price": "₹9.00 - 14.00 Lakh",
+    "power_bhp": "105-154 bhp",
+    "range_mileage": "16.5-19.8 kmpl",
+    "fuel_type": "Petrol/Diesel",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "255",
+    "make": "Renault",
+    "model": "Lodgy",
+    "price": "₹8.00 - 12.00 Lakh",
+    "power_bhp": "83-108 bhp",
+    "range_mileage": "20.0-21.0 kmpl",
+    "fuel_type": "Diesel",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "256",
+    "make": "Renault",
+    "model": "Captur",
+    "price": "₹10.00 - 14.00 Lakh",
+    "power_bhp": "105-154 bhp",
+    "range_mileage": "13.8-16.0 kmpl",
+    "fuel_type": "Petrol/Diesel",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "257",
+    "make": "Renault",
+    "model": "Scala",
+    "price": "₹7.50 - 10.00 Lakh",
+    "power_bhp": "97-84 bhp",
+    "range_mileage": "16.9-21.6 kmpl",
+    "fuel_type": "Petrol/Diesel",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "258",
+    "make": "Renault",
+    "model": "Pulse",
+    "price": "₹5.00 - 7.00 Lakh",
+    "power_bhp": "75-63 bhp",
+    "range_mileage": "19.0-23.0 kmpl",
+    "fuel_type": "Petrol/Diesel",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "259",
+    "make": "Renault",
+    "model": "Fluence",
+    "price": "₹14.00 - 16.00 Lakh",
+    "power_bhp": "108-108 bhp",
+    "range_mileage": "13.7-20.4 kmpl",
+    "fuel_type": "Petrol/Diesel",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "260",
+    "make": "Renault",
+    "model": "Koleos",
+    "price": "₹23.00 - 27.00 Lakh",
+    "power_bhp": "148 bhp",
+    "range_mileage": "17.0 kmpl",
+    "fuel_type": "Diesel",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "263",
+    "make": "Ashok Leyland",
+    "model": "Stile",
+    "price": "₹7.50 - 9.00 Lakh",
+    "power_bhp": "75 bhp",
+    "range_mileage": "19.5 kmpl",
+    "fuel_type": "Diesel",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "265",
+    "make": "Aston Martin",
+    "model": "Rapide",
+    "price": "₹3.30 Crore",
+    "power_bhp": "552 bhp",
+    "range_mileage": "8.0 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "266",
+    "make": "Aston Martin",
+    "model": "Vanquish",
+    "price": "₹3.80 Crore",
+    "power_bhp": "568 bhp",
+    "range_mileage": "8.0 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "267",
+    "make": "Aston Martin",
+    "model": "DB9",
+    "price": "₹3.00 Crore",
+    "power_bhp": "510 bhp",
+    "range_mileage": "7.0 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "269",
+    "make": "Aston Martin",
+    "model": "Virage",
+    "price": "N/A",
+    "power_bhp": "N/A",
+    "range_mileage": "N/A",
+    "fuel_type": "N/A",
+    "notes": "Discontinued, not officially sold in India"
+  },
+  {
+    "s_no": "273",
+    "make": "Audi",
+    "model": "Q2",
+    "price": "₹35.00 - 49.00 Lakh",
+    "power_bhp": "190 bhp",
+    "range_mileage": "15.0 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "277",
+    "make": "Audi",
+    "model": "A3",
+    "price": "₹30.00 - 40.00 Lakh",
+    "power_bhp": "148-180 bhp",
+    "range_mileage": "16.6-20.3 kmpl",
+    "fuel_type": "Petrol/Diesel",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "279",
+    "make": "Audi",
+    "model": "TT",
+    "price": "₹65.00 - 70.00 Lakh",
+    "power_bhp": "227 bhp",
+    "range_mileage": "14.3 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "280",
+    "make": "Audi",
+    "model": "R8",
+    "price": "₹2.72 Crore",
+    "power_bhp": "532-602 bhp",
+    "range_mileage": "8.0 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "285",
+    "make": "Audi",
+    "model": "A5",
+    "price": "₹55.00 - 60.00 Lakh",
+    "power_bhp": "187-248 bhp",
+    "range_mileage": "16.0-17.0 kmpl",
+    "fuel_type": "Petrol/Diesel",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "288",
+    "make": "Audi",
+    "model": "A5 Cabriolet",
+    "price": "₹69.00 Lakh",
+    "power_bhp": "248 bhp",
+    "range_mileage": "17.0 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "289",
+    "make": "Audi",
+    "model": "A7",
+    "price": "N/A",
+    "power_bhp": "N/A",
+    "range_mileage": "N/A",
+    "fuel_type": "N/A",
+    "notes": "Discontinued, not officially sold in India"
+  },
+  {
+    "s_no": "298",
+    "make": "Bentley",
+    "model": "Continental Flying Spur",
+    "price": "₹3.40 - 4.00 Crore",
+    "power_bhp": "500-616 bhp",
+    "range_mileage": "7.0-8.0 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "300",
+    "make": "Bentley",
+    "model": "Mulsanne",
+    "price": "₹5.50 - 6.50 Crore",
+    "power_bhp": "505 bhp",
+    "range_mileage": "6.0 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "309",
+    "make": "Chevrolet",
+    "model": "Beat",
+    "price": "₹4.00 - 6.00 Lakh",
+    "power_bhp": "79-57 bhp",
+    "range_mileage": "18.6-25.4 kmpl",
+    "fuel_type": "Petrol/Diesel",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "310",
+    "make": "Chevrolet",
+    "model": "Spark",
+    "price": "₹3.50 - 5.00 Lakh",
+    "power_bhp": "62 bhp",
+    "range_mileage": "16.2 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "311",
+    "make": "Chevrolet",
+    "model": "Sail Sedan",
+    "price": "₹6.00 - 8.50 Lakh",
+    "power_bhp": "82-77 bhp",
+    "range_mileage": "18.2-22.1 kmpl",
+    "fuel_type": "Petrol/Diesel",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "312",
+    "make": "Chevrolet",
+    "model": "Aveo U-Va",
+    "price": "₹4.50 - 6.00 Lakh",
+    "power_bhp": "88 bhp",
+    "range_mileage": "14.0 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "313",
+    "make": "Chevrolet",
+    "model": "Enjoy",
+    "price": "₹5.00 - 8.00 Lakh",
+    "power_bhp": "100-76 bhp",
+    "range_mileage": "13.7-18.2 kmpl",
+    "fuel_type": "Petrol/Diesel",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "314",
+    "make": "Chevrolet",
+    "model": "Sail Hatchback",
+    "price": "₹5.00 - 7.00 Lakh",
+    "power_bhp": "82-77 bhp",
+    "range_mileage": "18.2-22.1 kmpl",
+    "fuel_type": "Petrol/Diesel",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "315",
+    "make": "Chevrolet",
+    "model": "Trailblazer",
+    "price": "₹26.00 Lakh",
+    "power_bhp": "197 bhp",
+    "range_mileage": "11.4 kmpl",
+    "fuel_type": "Diesel",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "316",
+    "make": "Chevrolet",
+    "model": "Tavera",
+    "price": "₹8.00 - 12.00 Lakh",
+    "power_bhp": "78-100 bhp",
+    "range_mileage": "13.0 kmpl",
+    "fuel_type": "Diesel",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "317",
+    "make": "Chevrolet",
+    "model": "Cruze",
+    "price": "₹14.00 - 18.00 Lakh",
+    "power_bhp": "164 bhp",
+    "range_mileage": "14.8 kmpl",
+    "fuel_type": "Diesel",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "319",
+    "make": "Chevrolet",
+    "model": "Captiva",
+    "price": "₹25.00 - 27.00 Lakh",
+    "power_bhp": "148-184 bhp",
+    "range_mileage": "14.6 kmpl",
+    "fuel_type": "Diesel",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "320",
+    "make": "Chevrolet",
+    "model": "Aveo",
+    "price": "₹6.00 - 8.00 Lakh",
+    "power_bhp": "102 bhp",
+    "range_mileage": "13.0 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "321",
+    "make": "Chevrolet",
+    "model": "Optra",
+    "price": "₹8.00 - 10.00 Lakh",
+    "power_bhp": "102-120 bhp",
+    "range_mileage": "10.0-14.0 kmpl",
+    "fuel_type": "Petrol/Diesel",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "333",
+    "make": "Daewoo",
+    "model": "Cielo",
+    "price": "₹4.00 - 6.00 Lakh",
+    "power_bhp": "80 bhp",
+    "range_mileage": "12.0 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "334",
+    "make": "Daewoo",
+    "model": "Matiz",
+    "price": "₹3.00 - 4.00 Lakh",
+    "power_bhp": "53 bhp",
+    "range_mileage": "18.0 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "336",
+    "make": "DC",
+    "model": "Avanti",
+    "price": "₹35.00 - 40.00 Lakh",
+    "power_bhp": "250-310 bhp",
+    "range_mileage": "10.0 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "337",
+    "make": "Datsun",
+    "model": "Redi-Go",
+    "price": "₹3.98 - 4.96 Lakh",
+    "power_bhp": "53-67 bhp",
+    "range_mileage": "20.7-22.0 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "338",
+    "make": "Datsun",
+    "model": "Go",
+    "price": "₹4.00 - 6.50 Lakh",
+    "power_bhp": "67-76 bhp",
+    "range_mileage": "19.0-20.0 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "339",
+    "make": "Datsun",
+    "model": "Go Plus",
+    "price": "₹4.20 - 7.00 Lakh",
+    "power_bhp": "67-76 bhp",
+    "range_mileage": "19.0-20.0 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "341",
+    "make": "Eicher Polaris",
+    "model": "Multix",
+    "price": "₹3.00 - 4.00 Lakh",
+    "power_bhp": "9.8 bhp",
+    "range_mileage": "27.0 kmpl",
+    "fuel_type": "Diesel",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "344",
+    "make": "Ferrari",
+    "model": "GTC4Lusso",
+    "price": "₹4.20 - 4.90 Crore",
+    "power_bhp": "602-680 bhp",
+    "range_mileage": "6.0-7.0 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "345",
+    "make": "Ferrari",
+    "model": "488",
+    "price": "₹3.60 - 4.00 Crore",
+    "power_bhp": "660-669 bhp",
+    "range_mileage": "8.0 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "346",
+    "make": "Ferrari",
+    "model": "California",
+    "price": "₹3.30 Crore",
+    "power_bhp": "453-552 bhp",
+    "range_mileage": "8.0 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "348",
+    "make": "Ferrari",
+    "model": "FF",
+    "price": "₹4.00 Crore",
+    "power_bhp": "651 bhp",
+    "range_mileage": "6.0 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "349",
+    "make": "Ferrari",
+    "model": "458",
+    "price": "₹3.80 Crore",
+    "power_bhp": "562 bhp",
+    "range_mileage": "8.0 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "353",
+    "make": "Ferrari",
+    "model": "F12 Berlinetta",
+    "price": "₹4.80 Crore",
+    "power_bhp": "730 bhp",
+    "range_mileage": "6.0 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "357",
+    "make": "Ferrari",
+    "model": "F8 Tributo",
+    "price": "₹4.02 Crore",
+    "power_bhp": "710 bhp",
+    "range_mileage": "7.7 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "359",
+    "make": "Fiat",
+    "model": "Linea",
+    "price": "₹7.00 - 10.00 Lakh",
+    "power_bhp": "89-123 bhp",
+    "range_mileage": "15.0-20.0 kmpl",
+    "fuel_type": "Petrol/Diesel",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "360",
+    "make": "Fiat",
+    "model": "Punto",
+    "price": "₹5.00 - 8.00 Lakh",
+    "power_bhp": "67-92 bhp",
+    "range_mileage": "14.0-20.0 kmpl",
+    "fuel_type": "Petrol/Diesel",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "361",
+    "make": "Fiat",
+    "model": "Avventura",
+    "price": "₹7.00 - 9.00 Lakh",
+    "power_bhp": "89-92 bhp",
+    "range_mileage": "14.0-20.0 kmpl",
+    "fuel_type": "Petrol/Diesel",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "362",
+    "make": "Fiat",
+    "model": "Urban Cross",
+    "price": "₹7.00 - 10.00 Lakh",
+    "power_bhp": "92-138 bhp",
+    "range_mileage": "14.0-20.0 kmpl",
+    "fuel_type": "Petrol/Diesel",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "363",
+    "make": "Fiat",
+    "model": "500",
+    "price": "₹15.00 - 20.00 Lakh",
+    "power_bhp": "100 bhp",
+    "range_mileage": "15.0 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "364",
+    "make": "Fiat",
+    "model": "Punto EVO",
+    "price": "₹5.00 - 8.00 Lakh",
+    "power_bhp": "67-92 bhp",
+    "range_mileage": "14.0-20.0 kmpl",
+    "fuel_type": "Petrol/Diesel",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "365",
+    "make": "Fiat",
+    "model": "Siena",
+    "price": "N/A",
+    "power_bhp": "N/A",
+    "range_mileage": "N/A",
+    "fuel_type": "N/A",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "366",
+    "make": "Fiat",
+    "model": "Uno",
+    "price": "N/A",
+    "power_bhp": "N/A",
+    "range_mileage": "N/A",
+    "fuel_type": "N/A",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "367",
+    "make": "Fiat",
+    "model": "Palio",
+    "price": "N/A",
+    "power_bhp": "N/A",
+    "range_mileage": "N/A",
+    "fuel_type": "N/A",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "368",
+    "make": "Fiat",
+    "model": "Petra",
+    "price": "N/A",
+    "power_bhp": "N/A",
+    "range_mileage": "N/A",
+    "fuel_type": "N/A",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "369",
+    "make": "Fiat",
+    "model": "Adventure",
+    "price": "N/A",
+    "power_bhp": "N/A",
+    "range_mileage": "N/A",
+    "fuel_type": "N/A",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "373",
+    "make": "Force Motors",
+    "model": "One",
+    "price": "₹10.00 - 14.00 Lakh",
+    "power_bhp": "139 bhp",
+    "range_mileage": "12.0 kmpl",
+    "fuel_type": "Diesel",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "376",
+    "make": "Hindustan Motors",
+    "model": "Ambassador",
+    "price": "N/A",
+    "power_bhp": "N/A",
+    "range_mileage": "N/A",
+    "fuel_type": "N/A",
+    "notes": "Discontinued, classic car"
+  },
+  {
+    "s_no": "379",
+    "make": "Hummer",
+    "model": "H2",
+    "price": "N/A",
+    "power_bhp": "N/A",
+    "range_mileage": "N/A",
+    "fuel_type": "N/A",
+    "notes": "Discontinued, not officially sold in India"
+  },
+  {
+    "s_no": "380",
+    "make": "Hummer",
+    "model": "H3",
+    "price": "N/A",
+    "power_bhp": "N/A",
+    "range_mileage": "N/A",
+    "fuel_type": "N/A",
+    "notes": "Discontinued, not officially sold in India"
+  },
+  {
+    "s_no": "381",
+    "make": "ICML",
+    "model": "Extreme",
+    "price": "₹6.00 - 8.00 Lakh",
+    "power_bhp": "100 bhp",
+    "range_mileage": "14.0 kmpl",
+    "fuel_type": "Diesel",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "382",
+    "make": "ICML",
+    "model": "Rhino RX",
+    "price": "₹6.00 - 8.00 Lakh",
+    "power_bhp": "100 bhp",
+    "range_mileage": "14.0 kmpl",
+    "fuel_type": "Diesel",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "385",
+    "make": "Isuzu",
+    "model": "MU-7",
+    "price": "₹20.00 - 25.00 Lakh",
+    "power_bhp": "161 bhp",
+    "range_mileage": "12.0 kmpl",
+    "fuel_type": "Diesel",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "389",
+    "make": "Jaguar",
+    "model": "XE",
+    "price": "₹46.60 Lakh",
+    "power_bhp": "247 bhp",
+    "range_mileage": "13.0 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "390",
+    "make": "Jaguar",
+    "model": "XJ",
+    "price": "₹1.10 Crore",
+    "power_bhp": "300 bhp",
+    "range_mileage": "12.0 kmpl",
+    "fuel_type": "Diesel",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "392",
+    "make": "Jaguar",
+    "model": "XK",
+    "price": "N/A",
+    "power_bhp": "N/A",
+    "range_mileage": "N/A",
+    "fuel_type": "N/A",
+    "notes": "Discontinued, not officially sold in India"
+  },
+  {
+    "s_no": "403",
+    "make": "Kia",
+    "model": "Carnival",
+    "price": "₹25.00 - 35.00 Lakh",
+    "power_bhp": "197 bhp",
+    "range_mileage": "13.9 kmpl",
+    "fuel_type": "Diesel",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "408",
+    "make": "Lamborghini",
+    "model": "Aventador",
+    "price": "₹5.00 - 9.00 Crore",
+    "power_bhp": "690-759 bhp",
+    "range_mileage": "6.0 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "409",
+    "make": "Lamborghini",
+    "model": "Gallardo",
+    "price": "N/A",
+    "power_bhp": "N/A",
+    "range_mileage": "N/A",
+    "fuel_type": "N/A",
+    "notes": "Discontinued, classic car"
+  },
+  {
+    "s_no": "410",
+    "make": "Lamborghini",
+    "model": "Murcielago",
+    "price": "N/A",
+    "power_bhp": "N/A",
+    "range_mileage": "N/A",
+    "fuel_type": "N/A",
+    "notes": "Discontinued, classic car"
+  },
+  {
+    "s_no": "419",
+    "make": "Land Rover",
+    "model": "Freelander",
+    "price": "₹45.00 - 50.00 Lakh",
+    "power_bhp": "187 bhp",
+    "range_mileage": "14.0 kmpl",
+    "fuel_type": "Diesel",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "429",
+    "make": "Lexus",
+    "model": "GS",
+    "price": "N/A",
+    "power_bhp": "N/A",
+    "range_mileage": "N/A",
+    "fuel_type": "N/A",
+    "notes": "Discontinued, not officially sold in India"
+  },
+  {
+    "s_no": "434",
+    "make": "Maserati",
+    "model": "GranTurismo",
+    "price": "₹2.20 - 2.50 Crore",
+    "power_bhp": "453-460 bhp",
+    "range_mileage": "7.0 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "435",
+    "make": "Maserati",
+    "model": "Gran Cabrio",
+    "price": "N/A",
+    "power_bhp": "N/A",
+    "range_mileage": "N/A",
+    "fuel_type": "N/A",
+    "notes": "Discontinued, not officially sold in India"
+  },
+  {
+    "s_no": "451",
+    "make": "MINI",
+    "model": "Clubman",
+    "price": "₹42.00 Lakh",
+    "power_bhp": "189 bhp",
+    "range_mileage": "14.0 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "454",
+    "make": "Mitsubishi",
+    "model": "Pajero",
+    "price": "₹20.00 - 25.00 Lakh",
+    "power_bhp": "178 bhp",
+    "range_mileage": "11.0 kmpl",
+    "fuel_type": "Diesel",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "455",
+    "make": "Mitsubishi",
+    "model": "Outlander",
+    "price": "₹32.00 Lakh",
+    "power_bhp": "165 bhp",
+    "range_mileage": "10.0 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "456",
+    "make": "Mitsubishi",
+    "model": "Cedia",
+    "price": "₹8.00 - 10.00 Lakh",
+    "power_bhp": "113 bhp",
+    "range_mileage": "13.0 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "457",
+    "make": "Mitsubishi",
+    "model": "Montero",
+    "price": "₹60.00 Lakh",
+    "power_bhp": "202 bhp",
+    "range_mileage": "8.0 kmpl",
+    "fuel_type": "Diesel",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "458",
+    "make": "Mitsubishi",
+    "model": "Lancer",
+    "price": "₹7.00 - 9.00 Lakh",
+    "power_bhp": "108 bhp",
+    "range_mileage": "12.0 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "465",
+    "make": "Nissan",
+    "model": "Micra",
+    "price": "₹6.00 - 8.00 Lakh",
+    "power_bhp": "67-75 bhp",
+    "range_mileage": "19.0-23.0 kmpl",
+    "fuel_type": "Petrol/Diesel",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "466",
+    "make": "Nissan",
+    "model": "Sunny",
+    "price": "₹7.00 - 10.00 Lakh",
+    "power_bhp": "97-84 bhp",
+    "range_mileage": "16.9-22.7 kmpl",
+    "fuel_type": "Petrol/Diesel",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "467",
+    "make": "Nissan",
+    "model": "Terrano",
+    "price": "₹10.00 - 14.00 Lakh",
+    "power_bhp": "84-108 bhp",
+    "range_mileage": "19.0-20.5 kmpl",
+    "fuel_type": "Petrol/Diesel",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "468",
+    "make": "Nissan",
+    "model": "Kicks",
+    "price": "₹9.50 - 14.00 Lakh",
+    "power_bhp": "105-154 bhp",
+    "range_mileage": "13.9-16.4 kmpl",
+    "fuel_type": "Petrol/Diesel",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "472",
+    "make": "Nissan",
+    "model": "GT-R",
+    "price": "₹2.12 Crore",
+    "power_bhp": "565 bhp",
+    "range_mileage": "8.0 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "475",
+    "make": "Nissan",
+    "model": "Evalia",
+    "price": "₹8.00 - 10.00 Lakh",
+    "power_bhp": "84 bhp",
+    "range_mileage": "19.3 kmpl",
+    "fuel_type": "Diesel",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "476",
+    "make": "Nissan",
+    "model": "Teana",
+    "price": "₹15.00 - 20.00 Lakh",
+    "power_bhp": "180 bhp",
+    "range_mileage": "11.0 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "490",
+    "make": "Opel",
+    "model": "Astra",
+    "price": "₹6.00 - 8.00 Lakh",
+    "power_bhp": "75 bhp",
+    "range_mileage": "12.0 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "507",
+    "make": "Premier",
+    "model": "Rio",
+    "price": "₹5.00 - 7.00 Lakh",
+    "power_bhp": "65 bhp",
+    "range_mileage": "16.0 kmpl",
+    "fuel_type": "Diesel",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "510",
+    "make": "Rolls Royce",
+    "model": "Wraith",
+    "price": "₹6.22 Crore",
+    "power_bhp": "624 bhp",
+    "range_mileage": "6.0 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "511",
+    "make": "Rolls Royce",
+    "model": "Dawn",
+    "price": "₹6.44 Crore",
+    "power_bhp": "563 bhp",
+    "range_mileage": "6.0 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "515",
+    "make": "SAAB",
+    "model": "09-Mar",
+    "price": "N/A",
+    "power_bhp": "N/A",
+    "range_mileage": "N/A",
+    "fuel_type": "N/A",
+    "notes": "Discontinued, not sold in India"
+  },
+  {
+    "s_no": "524",
+    "make": "Skoda",
+    "model": "Rapid",
+    "price": "₹7.50 - 13.00 Lakh",
+    "power_bhp": "108-103 bhp",
+    "range_mileage": "14.8-21.7 kmpl",
+    "fuel_type": "Petrol/Diesel",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "528",
+    "make": "Skoda",
+    "model": "Laura",
+    "price": "₹12.00 - 17.00 Lakh",
+    "power_bhp": "108-158 bhp",
+    "range_mileage": "16.0-20.0 kmpl",
+    "fuel_type": "Petrol/Diesel",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "529",
+    "make": "Skoda",
+    "model": "Fabia",
+    "price": "₹5.00 - 8.00 Lakh",
+    "power_bhp": "74-103 bhp",
+    "range_mileage": "14.0-21.0 kmpl",
+    "fuel_type": "Petrol/Diesel",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "530",
+    "make": "Skoda",
+    "model": "Karoq",
+    "price": "₹25.00 Lakh",
+    "power_bhp": "148 bhp",
+    "range_mileage": "14.4 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "532",
+    "make": "Skoda",
+    "model": "Yeti",
+    "price": "₹15.00 - 20.00 Lakh",
+    "power_bhp": "108-138 bhp",
+    "range_mileage": "14.0-17.0 kmpl",
+    "fuel_type": "Diesel",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "533",
+    "make": "Skoda",
+    "model": "Octavia RS 245",
+    "price": "₹36.00 Lakh",
+    "power_bhp": "245 bhp",
+    "range_mileage": "16.0 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "535",
+    "make": "Ssangyong",
+    "model": "Rexton",
+    "price": "₹25.00 - 30.00 Lakh",
+    "power_bhp": "184 bhp",
+    "range_mileage": "15.0 kmpl",
+    "fuel_type": "Diesel",
+    "notes": "Discontinued (rebadged as Mahindra Alturas G4)"
+  },
+  {
+    "s_no": "541",
+    "make": "Volkswagen",
+    "model": "Polo",
+    "price": "₹6.00 - 10.00 Lakh",
+    "power_bhp": "75-108 bhp",
+    "range_mileage": "16.0-18.0 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "542",
+    "make": "Volkswagen",
+    "model": "Vento",
+    "price": "₹9.00 - 14.00 Lakh",
+    "power_bhp": "105-108 bhp",
+    "range_mileage": "16.0-22.0 kmpl",
+    "fuel_type": "Petrol/Diesel",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "544",
+    "make": "Volkswagen",
+    "model": "Ameo",
+    "price": "₹6.00 - 10.00 Lakh",
+    "power_bhp": "75-108 bhp",
+    "range_mileage": "19.0-22.0 kmpl",
+    "fuel_type": "Petrol/Diesel",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "547",
+    "make": "Volkswagen",
+    "model": "Jetta",
+    "price": "₹15.00 - 20.00 Lakh",
+    "power_bhp": "120-138 bhp",
+    "range_mileage": "14.0-19.0 kmpl",
+    "fuel_type": "Petrol/Diesel",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "548",
+    "make": "Volkswagen",
+    "model": "Beetle",
+    "price": "₹25.00 - 30.00 Lakh",
+    "power_bhp": "103 bhp",
+    "range_mileage": "17.6 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "549",
+    "make": "Volkswagen",
+    "model": "Tiguan Allspace",
+    "price": "₹34.00 Lakh",
+    "power_bhp": "187 bhp",
+    "range_mileage": "11.0 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "550",
+    "make": "Volkswagen",
+    "model": "Passat",
+    "price": "₹30.00 - 35.00 Lakh",
+    "power_bhp": "174 bhp",
+    "range_mileage": "17.4 kmpl",
+    "fuel_type": "Diesel",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "552",
+    "make": "Volkswagen",
+    "model": "T-Roc",
+    "price": "₹21.35 Lakh",
+    "power_bhp": "148 bhp",
+    "range_mileage": "15.0 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "554",
+    "make": "Volkswagen",
+    "model": "Touareg",
+    "price": "₹50.00 - 60.00 Lakh",
+    "power_bhp": "245 bhp",
+    "range_mileage": "11.0 kmpl",
+    "fuel_type": "Diesel",
+    "notes": "Discontinued in India"
+  },
+  {
+    "s_no": "565",
+    "make": "Volvo",
+    "model": "S60",
+    "price": "₹45.90 Lakh",
+    "power_bhp": "187 bhp",
+    "range_mileage": "14.0 kmpl",
+    "fuel_type": "Petrol",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "566",
+    "make": "Volvo",
+    "model": "V90 Cross Country",
+    "price": "₹67.00 Lakh",
+    "power_bhp": "235 bhp",
+    "range_mileage": "15.0 kmpl",
+    "fuel_type": "Diesel",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "569",
+    "make": "Volvo",
+    "model": "V40 Cross Country",
+    "price": "₹35.00 - 38.00 Lakh",
+    "power_bhp": "150-190 bhp",
+    "range_mileage": "16.0-18.0 kmpl",
+    "fuel_type": "Petrol/Diesel",
+    "notes": "Discontinued, last known data"
+  },
+  {
+    "s_no": "570",
+    "make": "Volvo",
+    "model": "S80",
+    "price": "₹45.00 - 50.00 Lakh",
+    "power_bhp": "163-205 bhp",
+    "range_mileage": "18.0 kmpl",
+    "fuel_type": "Diesel",
+    "notes": "Discontinued, last known data"
+  }
+]

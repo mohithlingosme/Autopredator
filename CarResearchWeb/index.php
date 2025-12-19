@@ -184,7 +184,7 @@ body {
                 <?php endif; ?>
                 <div class="card-footer">
                     <a class="btn btn-primary" href="brand.php?manufacturer_id=<?= (int) $family['manufacturer_id'] ?>">View brand</a>
-                    <a class="btn btn-outline" href="model.php?family_id=<?= (int) $family['id'] ?>">View models</a>
+                    <a class="btn btn-outline" href="brand.php?manufacturer_id=<?= (int) $family['manufacturer_id'] ?>">View models</a>
                 </div>
             </article>
         <?php endforeach; ?>

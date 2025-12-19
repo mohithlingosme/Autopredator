@@ -4,66 +4,61 @@ declare(strict_types=1);
 require_once __DIR__ . '/includes/header.php';
 require_once __DIR__ . '/includes/config.php';
 require_once __DIR__ . '/includes/auth.php';
-
-if (USE_JSON) {
-    require_once __DIR__ . '/includes/json_car_repository.php';
-} else {
-    require_once __DIR__ . '/includes/car_repository.php';
-}
+require_once __DIR__ . '/includes/repository.php';
 
 $variantId = (int) ($_GET['variant_id'] ?? 0);
-$variantSlug = trim($_GET['variant'] ?? '');
+$modelName = trim($_GET['model_name'] ?? '');
+$variantNameParam = trim($_GET['variant'] ?? '');
 
-if (USE_JSON) {
-    if (!empty($variantSlug)) {
-        $variant = json_get_car($variantSlug);
-    } elseif ($variantId > 0) {
-        $variant = json_get_car($variantId);
-    } else {
-        redirect('index.php');
+$variant = null;
+
+if ($variantId > 0) {
+    $variant = get_variant_by_id($variantId);
+} elseif ($modelName !== '' && $variantNameParam !== '') {
+    $variants = car_service()->getVariantsByModel($modelName);
+    foreach ($variants as $index => $v) {
+        if (strcasecmp($v['name'], $variantNameParam) === 0) {
+            $variant = [
+                'id' => $index + 1,
+                'variant_name' => $v['name'],
+                'fuel_type' => $v['fuel_type'],
+                'transmission' => $v['transmission'],
+                'ex_showroom_price' => $v['price_numeric'],
+                'model_name' => $modelName,
+                'manufacturer_name' => $v['brand'] ?? '',
+                'manufacturer_id' => 0,
+                'model_id' => $index + 1,
+                'body_type' => $v['segment'] ?? 'Car',
+            ];
+            break;
+        }
     }
-
-    if ($variant === null) {
-        redirect('index.php');
-    }
-
-    // Add missing fields for JSON mode
-    $variant['manufacturer_id'] = 1; // Placeholder
-    $variant['model_id'] = 1; // Placeholder
-    $variant['body_type'] = $variant['segment'];
-    $variant['ex_showroom_price'] = $variant['price_numeric'];
-
-    $specs = null; // No specs in JSON
-    $features = []; // No features in JSON
-    $prices = []; // No pricing history in JSON
-} else {
-    $variant = $variantId > 0 ? get_variant_by_id($variantId) : null;
-
-    if ($variant === null) {
-        redirect('index.php');
-    }
-
-    $specs = get_specs_for_variant($variantId);
-    $features = get_grouped_features_for_variant($variantId);
-    $prices = get_prices_for_variant($variantId);
 }
+
+if ($variant === null) {
+    redirect('index.php');
+}
+
+$variantId = (int) ($variant['id'] ?? $variantId);
+$manufacturerId = (int) ($variant['manufacturer_id'] ?? 0);
+$modelVariants = car_service()->getVariantsByModel($variant['model_name'] ?? $modelName);
 $favorites = fav_get_list();
 $isFavorite = in_array($variantId, $favorites, true);
-$page_title = $variant['variant_name'] . ' - ' . $variant['manufacturer_name'] . ' | Autopredator';
+$page_title = ($variant['variant_name'] ?? 'Variant') . ' - ' . ($variant['manufacturer_name'] ?? '') . ' | Autopredator';
 ?>
 
 <section class="breadcrumb-nav">
     <div class="container">
         <a href="index.php">Home</a> /
-        <a href="brand.php?manufacturer_id=<?= (int) $variant['manufacturer_id'] ?>"><?= e($variant['manufacturer_name']) ?></a> /
-        <a href="model.php?model_id=<?= (int) $variant['model_id'] ?>"><?= e($variant['model_name']) ?></a> /
-        <span><?= e($variant['variant_name']) ?></span>
+        <a href="brand.php?manufacturer_id=<?= (int) $manufacturerId ?>"><?= e($variant['manufacturer_name'] ?? 'Brand') ?></a> /
+        <a href="model.php?model_name=<?= urlencode($variant['model_name'] ?? '') ?>"><?= e($variant['model_name'] ?? '') ?></a> /
+        <span><?= e($variant['variant_name'] ?? '') ?></span>
     </div>
 </section>
 
 <section class="hero hero-small">
     <div class="container">
-        <h1><?= e($variant['manufacturer_name'] . ' ' . $variant['model_name'] . ' ' . $variant['variant_name']) ?></h1>
+        <h1><?= e(($variant['manufacturer_name'] ?? '') . ' ' . ($variant['model_name'] ?? '') . ' ' . ($variant['variant_name'] ?? '')) ?></h1>
         <p>Complete specifications, features, and pricing.</p>
     </div>
 </section>
@@ -73,7 +68,7 @@ $page_title = $variant['variant_name'] . ' - ' . $variant['manufacturer_name'] .
         <div class="card variant-header">
             <div class="variant-info">
                 <div>
-                    <h2><?= e($variant['variant_name']) ?></h2>
+                    <h2><?= e($variant['variant_name'] ?? '') ?></h2>
                     <div class="badges">
                         <?php if (!empty($variant['fuel_type'])): ?>
                             <span class="badge badge-info"><?= e($variant['fuel_type']) ?></span>
@@ -90,7 +85,7 @@ $page_title = $variant['variant_name'] . ' - ' . $variant['manufacturer_name'] .
                     <button class="btn btn-outline fav-button"
                             data-variant-id="<?= (int) $variantId ?>"
                             data-is-favorite="<?= $isFavorite ? '1' : '0' ?>">
-                        <?= $isFavorite ? '♥ Remove' : '♡ Save' ?>
+                        <?= $isFavorite ? '✖ Remove' : '★ Save' ?>
                     </button>
                     <a href="compare.php?ids=<?= (int) $variantId ?>" class="btn btn-outline">Compare</a>
                 </div>
@@ -114,69 +109,22 @@ $page_title = $variant['variant_name'] . ' - ' . $variant['manufacturer_name'] .
         <div class="tab-panel active" id="specifications">
             <div class="card">
                 <h3>Technical Specifications</h3>
-                <?php if ($specs): ?>
-                    <div class="specs-grid">
-                        <div class="spec-item"><label>Engine Type</label><p><?= e($specs['engine_type'] ?? 'N/A') ?></p></div>
-                        <div class="spec-item"><label>Displacement</label><p><?= e((string) ($specs['engine_displacement_cc'] ?? 'N/A')) ?> cc</p></div>
-                        <div class="spec-item"><label>Max Power</label><p><?= e((string) ($specs['max_power_bhp'] ?? 'N/A')) ?> bhp</p></div>
-                        <div class="spec-item"><label>Max Torque</label><p><?= e((string) ($specs['max_torque_nm'] ?? 'N/A')) ?> Nm</p></div>
-                        <div class="spec-item"><label>Transmission</label><p><?= e($specs['transmission_type'] ?? $variant['transmission'] ?? 'N/A') ?></p></div>
-                        <div class="spec-item"><label>Drivetrain</label><p><?= e($specs['drivetrain'] ?? 'N/A') ?></p></div>
-                        <div class="spec-item"><label>Fuel Tank</label><p><?= e((string) ($specs['fuel_tank_capacity_ltr'] ?? 'N/A')) ?> L</p></div>
-                        <div class="spec-item"><label>Seating</label><p><?= e((string) ($specs['seating_capacity'] ?? 'N/A')) ?> Seats</p></div>
-                        <div class="spec-item"><label>Ground Clearance</label><p><?= e((string) ($specs['ground_clearance_mm'] ?? 'N/A')) ?> mm</p></div>
-                        <div class="spec-item"><label>Boot Space</label><p><?= e((string) ($specs['boot_space_ltr'] ?? 'N/A')) ?> L</p></div>
-                        <div class="spec-item"><label>Mileage (City)</label><p><?= e((string) ($specs['mileage_city_kmpl'] ?? 'N/A')) ?> kmpl</p></div>
-                        <div class="spec-item"><label>Mileage (Highway)</label><p><?= e((string) ($specs['mileage_highway_kmpl'] ?? 'N/A')) ?> kmpl</p></div>
-                    </div>
-                <?php else: ?>
-                    <p>Specifications not available.</p>
-                <?php endif; ?>
+                <p>Detailed specs are not available for this variant yet.</p>
             </div>
         </div>
 
         <div class="tab-panel" id="features">
             <div class="card">
                 <h3>Features & Amenities</h3>
-                <?php if (!empty($features)): ?>
-                    <?php foreach ($features as $category => $featureList): ?>
-                        <div class="feature-group">
-                            <h4><?= e($category) ?></h4>
-                            <ul class="feature-list">
-                                <?php foreach ($featureList as $feature): ?>
-                                    <li><?= e($feature['name'] ?? '') ?></li>
-                                <?php endforeach; ?>
-                            </ul>
-                        </div>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <p>Features not available.</p>
-                <?php endif; ?>
+                <p>Features not available.</p>
             </div>
         </div>
 
         <div class="tab-panel" id="pricing">
             <div class="card">
                 <h3>Pricing</h3>
-                <?php if (!empty($prices)): ?>
-                    <div class="table-responsive">
-                        <table class="table pricing-table">
-                            <thead>
-                                <tr>
-                                    <th>Price</th>
-                                    <th>Updated At</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($prices as $price): ?>
-                                    <tr>
-                                        <td class="price"><?= !empty($price['price']) ? format_price((float) $price['price']) : 'N/A' ?></td>
-                                        <td><?= e($price['updated_at'] ?? '') ?></td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
-                    </div>
+                <?php if (!empty($variant['ex_showroom_price'])): ?>
+                    <p class="price"><?= format_price((float) $variant['ex_showroom_price']) ?></p>
                 <?php else: ?>
                     <p>Pricing information not available.</p>
                 <?php endif; ?>
@@ -190,18 +138,18 @@ $page_title = $variant['variant_name'] . ' - ' . $variant['manufacturer_name'] .
         </div>
         <div class="grid grid-responsive">
             <?php
-            $modelVariants = get_variants_by_model((int) $variant['model_id']);
-            $otherVariants = array_values(array_filter($modelVariants, static fn($v) => (int) $v['id'] !== $variantId));
+            $otherVariants = array_values(array_filter($modelVariants, static fn($v, $idx) => ($idx + 1) !== $variantId, ARRAY_FILTER_USE_BOTH));
             if (!empty($otherVariants)):
-                foreach (array_slice($otherVariants, 0, 3) as $other):
+                foreach (array_slice($otherVariants, 0, 3) as $idx => $other):
+                    $otherId = $idx + 1;
             ?>
                 <article class="card">
-                    <h4><?= e($other['variant_name']) ?></h4>
-                    <p class="small"><?= e($other['fuel_type'] ?? 'Petrol') ?> • <?= e($other['transmission'] ?? 'MT') ?></p>
-                    <?php if (!empty($other['ex_showroom_price'])): ?>
-                        <p class="price"><?= format_price((float) $other['ex_showroom_price']) ?></p>
+                    <h4><?= e($other['name'] ?? '') ?></h4>
+                    <p class="small"><?= e($other['fuel_type'] ?? 'Petrol') ?> · <?= e($other['transmission'] ?? 'MT') ?></p>
+                    <?php if (!empty($other['price_numeric'])): ?>
+                        <p class="price"><?= format_price((float) $other['price_numeric']) ?></p>
                     <?php endif; ?>
-                    <a href="variant.php?variant_id=<?= (int) $other['id'] ?>" class="btn btn-outline">View</a>
+                    <a href="variant.php?variant_id=<?= (int) $otherId ?>&model_name=<?= urlencode($variant['model_name'] ?? '') ?>" class="btn btn-outline">View</a>
                 </article>
             <?php
                 endforeach;
@@ -224,7 +172,7 @@ document.querySelector('.fav-button')?.addEventListener('click', function() {
         .then(data => {
             if (data.success) {
                 this.dataset.isFavorite = action === 'add' ? '1' : '0';
-                this.textContent = action === 'add' ? '♥ Remove' : '♡ Save';
+                this.textContent = action === 'add' ? '✖ Remove' : '★ Save';
             }
         });
 });

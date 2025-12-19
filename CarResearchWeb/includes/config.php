@@ -7,6 +7,17 @@ declare(strict_types=1);
  * You can override via an environment variable APP_ENV if desired.
  */
 $APP_ENV = getenv('APP_ENV') !== false ? getenv('APP_ENV') : 'local';
+$IS_PRODUCTION = $APP_ENV === 'production';
+
+if ($IS_PRODUCTION) {
+    ini_set('display_errors', '0');
+    ini_set('display_startup_errors', '0');
+    error_reporting(E_ALL & ~E_DEPRECATED & ~E_STRICT & ~E_NOTICE);
+} else {
+    ini_set('display_errors', '1');
+    ini_set('display_startup_errors', '1');
+    error_reporting(E_ALL);
+}
 
 /**
  * Data source mode: set to true to use JSON files as primary data source,

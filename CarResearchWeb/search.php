@@ -141,7 +141,7 @@ function checked_in(string $value, array $haystack): bool
                     </div>
                     <div class="actions">
                         <a class="btn btn-outline btn-compare-toggle" href="compare.php?ids=<?= (int) $row['variant_id'] ?>">Add to Compare</a>
-                        <a class="btn btn-primary" href="variant.php?variant_id=<?= (int) $row['variant_id'] ?>">View Variant</a>
+                        <a class="btn btn-primary" href="variant.php?variant_id=<?= (int) $row['variant_id'] ?>&model_name=<?= urlencode($row['model_name'] ?? '') ?>">View Variant</a>
                     </div>
                 </article>
             <?php endforeach; ?>
