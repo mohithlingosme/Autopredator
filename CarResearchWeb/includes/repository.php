@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-require_once __DIR__ . '/../app/Support/Autoload.php';
+require_once __DIR__ . '/bootstrap.php';
 require_once __DIR__ . '/config.php';
+require_once __DIR__ . '/db.php';
 
-use App\Repositories\JsonCarRepository;
 use App\Services\CarService;
 
 /**
@@ -15,9 +15,7 @@ function car_service(): CarService
     static $service = null;
 
     if ($service === null) {
-        $dataDir = defined('DATA_DIR') ? DATA_DIR : (__DIR__ . '/../data');
-        $repo = new JsonCarRepository($dataDir);
-        $service = new CarService($repo);
+        $service = new CarService(repo());
     }
 
     return $service;
@@ -134,14 +132,16 @@ function get_variants_by_model(int $modelId): array
     $variants = car_service()->getVariantsByModel($model['model'] ?? $model['name']);
     $list = [];
     foreach ($variants as $index => $variant) {
+        $variantId = isset($variant['id']) ? (int) $variant['id'] : ($index + 1);
         $list[] = [
-            'id' => $index + 1,
-            'variant_name' => $variant['name'],
-            'fuel_type' => $variant['fuel_type'],
-            'transmission' => $variant['transmission'],
-            'ex_showroom_price' => $variant['price_numeric'],
+            'id' => $variantId,
+            'variant_name' => $variant['name'] ?? ($variant['variant'] ?? ''),
+            'fuel_type' => $variant['fuel_type'] ?? '',
+            'transmission' => $variant['transmission'] ?? '',
+            'ex_showroom_price' => $variant['price_numeric'] ?? 0,
             'model_name' => $model['model'] ?? $model['name'],
             'manufacturer_name' => $model['manufacturer_name'] ?? '',
+            'manufacturer_id' => $model['manufacturer_id'] ?? null,
         ];
     }
 
@@ -150,30 +150,31 @@ function get_variants_by_model(int $modelId): array
 
 function get_variant_by_id(int $id): ?array
 {
-    $all = car_service()->searchVariants([
-        'limit' => PHP_INT_MAX,
-        'offset' => 0,
-    ]);
-
-    foreach ($all as $variant) {
-        if ((int) ($variant['id'] ?? 0) === $id) {
-            $brand = get_manufacturer_by_name($variant['brand'] ?? '') ?? ['id' => 0, 'name' => $variant['brand'] ?? ''];
-            return [
-                'id' => $id,
-                'variant_name' => $variant['variant'] ?? ($variant['name'] ?? ''),
-                'fuel_type' => $variant['fuel_type'] ?? '',
-                'transmission' => $variant['transmission'] ?? '',
-                'ex_showroom_price' => $variant['price_numeric'] ?? 0,
-                'model_name' => $variant['model'] ?? '',
-                'manufacturer_name' => $brand['name'],
-                'model_id' => $variant['id'] ?? $id,
-                'manufacturer_id' => $brand['id'],
-                'body_type' => $variant['segment'] ?? 'Car',
-            ];
-        }
+    $variant = car_service()->getVariantById($id);
+    if ($variant === null) {
+        return null;
     }
 
-    return null;
+    $brand = get_manufacturer_by_name($variant['brand'] ?? ($variant['manufacturer_name'] ?? ''))
+        ?? ['id' => $variant['manufacturer_id'] ?? 0, 'name' => $variant['brand'] ?? ($variant['manufacturer_name'] ?? '')];
+
+    return [
+        'id' => $id,
+        'variant_name' => $variant['variant_name'] ?? ($variant['variant'] ?? ($variant['name'] ?? '')),
+        'fuel_type' => $variant['fuel_type'] ?? '',
+        'transmission' => $variant['transmission'] ?? '',
+        'ex_showroom_price' => $variant['ex_showroom_price'] ?? ($variant['price_numeric'] ?? 0),
+        'model_name' => $variant['model_name'] ?? ($variant['model'] ?? ''),
+        'manufacturer_name' => $brand['name'] ?? '',
+        'model_id' => $variant['model_id'] ?? $id,
+        'manufacturer_id' => $brand['id'] ?? 0,
+        'body_type' => $variant['body_type'] ?? ($variant['segment'] ?? 'Car'),
+        'engine_displacement_cc' => $variant['engine_displacement_cc'] ?? null,
+        'max_power_bhp' => $variant['max_power_bhp'] ?? ($variant['horsepower'] ?? null),
+        'max_torque_nm' => $variant['max_torque_nm'] ?? null,
+        'mileage_city_kmpl' => $variant['mileage_city_kmpl'] ?? null,
+        'mileage_highway_kmpl' => $variant['mileage_highway_kmpl'] ?? null,
+    ];
 }
 
 function get_featured_families(int $limit = 6): array
@@ -226,4 +227,21 @@ function search_cars_count(array $filters): int
         }
     }
     return car_service()->searchVariantsCount($filtersForRepo);
+}
+
+/**
+ * Fetch detailed specs for a variant in DB mode. JSON mode returns null.
+ *
+ * @return array<string, mixed>|null
+ */
+function get_specs_for_variant(int $variantId): ?array
+{
+    if (defined('USE_JSON') && USE_JSON) {
+        return null;
+    }
+
+    return db_select_one(
+        'SELECT * FROM vehicle_specs WHERE variant_id = ? LIMIT 1',
+        [$variantId]
+    );
 }

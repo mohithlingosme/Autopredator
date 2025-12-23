@@ -37,7 +37,14 @@ function render_filter_panel(array $filters, array $options = []): void
         <select id="filter-body" name="body_type">
             <option value="">Any</option>
             <?php foreach ($bodyTypes as $body): ?>
-                <option value="<?= e($body) ?>" <?= (isset($filters['body_type']) && strtolower($filters['body_type']) === strtolower($body)) ? 'selected' : '' ?>><?= e($body) ?></option>
+                <?php
+                $selected = false;
+                if (isset($filters['body_type'])) {
+                    $filterBodyTypes = is_array($filters['body_type']) ? $filters['body_type'] : [$filters['body_type']];
+                    $selected = in_array(strtolower($body), array_map('strtolower', $filterBodyTypes), true);
+                }
+                ?>
+                <option value="<?= e($body) ?>" <?= $selected ? 'selected' : '' ?>><?= e($body) ?></option>
             <?php endforeach; ?>
         </select>
     </div>
@@ -72,6 +79,5 @@ function render_filter_panel(array $filters, array $options = []): void
         <button class="btn btn-primary" type="submit">Apply</button>
         <a class="btn btn-ghost" href="search.php">Reset</a>
     </div>
-</aside>
 <?php
 }

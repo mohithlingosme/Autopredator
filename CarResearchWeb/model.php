@@ -4,7 +4,7 @@ declare(strict_types=1);
 require_once __DIR__ . '/includes/header.php';
 require_once __DIR__ . '/includes/config.php';
 require_once __DIR__ . '/includes/auth.php';
-require_once __DIR__ . '/includes/repository.php';
+require_once __DIR__ . '/includes/bootstrap.php';
 require_once __DIR__ . '/views/partials/empty_state.php';
 
 $modelName = trim($_GET['model_name'] ?? '');
@@ -22,6 +22,62 @@ $manufacturerId = $manufacturer['id'] ?? 0;
 $variants = car_service()->getVariantsByModel($modelName);
 $familyModels = car_service()->getModelsByBrand($model['make']);
 $page_title = $model['model'] . ' Models & Variants | Autopredator';
+
+// Breadcrumbs
+$breadcrumbs = [
+    ['url' => 'index.php', 'label' => 'Home'],
+    ['url' => 'brand.php', 'label' => 'Brands'],
+    ['url' => 'brand.php?manufacturer_name=' . urlencode($model['make']), 'label' => $model['make']],
+    ['url' => '', 'label' => $model['model']],
+];
+
+// Sorting logic
+$sortBy = $_GET['sort'] ?? 'price_asc';
+usort($variants, function($a, $b) use ($sortBy) {
+    switch ($sortBy) {
+        case 'price_asc':
+            return ($a['price_numeric'] ?? 0) <=> ($b['price_numeric'] ?? 0);
+        case 'price_desc':
+            return ($b['price_numeric'] ?? 0) <=> ($a['price_numeric'] ?? 0);
+        case 'mileage_desc':
+            return ($b['mileage_kmpl'] ?? 0) <=> ($a['mileage_kmpl'] ?? 0);
+        case 'power_desc':
+            return ($b['horsepower'] ?? 0) <=> ($a['horsepower'] ?? 0);
+        default:
+            return strcmp($a['name'] ?? '', $b['name'] ?? '');
+    }
+});
+
+// Best Value logic: mid-price + best mileage + common transmission
+$bestValueIndex = null;
+if (count($variants) > 1) {
+    $prices = array_filter(array_column($variants, 'price_numeric'), fn($p) => $p > 0);
+    $mileages = array_filter(array_column($variants, 'mileage_kmpl'), fn($m) => $m > 0);
+
+    if (!empty($prices) && !empty($mileages)) {
+        $minPrice = min($prices);
+        $maxPrice = max($prices);
+        $midPrice = ($minPrice + $maxPrice) / 2;
+        $maxMileage = max($mileages);
+        $transmissions = array_count_values(array_column($variants, 'transmission'));
+        $commonTransmission = array_keys($transmissions, max($transmissions))[0];
+
+        $bestScore = -1;
+        foreach ($variants as $index => $variant) {
+            $price = $variant['price_numeric'] ?? 0;
+            $mileage = $variant['mileage_kmpl'] ?? 0;
+            $transmission = $variant['transmission'] ?? '';
+            $priceScore = 1 - abs($price - $midPrice) / ($maxPrice - $minPrice);
+            $mileageScore = $mileage / $maxMileage;
+            $transmissionScore = ($transmission === $commonTransmission) ? 1 : 0;
+            $score = $priceScore + $mileageScore + $transmissionScore;
+            if ($score > $bestScore) {
+                $bestScore = $score;
+                $bestValueIndex = $index;
+            }
+        }
+    }
+}
 ?>
 
 <section class="hero">
@@ -99,8 +155,19 @@ $page_title = $model['model'] . ' Models & Variants | Autopredator';
 
             <section class="section" style="padding-top:16px;">
                 <div class="section-header">
-                    <h2>Variants</h2>
-                    <p class="muted"><?= count($variants) ?> variants available</p>
+                    <div>
+                        <h2>Variants</h2>
+                        <p class="muted"><?= count($variants) ?> variants available</p>
+                    </div>
+                    <div class="card" style="padding:12px; display:flex; gap:8px; align-items:center;">
+                        <label class="muted" for="sort-variants">Sort</label>
+                        <select id="sort-variants" onchange="location.href='model.php?model_name=<?= urlencode($modelName) ?>&sort='+this.value" aria-label="Sort variants">
+                            <option value="price_asc" <?= $sortBy === 'price_asc' ? 'selected' : '' ?>>Price (low to high)</option>
+                            <option value="price_desc" <?= $sortBy === 'price_desc' ? 'selected' : '' ?>>Price (high to low)</option>
+                            <option value="mileage_desc" <?= $sortBy === 'mileage_desc' ? 'selected' : '' ?>>Mileage (high to low)</option>
+                            <option value="power_desc" <?= $sortBy === 'power_desc' ? 'selected' : '' ?>>Power (high to low)</option>
+                        </select>
+                    </div>
                 </div>
 
                 <?php if (empty($variants)): ?>
@@ -112,19 +179,42 @@ $page_title = $model['model'] . ' Models & Variants | Autopredator';
                                 <thead>
                                     <tr>
                                         <th>Variant</th>
-                                        <th>Fuel</th>
+                                        <th>Engine</th>
                                         <th>Transmission</th>
+                                        <th>Mileage/Range</th>
                                         <th>Price</th>
-                                        <th>Action</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php foreach ($variants as $index => $variant): ?>
                                         <?php $variantId = $index + 1; ?>
                                         <tr>
-                                            <td><?= e($variant['name'] ?? '') ?></td>
-                                            <td><?= e(display_value($variant['fuel_type'] ?? null)) ?></td>
+                                            <td>
+                                                <?= e($variant['name'] ?? '') ?>
+                                                <?php if ($index === $bestValueIndex): ?>
+                                                    <span class="badge badge-success">Best Value</span>
+                                                <?php endif; ?>
+                                            </td>
+                                            <td>
+                                                <?php if (!empty($variant['engine'])): ?>
+                                                    <?= e($variant['engine']) ?>
+                                                <?php elseif (!empty($variant['horsepower'])): ?>
+                                                    <?= e($variant['horsepower']) ?> bhp
+                                                <?php else: ?>
+                                                    —
+                                                <?php endif; ?>
+                                            </td>
                                             <td><?= e(display_value($variant['transmission'] ?? null)) ?></td>
+                                            <td>
+                                                <?php if (!empty($variant['mileage_kmpl'])): ?>
+                                                    <?= e($variant['mileage_kmpl']) ?> kmpl
+                                                <?php elseif (!empty($variant['range_km'])): ?>
+                                                    <?= e($variant['range_km']) ?> km range
+                                                <?php else: ?>
+                                                    —
+                                                <?php endif; ?>
+                                            </td>
                                             <td class="price">
                                                 <?php if (!empty($variant['price_numeric'])): ?>
                                                     <?= format_price((float) $variant['price_numeric']) ?>
@@ -133,7 +223,11 @@ $page_title = $model['model'] . ' Models & Variants | Autopredator';
                                                 <?php endif; ?>
                                             </td>
                                             <td>
-                                                <a href="variant.php?variant_id=<?= (int) $variantId ?>&model_name=<?= urlencode($model['model']) ?>" class="btn btn-outline btn-sm">View</a>
+                                                <div style="display: flex; gap: 4px; flex-wrap: wrap;">
+                                                    <a href="variant.php?variant_id=<?= (int) $variantId ?>&model_name=<?= urlencode($model['model']) ?>" class="btn btn-outline btn-sm">View</a>
+                                                    <button class="btn btn-outline btn-sm" type="button" data-compare-add="<?= e($variant['name'] ?? '') ?>" data-compare-label="<?= e($model['make'] . ' ' . $model['model'] . ' ' . ($variant['name'] ?? '')) ?>">Compare</button>
+                                                    <button class="btn btn-outline btn-sm" type="button" data-shortlist-add="<?= e($variant['name'] ?? '') ?>" data-shortlist-label="<?= e($model['make'] . ' ' . $model['model'] . ' ' . ($variant['name'] ?? '')) ?>">Shortlist</button>
+                                                </div>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>

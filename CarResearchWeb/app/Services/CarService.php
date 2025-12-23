@@ -3,13 +3,13 @@ declare(strict_types=1);
 
 namespace App\Services;
 
-use App\Repositories\JsonCarRepository;
+use App\Repositories\CarRepositoryInterface;
 
 final class CarService
 {
-    private JsonCarRepository $repo;
+    private CarRepositoryInterface $repo;
 
-    public function __construct(JsonCarRepository $repo)
+    public function __construct(CarRepositoryInterface $repo)
     {
         $this->repo = $repo;
     }
@@ -139,5 +139,13 @@ final class CarService
                 'ex_showroom_price' => $row['price_numeric'],
             ];
         }, $results);
+    }
+
+    /**
+     * @return array<string, mixed>|null
+     */
+    public function getVariantById(int $id): ?array
+    {
+        return $this->repo->getVariantById($id);
     }
 }

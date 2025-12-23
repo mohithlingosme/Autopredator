@@ -38,11 +38,36 @@ function render_car_card(array $car): void
                     <strong><?= e(is_array($fuel) ? implode(', ', $fuel) : $fuel) ?></strong>
                 </div>
             <?php endif; ?>
+            <?php
+            $power = $car['variants'][0]['horsepower'] ?? $car['variants'][0]['max_power_bhp'] ?? null;
+            if ($power): ?>
+                <div class="stat">
+                    <p class="muted">Power</p>
+                    <strong><?= e($power) ?> bhp</strong>
+                </div>
+            <?php endif; ?>
+            <?php
+            $mileage = $car['variants'][0]['mileage_kmpl'] ?? null;
+            if ($mileage): ?>
+                <div class="stat">
+                    <p class="muted">Mileage</p>
+                    <strong><?= e($mileage) ?> kmpl</strong>
+                </div>
+            <?php endif; ?>
+            <?php
+            $seats = $car['variants'][0]['seating_capacity'] ?? null;
+            if ($seats): ?>
+                <div class="stat">
+                    <p class="muted">Seats</p>
+                    <strong><?= e($seats) ?></strong>
+                </div>
+            <?php endif; ?>
         </div>
     </div>
     <div class="card-footer">
-        <a href="model.php?model_name=<?= urlencode($modelName) ?>" class="btn btn-primary">View Details</a>
+        <a href="model.php?model_name=<?= urlencode($modelName) ?>" class="btn btn-primary">View Variants</a>
         <button class="btn btn-outline" type="button" data-compare-add="<?= e($modelName) ?>" data-compare-label="<?= e($brand . ' ' . $title) ?>">Add to Compare</button>
+        <button class="btn btn-outline" type="button" data-favorite-toggle="<?= e($modelName) ?>" data-favorite-label="<?= e($brand . ' ' . $title) ?>">Add to Favorites</button>
     </div>
 </article>
 <?php

@@ -9,7 +9,7 @@ use App\Support\Logger;
 /**
  * JSON-backed repository with in-memory caching, validation, and normalization.
  */
-class JsonCarRepository
+class JsonCarRepository implements CarRepositoryInterface
 {
     private const FILE_CARSET = 'new_carset.json';
     private const FILE_LEGACY = 'data.json';
@@ -127,7 +127,14 @@ class JsonCarRepository
             }
 
             if (strtolower($name) === $key) {
-                return is_array($model['variants'] ?? null) ? $model['variants'] : [];
+                $variants = is_array($model['variants'] ?? null) ? $model['variants'] : [];
+                return array_map(function ($variant) use ($model) {
+                    if (!is_array($variant)) {
+                        return $variant;
+                    }
+                    $variant['id'] = $this->buildVariantId($model, $variant);
+                    return $variant;
+                }, $variants);
             }
         }
 
@@ -201,7 +208,7 @@ class JsonCarRepository
 
                 if ($match) {
                     $results[] = [
-                        'id' => count($results) + 1,
+                        'id' => $this->buildVariantId($model, $variant),
                         'brand' => $model['make'] ?? '',
                         'model' => $model['model'] ?? '',
                         'variant' => $variant['name'] ?? '',
@@ -212,6 +219,8 @@ class JsonCarRepository
                         'price_numeric' => $variantPrice,
                         'engine_size' => $variant['engine_size'] ?? '',
                         'horsepower' => $variant['horsepower'] ?? '',
+                        'power_min' => $variant['power_min'] ?? 0,
+                        'power_max' => $variant['power_max'] ?? 0,
                     ];
                 }
             }
@@ -236,6 +245,22 @@ class JsonCarRepository
         $offset = isset($filters['offset']) ? max(0, (int) $filters['offset']) : 0;
 
         return array_slice($results, $offset, $limit);
+    }
+
+    public function getVariantById(int $id): ?array
+    {
+        $all = $this->search([
+            'limit' => PHP_INT_MAX,
+            'offset' => 0,
+        ]);
+
+        foreach ($all as $row) {
+            if ((int) ($row['id'] ?? 0) === $id) {
+                return $row;
+            }
+        }
+
+        return null;
     }
 
     /**
@@ -305,6 +330,11 @@ class JsonCarRepository
      */
     private function normalizeCarsetRow(int $index, array $row): ?array
     {
+        if (!$this->validateCarsetRow($row)) {
+            Logger::error('Skipping invalid primary row', ['index' => $index, 'row' => $row]);
+            return null;
+        }
+
         $make = $this->cleanString($row['make'] ?? '');
         $model = $this->cleanString($row['model'] ?? '');
         $segment = $this->cleanString($row['segment'] ?? '');
@@ -327,6 +357,7 @@ class JsonCarRepository
             }
 
             $priceNumeric = $this->parsePrice($priceRaw);
+            $powerRange = $this->parsePowerRange($this->cleanString($variant['horsepower'] ?? ''));
             $variants[] = [
                 'id' => $variantIndex + 1,
                 'name' => $name,
@@ -338,7 +369,9 @@ class JsonCarRepository
                 'price_raw' => $priceRaw,
                 'price_numeric' => $priceNumeric,
                 'engine_size' => $this->cleanString($variant['engine_size'] ?? ''),
-                'horsepower' => $this->cleanString($variant['horsepower'] ?? ''),
+                'horsepower' => $powerRange['min'] !== $powerRange['max'] ? $powerRange['min'] . '-' . $powerRange['max'] : (string) $powerRange['min'],
+                'power_min' => $powerRange['min'],
+                'power_max' => $powerRange['max'],
             ];
         }
 
@@ -465,6 +498,8 @@ class JsonCarRepository
     }
 
     /**
+     * Parse price range and return min/max values.
+     *
      * @return array{min: float, max: float}
      */
     private function parsePriceRange(string $price): array
@@ -484,6 +519,32 @@ class JsonCarRepository
 
         return ['min' => $min, 'max' => $max];
     }
+
+    /**
+     * Parse power range and return min/max values.
+     *
+     * @return array{min: float, max: float}
+     */
+    private function parsePowerRange(string $power): array
+    {
+        $normalized = str_replace(['bhp', 'BHP', 'hp', 'HP'], '', $power);
+        $parts = preg_split('/[-–]/', $normalized);
+        if (!$parts || count($parts) === 1) {
+            $single = (float) trim($parts[0]);
+            return ['min' => $single, 'max' => $single];
+        }
+
+        $min = (float) trim($parts[0]);
+        $max = (float) trim($parts[1]);
+
+        if ($min > $max && $max > 0) {
+            [$min, $max] = [$max, $min];
+        }
+
+        return ['min' => $min, 'max' => $max];
+    }
+
+
 
     /**
      * @param mixed $value
@@ -506,5 +567,94 @@ class JsonCarRepository
             }
         }
         return $items;
+    }
+
+    /**
+     * Build a deterministic variant ID for consistent lookups.
+     *
+     * @param array<string, mixed> $model
+     * @param array<string, mixed> $variant
+     */
+    private function buildVariantId(array $model, array $variant): int
+    {
+        $base = strtolower(
+            trim((string) ($model['make'] ?? '')) . '|' .
+            trim((string) ($model['model'] ?? '')) . '|' .
+            trim((string) ($variant['name'] ?? ''))
+        );
+
+        return (int) sprintf('%u', crc32($base));
+    }
+
+    /**
+     * @return array<string, mixed>|null
+     */
+    public function getVariantByKey(string $variantKey): ?array
+    {
+        $this->bootstrap();
+
+        foreach ($this->dataset as $model) {
+            foreach ($model['variants'] as $variant) {
+                $id = $this->buildVariantId($model, $variant);
+                if ((string) $id === $variantKey) {
+                    return array_merge($variant, [
+                        'id' => $id,
+                        'brand' => $model['make'] ?? '',
+                        'model' => $model['model'] ?? '',
+                        'segment' => $model['segment'] ?? '',
+                    ]);
+                }
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    public function getSpecsForVariant(string $variantKey): array
+    {
+        $variant = $this->getVariantByKey($variantKey);
+        if ($variant === null) {
+            return [];
+        }
+
+        return $this->normalizeSpecs($variant);
+    }
+
+    /**
+     * Normalize spec data to standardized keys and types.
+     *
+     * @param array<string, mixed> $variant
+     * @return array<string, mixed>
+     */
+    private function normalizeSpecs(array $variant): array
+    {
+        return [
+            'fuel_type' => $this->cleanString($variant['fuel_type'] ?? ''),
+            'transmission' => $this->cleanString($variant['transmission'] ?? ''),
+            'engine' => $this->cleanString($variant['engine_size'] ?? ''),
+            'power_bhp' => $this->safeFloatToString($variant['power_min'] ?? $variant['horsepower'] ?? ''),
+            'torque_nm' => $this->cleanString($variant['torque_nm'] ?? ''),
+            'mileage_kmpl' => $this->safeFloatToString($variant['mileage_city_kmpl'] ?? ''),
+            'range_km' => $this->safeFloatToString($variant['range_km'] ?? ''),
+            'seating_capacity' => $this->cleanString($variant['seating_capacity'] ?? ''),
+            'fuel_tank_capacity_ltr' => $this->cleanString($variant['fuel_tank_capacity_ltr'] ?? ''),
+            'ground_clearance_mm' => $this->cleanString($variant['ground_clearance_mm'] ?? ''),
+            'boot_space_ltr' => $this->cleanString($variant['boot_space_ltr'] ?? ''),
+        ];
+    }
+
+    /**
+     * Safely convert float to string, returning empty string for invalid values.
+     */
+    private function safeFloatToString(mixed $value): string
+    {
+        if (is_numeric($value)) {
+            $float = (float) $value;
+            return $float > 0 ? (string) $float : '';
+        }
+        return $this->cleanString($value);
     }
 }

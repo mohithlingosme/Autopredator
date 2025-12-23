@@ -46,6 +46,51 @@ if (!function_exists('render_layout_end')) {
     <?php include __DIR__ . '/partials/footer.php'; ?>
 </div>
 <script src="assets/js/app.js" defer></script>
+<script src="assets/js/compare.js"></script>
+<script src="assets/js/favorites.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    function updateBadge(selector, storageKey) {
+        const count = JSON.parse(localStorage.getItem(storageKey) || '[]').length;
+        const badge = document.querySelector(selector);
+        if (count > 0) {
+            badge.textContent = count;
+            badge.style.display = 'inline';
+        } else {
+            badge.style.display = 'none';
+        }
+    }
+
+    // Update badges on load
+    updateBadge('[data-compare-count]', 'compare_variants');
+    updateBadge('[data-shortlist-count]', 'shortlist_variants');
+
+    // Listen for storage changes
+    window.addEventListener('storage', function(e) {
+        if (e.key === 'compare_variants') {
+            updateBadge('[data-compare-count]', 'compare_variants');
+        } else if (e.key === 'shortlist_variants') {
+            updateBadge('[data-shortlist-count]', 'shortlist_variants');
+        }
+    });
+
+    // Custom event for same-tab updates
+    window.addEventListener('updateBadges', function() {
+        updateBadge('[data-compare-count]', 'compare_variants');
+        updateBadge('[data-shortlist-count]', 'shortlist_variants');
+    });
+
+    // Mobile nav toggle
+    const navToggle = document.querySelector('[data-nav-toggle]');
+    const navLinks = document.querySelector('[data-nav-links]');
+    if (navToggle && navLinks) {
+        navToggle.addEventListener('click', function() {
+            navLinks.classList.toggle('is-open');
+            document.body.classList.toggle('nav-open');
+        });
+    }
+});
+</script>
 </body>
 </html>
 <?php

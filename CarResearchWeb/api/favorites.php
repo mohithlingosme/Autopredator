@@ -19,13 +19,23 @@ $variantId = (int) ($_GET['variant_id'] ?? $_POST['variant_id'] ?? 0);
 auth_session_start();
 
 if ($action === 'add' && $variantId > 0) {
-    json_response(['success' => false, 'message' => 'Favorites disabled in JSON mode']);
+    $favorites = $_SESSION['favorites'] ?? [];
+    if (!in_array($variantId, $favorites)) {
+        $favorites[] = $variantId;
+        $_SESSION['favorites'] = $favorites;
+    }
+    json_response(['success' => true, 'favorites' => $favorites]);
 } elseif ($action === 'remove' && $variantId > 0) {
-    json_response(['success' => false, 'message' => 'Favorites disabled in JSON mode']);
+    $favorites = $_SESSION['favorites'] ?? [];
+    $favorites = array_filter($favorites, fn($id) => $id != $variantId);
+    $_SESSION['favorites'] = array_values($favorites);
+    json_response(['success' => true, 'favorites' => $favorites]);
 } elseif ($action === 'list') {
-    json_response(['success' => true, 'favorites' => []]);
+    $favorites = $_SESSION['favorites'] ?? [];
+    json_response(['success' => true, 'favorites' => $favorites]);
 } elseif ($action === 'check' && $variantId > 0) {
-    json_response(['success' => true, 'is_favorite' => false]);
+    $favorites = $_SESSION['favorites'] ?? [];
+    json_response(['success' => true, 'is_favorite' => in_array($variantId, $favorites)]);
 } else {
     json_response(['success' => false, 'error' => 'Invalid request'], 400);
 }

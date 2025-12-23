@@ -1,0 +1,80 @@
+:root {
+    /* Color Palette */
+    --bg: #0b0c10;
+    --bg-card: #12131a;
+    --bg-soft: #1a1b25;
+    --text: #f5f7fb;
+    --muted: #a9afc3;
+    --primary: #e63946;
+    --primary-strong: #c5303b;
+    --primary-soft: rgba(230, 57, 70, 0.12);
+    --accent: #4cc9f0;
+    --success: #4caf50;
+    --warning: #f4a261;
+    --border: #1f2333;
+    --shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+
+    /* Spacing Scale */
+    --space-1: 8px;
+    --space-2: 16px;
+    --space-3: 24px;
+    --space-4: 32px;
+    --space-5: 40px;
+    --space-6: 48px;
+    --space-7: 56px;
+    --space-8: 64px;
+
+    /* Border Radius */
+    --radius-sm: 8px;
+    --radius: 12px;
+    --radius-lg: 18px;
+
+    /* Typography */
+    --font-body: "Inter", system-ui, -apple-system, sans-serif;
+    --font-h1: 2.5rem;
+    --font-h2: 2rem;
+    --font-body: 1rem;
+    --font-muted: 0.875rem;
+}
+
+/* Breadcrumbs */
+.breadcrumbs {
+    margin-bottom: 20px;
+    font-size: 14px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.breadcrumb-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.breadcrumb-item {
+    display: flex;
+    align-items: center;
+}
+
+.breadcrumb-item:not(:last-child)::after {
+    content: '/';
+    margin-left: 8px;
+    color: var(--muted);
+}
+
+.breadcrumb-item a {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.breadcrumb-item a:hover {
+    text-decoration: underline;
+}
+
+.breadcrumb-item span[aria-current="page"] {
+    color: var(--text);
+    font-weight: 500;
+}

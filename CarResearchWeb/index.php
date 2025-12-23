@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 require_once __DIR__ . '/includes/header.php';
-require_once __DIR__ . '/includes/repository.php';
+require_once __DIR__ . '/includes/bootstrap.php';
 require_once __DIR__ . '/views/partials/car_card.php';
 require_once __DIR__ . '/views/partials/empty_state.php';
 
@@ -142,7 +142,9 @@ $featuredVariants = get_featured_variants(6);
                         <?php endif; ?>
                         <div class="card-footer">
                             <a class="btn btn-primary" href="variant.php?variant_id=<?= (int) $variant['id'] ?>">View Variant</a>
-                            <button class="btn btn-outline btn-sm" type="button" data-compare-add="<?= e($variant['model_name']) ?>" data-compare-label="<?= e($variant['manufacturer_name'] . ' ' . $variant['variant_name']) ?>">Add to Compare</button>
+                            <button class="btn btn-outline btn-sm" type="button" data-shortlist-add="<?= e($variant['id']) ?>" data-shortlist-label="<?= e($variant['manufacturer_name'] . ' ' . $variant['model_name'] . ' ' . $variant['variant_name']) ?>">Shortlist</button>
+                            <button class="btn btn-outline btn-sm" type="button" data-favorite-toggle="<?= e($variant['id']) ?>">Favorite</button>
+                            <button class="btn btn-outline btn-sm" type="button" data-compare-add="<?= e($variant['id']) ?>" data-compare-label="<?= e($variant['manufacturer_name'] . ' ' . $variant['model_name'] . ' ' . $variant['variant_name']) ?>">Add to Compare</button>
                         </div>
                     </article>
                 <?php endforeach; ?>

@@ -14,13 +14,21 @@ $query = get_query('q');
             <span></span><span></span><span></span>
         </button>
         <div class="nav-search">
-            <?php include __DIR__ . '/search_bar.php'; ?>
+            <?php $id = 'nav-search-q'; include __DIR__ . '/search_bar.php'; ?>
         </div>
         <nav class="nav-links" data-nav-links>
             <a href="index.php" class="nav-link">Home</a>
             <a href="brand.php" class="nav-link">Brands</a>
             <a href="search.php" class="nav-link">Search</a>
-            <a href="compare.php" class="nav-link">Compare</a>
+            <a href="compare.php" class="nav-link">
+                Compare
+                <span class="badge badge-soft nav-badge" data-compare-count style="display: none;"></span>
+            </a>
+            <a href="shortlist.php" class="nav-link">
+                Shortlist
+                <span class="badge badge-soft nav-badge" data-shortlist-count style="display: none;"></span>
+            </a>
+            <a href="favorites.php" class="nav-link">Favorites</a>
             <?php if ($current_user): ?>
                 <span class="nav-user">Hi, <?= e($current_user['name'] ?? 'User') ?></span>
                 <a href="logout.php" class="nav-link">Logout</a>
