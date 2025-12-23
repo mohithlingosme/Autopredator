@@ -1,0 +1,26 @@
+[
+    {
+        "slug": "hyundai",
+        "name": "Hyundai",
+        "country_of_origin": "Unknown",
+        "logo_url": null
+    },
+    {
+        "slug": "honda",
+        "name": "Honda",
+        "country_of_origin": "Unknown",
+        "logo_url": null
+    },
+    {
+        "slug": "toyota",
+        "name": "Toyota",
+        "country_of_origin": "Unknown",
+        "logo_url": null
+    },
+    {
+        "slug": "mahindra",
+        "name": "Mahindra",
+        "country_of_origin": "Unknown",
+        "logo_url": null
+    }
+]

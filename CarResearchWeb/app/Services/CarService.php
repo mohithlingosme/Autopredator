@@ -148,4 +148,63 @@ final class CarService
     {
         return $this->repo->getVariantById($id);
     }
+
+    /**
+     * @param array<int, string> $variantSlugs
+     * @return array<string, mixed>
+     */
+    public function getCompareData(array $variantSlugs): array
+    {
+        $variants = [];
+        $specRows = [];
+        $featureRows = [];
+
+        foreach ($variantSlugs as $slug) {
+            $variantName = ucwords(str_replace('-', ' ', $slug));
+            $results = $this->repo->search(['variant' => $variantName]);
+            if ($results) {
+                $variant = $results[0];
+                $variants[$slug] = [
+                    'id' => $variant['id'],
+                    'name' => $variant['variant'],
+                    'model' => $variant['model'],
+                    'brand' => $variant['brand'],
+                    'price' => $variant['price_numeric'],
+                ];
+            }
+        }
+
+        // Build spec rows (simplified)
+        $specKeys = ['engine', 'power', 'torque', 'fuel_type', 'transmission', 'seating_capacity', 'mileage'];
+        foreach ($specKeys as $key) {
+            $values = [];
+            foreach ($variantSlugs as $slug) {
+                if (isset($variants[$slug])) {
+                    $variant = $this->repo->search(['variant' => ucwords(str_replace('-', ' ', $slug))])[0];
+                    $values[$slug] = $variant[$key] ?? 'unknown';
+                }
+            }
+            $specRows[] = [
+                'key' => $key,
+                'label' => ucwords(str_replace('_', ' ', $key)),
+                'unit' => in_array($key, ['power', 'torque']) ? 'hp/Nm' : '',
+                'values' => $values,
+            ];
+        }
+
+        // Feature rows (placeholder)
+        $featureRows = [
+            [
+                'key' => 'airbags',
+                'label' => 'Airbags',
+                'values' => array_fill_keys($variantSlugs, 'unknown'),
+            ],
+        ];
+
+        return [
+            'variants' => array_values($variants),
+            'spec_rows' => $specRows,
+            'feature_rows' => $featureRows,
+        ];
+    }
 }

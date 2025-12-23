@@ -8,18 +8,30 @@ Lightweight PHP app for researching Indian-market cars. Ships with brand/model/v
 - Optional: Python 3.10+ if you want to regenerate legacy JSON from tabular data.
 
 ## Run Locally
-1) Place the project under your web root (e.g., `C:\xampp\htdocs\Autopredator\CarResearchWeb`) or clone anywhere and use `php -S`.  
+### Option 1: Using setup.bat (Recommended for Windows)
+1) Clone the repository.
+2) Run `setup.bat` to automatically install dependencies and start the server.
+3) Open http://localhost:8000 in your browser.
+
+### Option 2: Manual Setup
+1) Place the project under your web root (e.g., `C:\xampp\htdocs\Autopredator\CarResearchWeb`) or clone anywhere and use `php -S`.
 2) Configure env (optional):
    ```bash
    set APP_ENV=local
    set USE_JSON=true
-   ```  
+   ```
 3) Start the app:
    ```bash
    cd C:\xampp\htdocs\Autopredator\CarResearchWeb
+   composer install
    php -S localhost:8000
-   ```  
+   ```
    or point Apache/XAMPP to this folder as the document root.
+
+### Option 3: Using Docker (Optional)
+1) Ensure Docker and Docker Compose are installed.
+2) Run `docker-compose up --build` to start the application with MySQL database.
+3) Open http://localhost:8000 in your browser.
 
 ## Configuration
 - `config.php` defines `BASE_PATH`, `DATA_DIR`, `APP_ENV`, and `USE_JSON` (JSON is the primary source). Production mode disables display_errors.  

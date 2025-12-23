@@ -9,6 +9,9 @@ require_once __DIR__ . '/views/partials/filter_panel.php';
 require_once __DIR__ . '/views/partials/pagination.php';
 require_once __DIR__ . '/views/partials/empty_state.php';
 
+// Noindex for search results page
+$page_noindex = true;
+
 $filters = build_search_filters($_GET);
 $results = search_cars($filters);
 $total = search_cars_count($filters);

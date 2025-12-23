@@ -293,7 +293,218 @@ INSERT INTO `features` (`name`, `category`) VALUES
 ('Apple CarPlay', 'Technology'),
 ('Steering Mounted Controls', 'Technology');
 
+-- ============================================================
+-- CONTENT SYSTEM TABLES
+-- Blog posts, categories, authors, media management
+-- ============================================================
+
+-- ============================================================
+-- 15. CONTENT AUTHORS TABLE
+-- Authors/editors for content management
+-- ============================================================
+CREATE TABLE IF NOT EXISTS `content_authors` (
+    `id` INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    `user_id` INT UNSIGNED,
+    `name` VARCHAR(120) NOT NULL,
+    `email` VARCHAR(160) NOT NULL UNIQUE,
+    `bio` TEXT,
+    `avatar_url` VARCHAR(255),
+    `social_links` JSON,  -- Twitter, LinkedIn, etc.
+    `is_active` TINYINT(1) NOT NULL DEFAULT 1,
+    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` DATETIME NULL ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE SET NULL,
+    INDEX `idx_email` (`email`),
+    INDEX `idx_active` (`is_active`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ============================================================
+-- 16. CONTENT CATEGORIES TABLE
+-- Categories for organizing blog posts
+-- ============================================================
+CREATE TABLE IF NOT EXISTS `content_categories` (
+    `id` INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    `name` VARCHAR(100) NOT NULL UNIQUE,
+    `slug` VARCHAR(100) NOT NULL UNIQUE,
+    `description` TEXT,
+    `parent_id` INT UNSIGNED,
+    `is_active` TINYINT(1) NOT NULL DEFAULT 1,
+    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` DATETIME NULL ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (`parent_id`) REFERENCES `content_categories` (`id`) ON DELETE SET NULL,
+    INDEX `idx_slug` (`slug`),
+    INDEX `idx_parent` (`parent_id`),
+    INDEX `idx_active` (`is_active`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ============================================================
+-- 17. BLOG POSTS TABLE
+-- Main content posts with editorial workflow
+-- ============================================================
+CREATE TABLE IF NOT EXISTS `blog_posts` (
+    `id` INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    `title` VARCHAR(255) NOT NULL,
+    `slug` VARCHAR(255) NOT NULL UNIQUE,
+    `excerpt` TEXT,
+    `content` LONGTEXT NOT NULL,
+    `featured_image` VARCHAR(255),
+    `author_id` INT UNSIGNED NOT NULL,
+    `category_id` INT UNSIGNED,
+    `status` ENUM('draft', 'review', 'published', 'archived') NOT NULL DEFAULT 'draft',
+    `published_at` DATETIME,
+    `seo_title` VARCHAR(255),
+    `seo_description` TEXT,
+    `seo_keywords` VARCHAR(255),
+    `reading_time` INT,  -- in minutes
+    `word_count` INT,
+    `is_featured` TINYINT(1) NOT NULL DEFAULT 0,
+    `is_ai_generated` TINYINT(1) NOT NULL DEFAULT 0,
+    `ai_prompt` TEXT,  -- Store the AI prompt used for generation
+    `review_notes` TEXT,  -- Editor notes during review
+    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` DATETIME NULL ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (`author_id`) REFERENCES `content_authors` (`id`) ON DELETE CASCADE,
+    FOREIGN KEY (`category_id`) REFERENCES `content_categories` (`id`) ON DELETE SET NULL,
+    INDEX `idx_slug` (`slug`),
+    INDEX `idx_author` (`author_id`),
+    INDEX `idx_category` (`category_id`),
+    INDEX `idx_status` (`status`),
+    INDEX `idx_published` (`published_at`),
+    INDEX `idx_featured` (`is_featured`),
+    INDEX `idx_ai_generated` (`is_ai_generated`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ============================================================
+-- 18. MEDIA LIBRARY TABLE
+-- File uploads for images, documents, etc.
+-- ============================================================
+CREATE TABLE IF NOT EXISTS `media_library` (
+    `id` INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    `filename` VARCHAR(255) NOT NULL,
+    `original_name` VARCHAR(255) NOT NULL,
+    `mime_type` VARCHAR(100) NOT NULL,
+    `file_path` VARCHAR(500) NOT NULL,
+    `file_size` INT UNSIGNED NOT NULL,  -- in bytes
+    `dimensions` VARCHAR(50),  -- width x height for images
+    `alt_text` VARCHAR(255),
+    `caption` TEXT,
+    `uploaded_by` INT UNSIGNED,
+    `is_active` TINYINT(1) NOT NULL DEFAULT 1,
+    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (`uploaded_by`) REFERENCES `users` (`id`) ON DELETE SET NULL,
+    INDEX `idx_filename` (`filename`),
+    INDEX `idx_mime_type` (`mime_type`),
+    INDEX `idx_uploaded_by` (`uploaded_by`),
+    INDEX `idx_active` (`is_active`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ============================================================
+-- 19. BLOG POST MEDIA TABLE
+-- Links posts to media files (featured images, galleries)
+-- ============================================================
+CREATE TABLE IF NOT EXISTS `blog_post_media` (
+    `id` INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    `post_id` INT UNSIGNED NOT NULL,
+    `media_id` INT UNSIGNED NOT NULL,
+    `media_type` ENUM('featured', 'gallery', 'inline') NOT NULL DEFAULT 'gallery',
+    `sort_order` INT NOT NULL DEFAULT 0,
+    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (`post_id`) REFERENCES `blog_posts` (`id`) ON DELETE CASCADE,
+    FOREIGN KEY (`media_id`) REFERENCES `media_library` (`id`) ON DELETE CASCADE,
+    UNIQUE KEY `unique_post_media` (`post_id`, `media_id`, `media_type`),
+    INDEX `idx_post` (`post_id`),
+    INDEX `idx_media` (`media_id`),
+    INDEX `idx_sort_order` (`sort_order`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ============================================================
+-- 20. BLOG POST TAGS TABLE
+-- Tags for better content organization
+-- ============================================================
+CREATE TABLE IF NOT EXISTS `blog_tags` (
+    `id` INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    `name` VARCHAR(50) NOT NULL UNIQUE,
+    `slug` VARCHAR(50) NOT NULL UNIQUE,
+    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    INDEX `idx_slug` (`slug`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ============================================================
+-- 21. BLOG POST TAGS MAPPING TABLE
+-- Many-to-many relationship between posts and tags
+-- ============================================================
+CREATE TABLE IF NOT EXISTS `blog_post_tags` (
+    `id` INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    `post_id` INT UNSIGNED NOT NULL,
+    `tag_id` INT UNSIGNED NOT NULL,
+    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (`post_id`) REFERENCES `blog_posts` (`id`) ON DELETE CASCADE,
+    FOREIGN KEY (`tag_id`) REFERENCES `blog_tags` (`id`) ON DELETE CASCADE,
+    UNIQUE KEY `unique_post_tag` (`post_id`, `tag_id`),
+    INDEX `idx_post` (`post_id`),
+    INDEX `idx_tag` (`tag_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ============================================================
+-- 22. AI DRAFT QUEUE TABLE
+-- Queue for AI-generated content drafts
+-- ============================================================
+CREATE TABLE IF NOT EXISTS `ai_draft_queue` (
+    `id` INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    `prompt` TEXT NOT NULL,
+    `topic` VARCHAR(255),
+    `category_id` INT UNSIGNED,
+    `target_word_count` INT,
+    `priority` ENUM('low', 'medium', 'high') NOT NULL DEFAULT 'medium',
+    `status` ENUM('pending', 'processing', 'completed', 'failed', 'approved', 'rejected') NOT NULL DEFAULT 'pending',
+    `generated_content` LONGTEXT,
+    `review_notes` TEXT,
+    `reviewed_by` INT UNSIGNED,
+    `reviewed_at` DATETIME,
+    `created_by` INT UNSIGNED,
+    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` DATETIME NULL ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (`category_id`) REFERENCES `content_categories` (`id`) ON DELETE SET NULL,
+    FOREIGN KEY (`reviewed_by`) REFERENCES `users` (`id`) ON DELETE SET NULL,
+    FOREIGN KEY (`created_by`) REFERENCES `users` (`id`) ON DELETE SET NULL,
+    INDEX `idx_status` (`status`),
+    INDEX `idx_priority` (`priority`),
+    INDEX `idx_category` (`category_id`),
+    INDEX `idx_created_by` (`created_by`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ============================================================
+-- SAMPLE CONTENT DATA
+-- ============================================================
+
+-- Insert sample content author
+INSERT INTO `content_authors` (`name`, `email`, `bio`) VALUES
+('CarResearch Team', 'editor@carresearch.com', 'Expert automotive journalists and reviewers providing in-depth analysis of cars in India.');
+
+-- Insert sample categories
+INSERT INTO `content_categories` (`name`, `slug`, `description`) VALUES
+('Car Reviews', 'car-reviews', 'Detailed reviews of new car launches and models'),
+('Buying Guide', 'buying-guide', 'Comprehensive guides to help you choose the right car'),
+('News', 'news', 'Latest automotive news and industry updates'),
+('Tips & Advice', 'tips-advice', 'Practical tips for car maintenance and ownership');
+
+-- Insert sample tags
+INSERT INTO `blog_tags` (`name`, `slug`) VALUES
+('SUV', 'suv'),
+('Sedan', 'sedan'),
+('Electric', 'electric'),
+('Hybrid', 'hybrid'),
+('Petrol', 'petrol'),
+('Diesel', 'diesel'),
+('Automatic', 'automatic'),
+('Manual', 'manual');
+
 -- Create indices for better performance
 CREATE INDEX idx_manufacturers_active ON `manufacturers` (`is_active`);
 CREATE INDEX idx_variants_active ON `variants` (`is_active`);
 CREATE INDEX idx_models_active ON `models` (`is_active`);
+CREATE INDEX idx_content_authors_active ON `content_authors` (`is_active`);
+CREATE INDEX idx_content_categories_active ON `content_categories` (`is_active`);
+CREATE INDEX idx_blog_posts_status ON `blog_posts` (`status`);
+CREATE INDEX idx_blog_posts_published ON `blog_posts` (`published_at`);
+CREATE INDEX idx_media_library_active ON `media_library` (`is_active`);

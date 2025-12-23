@@ -6,6 +6,9 @@ require_once __DIR__ . '/includes/config.php';
 require_once __DIR__ . '/includes/bootstrap.php';
 require_once __DIR__ . '/views/partials/empty_state.php';
 
+// Noindex for compare page
+$page_noindex = true;
+
 $ids = [];
 if (!empty($_GET['ids'])) {
     $ids = array_filter(array_map('trim', explode(',', (string) $_GET['ids'])));
@@ -135,6 +138,26 @@ function build_remove_url(string $removeKey): string
         </div>
     </div>
 </section>
+
+<!-- Sticky Compare Bar -->
+<div class="compare-sticky-bar" id="compare-sticky-bar" style="display: none;">
+    <div class="container">
+        <div class="compare-bar-content">
+            <div class="compare-bar-title">
+                <h3>Comparing <span id="compare-count">0</span> variants</h3>
+            </div>
+            <div class="compare-bar-chips" id="compare-bar-chips"></div>
+            <div class="compare-bar-actions">
+                <button class="btn btn-outline btn-sm" data-share-url id="share-compare-link">Copy link</button>
+                <button class="btn btn-ghost btn-sm" onclick="clearAllCompare()">Clear all</button>
+            </div>
+        </div>
+        <div class="compare-bar-search">
+            <input type="search" id="inline-search" placeholder="Add another variant..." aria-label="Search to add variant">
+            <div class="search-suggestions" id="inline-search-suggestions" hidden></div>
+        </div>
+    </div>
+</div>
 
 <section class="section">
     <div class="container">

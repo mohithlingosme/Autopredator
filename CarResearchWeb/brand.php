@@ -16,6 +16,13 @@ $page_description = $manufacturer
     ? 'Browse all ' . e($manufacturer['name']) . ' vehicles, compare models and find the best car for your budget.'
     : 'Browse all active manufacturers on Autopredator.';
 
+// Canonical URL for brand page
+if ($manufacturer) {
+    $page_canonical = 'https://autopredator.com/brand.php?manufacturer_name=' . urlencode($manufacturer['name']);
+} else {
+    $page_canonical = 'https://autopredator.com/brand.php';
+}
+
 // Breadcrumbs
 $breadcrumbs = [
     ['url' => 'index.php', 'label' => 'Home'],

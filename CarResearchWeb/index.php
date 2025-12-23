@@ -13,31 +13,43 @@ $featuredVariants = get_featured_variants(6);
 
 <section class="hero">
     <div class="container">
-        <div class="hero-card">
-            <p class="badge badge-soft">Car Research</p>
+        <div class="hero-card card">
+            <div class="badge badge-soft">Car Research Platform</div>
             <h1>Research, compare, and decide faster.</h1>
-            <p>Browse India-market cars, filter by price and fuel, then dive into variants with clean spec tables.</p>
+            <p class="text-secondary">Browse India-market cars, filter by price and fuel, then dive into variants with clean spec tables and expert reviews.</p>
             <?php include __DIR__ . '/views/partials/search_bar.php'; ?>
-            <div class="pill-row">
-                <a class="pill" href="search.php?max_budget=500000">Under 5L</a>
-                <a class="pill" href="search.php?min_budget=500000&max_budget=1000000">5-10L</a>
-                <a class="pill" href="search.php?min_budget=1000000&max_budget=2000000">10-20L</a>
-                <a class="pill" href="search.php?body_type=SUV">SUV</a>
-                <a class="pill" href="search.php?body_type=Hatchback">Hatchback</a>
-                <a class="pill" href="search.php?fuel_type=Electric">Electric</a>
+            <div class="flex flex-wrap gap-3 mt-4">
+                <a class="pill" href="search.php?max_budget=500000">
+                    <span>Under ₹5L</span>
+                </a>
+                <a class="pill" href="search.php?min_budget=500000&max_budget=1000000">
+                    <span>₹5-10L</span>
+                </a>
+                <a class="pill" href="search.php?min_budget=1000000&max_budget=2000000">
+                    <span>₹10-20L</span>
+                </a>
+                <a class="pill" href="search.php?body_type=SUV">
+                    <span>SUV</span>
+                </a>
+                <a class="pill" href="search.php?body_type=Hatchback">
+                    <span>Hatchback</span>
+                </a>
+                <a class="pill" href="search.php?fuel_type=Electric">
+                    <span>Electric</span>
+                </a>
             </div>
-            <div class="stat-row" style="margin-top: 20px;">
-                <div class="stat">
-                    <p class="muted">Active brands</p>
-                    <strong><?= e((string) count($featuredManufacturers)) ?></strong>
+            <div class="grid grid-3 mt-6">
+                <div class="text-center">
+                    <div class="text-2xl font-bold text-primary mb-1"><?= e((string) count($featuredManufacturers)) ?>+</div>
+                    <div class="text-sm text-muted">Active brands</div>
                 </div>
-                <div class="stat">
-                    <p class="muted">Model families</p>
-                    <strong><?= e((string) count($featuredFamilies)) ?></strong>
+                <div class="text-center">
+                    <div class="text-2xl font-bold text-primary mb-1"><?= e((string) count($featuredFamilies)) ?>+</div>
+                    <div class="text-sm text-muted">Model families</div>
                 </div>
-                <div class="stat">
-                    <p class="muted">Variants tracked</p>
-                    <strong><?= e((string) count($featuredVariants)) ?></strong>
+                <div class="text-center">
+                    <div class="text-2xl font-bold text-primary mb-1"><?= e((string) count($featuredVariants)) ?>+</div>
+                    <div class="text-sm text-muted">Variants tracked</div>
                 </div>
             </div>
         </div>

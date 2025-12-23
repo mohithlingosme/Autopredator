@@ -1,0 +1,26 @@
+[
+    {
+        "key": "air_conditioner",
+        "label": "Air Conditioner",
+        "category": "Comfort & Convenience",
+        "type": "boolean",
+        "priority": 10,
+        "aliases": ["Air Conditioner"]
+    },
+    {
+        "key": "power_windows",
+        "label": "Power Windows",
+        "category": "Comfort & Convenience",
+        "type": "boolean",
+        "priority": 20,
+        "aliases": ["Power Windows"]
+    },
+    {
+        "key": "central_locking",
+        "label": "Central Locking",
+        "category": "Safety",
+        "type": "boolean",
+        "priority": 15,
+        "aliases": ["Central Locking"]
+    }
+]

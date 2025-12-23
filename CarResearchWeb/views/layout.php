@@ -21,13 +21,21 @@ if (!function_exists('render_layout_start')) {
     <title><?= e($pageTitle) ?></title>
     <meta name="description" content="<?= e($pageDescription) ?>">
     <link rel="icon" href="favicon.ico">
-    <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/app.css">
+    <link rel="stylesheet" href="assets/css/components.css">
 </head>
 <body class="<?= e($bodyClass) ?>">
 <div class="page-shell">
     <?php include __DIR__ . '/partials/navbar.php'; ?>
     <main class="page-content" id="main-content">
+        <!-- Recently Viewed Section (only on home page) -->
+        <?php if (basename($_SERVER['PHP_SELF']) === 'index.php'): ?>
+            <section class="section">
+                <div class="container">
+                    <div data-recently-viewed></div>
+                </div>
+            </section>
+        <?php endif; ?>
 <?php if ($suggestions !== []): ?>
     <script type="application/json" id="search-suggestions"><?= json_encode($suggestions, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?></script>
 <?php endif; ?>

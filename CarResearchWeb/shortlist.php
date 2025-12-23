@@ -6,19 +6,27 @@ require_once __DIR__ . '/includes/bootstrap.php';
 require_once __DIR__ . '/views/partials/car_card.php';
 require_once __DIR__ . '/views/partials/empty_state.php';
 
-$shortlistedIds = [];
-if (isset($_GET['ids'])) {
-    $shortlistedIds = array_filter(explode(',', $_GET['ids']));
-} elseif (isset($_COOKIE['shortlist_variants'])) {
-    $shortlistedIds = json_decode($_COOKIE['shortlist_variants'], true) ?? [];
+// Noindex for shortlist page
+$page_noindex = true;
+
+$shortlistedSlugs = [];
+try {
+    $response = file_get_contents('http://' . $_SERVER['HTTP_HOST'] . '/api/shortlist');
+    $data = json_decode($response, true);
+    if ($data['ok']) {
+        $shortlistedSlugs = $data['data'];
+    }
+} catch (Exception $e) {
+    // Fallback to empty
 }
 
 $shortlistedVariants = [];
-if (!empty($shortlistedIds)) {
-    foreach ($shortlistedIds as $id) {
-        $variant = get_variant_by_id((int) $id);
-        if ($variant) {
-            $shortlistedVariants[] = $variant;
+if (!empty($shortlistedSlugs)) {
+    foreach ($shortlistedSlugs as $slug) {
+        $variantName = ucwords(str_replace('-', ' ', $slug));
+        $variants = repo()->search(['variant' => $variantName]);
+        if ($variants) {
+            $shortlistedVariants[] = $variants[0];
         }
     }
 }
@@ -62,7 +70,7 @@ $page_description = 'Review your shortlisted car variants and compare them.';
                         <?php endif; ?>
                         <div class="card-footer">
                             <a class="btn btn-primary" href="variant.php?variant_id=<?= (int) $variant['id'] ?>">View Variant</a>
-                            <button class="btn btn-outline btn-sm" type="button" data-shortlist-remove="<?= e($variant['id']) ?>" data-shortlist-label="<?= e($variant['manufacturer_name'] . ' ' . $variant['model_name'] . ' ' . $variant['variant_name']) ?>">Remove</button>
+                            <button class="btn btn-outline btn-sm" type="button" data-shortlist-remove="<?= e(strtolower(str_replace(' ', '-', $variant['variant']))) ?>" data-shortlist-label="<?= e($variant['manufacturer_name'] . ' ' . $variant['model_name'] . ' ' . $variant['variant_name']) ?>">Remove</button>
                         </div>
                     </article>
                 <?php endforeach; ?>
@@ -74,15 +82,25 @@ $page_description = 'Review your shortlisted car variants and compare them.';
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('[data-shortlist-remove]').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const variantId = this.getAttribute('data-shortlist-remove');
-            let shortlist = JSON.parse(localStorage.getItem('shortlist_variants') || '[]');
-            shortlist = shortlist.filter(id => id !== variantId);
-            localStorage.setItem('shortlist_variants', JSON.stringify(shortlist));
-            // Dispatch custom event to update badges
-            window.dispatchEvent(new Event('updateBadges'));
-            // Reload page to reflect changes
-            location.reload();
+        btn.addEventListener('click', async function() {
+            const variantSlug = this.getAttribute('data-shortlist-remove');
+            try {
+                const response = await fetch('/api/shortlist/remove', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ variant_slug: variantSlug })
+                });
+                const data = await response.json();
+                if (data.ok) {
+                    // Reload page to reflect changes
+                    location.reload();
+                } else {
+                    alert('Failed to remove from shortlist');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred');
+            }
         });
     });
 });
