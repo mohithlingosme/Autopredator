@@ -1,0 +1,194 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  detect:
+    name: Detect project areas
+    runs-on: ubuntu-latest
+    outputs:
+      backend: ${{ steps.check.outputs.backend }}
+      frontend: ${{ steps.check.outputs.frontend }}
+      php_app: ${{ steps.check.outputs.php_app }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - id: check
+        name: Check folders
+        run: |
+          if [ -d backend ]; then echo "backend=true" >> "$GITHUB_OUTPUT"; else echo "backend=false" >> "$GITHUB_OUTPUT"; fi
+          if [ -d frontend ]; then echo "frontend=true" >> "$GITHUB_OUTPUT"; else echo "frontend=false" >> "$GITHUB_OUTPUT"; fi
+          if [ -d php_app ]; then echo "php_app=true" >> "$GITHUB_OUTPUT"; else echo "php_app=false" >> "$GITHUB_OUTPUT"; fi
+
+  backend:
+    name: Backend (Python)
+    needs: detect
+    if: needs.detect.outputs.backend == 'true'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: backend
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: |
+            backend/requirements.txt
+            backend/requirements-dev.txt
+
+      - name: Install dependencies
+        run: |
+          if [ -f requirements.txt ]; then
+            pip install -r requirements.txt
+          else
+            echo "requirements.txt not found, skipping"
+          fi
+
+          if [ -f requirements-dev.txt ]; then
+            pip install -r requirements-dev.txt
+          else
+            echo "requirements-dev.txt not found, skipping"
+          fi
+
+      - name: Ruff (if installed)
+        run: |
+          if python -m pip show ruff >/dev/null 2>&1; then
+            ruff check .
+          else
+            echo "ruff not installed; skipping"
+          fi
+
+      - name: Black (if installed)
+        run: |
+          if python -m pip show black >/dev/null 2>&1; then
+            black --check .
+          else
+            echo "black not installed; skipping"
+          fi
+
+      - name: Mypy (if installed)
+        run: |
+          if python -m pip show mypy >/dev/null 2>&1; then
+            mypy .
+          else
+            echo "mypy not installed; skipping"
+          fi
+
+      - name: Pytest (if installed)
+        run: |
+          if python -m pip show pytest >/dev/null 2>&1; then
+            pytest -q
+          else
+            echo "pytest not installed; skipping"
+          fi
+
+  frontend:
+    name: Frontend (Node)
+    needs: detect
+    if: needs.detect.outputs.frontend == 'true'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: frontend
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install dependencies
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci
+          else
+            npm install
+          fi
+
+      - name: Lint (if script exists)
+        run: npm run lint --if-present
+
+      - name: Typecheck (if script exists)
+        run: npm run typecheck --if-present
+
+      - name: Build (if script exists)
+        run: npm run build --if-present
+
+  php:
+    name: PHP App
+    needs: detect
+    if: needs.detect.outputs.php_app == 'true'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: php_app
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.2"
+          coverage: none
+
+      - name: PHP lint
+        run: |
+          if compgen -G "**/*.php" >/dev/null; then
+            find . -name "*.php" -print -exec php -l {} \;
+          else
+            echo "No PHP files found; skipping php -l"
+          fi
+
+      - name: Install Composer dependencies
+        run: |
+          if [ -f composer.json ]; then
+            composer install --no-interaction --no-progress
+          else
+            echo "composer.json not found; skipping composer install"
+          fi
+
+      - name: PHPUnit (if available)
+        run: |
+          if [ -x vendor/bin/phpunit ]; then
+            vendor/bin/phpunit
+          else
+            echo "phpunit not installed; skipping tests"
+          fi
+
+  summary:
+    name: Summary
+    needs:
+      - detect
+      - backend
+      - frontend
+      - php
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print results
+        run: |
+          echo "Backend job: ${{ needs.backend.result }}"
+          echo "Frontend job: ${{ needs.frontend.result }}"
+          echo "PHP job: ${{ needs.php.result }}"
+          echo "CI done ✅"
