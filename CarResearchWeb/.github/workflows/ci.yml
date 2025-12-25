@@ -1,0 +1,203 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [ "main", "master" ]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  changes:
+    name: Detect changes
+    runs-on: ubuntu-latest
+    outputs:
+      php: ${{ steps.filter.outputs.php }}
+      node: ${{ steps.filter.outputs.node }}
+      python: ${{ steps.filter.outputs.python }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Path filter
+        id: filter
+        uses: dorny/paths-filter@v3
+        with:
+          filters: |
+            php:
+              - '**/*.php'
+              - 'composer.json'
+              - 'composer.lock'
+            node:
+              - '**/package.json'
+              - '**/package-lock.json'
+              - '**/pnpm-lock.yaml'
+              - '**/yarn.lock'
+              - 'frontend/**'
+              - 'client/**'
+              - 'web/**'
+            python:
+              - '**/*.py'
+              - 'pyproject.toml'
+              - 'requirements*.txt'
+              - 'backend/**'
+              - 'api/**'
+
+  php:
+    name: PHP checks
+    needs: [changes]
+    if: ${{ needs.changes.outputs.php == 'true' || hashFiles('**/composer.json') != '' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.2"
+          tools: composer:v2
+          coverage: none
+
+      - name: PHP syntax lint
+        run: |
+          shopt -s globstar
+          php -v
+          # Lint all PHP files (skip vendor if present)
+          for f in **/*.php; do
+            [[ "$f" == vendor/* ]] && continue
+            php -l "$f" >/dev/null
+          done
+
+      - name: Composer install (if composer.json exists)
+        if: ${{ hashFiles('**/composer.json') != '' }}
+        run: |
+          set -e
+          COMPOSER_DIR="$(dirname "$(find . -name composer.json | head -n 1)")"
+          if [ -z "$COMPOSER_DIR" ] || [ "$COMPOSER_DIR" = "." ]; then
+            COMPOSER_DIR="."
+          fi
+          echo "Composer directory: $COMPOSER_DIR"
+          cd "$COMPOSER_DIR"
+          composer install --no-interaction --no-progress --prefer-dist
+
+      - name: PHPUnit (if available)
+        if: ${{ hashFiles('**/vendor/bin/phpunit') != '' || hashFiles('**/phpunit.xml*') != '' }}
+        run: |
+          if [ -f "vendor/bin/phpunit" ]; then
+            vendor/bin/phpunit --colors=always
+          else
+            echo "PHPUnit not found; skipping."
+          fi
+
+  node:
+    name: Node checks
+    needs: [changes]
+    if: ${{ needs.changes.outputs.node == 'true' || hashFiles('**/package.json') != '' }}
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: |
+            package-lock.json
+            frontend/package-lock.json
+            client/package-lock.json
+            web/package-lock.json
+
+      - name: Install + lint + test + build (auto-detect folder)
+        run: |
+          set -e
+          # Pick a frontend directory if it exists; fallback to first package.json or root.
+          DIR=""
+          for d in frontend client web; do
+            if [ -f "$d/package.json" ]; then DIR="$d"; break; fi
+          done
+          if [ -z "$DIR" ] && [ -f "package.json" ]; then
+            DIR="."
+          fi
+          if [ -z "$DIR" ]; then
+            DIR="$(dirname "$(find . -name package.json | head -n 1)")"
+          fi
+          if [ -z "$DIR" ]; then
+            echo "No package.json found; skipping Node checks."
+            exit 0
+          fi
+
+          echo "Using Node project dir: $DIR"
+          cd "$DIR"
+
+          if [ -f package-lock.json ]; then
+            npm ci
+          else
+            npm install
+          fi
+
+          if npm run | grep -qE '^  lint'; then npm run lint; else echo "No lint script"; fi
+          if npm run | grep -qE '^  test'; then npm test -- --runInBand || npm test; else echo "No test script"; fi
+          if npm run | grep -qE '^  build'; then npm run build; else echo "No build script"; fi
+
+      - name: Upload build artifact (if build exists)
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-build
+          path: |
+            frontend/dist
+            client/dist
+            web/dist
+            dist
+          if-no-files-found: ignore
+
+  python:
+    name: Python checks
+    needs: [changes]
+    if: ${{ needs.changes.outputs.python == 'true' || hashFiles('**/pyproject.toml') != '' || hashFiles('**/requirements*.txt') != '' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install deps (requirements.txt or pyproject)
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f "requirements.txt" ]; then
+            pip install -r requirements.txt
+          elif [ -f "backend/requirements.txt" ]; then
+            pip install -r backend/requirements.txt
+          elif [ -f "pyproject.toml" ]; then
+            pip install -e ".[dev]" || pip install -e .
+          else
+            echo "No Python dependency file found; installing minimal tooling."
+            pip install ruff pytest
+          fi
+
+      - name: Ruff (lint)
+        run: |
+          if python -c "import ruff" 2>/dev/null; then
+            ruff check .
+          else
+            echo "ruff not installed; skipping."
+          fi
+
+      - name: Pytest
+        run: |
+          if command -v pytest >/dev/null 2>&1; then
+            pytest -q
+          else
+            echo "pytest not installed; skipping."
+          fi

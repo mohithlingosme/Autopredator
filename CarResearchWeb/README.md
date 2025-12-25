@@ -33,6 +33,25 @@ Lightweight PHP app for researching Indian-market cars. Ships with brand/model/v
 2) Run `docker-compose up --build` to start the application with MySQL database.
 3) Open http://localhost:8000 in your browser.
 
+## CI/CD
+- CI (`.github/workflows/ci.yml`): runs on PRs and pushes to `main`/`master`, auto-detects stacks; PHP 8.2 lint + composer install + PHPUnit; Node (if `package.json` exists) runs `npm ci`/lint/test/build and uploads `dist`; Python (if any `.py`/requirements) installs deps, runs Ruff when available, then pytest.
+- Security (`.github/workflows/security.yml`): dependency review on PRs, CodeQL for detected JavaScript/Python/PHP, and Trivy filesystem scan for HIGH/CRITICAL issues on pushes/PRs/weekly.
+- Release Docker (`.github/workflows/release-docker.yml`): builds with Buildx and pushes to GHCR on `v*.*.*` tags or manual dispatch, tagging both the version and `latest`; auto-detects Dockerfile location if not at repo root.
+- Deploy (`.github/workflows/deploy.yml`): deploys over SSH on manual dispatch or push to `main`/`master`; writes `IMAGE` into `.env`, then `docker compose pull && docker compose up -d --remove-orphans` at `DEPLOY_PATH`.
+
+### GitHub Actions secrets/vars
+- `SSH_HOST`, `SSH_USER`, `SSH_KEY` (private key), `SSH_PORT` (optional), `DEPLOY_PATH`, `IMAGE` for deploys.
+- Default GHCR auth uses `GITHUB_TOKEN` for release builds; set `IMAGE` to `ghcr.io/<owner>/carresearchweb:tag`.
+
+## Release
+- Tag `vX.Y.Z` to trigger the Docker build/push to GHCR (`ghcr.io/<owner>/carresearchweb:<tag>` and `:latest`).  
+- You can also run the release workflow manually with a custom tag input if needed.
+
+## Deploy
+- Server needs Docker + Docker Compose plugin and GHCR pull access (`docker login ghcr.io -u <user> -p <PAT>` once).
+- Workflow assumes `docker-compose.yml` exists at `$DEPLOY_PATH` on the server and uses the `IMAGE` env value written into `.env`.
+- After a successful deploy, containers are refreshed and old images are pruned via `docker image prune -f`.
+
 ## Configuration
 - `config.php` defines `BASE_PATH`, `DATA_DIR`, `APP_ENV`, and `USE_JSON` (JSON is the primary source). Production mode disables display_errors.  
 - `includes/config.php` simply loads the shared config for legacy includes.
