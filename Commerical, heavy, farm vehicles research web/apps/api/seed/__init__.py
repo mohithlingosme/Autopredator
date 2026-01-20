@@ -1,0 +1,1 @@
+"""AutoPredator seed package."""

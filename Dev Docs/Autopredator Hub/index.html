@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Autopredator Hub - Ecosystem Entry Portal</title>
+  <style>
+    :root {
+      --red: #e02424;
+      --red-dark: #b01616;
+      --bg: #050505;
+      --bg-card: #0c0c0c;
+      --bg-quiet: #131313;
+      --text: #ffffff;
+      --muted: #b5b5b5;
+      --line: #202020;
+      --shadow: 0 18px 38px rgba(0, 0, 0, 0.55);
+      --radius-lg: 18px;
+      --radius-xl: 24px;
+      --speed: 0.2s ease-out;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      background: radial-gradient(circle at 10% 10%, #121212, var(--bg) 60%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(12px);
+      background: rgba(0, 0, 0, 0.75);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 0;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, #ff5a5a, #8c1111);
+      display: grid;
+      place-items: center;
+      color: #fff;
+      box-shadow: 0 0 18px rgba(224, 36, 36, 0.7);
+      font-size: 0.85rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .nav-link {
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      position: relative;
+      padding-bottom: 0.12rem;
+    }
+
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 2px;
+      width: 0;
+      background: var(--red);
+      transition: width var(--speed);
+    }
+
+    .nav-link:hover {
+      color: var(--text);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      display: flex;
+      gap: 0.6rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 0.55rem 1rem;
+      background: transparent;
+      color: var(--text);
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all var(--speed);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+    }
+
+    .btn:hover {
+      border-color: var(--red);
+      color: #fff;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--red), var(--red-dark));
+      border-color: transparent;
+      box-shadow: 0 0 18px rgba(224, 36, 36, 0.7);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 0 26px rgba(224, 36, 36, 0.9);
+    }
+
+    section {
+      padding: 3rem 0 2.5rem;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: flex-end;
+      margin-bottom: 1.4rem;
+    }
+
+    .section-title-group {
+      max-width: 520px;
+    }
+
+    .kicker {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+    }
+
+    .section-title {
+      font-size: 1.35rem;
+      letter-spacing: 0.02em;
+    }
+
+    .section-sub {
+      font-size: 0.92rem;
+      color: var(--muted);
+      margin-top: 0.4rem;
+    }
+
+    .section-tagline {
+      font-size: 0.82rem;
+      color: var(--muted);
+      max-width: 360px;
+    }
+
+    @media (max-width: 860px) {
+      .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      header {
+        position: static;
+      }
+    }
+
+    .hero {
+      padding: 3.5rem 0 2.5rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 1.6rem;
+      align-items: center;
+    }
+
+    .hero-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.25rem 0.8rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.02);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.9rem;
+    }
+
+    .hero-title {
+      font-size: clamp(2.2rem, 4vw, 2.8rem);
+      line-height: 1.08;
+      margin-bottom: 0.8rem;
+    }
+
+    .hero-title span {
+      color: var(--red);
+    }
+
+    .hero-sub {
+      font-size: 1rem;
+      color: var(--muted);
+      max-width: 34rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 0.7rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .hero-note {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-top: 0.6rem;
+    }
+
+    .hero-card {
+      background: linear-gradient(135deg, #141414, #0b0b0b);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      padding: 1.2rem;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card h4 {
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0.8rem;
+      font-size: 0.9rem;
+    }
+
+    .mini-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: 0.75rem;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .mini-card strong {
+      display: block;
+      margin-bottom: 0.25rem;
+      font-size: 0.9rem;
+    }
+
+    .mini-card span {
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+    .grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .cols-3 {
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+
+    .cols-4 {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+
+    .card {
+      padding: 1rem;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--line);
+      background: var(--bg-card);
+      transition: transform var(--speed), border-color var(--speed), box-shadow var(--speed);
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(224, 36, 36, 0.5);
+      box-shadow: var(--shadow);
+    }
+
+    .card h3 {
+      font-size: 1.05rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 0.88rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .meta {
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+    }
+
+    .list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      padding-left: 0;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .list li {
+      display: flex;
+      gap: 0.5rem;
+      align-items: flex-start;
+    }
+
+    .list li::before {
+      content: "-";
+      color: var(--red);
+      margin-top: 0.1rem;
+      display: inline-block;
+      width: 10px;
+    }
+
+    .diagram {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 0.8rem;
+      font-size: 0.88rem;
+    }
+
+    .diagram .node {
+      padding: 0.85rem;
+      border-radius: var(--radius-lg);
+      border: 1px dashed var(--line);
+      background: #0a0a0a;
+      text-align: center;
+    }
+
+    .node strong {
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+
+    form {
+      display: grid;
+      gap: 0.8rem;
+    }
+
+    label {
+      display: block;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 0.25rem;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 0.65rem 0.75rem;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: #0f0f0f;
+      color: var(--text);
+      font-size: 0.95rem;
+    }
+
+    textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 1.4rem 0;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.65);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      z-index: 50;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal {
+      background: #0f0f0f;
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--line);
+      padding: 1.2rem;
+      max-width: 460px;
+      width: 100%;
+      box-shadow: var(--shadow);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.6rem;
+    }
+
+    .modal-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+    }
+
+    .modal-close {
+      border: 1px solid var(--line);
+      width: 36px;
+      height: 36px;
+      border-radius: 11px;
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+      font-size: 1rem;
+    }
+
+    .modal-note {
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-top: 0.5rem;
+      border-top: 1px dashed var(--line);
+      padding-top: 0.6rem;
+    }
+
+    @media (max-width: 720px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .nav-links, .nav-cta {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="container nav">
+        <div class="brand">
+          <div class="brand-mark">AP</div>
+          <div>
+            <div>Autopredator</div>
+            <div style="font-size: 0.65rem; color: var(--muted); letter-spacing: 0.12em;">Hub Gateway</div>
+          </div>
+        </div>
+        <div class="nav-links">
+          <a class="nav-link" data-scroll="#home">Home</a>
+          <a class="nav-link" data-scroll="#ecosystem">Ecosystem</a>
+          <a class="nav-link" data-scroll="#solutions">Solutions</a>
+          <a class="nav-link" data-scroll="#apps">Apps</a>
+          <a class="nav-link" data-scroll="#story">Story</a>
+          <a class="nav-link" data-scroll="#resources">Resources</a>
+          <a class="nav-link" data-scroll="#contact">Contact</a>
+        </div>
+        <div class="nav-cta">
+          <button class="btn" data-scroll="#apps">Explore Apps</button>
+          <button class="btn" data-scroll="#contact">Talk to Us</button>
+          <button class="btn btn-primary" id="openLogin">Sign In</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section id="home" class="hero">
+        <div class="container hero-grid">
+          <div>
+            <div class="hero-label">Autopredator Hub</div>
+            <div class="hero-title">
+              Multiple apps, <span>one brand.</span> The entry point for every vehicle user.
+            </div>
+            <p class="hero-sub">
+              Hero + story for Autopredator. Who it is for, why the ecosystem matters, and the first step to take.
+              Hub is not a dashboard; it is the guide and router for the fleet, marketplace, finance, EV, and analytics apps.
+            </p>
+            <div class="hero-list">
+              <div class="pill">For individual owners, fleets, partners, and heavy equipment users</div>
+              <div class="pill">Apps and services preview: Fleet Pro, AutoMart, Finance Desk, EV Center, AI Advisor</div>
+              <div class="pill">Strong CTAs: Explore Apps, Talk to Us, Sign In</div>
+            </div>
+            <div class="hero-ctas">
+              <button class="btn btn-primary" data-scroll="#apps">Explore Apps</button>
+              <button class="btn" data-scroll="#contact">Talk to Us</button>
+              <button class="btn" id="openLoginSecondary">Sign In</button>
+            </div>
+            <div class="hero-note">Short who-it-is-for and app teaser live on the home page.</div>
+          </div>
+          <div class="hero-card">
+            <h4>Gateway Snapshot</h4>
+            <div class="hero-card-grid">
+              <div class="mini-card">
+                <strong>Trusted entry</strong>
+                <span>Hub explains the ecosystem and routes you after identity is confirmed.</span>
+              </div>
+              <div class="mini-card">
+                <strong>Segment aware</strong>
+                <span>Individuals, fleets, farmers, construction, partners all get tailored paths.</span>
+              </div>
+              <div class="mini-card">
+                <strong>Primary CTAs</strong>
+                <span>Explore Apps / Talk to Us / Sign In appear across the page.</span>
+              </div>
+              <div class="mini-card">
+                <strong>Simple language</strong>
+                <span>Plain-English benefits and India-specific context stay up front.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="ecosystem">
+        <div class="container">
+          <div class="section-header">
+            <div class="section-title-group">
+              <div class="kicker">Ecosystem</div>
+              <div class="section-title">Autopredator = multiple apps, one brand.</div>
+              <div class="section-sub">
+                Clear explainer that Hub is the entry point and story layer, not the operations dashboard.
+                From Hub, users branch to fleet, marketplace, finance, EV, analytics, and partner consoles.
+              </div>
+            </div>
+            <div class="section-tagline">Simple diagrams and routes clarify Hub to Fleet, Marketplace, Finance, EV, AI.</div>
+          </div>
+          <div class="diagram">
+            <div class="node"><strong>Hub</strong>Entry + explainer + identity router</div>
+            <div class="node"><strong>Fleet</strong>Fleet Pro, Driver Console, Insight</div>
+            <div class="node"><strong>Marketplace</strong>AutoMart, Auction Hub, ScrapConnect</div>
+            <div class="node"><strong>Finance</strong>Finance Desk, InsurePro, Credit Checker</div>
+            <div class="node"><strong>EV</strong>EV Center, Charging Portal, Green Score</div>
+            <div class="node"><strong>AI</strong>AI Vehicle Advisor, AI Mechanic, Predictive Insight</div>
+          </div>
+          <div class="card" style="margin-top: 1rem;">
+            <div class="meta">Clarify</div>
+            <p>Hub is not the dashboard. It tells the story, lists apps, collects intent, and hands off to the right specialized product.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="solutions">
+        <div class="container">
+          <div class="section-header">
+            <div class="section-title-group">
+              <div class="kicker">Solutions</div>
+              <div class="section-title">High-level index by user type.</div>
+              <div class="section-sub">
+                /solutions is the index page linking to segment-specific pages below. Each card shows problems,
+                relevant apps, and a CTA.
+              </div>
+            </div>
+            <div class="section-tagline">Individuals, fleets, farmers, construction, partners.</div>
+          </div>
+          <div class="grid cols-3">
+            <div class="card">
+              <div class="meta">/solutions/individuals</div>
+              <h3>Individuals / Family Owners</h3>
+              <p>Explain problems and benefits in simple language. Reminders, cost control, buying and basic finance.</p>
+              <ul class="list">
+                <li>Relevant apps: Reminder tool, Vehicle Vault, AutoMart, basic Finance.</li>
+                <li>CTA: Start with free tool / Sign up.</li>
+              </ul>
+            </div>
+            <div class="card">
+              <div class="meta">/solutions/fleet</div>
+              <h3>Fleets & Logistics</h3>
+              <p>For taxis, trucks, staff transport operators wanting structure and analytics.</p>
+              <ul class="list">
+                <li>Apps: Fleet Pro, Driver Console, Insight, Finance Desk.</li>
+                <li>CTA: Book a fleet demo.</li>
+              </ul>
+            </div>
+            <div class="card">
+              <div class="meta">/solutions/rural</div>
+              <h3>Farmers & Rural Users</h3>
+              <p>Tractors and agri machinery owners needing seasonal reminders and financing clarity.</p>
+              <ul class="list">
+                <li>Apps: AgriDrive, Finance Desk (agri), basic reminders.</li>
+                <li>CTA: Talk to an advisor / See Agri tools.</li>
+              </ul>
+            </div>
+            <div class="card">
+              <div class="meta">/solutions/construction</div>
+              <h3>Construction & Heavy Equipment</h3>
+              <p>JCBs, cranes, earthmovers, tippers seeking utilisation and compliance control.</p>
+              <ul class="list">
+                <li>Apps: BuildDrive, Fleet Pro.</li>
+                <li>CTA: Request heavy fleet demo.</li>
+              </ul>
+            </div>
+            <div class="card">
+              <div class="meta">/solutions/partners</div>
+              <h3>Workshops, Dealers & Partners</h3>
+              <p>Garages, tyre shops, dealers, finance and insurance partners needing digital leads and onboarding.</p>
+              <ul class="list">
+                <li>Apps: Partner Console, Workshop Portal, Lead APIs.</li>
+                <li>CTA: Apply to become a partner.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="apps">
+        <div class="container">
+          <div class="section-header">
+            <div class="section-title-group">
+              <div class="kicker">Apps & Services Catalog</div>
+              <div class="section-title">Grouped by category with detail page paths.</div>
+              <div class="section-sub">
+                /apps page shows the ecosystem catalog. Each app has a detail page with what it does, who it is for,
+                3-5 benefits, how it connects, and CTAs to sign in, book demo, or contact sales.
+              </div>
+            </div>
+            <div class="section-tagline">Ownership & Compliance, Marketplace, Fleet & Heavy, Finance, EV, AI & Analytics.</div>
+          </div>
+          <div class="grid cols-3">
+            <div class="card">
+              <div class="meta">Ownership & Compliance</div>
+              <h3>Vehicle Vault</h3>
+              <p>/apps/vehicle-vault - digital RC, insurance, permits, compliance tracking.</p>
+              <ul class="list">
+                <li>Also list: Challan Center, LegalDesk, Reminder Tool.</li>
+              </ul>
+            </div>
+            <div class="card">
+              <div class="meta">Marketplace</div>
+              <h3>AutoMart</h3>
+              <p>/apps/automart - buy/sell vehicles; works with Auction Hub and ScrapConnect.</p>
+              <ul class="list">
+                <li>Other pages: /apps/auction-hub, /apps/scrapconnect.</li>
+              </ul>
+            </div>
+            <div class="card">
+              <div class="meta">Fleet & Heavy</div>
+              <h3>Fleet Pro</h3>
+              <p>/apps/fleet-pro - fleet operations, visibility, driver console, heavy verticals.</p>
+              <ul class="list">
+                <li>Verticals: BuildDrive, AgriDrive; insights via /apps/insight.</li>
+              </ul>
+            </div>
+            <div class="card">
+              <div class="meta">Finance & Insurance</div>
+              <h3>Finance Desk</h3>
+              <p>/apps/finance-desk - compare, track EMIs; fits with InsurePro and Credit Checker.</p>
+              <ul class="list">
+                <li>Other detail pages: /apps/insurepro.</li>
+              </ul>
+            </div>
+            <div class="card">
+              <div class="meta">EV & Future Mobility</div>
+              <h3>EV Center</h3>
+              <p>/apps/ev-center - charging, battery health, EV readiness.</p>
+              <ul class="list">
+                <li>Also: Charging Portal, Green Score.</li>
+              </ul>
+            </div>
+            <div class="card">
+              <div class="meta">AI & Analytics</div>
+              <h3>AI Vehicle Advisor</h3>
+              <p>/apps/ai-vehicle-advisor - plain-language purchase guidance linked to ecosystem data.</p>
+              <ul class="list">
+                <li>Also: AI Mechanic, Predictive Maintenance & Insight.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="card" style="margin-top: 1rem;">
+            <div class="meta">App Detail Template</div>
+            <p>Each detail page covers: what it does, who it is for, 3-5 benefits, how it connects to other apps, CTA (sign in, demo, contact sales).</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="story">
+        <div class="container">
+          <div class="section-header">
+            <div class="section-title-group">
+              <div class="kicker">Trust & Story</div>
+              <div class="section-title">Why Autopredator and who we are.</div>
+              <div class="section-sub">
+                /why-autopredator explains the one-ecosystem philosophy and India-focused approach.
+                /about covers mission, vision, timeline, and team summary. /stories hosts case studies and testimonials.
+              </div>
+            </div>
+            <div class="section-tagline">Comparisons vs fragmented tools; placeholders for quotes, before/after metrics.</div>
+          </div>
+          <div class="grid cols-3">
+            <div class="card">
+              <div class="meta">/why-autopredator</div>
+              <h3>Why one ecosystem?</h3>
+              <p>Story, philosophy, India-specific focus; position against random standalone tools.</p>
+            </div>
+            <div class="card">
+              <div class="meta">/about</div>
+              <h3>About / Company</h3>
+              <p>Mission, vision, roadmap timeline; add team snapshots later.</p>
+            </div>
+            <div class="card">
+              <div class="meta">/stories</div>
+              <h3>Case Studies & Testimonials</h3>
+              <p>Fleet, individual, partner stories with before/after, quotes, metrics.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="resources">
+        <div class="container">
+          <div class="section-header">
+            <div class="section-title-group">
+              <div class="kicker">Resources & Content</div>
+              <div class="section-title">Blog, guides, help center.</div>
+              <div class="section-sub">
+                /blog for articles; /guides for playbooks; /help for FAQs and links to app-specific help docs.
+              </div>
+            </div>
+            <div class="section-tagline">Buying, maintaining, financing, EV basics, permits, scrappage rules.</div>
+          </div>
+          <div class="grid cols-3">
+            <div class="card">
+              <div class="meta">/blog</div>
+              <h3>Articles & Updates</h3>
+              <p>Guides on buying, maintaining, financing, EV basics, and ecosystem news.</p>
+            </div>
+            <div class="card">
+              <div class="meta">/guides</div>
+              <h3>Guides & Playbooks</h3>
+              <ul class="list">
+                <li>How to manage a small fleet</li>
+                <li>Basics of permits and challans</li>
+                <li>Understanding scrappage rules</li>
+              </ul>
+            </div>
+            <div class="card">
+              <div class="meta">/help</div>
+              <h3>Help Center / FAQ</h3>
+              <p>General FAQs plus links to app-specific help docs.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="contact">
+        <div class="container">
+          <div class="section-header">
+            <div class="section-title-group">
+              <div class="kicker">Contact, Sales & Partner Flows</div>
+              <div class="section-title">Talk to us, book demos, become a partner.</div>
+              <div class="section-sub">
+                /contact form with WhatsApp/phone/email, simple options per segment.
+                /demo for fleets; /partners/apply for workshops, dealers, and finance/insurance partners.
+              </div>
+            </div>
+            <div class="section-tagline">Simple intent capture, routed to the right product specialist.</div>
+          </div>
+          <div class="grid cols-3">
+            <div class="card">
+              <div class="meta">/contact</div>
+              <h3>Talk to Us</h3>
+              <form>
+                <div>
+                  <label>Name</label>
+                  <input type="text" placeholder="Your name" />
+                </div>
+                <div>
+                  <label>Email</label>
+                  <input type="email" placeholder="you@example.com" />
+                </div>
+                <div>
+                  <label>I am</label>
+                  <select>
+                    <option>Individual</option>
+                    <option>Fleet</option>
+                    <option>Partner</option>
+                  </select>
+                </div>
+                <div>
+                  <label>Message</label>
+                  <textarea placeholder="Tell us what you need"></textarea>
+                </div>
+                <button class="btn btn-primary" type="submit">Submit</button>
+              </form>
+            </div>
+            <div class="card">
+              <div class="meta">/demo</div>
+              <h3>Book a Demo</h3>
+              <p>Fleet / B2B demo for Fleet Pro, Insight, heavy fleet modules.</p>
+              <button class="btn">Request demo</button>
+            </div>
+            <div class="card">
+              <div class="meta">/partners/apply</div>
+              <h3>Become a Partner</h3>
+              <p>Onboarding flow for workshops, dealers, finance/insurance partners.</p>
+              <button class="btn">Apply as partner</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="auth">
+        <div class="container">
+          <div class="section-header">
+            <div class="section-title-group">
+              <div class="kicker">Auth & Routing</div>
+              <div class="section-title">Gateway login, signup, and utility pages.</div>
+              <div class="section-sub">
+                /login with generic login form; backend decides where to route (fleet, marketplace, etc.).
+                /signup with primary segment selection. Utility pages: /forgot-password, /reset-password, /verify-email.
+              </div>
+            </div>
+            <div class="section-tagline">No vehicle data shown in Hub; routing happens after identity.</div>
+          </div>
+          <div class="grid cols-4">
+            <div class="card">
+              <div class="meta">/login</div>
+              <h3>Sign In</h3>
+              <p>Identity check and router to fleet, marketplace, finance, EV, etc.</p>
+            </div>
+            <div class="card">
+              <div class="meta">/signup</div>
+              <h3>Create Account</h3>
+              <p>Minimal registration with segment selection (individual, fleet, partner).</p>
+            </div>
+            <div class="card">
+              <div class="meta">Password Utilities</div>
+              <p>/forgot-password, /reset-password, /verify-email.</p>
+            </div>
+            <div class="card">
+              <div class="meta">Routing Note</div>
+              <p>Hub is the identity + router; dashboards live on dedicated subdomains.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="legal">
+        <div class="container">
+          <div class="section-header">
+            <div class="section-title-group">
+              <div class="kicker">Legal & Policy</div>
+              <div class="section-title">Terms, privacy, cookies, security.</div>
+              <div class="section-sub">
+                /legal/terms, /legal/privacy, /legal/cookies, /legal/security. Optional meta pages: /status, /changelog.
+              </div>
+            </div>
+            <div class="section-tagline">Ecosystem-level policies referenced by every app.</div>
+          </div>
+          <div class="grid cols-3">
+            <div class="card">
+              <div class="meta">/legal/terms</div>
+              <h3>Terms of Use</h3>
+              <p>Cover ecosystem products and routing expectations.</p>
+            </div>
+            <div class="card">
+              <div class="meta">/legal/privacy</div>
+              <h3>Privacy Policy</h3>
+              <p>Data practices for Hub, apps, and shared identity service.</p>
+            </div>
+            <div class="card">
+              <div class="meta">/legal/cookies + /legal/security</div>
+              <h3>Cookies & Security</h3>
+              <p>Consent, data handling, security practices.</p>
+            </div>
+          </div>
+          <div class="card" style="margin-top: 1rem;">
+            <div class="meta">System / Meta</div>
+            <p>Optional public status page (/status or external link) and changelog (/changelog) for ecosystem-level updates.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container footer-row">
+        <div>Autopredator Hub - Ecosystem Entry Portal.</div>
+        <div class="footer-links">
+          <a href="#legal">Legal</a>
+          <a href="#contact">Contact</a>
+          <a href="#legal">Status & Changelog</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+  <div class="modal-backdrop" id="loginModal">
+    <div class="modal">
+      <div class="modal-header">
+        <div class="modal-title">Sign in to Autopredator</div>
+        <button class="modal-close" id="closeLogin" aria-label="Close">x</button>
+      </div>
+      <p style="color: var(--muted); margin-bottom: 0.6rem;">
+        Login is the gateway. After authentication, backend routes you to the right product (Fleet, Marketplace, Finance, EV, AI).
+        No vehicle data is displayed inside the Hub.
+      </p>
+      <form onsubmit="event.preventDefault(); alert('Demo: route based on segment');">
+        <div>
+          <label>Email</label>
+          <input type="email" placeholder="you@example.com" required />
+        </div>
+        <div>
+          <label>Password</label>
+          <input type="password" placeholder="********" required />
+        </div>
+        <div>
+          <label>I am primarily a...</label>
+          <select>
+            <option>Individual owner</option>
+            <option>Fleet operator</option>
+            <option>Farmer / rural user</option>
+            <option>Construction / heavy equipment owner</option>
+            <option>Workshop / dealer / partner</option>
+          </select>
+        </div>
+        <button class="btn btn-primary" type="submit" style="width: 100%;">Sign in & route me</button>
+      </form>
+      <div class="modal-note">
+        Real product: selected segment plus backend rules send you to fleet.autopredator.com, market.autopredator.com,
+        finance.autopredator.com, or other specialized apps.
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.querySelectorAll("[data-scroll]").forEach(function (el) {
+      el.addEventListener("click", function () {
+        var id = el.getAttribute("data-scroll");
+        var target = document.querySelector(id);
+        if (target) {
+          window.scrollTo({
+            top: target.offsetTop - 60,
+            behavior: "smooth",
+          });
+        }
+      });
+    });
+
+    const loginModal = document.getElementById("loginModal");
+    const openLogin = document.getElementById("openLogin");
+    const openLoginSecondary = document.getElementById("openLoginSecondary");
+    const closeLogin = document.getElementById("closeLogin");
+
+    function openModal() {
+      if (loginModal) loginModal.classList.add("open");
+    }
+
+    function closeModal() {
+      if (loginModal) loginModal.classList.remove("open");
+    }
+
+    [openLogin, openLoginSecondary].forEach(function (btn) {
+      if (btn) btn.addEventListener("click", openModal);
+    });
+
+    if (closeLogin) closeLogin.addEventListener("click", closeModal);
+    if (loginModal) {
+      loginModal.addEventListener("click", function (e) {
+        if (e.target === loginModal) closeModal();
+      });
+    }
+  </script>
+</body>
+</html>
+
+
+

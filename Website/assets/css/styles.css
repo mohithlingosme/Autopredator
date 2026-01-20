@@ -1,0 +1,22 @@
+:root {
+  --ap-black: #0b0f14;
+  --ap-black-soft: #0f141b;
+  --ap-white: #e8edf5;
+  --ap-white-soft: #9aa5b5;
+  --ap-red: #e50914;
+  --ap-red-dark: #b00010;
+  --ap-red-soft: #ffd6d9;
+  --ap-accent: #19e6b3;
+  --ap-border: #1f2733;
+  --ap-radius: 14px;
+  --ap-spacing-1: 8px;
+  --ap-spacing-2: 14px;
+  --ap-spacing-3: 22px;
+  --ap-spacing-4: 34px;
+}
+
+body {
+  background: radial-gradient(circle at 10% 10%, rgba(25, 230, 179, 0.05), transparent 25%), radial-gradient(circle at 80% 0, rgba(229, 9, 20, 0.08), transparent 30%), var(--ap-black-soft);
+  color: var(--ap-white);
+  font-family: "Inter", "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}

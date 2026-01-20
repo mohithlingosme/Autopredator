@@ -1,0 +1,128 @@
+version: '3.8'
+
+services:
+  web:
+    image: ghcr.io/your-org/autopredator-web:staging
+    container_name: autopredator_web_staging
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+    networks:
+      - public
+    depends_on:
+      - api
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.web.rule=Host(`staging.example.com`)"
+      - "traefik.http.routers.web.entrypoints=websecure"
+      - "traefik.http.routers.web.tls.certresolver=letsencrypt"
+      - "traefik.http.services.web.loadbalancer.server.port=3000"
+      - "traefik.http.middlewares.security.headers.customrequestheaders.X-Frame-Options=DENY"
+      - "traefik.http.middlewares.security.headers.customrequestheaders.X-Content-Type-Options=nosniff"
+      - "traefik.http.middlewares.security.headers.customrequestheaders.Referrer-Policy=strict-origin-when-cross-origin"
+      - "traefik.http.routers.web.middlewares=security@docker"
+
+  api:
+    image: ghcr.io/your-org/autopredator-api:staging
+    container_name: autopredator_api_staging
+    restart: unless-stopped
+    environment:
+      - ENVIRONMENT=staging
+    env_file:
+      - ../../infra/env/.env.staging
+    networks:
+      - public
+      - private
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.api.rule=Host(`staging.example.com`) && PathPrefix(`/api`)"
+      - "traefik.http.routers.api.entrypoints=websecure"
+      - "traefik.http.routers.api.tls.certresolver=letsencrypt"
+      - "traefik.http.services.api.loadbalancer.server.port=8000"
+      - "traefik.http.middlewares.security.headers.customrequestheaders.X-Frame-Options=DENY"
+      - "traefik.http.middlewares.security.headers.customrequestheaders.X-Content-Type-Options=nosniff"
+      - "traefik.http.middlewares.security.headers.customrequestheaders.Referrer-Policy=strict-origin-when-cross-origin"
+      - "traefik.http.routers.api.middlewares=security@docker"
+
+  workers:
+    image: ghcr.io/your-org/autopredator-workers:staging
+    container_name: autopredator_workers_staging
+    restart: unless-stopped
+    environment:
+      - ENVIRONMENT=staging
+    env_file:
+      - ../../infra/env/.env.staging
+    networks:
+      - private
+    depends_on:
+      redis:
+        condition: service_healthy
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: autopredator_postgres_staging
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: autopredator_staging
+      POSTGRES_USER: autopredator
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - postgres_staging_data:/var/lib/postgresql/data
+    networks:
+      - private
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U autopredator -d autopredator_staging"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: autopredator_redis_staging
+    restart: unless-stopped
+    volumes:
+      - redis_staging_data:/data
+    networks:
+      - private
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  traefik:
+    image: traefik:v2.10
+    container_name: autopredator_traefik_staging
+    restart: unless-stopped
+    command:
+      - "--api.dashboard=false"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.letsencrypt.acme.httpchallenge=true"
+      - "--certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=web"
+      - "--certificatesresolvers.letsencrypt.acme.email=admin@example.com"
+      - "--certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - traefik_staging_letsencrypt:/letsencrypt
+    networks:
+      - public
+
+volumes:
+  postgres_staging_data:
+  redis_staging_data:
+  traefik_staging_letsencrypt:
+
+networks:
+  public:
+  private:

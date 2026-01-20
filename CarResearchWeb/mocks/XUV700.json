@@ -1,0 +1,170 @@
+{
+  "model_info": {
+    "brand": "Mahindra",
+    "model": "XUV700",
+    "brochure_version": "2024"
+  },
+  "common_specs": {
+    "length_mm": 4695,
+    "width_mm": 1890,
+    "height_mm": 1755,
+    "wheelbase_mm": 2750,
+    "fuel_tank_capacity_litres": 60,
+    "suspension_front": "McPherson Strut Independent Suspension with FSD and Stabilizer bar",
+    "suspension_rear": "Multi-link Independent Suspension with FSD and Stabilizer bar",
+    "brakes_front": "Ventilated Disc",
+    "brakes_rear": "Solid Disc",
+    "standard_safety": {
+      "abs": true
+    }
+  },
+  "variants": [
+    {
+      "variant_name": "MX",
+      "powertrain": {
+        "engine_name": "Turbo Petrol mStallion",
+        "max_power_ps": 200,
+        "max_torque_nm": 380,
+        "engine_displacement_cc": 2000,
+        "transmission": "6 MT / 6 AT"
+      },
+      "features": {
+        "touchscreen_size_inch": 8,
+        "speakers_count": 4,
+        "wheel_type": "Steel with Cover",
+        "wheel_radius_inch": 17,
+        "tyre_size": "235/65 R17",
+        "android_auto_apple_carplay": true,
+        "rear_ac_vents": true,
+        "armrest_rear": true,
+        "adjustable_headrests_rear": true,
+        "orvm_electric_fold": false
+      }
+    },
+    {
+      "variant_name": "AX3",
+      "powertrain": {
+        "engine_name": "Turbo Petrol mStallion",
+        "max_power_ps": 200,
+        "max_torque_nm": 380,
+        "engine_displacement_cc": 2000,
+        "transmission": "6 MT / 6 AT"
+      },
+      "features": {
+        "touchscreen_size_inch": 10.25,
+        "speakers_count": 6,
+        "wheel_type": "Steel",
+        "wheel_radius_inch": 17,
+        "tyre_size": "235/65 R17",
+        "android_auto_apple_carplay": true,
+        "connected_car_tech": true,
+        "drl": true,
+        "fog_lights": false
+      }
+    },
+    {
+      "variant_name": "AX5 Select",
+      "powertrain": {
+        "engine_name": "Turbo Petrol mStallion",
+        "max_power_ps": 200,
+        "max_torque_nm": 380,
+        "engine_displacement_cc": 2000,
+        "transmission": "6 MT / 6 AT"
+      },
+      "features": {
+        "touchscreen_size_inch": 10.25,
+        "speakers_count": 6,
+        "wheel_type": "Steel",
+        "wheel_radius_inch": 17,
+        "tyre_size": "235/65 R17",
+        "sunroof": true,
+        "push_button_start": true,
+        "android_auto_apple_carplay": true,
+        "connected_car_tech": true,
+        "drl": true
+      }
+    },
+    {
+      "variant_name": "AX5",
+      "powertrain": {
+        "engine_name": "Turbo Petrol mStallion",
+        "max_power_ps": 200,
+        "max_torque_nm": 380,
+        "engine_displacement_cc": 2000,
+        "transmission": "6 MT / 6 AT"
+      },
+      "features": {
+        "touchscreen_size_inch": 10.25,
+        "speakers_count": 6,
+        "wheel_type": "Diamond Cut Alloy",
+        "wheel_radius_inch": 17,
+        "tyre_size": "235/65 R17",
+        "sunroof": true,
+        "push_button_start": true,
+        "rear_camera": true,
+        "cruise_control": true,
+        "fog_lights": true,
+        "android_auto_apple_carplay": true,
+        "connected_car_tech": true,
+        "drl": true
+      }
+    },
+    {
+      "variant_name": "AX7",
+      "powertrain": {
+        "engine_name": "Turbo Petrol mStallion",
+        "max_power_ps": 200,
+        "max_torque_nm": 380,
+        "engine_displacement_cc": 2000,
+        "transmission": "6 MT / 6 AT"
+      },
+      "features": {
+        "touchscreen_size_inch": 10.25,
+        "speakers_count": 6,
+        "wheel_type": "Diamond Cut Alloy",
+        "wheel_radius_inch": 18,
+        "tyre_size": "235/60 R18",
+        "sunroof": true,
+        "push_button_start": true,
+        "rear_camera": true,
+        "cruise_control": true,
+        "fog_lights": true,
+        "ac_automatic": true,
+        "orvm_electric_fold": true,
+        "armrest_front": true,
+        "android_auto_apple_carplay": true,
+        "connected_car_tech": true,
+        "drl": true
+      }
+    },
+    {
+      "variant_name": "AX7 Luxury Pack",
+      "powertrain": {
+        "engine_name": "Turbo Petrol mStallion",
+        "max_power_ps": 200,
+        "max_torque_nm": 380,
+        "engine_displacement_cc": 2000,
+        "transmission": "6 MT / 6 AT"
+      },
+      "features": {
+        "touchscreen_size_inch": 10.25,
+        "speakers_count": 12,
+        "wheel_type": "Diamond Cut Alloy",
+        "wheel_radius_inch": 18,
+        "tyre_size": "235/60 R18",
+        "sunroof": true,
+        "push_button_start": true,
+        "rear_camera": true,
+        "cruise_control": true,
+        "fog_lights": true,
+        "ac_automatic": true,
+        "orvm_electric_fold": true,
+        "armrest_front": true,
+        "wireless_charger": true,
+        "android_auto_apple_carplay": true,
+        "connected_car_tech": true,
+        "drl": true
+      }
+    }
+  ]
+}

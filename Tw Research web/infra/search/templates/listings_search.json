@@ -1,0 +1,40 @@
+{
+  "index_patterns": ["listings_search*"],
+  "template": {
+    "settings": {
+      "number_of_shards": 1,
+      "number_of_replicas": 0,
+      "analysis": {
+        "normalizer": {
+          "lowercase_keyword": {
+            "type": "custom",
+            "filter": ["lowercase"]
+          }
+        }
+      }
+    },
+    "mappings": {
+      "dynamic": "false",
+      "properties": {
+        "id": { "type": "keyword" },
+        "org_id": { "type": "keyword" },
+        "variant_id": { "type": "keyword" },
+        "city_id": { "type": "keyword" },
+        "city": { "type": "keyword", "normalizer": "lowercase_keyword" },
+        "listing_type": { "type": "keyword" },
+        "status": { "type": "keyword" },
+        "price": { "type": "double" },
+        "year": { "type": "integer" },
+        "km": { "type": "integer" },
+        "fuel_type": { "type": "keyword" },
+        "transmission": { "type": "keyword" },
+        "body_type": { "type": "keyword" },
+        "title": { "type": "text" },
+        "description": { "type": "text" },
+        "features": { "type": "keyword" },
+        "created_at": { "type": "date" },
+        "updated_at": { "type": "date" }
+      }
+    }
+  }
+}

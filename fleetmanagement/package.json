@@ -1,0 +1,20 @@
+{
+  "name": "autopredator-fleetcommand",
+  "version": "1.0.0",
+  "description": "Fleet management platform",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "db:migrate": "echo 'Run migrations here'",
+    "db:seed": "echo 'Run seed here'",
+    "db:reset": "echo 'Reset DB here'"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}

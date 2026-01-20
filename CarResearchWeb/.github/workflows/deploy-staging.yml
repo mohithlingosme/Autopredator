@@ -1,0 +1,43 @@
+name: Deploy to Staging
+
+on:
+  push:
+    tags: [ "v*" ]
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy over SSH (docker compose)
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.STAGING_SSH_HOST }}
+          username: ${{ secrets.STAGING_SSH_USER }}
+          key: ${{ secrets.STAGING_SSH_KEY }}
+          port: ${{ secrets.STAGING_SSH_PORT != '' && secrets.STAGING_SSH_PORT || 22 }}
+          script_stop: true
+          script: |
+            set -euo pipefail
+            cd "${{ secrets.STAGING_DEPLOY_PATH }}"
+
+            # Run migrations if needed
+            # php scripts/migrate.php
+
+            # Pull latest image
+            tmp_env="$(mktemp)"
+            grep -v '^IMAGE=' .env 2>/dev/null > "$tmp_env" || true
+            echo "IMAGE=${{ secrets.STAGING_IMAGE }}" >> "$tmp_env"
+            mv "$tmp_env" .env
+
+            docker compose pull
+            docker compose up -d --remove-orphans
+            docker image prune -f
+
+            # Smoke test
+            sleep 10
+            curl -f http://localhost/health || exit 1

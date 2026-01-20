@@ -1,0 +1,67 @@
+{
+  "index_patterns": ["listing_search*"],
+  "template": {
+    "settings": {
+      "number_of_shards": 1,
+      "number_of_replicas": 0,
+      "refresh_interval": "1s",
+      "analysis": {
+        "analyzer": {
+          "autocomplete": {
+            "tokenizer": "standard",
+            "filter": ["lowercase", "asciifolding", "autocomplete_filter"]
+          }
+        },
+        "filter": {
+          "autocomplete_filter": {
+            "type": "edge_ngram",
+            "min_gram": 2,
+            "max_gram": 20
+          }
+        }
+      }
+    },
+    "mappings": {
+      "dynamic": "false",
+      "properties": {
+        "listing_id": { "type": "keyword" },
+        "variant_id": { "type": "keyword" },
+        "model_id": { "type": "keyword" },
+        "family_id": { "type": "keyword" },
+        "manufacturer_id": { "type": "keyword" },
+        "seller_org_id": { "type": "keyword" },
+        "title": { "type": "text", "analyzer": "autocomplete", "search_analyzer": "standard" },
+        "description": { "type": "text" },
+        "manufacturer": { "type": "keyword" },
+        "model_name": { "type": "keyword" },
+        "variant_name": { "type": "keyword" },
+        "city_id": { "type": "integer" },
+        "city_name": { "type": "keyword" },
+        "state_code": { "type": "keyword" },
+        "fuel_type": { "type": "keyword" },
+        "transmission": { "type": "keyword" },
+        "body_type": { "type": "keyword" },
+        "year": { "type": "integer" },
+        "km_driven": { "type": "integer" },
+        "price": { "type": "double" },
+        "status": { "type": "keyword" },
+        "tags": { "type": "keyword" },
+        "facets": {
+          "properties": {
+            "seating_capacity": { "type": "integer" },
+            "power_hp": { "type": "double" },
+            "torque_nm": { "type": "double" }
+          }
+        },
+        "media": {
+          "type": "nested",
+          "properties": {
+            "url": { "type": "keyword" },
+            "media_type": { "type": "keyword" }
+          }
+        },
+        "created_at": { "type": "date" }
+      }
+    }
+  }
+}

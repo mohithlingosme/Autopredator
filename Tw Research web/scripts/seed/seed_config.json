@@ -1,0 +1,45 @@
+{
+  "seed": 42,
+  "num_manufacturers": 12,
+  "num_models_per_mfr": {
+    "min": 4,
+    "max": 6
+  },
+  "num_variants_per_model": {
+    "min": 3,
+    "max": 6
+  },
+  "num_cities": 15,
+  "num_listings": 3000,
+  "num_leads": 20000,
+  "num_users": 200,
+  "num_dealers": 25,
+  "price_history": {
+    "months": 24,
+    "start_month": "2023-01-01",
+    "end_month": "2024-12-01"
+  },
+  "presets": {
+    "small": {
+      "num_listings": 1200,
+      "num_leads": 6000,
+      "num_users": 120,
+      "num_dealers": 15
+    },
+    "medium": {},
+    "large": {
+      "num_models_per_mfr": {
+        "min": 5,
+        "max": 7
+      },
+      "num_variants_per_model": {
+        "min": 4,
+        "max": 7
+      },
+      "num_listings": 6000,
+      "num_leads": 60000,
+      "num_users": 400,
+      "num_dealers": 40
+    }
+  }
+}

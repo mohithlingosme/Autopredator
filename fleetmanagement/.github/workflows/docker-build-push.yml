@@ -1,0 +1,48 @@
+name: Docker Build and Push
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - id: detect
+        name: Detect Dockerfiles
+        run: |
+          if [ -f backend/Dockerfile ]; then echo "backend=true" >> "$GITHUB_OUTPUT"; else echo "backend=false" >> "$GITHUB_OUTPUT"; fi
+          if [ -f frontend/Dockerfile ]; then echo "frontend=true" >> "$GITHUB_OUTPUT"; else echo "frontend=false" >> "$GITHUB_OUTPUT"; fi
+
+      - name: Log in to Docker Hub
+        if: steps.detect.outputs.backend == 'true' || steps.detect.outputs.frontend == 'true'
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push backend image
+        if: steps.detect.outputs.backend == 'true'
+        uses: docker/build-push-action@v6
+        with:
+          context: ./backend
+          file: backend/Dockerfile
+          push: true
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/autopredator-backend:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/autopredator-backend:${{ github.sha }}
+
+      - name: Build and push frontend image
+        if: steps.detect.outputs.frontend == 'true'
+        uses: docker/build-push-action@v6
+        with:
+          context: ./frontend
+          file: frontend/Dockerfile
+          push: true
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/autopredator-frontend:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/autopredator-frontend:${{ github.sha }}

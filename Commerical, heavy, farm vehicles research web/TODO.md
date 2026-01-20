@@ -1,0 +1,88 @@
+v# Local Infrastructure
+
+- [x] A) Developer prerequisites documentation
+  - [x] Create docs/Local_Infrastructure.md with required installs, recommended tools, troubleshooting
+- [x] B) Repo bootstrap scripts
+  - [x] Create scripts/doctor (verifies versions, prints pass/fail)
+  - [x] Create scripts/bootstrap (copies .env, runs pnpm install, starts compose, runs migrations, seeds, prints URLs/credentials)
+  - [x] Create scripts/reset (stops compose, removes volumes safely, rebuilds/restarts)
+  - [x] Create scripts/db-migrate (applies migrations)
+  - [x] Create scripts/db-reset (drops/recreates schema, migrates)
+  - [x] Create scripts/seed (seeds demo org + admin user) - exists
+  - [x] Add package.json scripts at repo root for dev, up, down, logs, bootstrap, reset, doctor, db:migrate, db:reset, seed, test:all, lint:all, typecheck:all
+- [x] C) Docker Compose local runtime
+  - [x] Update docker-compose.yml with postgres, redis, api, worker, web services (healthchecks, env_files, ports) - already present
+  - [x] Add .dockerignore for each app (api, worker, web)
+- [x] D) Environment & config
+  - [x] Create apps/api/.env.example
+  - [x] Create apps/web/.env.example
+  - [x] Create apps/worker/.env.example
+  - [x] Add runtime env validation (Pydantic for api/worker, runtime check for web)
+  - [x] Ensure .env files in .gitignore - already present
+- [x] E) DB & Migrations local workflow
+  - [x] Ensure migrations run from host/container
+  - [x] Provide canonical pnpm db:migrate command
+  - [x] Provide pnpm seed command
+  - [x] Set up Alembic if not present with initial migration - already present
+- [x] F) Local Observability
+  - [x] API provides GET /health (liveness) and GET /ready (readiness with DB check)
+  - [x] Enable structured JSON logging for API and worker
+  - [x] Add correlation ID in API logs per request
+- [x] G) Local testing plumbing
+  - [x] Add root scripts pnpm lint:all, typecheck:all, test:all
+  - [x] Add minimal e2e scaffold in /e2e (Playwright, smoke test for login page)
+
+# Infrastructure
+
+- [x] A) Infrastructure folder layout [P0]
+  - [x] Create infra/README.md
+  - [x] Create infra/environments/staging/ and infra/environments/production/
+  - [x] Create infra/environments/<env>/.env.example for each env
+  - [x] Create infra/compose/docker-compose.base.yml
+  - [x] Create infra/compose/docker-compose.staging.yml
+  - [x] Create infra/compose/docker-compose.production.yml
+  - [x] Create infra/proxy/Caddyfile (using Caddy for reverse proxy)
+  - [x] Create infra/scripts/provision_vps.sh
+  - [x] Create infra/scripts/deploy.sh
+  - [x] Create infra/scripts/rollback.sh
+  - [x] Create infra/scripts/backup_postgres.sh
+  - [x] Create infra/scripts/restore_postgres.sh
+  - [x] Create infra/scripts/rotate_secrets.sh
+  - [x] Create infra/scripts/healthcheck.sh
+  - [x] Create infra/backups/README.md
+  - [x] Create infra/observability/README.md
+  - [x] Create infra/observability/prometheus/prometheus.yml (scaffold)
+  - [x] Create infra/observability/grafana/ (scaffold)
+- [x] B) DNS / SSL / Reverse proxy [P0]
+  - [x] Configure Caddyfile for app.<domain> → web, api.<domain> → api
+  - [x] Enable HTTPS with auto-renew
+  - [x] Add security headers (HSTS, CSP minimal, X-Frame-Options)
+- [x] C) Server hardening checklist [P0]
+  - [x] Include in infra/README.md: deploy user, disable root, SSH keys, UFW rules (80/443/22 only)
+  - [x] Lock DB/Redis ports
+  - [x] Directory layout: /opt/fleetcommand/{configs,logs,data,backups}
+  - [x] Time sync and host monitoring tips
+- [x] D) Compose deployment (staging/prod) [P0]
+  - [x] Compose runs web, api, worker, postgres, redis, caddy
+  - [x] Add healthchecks for api, db, proxy
+  - [x] Use named volumes for postgres data
+  - [x] Use env vars from .env
+- [x] E) Secrets & config management [P0]
+  - [x] .env.example for each env with DB, JWT, CORS, domains, placeholders
+  - [x] Ensure .env ignored, mention server permissions
+- [x] F) CI/CD pipelines [P0]
+  - [x] Create .github/workflows/ci.yml (lint, typecheck, tests)
+  - [x] Create .github/workflows/docker-build-push.yml (build/push images)
+  - [x] Create .github/workflows/deploy-staging.yml (deploy via SSH)
+  - [x] Create .github/workflows/deploy-production.yml (manual approval)
+  - [x] Create .github/workflows/security.yml (dependency/secret scan)
+  - [x] Deploy via SSH with infra/scripts/deploy.sh <env> <image_tag>
+  - [x] Rollback by redeploying previous tag
+- [x] G) Backups & DR [P1]
+  - [x] Implement backup_postgres.sh (daily dump, retention, compression, offsite placeholder)
+  - [x] Implement restore_postgres.sh
+  - [x] infra/backups/README.md with RPO/RTO, restore drill
+- [x] H) Observability baseline [P1]
+  - [x] Ensure /health and /ready in API
+  - [x] Log viewing instructions
+  - [x] Prometheus scaffold and enable instructions

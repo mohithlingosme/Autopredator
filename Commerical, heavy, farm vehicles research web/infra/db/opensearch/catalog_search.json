@@ -1,0 +1,41 @@
+{
+  "index_patterns": ["catalog_search*"],
+  "template": {
+    "settings": {
+      "number_of_shards": 1,
+      "number_of_replicas": 0,
+      "refresh_interval": "1s"
+    },
+    "mappings": {
+      "dynamic": "false",
+      "properties": {
+        "variant_id": { "type": "keyword" },
+        "model_id": { "type": "keyword" },
+        "family_id": { "type": "keyword" },
+        "manufacturer_id": { "type": "keyword" },
+        "manufacturer": { "type": "keyword" },
+        "model_name": { "type": "keyword" },
+        "variant_name": { "type": "text", "fields": { "raw": { "type": "keyword" } } },
+        "fuel_type": { "type": "keyword" },
+        "transmission": { "type": "keyword" },
+        "body_type": { "type": "keyword" },
+        "year_start": { "type": "integer" },
+        "year_end": { "type": "integer" },
+        "msrp_ex_showroom": { "type": "double" },
+        "specs": {
+          "properties": {
+            "engine_type": { "type": "keyword" },
+            "displacement_cc": { "type": "integer" },
+            "power_hp": { "type": "double" },
+            "torque_nm": { "type": "double" },
+            "seating_capacity": { "type": "integer" },
+            "mileage_kmpl": { "type": "double" },
+            "emission_standard": { "type": "keyword" }
+          }
+        },
+        "features": { "type": "keyword" },
+        "created_at": { "type": "date" }
+      }
+    }
+  }
+}

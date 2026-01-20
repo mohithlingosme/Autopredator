@@ -1,0 +1,17 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:e2e": "playwright test",
+    "test:smoke": "npm run build"
+  },
+  "devDependencies": {
+    "vitest": "^1.0.0",
+    "@testing-library/react": "^14.0.0",
+    "jsdom": "^23.0.0",
+    "@playwright/test": "^1.40.0"
+  }
+}

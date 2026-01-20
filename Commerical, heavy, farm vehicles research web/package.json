@@ -1,0 +1,28 @@
+{
+  "name": "autopredator-fleetcommand",
+  "version": "1.0.0",
+  "description": "Multi-tenant fleet management platform",
+  "private": true,
+  "scripts": {
+    "dev": "docker compose up -d && pnpm --filter web dev",
+    "up": "docker compose up -d",
+    "down": "docker compose down",
+    "logs": "docker compose logs -f",
+    "bootstrap": "node scripts/bootstrap.js",
+    "reset": "node scripts/reset.js",
+    "doctor": "node scripts/doctor.js",
+    "db:migrate": "node scripts/db-migrate.js",
+    "db:reset": "node scripts/db-reset.js",
+    "seed": "python scripts/seed.py",
+    "test:all": "pnpm --filter api test && pnpm --filter web test",
+    "lint:all": "pnpm --filter api lint && pnpm --filter web lint",
+    "typecheck:all": "pnpm --filter api typecheck && pnpm --filter web typecheck"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  }
+}

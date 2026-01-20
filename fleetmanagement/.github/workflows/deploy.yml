@@ -1,0 +1,30 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy over SSH
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script_stop: true
+          script: |
+            cd ${{ secrets.DEPLOY_PATH }}
+
+            if [ ! -f docker-compose.prod.yml ]; then
+              echo "docker-compose.prod.yml not found in ${{ secrets.DEPLOY_PATH }}"
+              exit 1
+            fi
+
+            git fetch origin main
+            git reset --hard origin/main
+            docker compose -f docker-compose.prod.yml pull || true
+            docker compose -f docker-compose.prod.yml up -d --remove-orphans
+            docker image prune -f

@@ -1,0 +1,80 @@
+name: Security
+
+on:
+  pull_request:
+  push:
+    branches: [ "main", "master" ]
+  schedule:
+    - cron: "0 3 * * 1"   # every Monday 03:00 UTC
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  detect:
+    name: Detect languages
+    runs-on: ubuntu-latest
+    outputs:
+      javascript: ${{ steps.langs.outputs.javascript }}
+      python: ${{ steps.langs.outputs.python }}
+      php: ${{ steps.langs.outputs.php }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: langs
+        name: Identify code languages
+        run: |
+          set -e
+          has_js=false
+          has_py=false
+          has_php=false
+
+          if git ls-files '*.js' '*.ts' 'package.json' 'pnpm-lock.yaml' 'yarn.lock' 'package-lock.json' 2>/dev/null | grep -q .; then
+            has_js=true
+          fi
+          if git ls-files '*.py' 'pyproject.toml' 'requirements*.txt' 'backend/**' 'api/**' 2>/dev/null | grep -q .; then
+            has_py=true
+          fi
+          if git ls-files '*.php' 'composer.json' 'composer.lock' 2>/dev/null | grep -q .; then
+            has_php=true
+          fi
+
+          echo "javascript=$has_js" >> "$GITHUB_OUTPUT"
+          echo "python=$has_py" >> "$GITHUB_OUTPUT"
+          echo "php=$has_php" >> "$GITHUB_OUTPUT"
+
+  dependency-review:
+    if: ${{ github.event_name == 'pull_request' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/dependency-review-action@v4
+
+  codeql:
+    runs-on: ubuntu-latest
+    needs: detect
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [ "javascript", "python", "php" ]
+    if: |
+      (matrix.language == 'javascript' && needs.detect.outputs.javascript == 'true') ||
+      (matrix.language == 'python' && needs.detect.outputs.python == 'true') ||
+      (matrix.language == 'php' && needs.detect.outputs.php == 'true')
+    steps:
+      - uses: actions/checkout@v4
+      - uses: github/codeql-action/init@v3
+        with:
+          languages: ${{ matrix.language }}
+      - uses: github/codeql-action/analyze@v3
+
+  trivy-fs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Trivy filesystem scan
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          scan-type: "fs"
+          ignore-unfixed: true
+          severity: "CRITICAL,HIGH"

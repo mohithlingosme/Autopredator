@@ -1,0 +1,24 @@
+version: "3.9"
+
+services:
+  backend:
+    image: YOUR_DOCKERHUB/autopredator-backend:latest
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - PORT=8000
+    # mount env file or secrets as needed
+    # env_file:
+    #   - ./backend/.env.prod
+
+  frontend:
+    image: YOUR_DOCKERHUB/autopredator-frontend:latest
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - BACKEND_URL=http://backend:8000

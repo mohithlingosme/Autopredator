@@ -1,0 +1,23 @@
+# Global owners
+* @autopredator/maintainers
+
+# Frontend
+apps/web/ @autopredator/frontend-team
+packages/shared/ @autopredator/frontend-team
+
+# Backend
+apps/api/ @autopredator/backend-team
+apps/workers/ @autopredator/backend-team
+
+# Infrastructure
+infra/ @autopredator/devops-team
+
+# Documentation
+docs/ @autopredator/docs-team
+README.md @autopredator/docs-team
+
+# CI/CD
+.github/ @autopredator/devops-team
+
+# Scripts and tooling
+scripts/ @autopredator/devops-team

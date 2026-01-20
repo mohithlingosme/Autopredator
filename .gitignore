@@ -1,0 +1,28 @@
+# Environment / secrets
+.env
+.env.*
+*.env
+
+# Logs
+*.log
+
+# Local uploads / media
+uploads/
+legacy/uploads/
+legacy/php_app/uploads/
+media/
+staticfiles/
+
+# Local database artifacts
+db.sqlite3
+*.sqlite3
+database/*.sql
+
+# OS / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json

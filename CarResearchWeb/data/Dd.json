@@ -1,0 +1,484 @@
+[
+  {
+    "brand": "Maruti Suzuki",
+    "models": [
+name: S_presso 
+name: Alto k10
+      {
+        "name": "WagonR",
+        "variants": [
+          { "fuel": "Petrol", "transmission": "Manual", "name": "LXi" },
+          { "fuel": "Petrol", "transmission": "Manual", "name": "VXi" },
+          { "fuel": "Petrol", "transmission": "Manual", "name": "ZXi" },
+          { "fuel": "Petrol", "transmission": "Manual", "name": "ZXi+" },
+          { "fuel": "Petrol", "transmission": "Automatic", "name": "VXi AGS" },
+          { "fuel": "Petrol", "transmission": "Automatic", "name": "ZXi AGS" },
+          { "fuel": "Petrol", "transmission": "Automatic", "name": "ZXi+ AGS" },
+          { "fuel": "CNG", "transmission": "Manual", "name": "LXi CNG" },
+          { "fuel": "CNG", "transmission": "Manual", "name": "VXi CNG" }
+        ]
+      },
+      {
+        "name": "Eeco",
+        "variants": [
+          { "fuel": "Petrol", "transmission": "Manual", "name": "Eeco 5 Seater Standard" },
+          { "fuel": "Petrol", "transmission": "Manual", "name": "Eeco 5 Seater AC" },
+          { "fuel": "Petrol", "transmission": "Manual", "name": "Eeco 6 Seater Standard" },
+          { "fuel": "CNG", "transmission": "Manual", "name": "Eeco 5 Seater AC CNG" }
+        ]
+      },
+      { "name": "Swift", "variants": [
+        { "fuel": "Petrol", "transmission": "Manual", "name": "LXi" },
+        { "fuel": "Petrol", "transmission": "Manual", "name": "VXi" },
+        { "fuel": "Petrol", "transmission": "Manual", "name": "Vxi (O)"}
+        { "fuel": "Petrol", "transmission": "Manual", "name": "ZXi" },
+        { "fuel": "Petrol", "transmission": "Manual", "name": "ZXi+" },
+        { "fuel": "Petrol", "transmission": "Automatic", "name": "Vxi"},
+        { "fuel": "Petrol", "transmission": "Automatic", "name": "Vxi (O)"},
+        { "fuel": "Petrol", "transmission": "Automatic", "name": "Zxi"},
+        { "fuel": "Petrol", "transmission": "Automatic", "name": "Zxi+"}
+        { "fuel": "CNG", "transmission": "Manual", "name": "LXi"},
+        { "fuel": "CNG", "transmission": "Manual", "name": "VXi (o)"},
+        { "fuel": "CNG", "transmission": "Manual", "name": "VXi"},
+        { "fuel": "CNG", "transmission": "Manual", "name": "ZXi"} 
+      ] },
+      { "name": "Dzire", "variants": [
+        
+      ] },
+      { "name": "Brezza", "variants": [] },
+      { "name": "Ertiga", "variants": [] },
+      { "name": "Vitara", "variants": [] },
+      { "name": "Tour S", "variants": [] },
+      { "name": "Tour M", "variants": [] },
+      { "name": "Tour H2", "variants": [] },
+      { "name": "Tour H1", "variants": [] },
+      { "name": "Tour V", "variants": [] },
+      { "name": "e VITARA", "variants": [] },
+      { "name": "Invicto", "variants": [] },
+      { "name": "Jimny", "variants": [] },
+      { "name": "XL6", "variants": [] },
+      { "name": "Grand Vitara", "variants": [] },
+      { "name": "FRONX", "variants": [] },
+      { "name": "Baleno", "variants": [] },
+      { "name": "Ignis", "variants": [] }
+    ]
+  },
+  {
+    "brand": "Hyundai",
+    "models": [
+      "Venue",
+      "Venue N Line",
+      "Creta N Line",
+      "Exter",
+      "Creta",
+      "Alcazar",
+      "Aura",
+      "Verna",
+      "Grand i10 Nios",
+      "i20",
+      "i20 N Line"
+    ]
+  },
+  {
+    "brand": "Tata",
+    "models": [
+      "Sierra",
+      "Harrier",
+      "Harrier.ev",
+      "Safari",
+      "Nexon",
+      "Nexon.ev",
+      "Punch",
+      "Punch.ev",
+      "Altroz",
+      "Tiago",
+      "Tiago.ev",
+      "Curvv",
+      "Curvv.ev",
+      "Tigor",
+      "Tigor.ev"
+    ]
+  },
+  {
+    "brand": "Mahindra",
+    "models": [
+      "XUV 7X0",
+      "Thar Roxx",
+      "XUV 3X0",
+      "Scorpio-N",
+      "Thar",
+      "Scorpio Classic",
+      "Bolero Neo",
+      "Bolero Neo plus",
+      "Bolero",
+      "XUV 400",
+      "Marazzo"
+    ]
+  },
+  {
+    "brand": "Toyota",
+    "models": [
+      "Glanza",
+      "Urban Cruiser Taisor",
+      "Rumion",
+      "Urban Cruiser Hyryder",
+      "Innova Crysta",
+      "Innova Hycross",
+      "Hilux",
+      "Fortuner",
+      "Legender",
+      "Camry",
+      "Vellfire",
+      "Land Cruiser 300"
+    ]
+  },
+  {
+    "brand": "Kia",
+    "models": [
+      "Seltos",
+      "Carens",
+      "Clavis",
+      "Syros",
+      "EV9",
+      "Carnival",
+      "Sonet",
+      "EV6"
+    ]
+  },
+  {
+    "brand": "Skoda",
+    "models": [
+      "Kodiaq",
+      "Kylaq",
+      "Slavia",
+      "Kushaq"
+    ]
+  },
+  {
+    "brand": "Volkswagen",
+    "models": [
+      "Golf GTI",
+      "Tiguan R-Line",
+      "Taigun",
+      "Virtus"
+    ]
+  },
+  {
+    "brand": "Honda",
+    "models": [
+      "Amaze",
+      "Elevate",
+      "City",
+      "City e:HEV",
+      "Amaze 2nd Gen"
+    ]
+  },
+  {
+    "brand": "MG",
+    "models": [
+      "Windsor EV",
+      "Hector",
+      "Comet EV",
+      "Astor",
+      "ZS EV",
+      "Gloster"
+    ]
+  },
+  {
+    "brand": "Renault",
+    "models": [
+      "Duster",
+      "KWID",
+      "TRIBER",
+      "KIGER"
+    ]
+  },
+  {
+    "brand": "Citroen",
+    "models": [
+      "Basalt",
+      "Aircross",
+      "C3",
+      "E-C3",
+      "C5 Aircross"
+    ]
+  },
+  {
+    "brand": "Jeep",
+    "models": [
+      "Compass",
+      "Meridian",
+      "Wrangler",
+      "Grand Cherokee"
+    ]
+  },
+  {
+    "brand": "Nissan",
+    "models": [
+      "MAGNITE",
+      "X-Trail",
+      "Gravite"
+    ]
+  },
+  {
+    "brand": "Vinfast",
+    "models": [
+      "VF 7",
+      "VF 6"
+    ]
+  },
+  {
+    "brand": "Force Motors",
+    "models": [
+      "Gurkha",
+      "Trax"
+    ]
+  },
+  {
+    "brand": "Isuzu",
+    "models": [
+      "MU-X",
+      "V-Cross",
+      "Hi-Lander",
+      "S-CAB Z",
+      "S-CAB",
+      "D-MAX"
+    ]
+  },
+  {
+    "brand": "BMW",
+    "models": [
+      "iX",
+      "iX1 LWB",
+      "i7",
+      "i5",
+      "XM",
+      "M5",
+      "X7",
+      "X3",
+      "X1",
+      "M8",
+      "7 Series",
+      "5 Series LWB",
+      "M4",
+      "M4 CS",
+      "3 Series",
+      "3 LWB",
+      "M2",
+      "2 Series",
+      "Z4",
+      "The 7 Protection"
+    ]
+  },
+  {
+    "brand": "Mercedes-Benz",
+    "models": [
+      "A Class Sedan",
+      "C Class Sedan",
+      "EQS Sedan",
+      "E Class Sedan Long",
+      "S Class",
+      "EQA",
+      "EQB",
+      "EQE SUV",
+      "EQS SUV",
+      "GLA",
+      "GLC",
+      "GLE",
+      "GLS",
+      "G Class Electric",
+      "G Class",
+      "CLE Cabriolet",
+      "AMG SL Roadster",
+      "GLC Coupe",
+      "GLE Coupe",
+      "CLE Coupe",
+      "AMG GT Coupe",
+      "AMG GT 4 Door Coupe",
+      "AMG SL Roadster",
+      "Mercedes-Maybach S Class",
+      "Mercedes-Maybach GLS",
+      "Mercedes-Maybach EQS SUV",
+      "Mercedes-Maybach SL Monogram Series"
+    ]
+  },
+  {
+    "brand": "Land Rover",
+    "models": [
+      "Range Rover",
+      "Range Rover Sport",
+      "Range Rover Velar",
+      "Range Rover Evoque",
+      "Defender Octa",
+      "Defender 130",
+      "Defender 110",
+      "Defender 90",
+      "Discovery",
+      "Discovery Sport"
+    ]
+  },
+  {
+    "brand": "Audi",
+    "models": [
+      "Q3",
+      "Q5",
+      "Q7",
+      "Q8",
+      "A4",
+      "A5",
+      "A6"
+    ]
+  },
+  {
+    "brand": "BYD",
+    "models": [
+      "ATTO 2",
+      "eMAX 7",
+      "SEAL",
+      "SEALION 7"
+    ]
+  },
+  {
+    "brand": "Porsche",
+    "models": [
+      "911",
+      "718",
+      "Taycan",
+      "Panamera",
+      "Macan",
+      "Cayenne"
+    ]
+  },
+  {
+    "brand": "Volvo",
+    "models": [
+      "EC 40",
+      "EX 40",
+      "EX 30",
+      "XC 90",
+      "XC 60",
+      "S 90"
+    ]
+  },
+  {
+    "brand": "Lexus",
+    "models": [
+      "NX",
+      "RX",
+      "LX",
+      "ES",
+      "LM"
+    ]
+  },
+  {
+    "brand": "Mini",
+    "models": [
+      "Electric Mini Countryman",
+      "Mini cooper",
+      "Mini John cooper works"
+    ]
+  },
+  {
+    "brand": "Lamborghini",
+    "models": [
+      "Temerario",
+      "revuelto",
+      "Urus",
+      "Huracan"
+    ]
+  },
+  {
+    "brand": "Rolls-Royce",
+    "models": [
+      "Phantom",
+      "Phantom Extended",
+      "Spectre",
+      "Cullinan Series II",
+      "Ghost Series II",
+      "Ghost extended series II"
+    ]
+  },
+  {
+    "brand": "Ferrari",
+    "models": [
+      "SF 9- Stradale",
+      "SF 90",
+      "296 GTB",
+      "296 GTS",
+      "12 Cilindri",
+      "12 Cilindri Spider",
+      "Purosangue",
+      "Roma",
+      "Roma Spider"
+    ]
+  },
+  {
+    "brand": "Jaguar",
+    "models": [
+      "F Pace"
+    ]
+  },
+  {
+    "brand": "Maserati",
+    "models": [
+      "Grecale",
+      "GranTurismo",
+      "Gran Cabrio",
+      "Mcpura",
+      "Mcpura cielo",
+      "MC 20",
+      "MC 20 Cielo",
+      "GT2 Stradale",
+      "GT2",
+      "Mcxtrema"
+    ]
+  },
+  {
+    "brand": "Tesla",
+    "models": [
+      "Model Y"
+    ]
+  },
+  {
+    "brand": "Aston Martin",
+    "models": [
+      "Vantage",
+      "DB12",
+      "Vanquish",
+      "DBX",
+      "Valhalla",
+      "Valkyrie",
+      "Valour",
+      "Valiant"
+    ]
+  },
+  {
+    "brand": "McLaren",
+    "models": [
+      "750s",
+      "750s Spider",
+      "Artura",
+      "Artura Spider",
+      "GTS",
+      "W1"
+    ]
+  },
+  {
+    "brand": "Bentley",
+    "models": [
+      "Benntayga Extended wheelbase",
+      "FLying spur",
+      "Continental GT",
+      "Continental GTC"
+    ]
+  },
+  {
+    "brand": "Lotus",
+    "models": [
+      "Eletre",
+      "Emira",
+      "emeya",
+      "evija"
+    ]
+  }
+]

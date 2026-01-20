@@ -1,0 +1,22 @@
+# Performance Plan
+
+- **Indexes**
+  - Listings: `idx_listings_filters_city_status`, `idx_listings_filters_price`, `idx_listings_filters_year`, `idx_listings_filters_km`, `idx_listings_filters_powertrain`.
+  - Leads: `idx_leads_seller_status_created`.
+  - Variants/catalog: `idx_variants_model`, `idx_variants_filters`, `idx_media_assets_variant`.
+  - Finance: `idx_finance_applications_status_org`.
+  - Trips/Fuel: `idx_trips_vehicle_time`, `idx_fuel_logs_vehicle_time`.
+- **Partitioning**
+  - PostgreSQL: `price_history` partitioned by `effective_date` (monthly); default partition created to avoid insert failures. Add rolling monthly partitions if volume grows.
+  - ClickHouse: all event tables partitioned by `toYYYYMM(event_time)`, ordered by `(org_id, event_time, session_id/listing_id)` for pruning.
+- **Materialized views (future)**
+  - Listing search cache: MV on `listings` + `variants` + `cities` for quick API hydration.
+  - Lead funnel stats: daily rollups per seller org for dashboard cards.
+  - Fleet telemetry: hourly aggregates of fuel/odometer deltas per vehicle.
+- **Constraints/quality**
+  - `CHECK` on year/odometer/price prevent bad data; composite PK on `price_history` enforces unique price per variant/city/day.
+  - Foreign keys with cascading deletes on child tables to keep data tidy.
+- **Vacuum/maintenance**
+  - Enable autovacuum; consider `pg_partman` for rolling partitions on `price_history`.
+  - Redis TTLs enforced (no long-lived keys).
+  - OpenSearch refresh interval set to 1s for dev; increase and add ILM policies in production.

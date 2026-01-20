@@ -1,0 +1,27 @@
+{
+  "index_patterns": ["catalog_suggest*"],
+  "template": {
+    "settings": {
+      "number_of_shards": 1,
+      "number_of_replicas": 0
+    },
+    "mappings": {
+      "dynamic": "false",
+      "properties": {
+        "id": { "type": "keyword" },
+        "type": { "type": "keyword" },
+        "name": { "type": "text" },
+        "suggest": {
+          "type": "completion",
+          "contexts": [
+            {
+              "name": "type",
+              "type": "category",
+              "path": "type"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

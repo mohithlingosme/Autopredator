@@ -1,0 +1,80 @@
+name: Deploy to Production
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag to deploy'
+        required: true
+        type: string
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          known_hosts: ${{ secrets.SERVER_HOST_PRODUCTION }}
+
+      - name: Backup production database
+        run: |
+          echo "💾 Creating production backup before deployment..."
+          ssh -o StrictHostKeyChecking=no deploy@${{ secrets.SERVER_HOST_PRODUCTION }} << 'EOF'
+            set -e
+            cd /opt/fleetcommand/configs
+            ./infra/scripts/backup_postgres.sh production
+          EOF
+
+      - name: Deploy to production
+        run: |
+          echo "🚀 Deploying ${{ inputs.tag }} to production..."
+          ssh -o StrictHostKeyChecking=no deploy@${{ secrets.SERVER_HOST_PRODUCTION }} << EOF
+            set -e
+            cd /opt/fleetcommand/configs
+            ./infra/scripts/deploy.sh production ${{ inputs.tag }}
+          EOF
+
+      - name: Health check
+        run: |
+          echo "🏥 Running health checks..."
+          ssh -o StrictHostKeyChecking=no deploy@${{ secrets.SERVER_HOST_PRODUCTION }} << 'EOF'
+            set -e
+            cd /opt/fleetcommand/configs
+            ./infra/scripts/healthcheck.sh production
+          EOF
+
+      - name: Rollback on failure
+        if: failure()
+        run: |
+          echo "❌ Production deployment failed! Attempting rollback..."
+          ssh -o StrictHostKeyChecking=no deploy@${{ secrets.SERVER_HOST_PRODUCTION }} << 'EOF'
+            set -e
+            cd /opt/fleetcommand/configs
+            # Rollback to previous tag (assuming tags are ordered)
+            PREVIOUS_TAG=$(git tag --sort=-version:refname | sed -n '2p')
+            if [ -n "$PREVIOUS_TAG" ]; then
+              ./infra/scripts/rollback.sh production $PREVIOUS_TAG
+            fi
+          EOF
+
+      - name: Notify on success
+        if: success()
+        run: |
+          echo "✅ Production deployment successful!"
+          # Add notification logic here (Slack, email, etc.)
+
+      - name: Notify on failure
+        if: failure()
+        run: |
+          echo "❌ Production deployment failed!"
+          # Add notification logic here (Slack, email, etc.)

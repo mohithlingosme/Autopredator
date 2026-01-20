@@ -1,0 +1,84 @@
+name: Security Scan
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  schedule:
+    # Run weekly on Sundays at 2 AM UTC
+    - cron: '0 2 * * 0'
+
+jobs:
+  security-scan:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+
+    # Python Security Scanning
+    - name: Run Bandit (Python security linter)
+      run: |
+        pip install bandit
+        bandit -r apps/api/ -f json -o bandit-report.json || true
+
+    - name: Run Safety (Python dependency vulnerability check)
+      run: |
+        pip install safety
+        cd apps/api
+        safety check --output json || true
+
+    # JavaScript Security Scanning
+    - name: Run npm audit
+      run: |
+        cd apps/web
+        npm audit --audit-level moderate --json > npm-audit.json || true
+
+    # Infrastructure Security
+    - name: Run Trivy vulnerability scanner
+      uses: aquasecurity/trivy-action@master
+      with:
+        scan-type: 'fs'
+        scan-ref: '.'
+        format: 'sarif'
+        output: 'trivy-results.sarif'
+
+    # Secrets Detection
+    - name: Run TruffleHog OSS
+      uses: trufflesecurity/trufflehog@main
+      with:
+        path: ./
+        base: main
+        head: HEAD
+        extra_args: --debug --only-verified
+
+    # Upload SARIF files
+    - name: Upload Trivy scan results to GitHub Security tab
+      uses: github/codeql-action/upload-sarif@v2
+      if: always()
+      with:
+        sarif_file: 'trivy-results.sarif'
+
+    # Archive security reports
+    - name: Archive security reports
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: security-reports
+        path: |
+          bandit-report.json
+          npm-audit.json
+        retention-days: 30

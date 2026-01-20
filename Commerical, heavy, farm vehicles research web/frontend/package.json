@@ -1,0 +1,11 @@
+{
+  "name": "autopredator-frontend",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "lint": "node ./scripts/lint.js",
+    "test": "node ./scripts/test.js",
+    "build": "node ./scripts/build.js"
+  }
+}

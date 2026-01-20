@@ -1,0 +1,922 @@
+[
+    {
+        "s_no": "1",
+        "make": "Hyundai",
+        "model": "Creta",
+        "price": "\u20b911.00 - 20.15 Lakh",
+        "power_bhp": "113-160 bhp",
+        "range_mileage": "17.4-21.8 kmpl",
+        "fuel_type": "Petrol\/Diesel",
+        "notes": "Current generation"
+    },
+    {
+        "s_no": "2",
+        "make": "Hyundai",
+        "model": "Elite i20",
+        "price": "\u20b96.99 - 9.73 Lakh",
+        "power_bhp": "82-99 bhp",
+        "range_mileage": "20-25 kmpl",
+        "fuel_type": "Petrol\/Diesel",
+        "notes": "Pre-facelift of current i20, last known data"
+    },
+    {
+        "s_no": "3",
+        "make": "Hyundai",
+        "model": "Verna",
+        "price": "\u20b911.00 - 17.42 Lakh",
+        "power_bhp": "113-160 bhp",
+        "range_mileage": "18.6-20.6 kmpl",
+        "fuel_type": "Petrol",
+        "notes": "Current generation"
+    },
+    {
+        "s_no": "4",
+        "make": "Hyundai",
+        "model": "Venue",
+        "price": "\u20b97.94 - 13.48 Lakh",
+        "power_bhp": "82-118 bhp",
+        "range_mileage": "18.1-24.2 kmpl",
+        "fuel_type": "Petrol\/Diesel",
+        "notes": "Current generation"
+    },
+    {
+        "s_no": "5",
+        "make": "Hyundai",
+        "model": "i20",
+        "price": "\u20b97.04 - 11.21 Lakh",
+        "power_bhp": "82-118 bhp",
+        "range_mileage": "20.0-25.2 kmpl",
+        "fuel_type": "Petrol\/Diesel",
+        "notes": "Current generation"
+    },
+    {
+        "s_no": "6",
+        "make": "Hyundai",
+        "model": "Grand i10 Nios",
+        "price": "\u20b95.92 - 8.56 Lakh",
+        "power_bhp": "82 bhp",
+        "range_mileage": "20.7-27.0 kmpl",
+        "fuel_type": "Petrol\/CNG",
+        "notes": "Current generation"
+    },
+    {
+        "s_no": "7",
+        "make": "Hyundai",
+        "model": "Alcazar",
+        "price": "\u20b916.78 - 21.28 Lakh",
+        "power_bhp": "114-158 bhp",
+        "range_mileage": "18.1-20.4 kmpl",
+        "fuel_type": "Petrol\/Diesel",
+        "notes": "Current generation"
+    },
+    {
+        "s_no": "8",
+        "make": "Hyundai",
+        "model": "Aura",
+        "price": "\u20b96.49 - 9.05 Lakh",
+        "power_bhp": "82 bhp",
+        "range_mileage": "20.5-28.0 kmpl",
+        "fuel_type": "Petrol\/CNG",
+        "notes": "Current generation"
+    },
+    {
+        "s_no": "9",
+        "make": "Hyundai",
+        "model": "Tucson",
+        "price": "\u20b929.21 - 35.94 Lakh",
+        "power_bhp": "154-183 bhp",
+        "range_mileage": "15.3-18.0 kmpl",
+        "fuel_type": "Petrol\/Diesel",
+        "notes": "Current generation"
+    },
+    {
+        "s_no": "10",
+        "make": "Hyundai",
+        "model": "Exter",
+        "price": "\u20b96.13 - 10.28 Lakh",
+        "power_bhp": "82 bhp",
+        "range_mileage": "19.4-27.1 kmpl",
+        "fuel_type": "Petrol\/CNG",
+        "notes": "Current generation"
+    },
+    {
+        "s_no": "11",
+        "make": "Hyundai",
+        "model": "i20 N-Line",
+        "price": "\u20b99.99 - 12.32 Lakh",
+        "power_bhp": "118 bhp",
+        "range_mileage": "20.2 kmpl",
+        "fuel_type": "Petrol",
+        "notes": "Current generation"
+    },
+    {
+        "s_no": "12",
+        "make": "Hyundai",
+        "model": "Kona Electric",
+        "price": "\u20b923.84 - 24.03 Lakh",
+        "power_bhp": "134 bhp",
+        "range_mileage": "452 km\/charge",
+        "fuel_type": "Electric",
+        "notes": "Current generation"
+    },
+    {
+        "s_no": "13",
+        "make": "Hyundai",
+        "model": "Creta N Line",
+        "price": "\u20b915.45 - 19.99 Lakh",
+        "power_bhp": "158 bhp",
+        "range_mileage": "18.0 kmpl",
+        "fuel_type": "Petrol",
+        "notes": "Current generation"
+    },
+    {
+        "s_no": "14",
+        "make": "Hyundai",
+        "model": "Creta Electric",
+        "price": "\u20b920.00 - 25.00 Lakh (Est.)",
+        "power_bhp": "~138 bhp (Est.)",
+        "range_mileage": "~450 km\/charge (Est.)",
+        "fuel_type": "Electric",
+        "notes": "Expected Launch: Early 2025"
+    },
+    {
+        "s_no": "15",
+        "make": "Hyundai",
+        "model": "Ioniq 5",
+        "price": "\u20b946.05 Lakh",
+        "power_bhp": "215 bhp",
+        "range_mileage": "631 km\/charge",
+        "fuel_type": "Electric",
+        "notes": "Current generation"
+    },
+    {
+        "s_no": "16",
+        "make": "Mercedes-Benz",
+        "model": "E-Class",
+        "price": "\u20b976.00 Lakh - 89.00 Lakh",
+        "power_bhp": "194-282 bhp",
+        "range_mileage": "15.0 kmpl",
+        "fuel_type": "Petrol\/Diesel",
+        "notes": "Current generation"
+    },
+    {
+        "s_no": "17",
+        "make": "Mercedes-Benz",
+        "model": "C-Class",
+        "price": "\u20b961.85 - 69.00 Lakh",
+        "power_bhp": "201-255 bhp",
+        "range_mileage": "16.0-23.0 kmpl",
+        "fuel_type": "Petrol\/Diesel",
+        "notes": "Current generation"
+    },
+    {
+        "s_no": "18",
+        "make": "Mercedes-Benz",
+        "model": "S-Class",
+        "price": "\u20b91.77 - 1.86 Crore",
+        "power_bhp": "362-496 bhp",
+        "range_mileage": "12.8 kmpl",
+        "fuel_type": "Petrol",
+        "notes": "Current generation"
+    },
+    {
+        "s_no": "19",
+        "make": "Mercedes-Benz",
+        "model": "GLA",
+        "price": "\u20b951.75 - 58.15 Lakh",
+        "power_bhp": "161-188 bhp",
+        "range_mileage": "17.4-18.3 kmpl",
+        "fuel_type": "Petrol\/Diesel",
+        "notes": "Current generation"
+    },
+    {
+        "s_no": "20",
+        "make": "Mercedes-Benz",
+        "model": "GLC",
+        "price": "\u20b975.90 - 85.90 Lakh",
+        "power_bhp": "201-255 bhp",
+        "range_mileage": "14.7-19.0 kmpl",
+        "fuel_type": "Petrol\/Diesel",
+        "notes": "Current generation"
+    },
+    {
+        "s_no": "21",
+        "make": "Mercedes-Benz",
+        "model": "GLS",
+        "price": "\u20b91.32 - 1.37 Crore",
+        "power_bhp": "362-380 bhp",
+        "range_mileage": "10.0-11.0 kmpl",
+        "fuel_type": "Petrol\/Diesel",
+        "notes": "Current generation"
+    },
+    {
+        "s_no": "22",
+        "make": "Mercedes-Benz",
+        "model": "GLE",
+        "price": "\u20b996.40 Lakh - 1.15 Crore",
+        "power_bhp": "265-380 bhp",
+        "range_mileage": "12.0-14.0 kmpl",
+        "fuel_type": "Diesel",
+        "notes": "Current generation"
+    },
+    {
+        "s_no": "23",
+        "make": "Mercedes-Benz",
+        "model": "A-Class Limousine",
+        "price": "\u20b946.05 - 48.35 Lakh",
+        "power_bhp": "161-188 bhp",
+        "range_mileage": "17.5-21.3 kmpl",
+        "fuel_type": "Petrol\/Diesel",
+        "notes": "Current generation"
+    },
+    {
+        "s_no": "24",
+        "make": "Mercedes-Benz",
+        "model": "G-Class",
+        "price": "\u20b92.55 - 4.00 Crore",
+        "power_bhp": "422-585 bhp",
+        "range_mileage": "8.0-9.0 kmpl",
+        "fuel_type": "Petrol\/Diesel",
+        "notes": "Current generation"
+    },
+    {
+        "s_no": "25",
+        "make": "Mercedes-Benz",
+        "model": "AMG GLC 43 Coupe",
+        "price": "\u20b987.00 Lakh",
+        "power_bhp": "385 bhp",
+        "range_mileage": "10.0 kmpl",
+        "fuel_type": "Petrol",
+        "notes": "Current generation"
+    },
+    {
+        "s_no": "26",
+        "make": "Mercedes-Benz",
+        "model": "W110",
+        "price": "N\/A",
+        "power_bhp": "N\/A",
+        "range_mileage": "N\/A",
+        "fuel_type": "Petrol\/Diesel",
+        "notes": "Classic car, no current data"
+    },
+    {
+        "s_no": "27",
+        "make": "Mercedes-Benz",
+        "model": "GLE Coupe",
+        "price": "\u20b989.00 Lakh - 1.00 Crore",
+        "power_bhp": "333-367 bhp",
+        "range_mileage": "10.0 kmpl",
+        "fuel_type": "Petrol\/Diesel",
+        "notes": "Current generation"
+    },
+    {
+        "s_no": "28",
+        "make": "Mercedes-Benz",
+        "model": "GLC Coupe",
+        "price": "\u20b972.50 - 73.50 Lakh",
+        "power_bhp": "258 bhp",
+        "range_mileage": "12.7 kmpl",
+        "fuel_type": "Petrol",
+        "notes": "Current generation"
+    },
+    {
+        "s_no": "29",
+        "make": "Mercedes-Benz",
+        "model": "C-Coupe",
+        "price": "N\/A",
+        "power_bhp": "N\/A",
+        "range_mileage": "N\/A",
+        "fuel_type": "N\/A",
+        "notes": "Not officially sold in India as standalone model"
+    },
+    {
+        "s_no": "30",
+        "make": "Mercedes-Benz",
+        "model": "Maybach S-Class",
+        "price": "\u20b92.77 - 3.44 Crore",
+        "power_bhp": "496-603 bhp",
+        "range_mileage": "9.8 kmpl",
+        "fuel_type": "Petrol",
+        "notes": "Current generation"
+    },
+    {
+        "s_no": "31",
+        "make": "Mercedes-Benz",
+        "model": "EQB",
+        "price": "\u20b977.50 Lakh",
+        "power_bhp": "225 bhp",
+        "range_mileage": "423 km\/charge",
+        "fuel_type": "Electric",
+        "notes": "Current generation"
+    },
+    {
+        "s_no": "32",
+        "make": "Mercedes-Benz",
+        "model": "A-Class",
+        "price": "N\/A",
+        "power_bhp": "N\/A",
+        "range_mileage": "N\/A",
+        "fuel_type": "N\/A",
+        "notes": "Replaced by A-Class Limousine in India"
+    },
+    {
+        "s_no": "33",
+        "make": "Mercedes-Benz",
+        "model": "Maybach GLS",
+        "price": "\u20b93.35 - 3.39 Crore",
+        "power_bhp": "550 bhp",
+        "range_mileage": "8.0 kmpl",
+        "fuel_type": "Petrol",
+        "notes": "Current generation"
+    },
+    {
+        "s_no": "34",
+        "make": "Mercedes-Benz",
+        "model": "EQA",
+        "price": "\u20b966.00 Lakh",
+        "power_bhp": "188 bhp",
+        "range_mileage": "400-418 km\/charge",
+        "fuel_type": "Electric",
+        "notes": "Current generation"
+    },
+    {
+        "s_no": "35",
+        "make": "Mercedes-Benz",
+        "model": "AMG GLA",
+        "price": "\u20b963.50 Lakh",
+        "power_bhp": "306 bhp",
+        "range_mileage": "13.0 kmpl",
+        "fuel_type": "Petrol",
+        "notes": "Current generation"
+    },
+    {
+        "s_no": "36",
+        "make": "Mercedes-Benz",
+        "model": "EQE SUV",
+        "price": "\u20b91.39 Crore",
+        "power_bhp": "292 bhp",
+        "range_mileage": "550 km\/charge",
+        "fuel_type": "Electric",
+        "notes": "Current generation"
+    },
+    {
+        "s_no": "37",
+        "make": "Mercedes-Benz",
+        "model": "GLB",
+        "price": "\u20b960.00 - 65.00 Lakh",
+        "power_bhp": "163-188 bhp",
+        "range_mileage": "14.0-16.0 kmpl",
+        "fuel_type": "Petrol\/Diesel",
+        "notes": "Current generation"
+    },
+    {
+        "s_no": "38",
+        "make": "Mercedes-Benz",
+        "model": "AMG E53",
+        "price": "\u20b91.06 Crore",
+        "power_bhp": "429 bhp",
+        "range_mileage": "11.0 kmpl",
+        "fuel_type": "Petrol",
+        "notes": "Current generation"
+    },
+    {
+        "s_no": "39",
+        "make": "Mercedes-Benz",
+        "model": "AMG GT 63 S",
+        "price": "\u20b93.30 Crore",
+        "power_bhp": "630 bhp",
+        "range_mileage": "12.65 kmpl",
+        "fuel_type": "Petrol",
+        "notes": "Current generation (V8 Biturbo)"
+    },
+    {
+        "s_no": "40",
+        "make": "Mercedes-Benz",
+        "model": "S-Coupe",
+        "price": "N\/A",
+        "power_bhp": "N\/A",
+        "range_mileage": "N\/A",
+        "fuel_type": "N\/A",
+        "notes": "Not officially sold in India as standalone model"
+    },
+    {
+        "s_no": "41",
+        "make": "Mercedes-Benz",
+        "model": "AMG A35",
+        "price": "\u20b958.00 Lakh",
+        "power_bhp": "306 bhp",
+        "range_mileage": "13.0 kmpl",
+        "fuel_type": "Petrol",
+        "notes": "Current generation"
+    },
+    {
+        "s_no": "42",
+        "make": "Mercedes-Benz",
+        "model": "190",
+        "price": "N\/A",
+        "power_bhp": "N\/A",
+        "range_mileage": "N\/A",
+        "fuel_type": "N\/A",
+        "notes": "Classic car, no current data"
+    },
+    {
+        "s_no": "43",
+        "make": "Mercedes-Benz",
+        "model": "EQS",
+        "price": "\u20b91.62 - 1.67 Crore",
+        "power_bhp": "329-516 bhp",
+        "range_mileage": "770-857 km\/charge",
+        "fuel_type": "Electric",
+        "notes": "Current generation"
+    },
+    {
+        "s_no": "44",
+        "make": "Mercedes-Benz",
+        "model": "AMG C 43",
+        "price": "\u20b998.25 Lakh",
+        "power_bhp": "402 bhp",
+        "range_mileage": "14.0 kmpl",
+        "fuel_type": "Petrol",
+        "notes": "Current generation"
+    },
+    {
+        "s_no": "45",
+        "make": "Mercedes-Benz",
+        "model": "AMG A45 S",
+        "price": "\u20b987.50 Lakh",
+        "power_bhp": "421 bhp",
+        "range_mileage": "12.0 kmpl",
+        "fuel_type": "Petrol",
+        "notes": "Current generation"
+    },
+    {
+        "s_no": "46",
+        "make": "Mercedes-Benz",
+        "model": "AMG GLE Coupe",
+        "price": "\u20b91.85 Crore",
+        "power_bhp": "543 bhp",
+        "range_mileage": "8.0 kmpl",
+        "fuel_type": "Petrol",
+        "notes": "Current generation"
+    },
+    {
+        "s_no": "47",
+        "make": "Mercedes-Benz",
+        "model": "SL",
+        "price": "N\/A",
+        "power_bhp": "N\/A",
+        "range_mileage": "N\/A",
+        "fuel_type": "N\/A",
+        "notes": "Not officially sold in India as standalone model"
+    },
+    {
+        "s_no": "48",
+        "make": "Mercedes-Benz",
+        "model": "CLK",
+        "price": "N\/A",
+        "power_bhp": "N\/A",
+        "range_mileage": "N\/A",
+        "fuel_type": "N\/A",
+        "notes": "Classic car, no current data"
+    },
+    {
+        "s_no": "49",
+        "make": "Mercedes-Benz",
+        "model": "W123",
+        "price": "N\/A",
+        "power_bhp": "N\/A",
+        "range_mileage": "N\/A",
+        "fuel_type": "N\/A",
+        "notes": "Classic car, no current data"
+    },
+    {
+        "s_no": "50",
+        "make": "Mercedes-Benz",
+        "model": "MB-Class",
+        "price": "N\/A",
+        "power_bhp": "N\/A",
+        "range_mileage": "N\/A",
+        "fuel_type": "N\/A",
+        "notes": "Unclear model name, assuming typo or very rare"
+    },
+    {
+        "s_no": "51",
+        "make": "Mercedes-Benz",
+        "model": "SDL",
+        "price": "N\/A",
+        "power_bhp": "N\/A",
+        "range_mileage": "N\/A",
+        "fuel_type": "N\/A",
+        "notes": "Unclear model name, assuming typo or very rare"
+    },
+    {
+        "s_no": "52",
+        "make": "Mercedes-Benz",
+        "model": "Maybach SL 680",
+        "price": "N\/A",
+        "power_bhp": "N\/A",
+        "range_mileage": "N\/A",
+        "fuel_type": "N\/A",
+        "notes": "Not launched in India"
+    },
+    {
+        "s_no": "53",
+        "make": "Mercedes-Benz",
+        "model": "G580 with EQ Technology",
+        "price": "\u20b93.00 Crore (Est.)",
+        "power_bhp": "~587 bhp (Est.)",
+        "range_mileage": "~473 km\/charge (Est.)",
+        "fuel_type": "Electric",
+        "notes": "Expected Launch: Late 2024\/Early 2025"
+    },
+    {
+        "s_no": "54",
+        "make": "Mercedes-Benz",
+        "model": "CLE Cabriolet",
+        "price": "N\/A",
+        "power_bhp": "N\/A",
+        "range_mileage": "N\/A",
+        "fuel_type": "N\/A",
+        "notes": "Not launched in India"
+    },
+    {
+        "s_no": "55",
+        "make": "Mercedes-Benz",
+        "model": "EQS SUV",
+        "price": "\u20b91.39 - 1.49 Crore",
+        "power_bhp": "355-536 bhp",
+        "range_mileage": "610-660 km\/charge",
+        "fuel_type": "Electric",
+        "notes": "Current generation"
+    },
+    {
+        "s_no": "56",
+        "make": "Mercedes-Benz",
+        "model": "AMG G-Class",
+        "price": "\u20b94.00 Crore",
+        "power_bhp": "585 bhp",
+        "range_mileage": "8.0 kmpl",
+        "fuel_type": "Petrol",
+        "notes": "Current generation (AMG G 63)"
+    },
+    {
+        "s_no": "57",
+        "make": "Mercedes-Benz",
+        "model": "Maybach EQS SUV",
+        "price": "\u20b92.35 Crore (Est.)",
+        "power_bhp": "658 bhp",
+        "range_mileage": "600 km\/charge",
+        "fuel_type": "Electric",
+        "notes": "Expected Launch: Late 2024\/Early 2025"
+    },
+    {
+        "s_no": "58",
+        "make": "Mercedes-Benz",
+        "model": "AMG SL55 Roadster",
+        "price": "N\/A",
+        "power_bhp": "N\/A",
+        "range_mileage": "N\/A",
+        "fuel_type": "N\/A",
+        "notes": "Not officially launched in India"
+    },
+    {
+        "s_no": "59",
+        "make": "Mercedes-Benz",
+        "model": "AMG GT 63 S E Performance",
+        "price": "\u20b93.30 Crore",
+        "power_bhp": "831 bhp",
+        "range_mileage": "12 km (electric only)",
+        "fuel_type": "Plug-in Hybrid",
+        "notes": "Current generation"
+    },
+    {
+        "s_no": "60",
+        "make": "Mercedes-Benz",
+        "model": "AMG S 63 E Performance",
+        "price": "\u20b93.30 Crore",
+        "power_bhp": "794 bhp",
+        "range_mileage": "33 km (electric only)",
+        "fuel_type": "Plug-in Hybrid",
+        "notes": "Current generation"
+    },
+    {
+        "s_no": "61",
+        "make": "Mercedes-Benz",
+        "model": "AMG C 63 S E Performance",
+        "price": "N\/A",
+        "power_bhp": "N\/A",
+        "range_mileage": "N\/A",
+        "fuel_type": "N\/A",
+        "notes": "Not officially launched in India"
+    },
+    {
+        "s_no": "62",
+        "make": "Honda",
+        "model": "City",
+        "price": "\u20b912.00 - 16.35 Lakh",
+        "power_bhp": "119 bhp",
+        "range_mileage": "17.8-18.4 kmpl",
+        "fuel_type": "Petrol",
+        "notes": "Current generation"
+    },
+    {
+        "s_no": "63",
+        "make": "Honda",
+        "model": "Amaze",
+        "price": "\u20b97.20 - 9.92 Lakh",
+        "power_bhp": "89 bhp",
+        "range_mileage": "18.3-18.6 kmpl",
+        "fuel_type": "Petrol",
+        "notes": "Current generation"
+    },
+    {
+        "s_no": "64",
+        "make": "Honda",
+        "model": "Elevate",
+        "price": "\u20b911.91 - 16.43 Lakh",
+        "power_bhp": "119 bhp",
+        "range_mileage": "15.3-16.9 kmpl",
+        "fuel_type": "Petrol",
+        "notes": "Current generation"
+    },
+    {
+        "s_no": "65",
+        "make": "Honda",
+        "model": "City Hybrid eHEV",
+        "price": "\u20b919.04 - 20.55 Lakh",
+        "power_bhp": "124 bhp (combined)",
+        "range_mileage": "27.1 kmpl",
+        "fuel_type": "Petrol Hybrid",
+        "notes": "Current generation"
+    },
+    {
+        "s_no": "66",
+        "make": "Honda",
+        "model": "Step",
+        "price": "N\/A",
+        "power_bhp": "N\/A",
+        "range_mileage": "N\/A",
+        "fuel_type": "N\/A",
+        "notes": "Not sold in India"
+    },
+    {
+        "s_no": "67",
+        "make": "Honda",
+        "model": "Concerto",
+        "price": "N\/A",
+        "power_bhp": "N\/A",
+        "range_mileage": "N\/A",
+        "fuel_type": "N\/A",
+        "notes": "Classic car, not sold in India"
+    },
+    {
+        "s_no": "68",
+        "make": "Honda",
+        "model": "CRX",
+        "price": "N\/A",
+        "power_bhp": "N\/A",
+        "range_mileage": "N\/A",
+        "fuel_type": "N\/A",
+        "notes": "Classic car, not sold in India"
+    },
+    {
+        "s_no": "69",
+        "make": "Toyota",
+        "model": "Innova Crysta",
+        "price": "\u20b919.99 - 26.55 Lakh",
+        "power_bhp": "148 bhp",
+        "range_mileage": "14.0-15.0 kmpl",
+        "fuel_type": "Diesel",
+        "notes": "Current generation"
+    },
+    {
+        "s_no": "70",
+        "make": "Toyota",
+        "model": "Fortuner",
+        "price": "\u20b933.43 - 51.44 Lakh",
+        "power_bhp": "164-201 bhp",
+        "range_mileage": "10.0-14.0 kmpl",
+        "fuel_type": "Petrol\/Diesel",
+        "notes": "Current generation"
+    },
+    {
+        "s_no": "71",
+        "make": "Toyota",
+        "model": "Camry",
+        "price": "\u20b946.17 Lakh",
+        "power_bhp": "176 bhp",
+        "range_mileage": "23.2 kmpl",
+        "fuel_type": "Hybrid (Petrol)",
+        "notes": "Current generation"
+    },
+    {
+        "s_no": "72",
+        "make": "Toyota",
+        "model": "Glanza",
+        "price": "\u20b96.86 - 10.00 Lakh",
+        "power_bhp": "89 bhp",
+        "range_mileage": "22.3-22.9 kmpl",
+        "fuel_type": "Petrol",
+        "notes": "Current generation (rebadged Baleno)"
+    },
+    {
+        "s_no": "73",
+        "make": "Toyota",
+        "model": "Urban Cruiser Hyryder",
+        "price": "\u20b911.14 - 22.46 Lakh",
+        "power_bhp": "101-114 bhp",
+        "range_mileage": "19.4-27.9 kmpl",
+        "fuel_type": "Petrol\/Hybrid\/CNG",
+        "notes": "Current generation"
+    },
+    {
+        "s_no": "74",
+        "make": "Toyota",
+        "model": "Land Cruiser",
+        "price": "\u20b92.10 Crore",
+        "power_bhp": "304 bhp",
+        "range_mileage": "11.0 kmpl",
+        "fuel_type": "Diesel",
+        "notes": "Current generation (LC 300)"
+    },
+    {
+        "s_no": "75",
+        "make": "Toyota",
+        "model": "Innova Hycross",
+        "price": "\u20b919.77 - 30.98 Lakh",
+        "power_bhp": "172-184 bhp",
+        "range_mileage": "16.1-23.2 kmpl",
+        "fuel_type": "Petrol\/Hybrid",
+        "notes": "Current generation"
+    },
+    {
+        "s_no": "76",
+        "make": "Toyota",
+        "model": "Vellfire",
+        "price": "\u20b91.20 - 1.30 Crore",
+        "power_bhp": "163 bhp",
+        "range_mileage": "16.3 kmpl",
+        "fuel_type": "Hybrid (Petrol)",
+        "notes": "Current generation"
+    },
+    {
+        "s_no": "77",
+        "make": "Toyota",
+        "model": "Rumion",
+        "price": "\u20b910.44 - 13.73 Lakh",
+        "power_bhp": "87 bhp",
+        "range_mileage": "20.5-26.1 kmpl",
+        "fuel_type": "Petrol\/CNG",
+        "notes": "Current generation (rebadged Ertiga)"
+    },
+    {
+        "s_no": "78",
+        "make": "Toyota",
+        "model": "Prado",
+        "price": "\u20b990.00 Lakh (Est.)",
+        "power_bhp": "N\/A",
+        "range_mileage": "N\/A",
+        "fuel_type": "Diesel",
+        "notes": "Expected launch, no official data"
+    },
+    {
+        "s_no": "79",
+        "make": "Toyota",
+        "model": "Commuter",
+        "price": "N\/A",
+        "power_bhp": "N\/A",
+        "range_mileage": "N\/A",
+        "fuel_type": "N\/A",
+        "notes": "Not sold as passenger vehicle in India"
+    },
+    {
+        "s_no": "80",
+        "make": "Toyota",
+        "model": "Urban Cruiser Taisor",
+        "price": "\u20b97.74 - 13.04 Lakh",
+        "power_bhp": "89-99 bhp",
+        "range_mileage": "21.7-22.8 kmpl",
+        "fuel_type": "Petrol\/CNG",
+        "notes": "Current generation (rebadged Fronx)"
+    },
+    {
+        "s_no": "81",
+        "make": "Toyota",
+        "model": "Cresta",
+        "price": "N\/A",
+        "power_bhp": "N\/A",
+        "range_mileage": "N\/A",
+        "fuel_type": "N\/A",
+        "notes": "Classic car, not sold in India"
+    },
+    {
+        "s_no": "82",
+        "make": "Toyota",
+        "model": "MR2",
+        "price": "N\/A",
+        "power_bhp": "N\/A",
+        "range_mileage": "N\/A",
+        "fuel_type": "N\/A",
+        "notes": "Classic car, not sold in India"
+    },
+    {
+        "s_no": "83",
+        "make": "Toyota",
+        "model": "Sera",
+        "price": "N\/A",
+        "power_bhp": "N\/A",
+        "range_mileage": "N\/A",
+        "fuel_type": "N\/A",
+        "notes": "Classic car, not sold in India"
+    },
+    {
+        "s_no": "84",
+        "make": "Toyota",
+        "model": "Celica",
+        "price": "N\/A",
+        "power_bhp": "N\/A",
+        "range_mileage": "N\/A",
+        "fuel_type": "N\/A",
+        "notes": "Classic car, not sold in India"
+    },
+    {
+        "s_no": "85",
+        "make": "Toyota",
+        "model": "Estima",
+        "price": "N\/A",
+        "power_bhp": "N\/A",
+        "range_mileage": "N\/A",
+        "fuel_type": "N\/A",
+        "notes": "Not sold in India"
+    },
+    {
+        "s_no": "86",
+        "make": "Toyota",
+        "model": "Corona",
+        "price": "N\/A",
+        "power_bhp": "N\/A",
+        "range_mileage": "N\/A",
+        "fuel_type": "N\/A",
+        "notes": "Classic car, not sold in India"
+    },
+    {
+        "s_no": "87",
+        "make": "Toyota",
+        "model": "Ventury",
+        "price": "N\/A",
+        "power_bhp": "N\/A",
+        "range_mileage": "N\/A",
+        "fuel_type": "N\/A",
+        "notes": "Not sold in India"
+    },
+    {
+        "s_no": "88",
+        "make": "Toyota",
+        "model": "Cressida",
+        "price": "N\/A",
+        "power_bhp": "N\/A",
+        "range_mileage": "N\/A",
+        "fuel_type": "N\/A",
+        "notes": "Classic car, not sold in India"
+    },
+    {
+        "s_no": "89",
+        "make": "Toyota",
+        "model": "Mark",
+        "price": "N\/A",
+        "power_bhp": "N\/A",
+        "range_mileage": "N\/A",
+        "fuel_type": "N\/A",
+        "notes": "Not sold in India"
+    },
+    {
+        "s_no": "90",
+        "make": "Toyota",
+        "model": "Alphard",
+        "price": "N\/A",
+        "power_bhp": "N\/A",
+        "range_mileage": "N\/A",
+        "fuel_type": "N\/A",
+        "notes": "Similar to Vellfire, not sold as Alphard in India"
+    },
+    {
+        "s_no": "91",
+        "make": "Toyota",
+        "model": "Crnos",
+        "price": "N\/A",
+        "power_bhp": "N\/A",
+        "range_mileage": "N\/A",
+        "fuel_type": "N\/A",
+        "notes": "Unclear model name, assuming typo or very rare"
+    },
+    {
+        "s_no": "92",
+        "make": "Toyota",
+        "model": "Crnos",
+        "price": "N\/A",
+        "power_bhp": "N\/A",
+        "range_mileage": "N\/A",
+        "fuel_type": "N\/A",
+        "notes": "Unclear model name, assuming typo or very rare"
+    }
+]

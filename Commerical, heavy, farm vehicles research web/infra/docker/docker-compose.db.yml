@@ -1,0 +1,101 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: autopredator-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: "${POSTGRES_USER:-autopredator}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:-autopredator}"
+      POSTGRES_DB: "${POSTGRES_DB:-autopredator}"
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - autopredator-db
+
+  redis:
+    image: redis:7
+    container_name: autopredator-redis
+    restart: unless-stopped
+    command: ["redis-server", "--appendonly", "yes"]
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - redis_data:/data
+    networks:
+      - autopredator-db
+
+  opensearch:
+    image: opensearchproject/opensearch:2.13.0
+    container_name: autopredator-opensearch
+    restart: unless-stopped
+    environment:
+      discovery.type: single-node
+      bootstrap.memory_lock: "true"
+      OPENSEARCH_JAVA_OPTS: "-Xms1g -Xmx1g"
+      plugins.security.disabled: "true"
+      cluster.name: autopredator-search
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    ports:
+      - "${OPENSEARCH_PORT:-9200}:9200"
+      - "${OPENSEARCH_HTTPS_PORT:-9600}:9600"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -s http://localhost:9200/_cluster/health || exit 1"]
+      interval: 20s
+      timeout: 10s
+      retries: 10
+    volumes:
+      - opensearch_data:/usr/share/opensearch/data
+    networks:
+      - autopredator-db
+
+  clickhouse:
+    image: clickhouse/clickhouse-server:24.8
+    container_name: autopredator-clickhouse
+    restart: unless-stopped
+    environment:
+      CLICKHOUSE_DB: "${CLICKHOUSE_DB:-autopredator}"
+      CLICKHOUSE_USER: "${CLICKHOUSE_USER:-autopredator}"
+      CLICKHOUSE_PASSWORD: "${CLICKHOUSE_PASSWORD:-autopredator}"
+    ports:
+      - "${CLICKHOUSE_HTTP_PORT:-8123}:8123"
+      - "${CLICKHOUSE_TCP_PORT:-9000}:9000"
+    healthcheck:
+      test: ["CMD-SHELL", "clickhouse-client --query='SELECT 1'"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - clickhouse_data:/var/lib/clickhouse
+    networks:
+      - autopredator-db
+
+volumes:
+  postgres_data: {}
+  redis_data: {}
+  opensearch_data: {}
+  clickhouse_data: {}
+
+networks:
+  autopredator-db:
+    driver: bridge

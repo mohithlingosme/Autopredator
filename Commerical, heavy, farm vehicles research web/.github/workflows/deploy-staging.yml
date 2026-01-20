@@ -1,0 +1,66 @@
+name: Deploy to Staging
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-staging
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          known_hosts: ${{ secrets.SERVER_HOST_STAGING }}
+
+      - name: Get latest tag
+        id: get_tag
+        run: |
+          TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "latest")
+          echo "tag=$TAG" >> $GITHUB_OUTPUT
+
+      - name: Deploy to staging
+        run: |
+          echo "🚀 Deploying ${{ steps.get_tag.outputs.tag }} to staging..."
+          ssh -o StrictHostKeyChecking=no deploy@${{ secrets.SERVER_HOST_STAGING }} << EOF
+            set -e
+            cd /opt/fleetcommand/configs
+            ./infra/scripts/deploy.sh staging ${{ steps.get_tag.outputs.tag }}
+          EOF
+
+      - name: Health check
+        run: |
+          echo "🏥 Running health checks..."
+          ssh -o StrictHostKeyChecking=no deploy@${{ secrets.SERVER_HOST_STAGING }} << 'EOF'
+            set -e
+            cd /opt/fleetcommand/configs
+            ./infra/scripts/healthcheck.sh staging
+          EOF
+
+      - name: Run smoke tests
+        run: |
+          echo "🧪 Running smoke tests..."
+          # Add smoke test commands here
+          # Example: npm run test:e2e -- --grep "smoke"
+
+      - name: Notify on success
+        if: success()
+        run: |
+          echo "✅ Staging deployment successful!"
+          # Add notification logic here (Slack, email, etc.)
+
+      - name: Notify on failure
+        if: failure()
+        run: |
+          echo "❌ Staging deployment failed!"
+          # Add notification logic here (Slack, email, etc.)
