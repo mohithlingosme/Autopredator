@@ -39,7 +39,14 @@
     - no variant has >1 thumbnail
     - view exists (optional)
 
-### 1.3 Seed strategy update (idempotent)
+### 1.3 Schema Analysis: Variant-Specific Technical Specifications
+- [x] **Analysis Complete** (2025-01-20): Reviewed `docs/db-schema-complete.sql` and `data/new_carset.json`
+  - Finding: **Schema is already variant-specific** ✅
+  - The `vehicle_specs` table has `variant_id` as a UNIQUE foreign key
+  - All technical specs (torque, power, dimensions, displacement) are linked to specific variants
+  - **No ALTER TABLE commands needed** - schema correctly enforces 1:1 variant-to-specs relationship
+
+### 1.4 Seed strategy update (idempotent)
 - [ ] Ensure all seeds use UPSERT patterns:
   - `features(name)` UNIQUE → `INSERT ... ON DUPLICATE KEY UPDATE ...`
   - variants unique `(model_id,fuel,transmission,variant_name)`
@@ -55,11 +62,11 @@
 ## 2) Backend: connect to `autopredator_cars` and expose stable APIs
 
 ### 2.1 Config + DB client
-- [ ] Backend `.env` variables:
+- [x] Backend `.env` variables:
   - `DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASS`, `DB_NAME=autopredator_cars`
-- [ ] Add DB connection module with pooling + reconnect:
+- [x] Add DB connection module with pooling + reconnect:
   - `src/db/index.(js|ts|py|php)` (match your stack)
-- [ ] Add a health endpoint:
+- [x] Add a health endpoint:
   - `GET /api/health` returns DB ok + version
 
 ### 2.2 Data model mapping (backend layer)
@@ -113,7 +120,7 @@
 ## 3) Frontend: update UI to match DB + new API contracts
 
 ### 3.1 Routing (slug-based)
-- [ ] Use slugs everywhere:
+- [x] Use slugs everywhere:
   - `/brands/:brandSlug`
   - `/models/:modelSlug`
   - `/variants/:variantSlug`
@@ -130,12 +137,12 @@
   - Sources if present (optional)
 
 ### 3.3 Filters (from real columns)
-- [ ] Filter variants by:
+- [x] Filter variants by:
   - fuel
   - transmission
   - price range
   - feature presence (optional)
-- [ ] Add “Only ex-showroom” label (hard-coded rule)
+- [x] Add “Only ex-showroom” label (hard-coded rule)
 
 ### 3.4 UX safeguards
 - [ ] If price missing, show “Price not available” (don’t crash)

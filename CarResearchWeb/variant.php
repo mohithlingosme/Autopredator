@@ -8,13 +8,16 @@ require_once __DIR__ . '/includes/bootstrap.php';
 require_once __DIR__ . '/views/partials/empty_state.php';
 
 $variantId = (int) ($_GET['variant_id'] ?? 0);
+$variantSlug = trim($_GET['variant_slug'] ?? $_GET['slug'] ?? '');
 $modelName = trim($_GET['model_name'] ?? '');
 $variantNameParam = trim($_GET['variant'] ?? '');
 
 $variant = null;
 
-if ($variantId > 0) {
-    $variant = get_variant_by_id($variantId);
+if ($variantSlug !== '') {
+    $variant = repo()->getVariantBySlug($variantSlug);
+} elseif ($variantId > 0) {
+    $variant = repo()->getVariantById($variantId);
 } elseif ($modelName !== '' && $variantNameParam !== '') {
     $variants = car_service()->getVariantsByModel($modelName);
     foreach ($variants as $index => $v) {
@@ -22,12 +25,13 @@ if ($variantId > 0) {
             $resolvedId = isset($v['id']) ? (int) $v['id'] : ($index + 1);
             $variant = [
                 'id' => $resolvedId,
-                'variant_name' => $v['name'],
+                'variant' => $v['name'],
+                'slug' => $v['slug'] ?? slugify($v['name']),
                 'fuel_type' => $v['fuel_type'],
                 'transmission' => $v['transmission'],
-                'ex_showroom_price' => $v['price_numeric'],
-                'model_name' => $modelName,
-                'manufacturer_name' => $v['brand'] ?? '',
+                'price_numeric' => $v['price_numeric'] ?? null,
+                'model' => $modelName,
+                'brand' => $v['brand'] ?? '',
                 'manufacturer_id' => 0,
                 'model_id' => $resolvedId,
                 'body_type' => $v['segment'] ?? 'Car',
@@ -42,19 +46,38 @@ if ($variant === null) {
 }
 
 $variantId = (int) ($variant['id'] ?? $variantId);
+$variantSlug = $variant['slug'] ?? $variantSlug;
 $manufacturerId = (int) ($variant['manufacturer_id'] ?? 0);
-$modelVariants = car_service()->getVariantsByModel($variant['model_name'] ?? $modelName);
+$modelName = $variant['model_name'] ?? $variant['model'] ?? $modelName;
+$brandName = $variant['manufacturer_name'] ?? $variant['brand'] ?? '';
+$variantName = $variant['variant_name'] ?? $variant['variant'] ?? ($variant['name'] ?? '');
+$priceValue = $variant['ex_showroom_price'] ?? $variant['price_numeric'] ?? null;
+$hasPrice = $priceValue !== null && $priceValue > 0;
+$images = is_array($variant['images'] ?? null) ? $variant['images'] : [];
+$primaryImage = $variant['image_url'] ?? null;
+foreach ($images as $img) {
+    if (!empty($img['image_url']) && (int) ($img['is_thumbnail'] ?? 0) === 1) {
+        $primaryImage = $img['image_url'];
+        break;
+    }
+    if ($primaryImage === null && !empty($img['image_url'])) {
+        $primaryImage = $img['image_url'];
+    }
+}
+$primaryImage = $primaryImage ?: '/assets/img/no-car-image.png';
+
+$modelVariants = car_service()->getVariantsByModel($modelName);
 $favorites = fav_get_list();
 $isFavorite = in_array($variantId, $favorites, true);
-$page_title = ($variant['variant_name'] ?? 'Variant') . ' - ' . ($variant['manufacturer_name'] ?? '') . ' | Autopredator';
+$page_title = ($variantName ?: 'Variant') . ' - ' . $brandName . ' | Autopredator';
 
 // Breadcrumbs
 $breadcrumbs = [
     ['url' => 'index.php', 'label' => 'Home'],
     ['url' => 'brand.php', 'label' => 'Brands'],
-    ['url' => 'brand.php?manufacturer_name=' . urlencode($variant['manufacturer_name'] ?? ''), 'label' => $variant['manufacturer_name'] ?? ''],
-    ['url' => 'model.php?model_name=' . urlencode($variant['model_name'] ?? ''), 'label' => $variant['model_name'] ?? ''],
-    ['url' => '', 'label' => $variant['variant_name'] ?? ''],
+    ['url' => 'brand.php?brandSlug=' . urlencode(slugify($brandName)), 'label' => $brandName],
+    ['url' => 'model.php?brandSlug=' . urlencode(slugify($brandName)) . '&modelSlug=' . urlencode(slugify($modelName)), 'label' => $modelName],
+    ['url' => '', 'label' => $variantName],
 ];
 
 // Render breadcrumbs
@@ -66,23 +89,28 @@ render_breadcrumbs($breadcrumbs);
     <div class="container">
         <div class="hero-card">
             <p class="badge badge-soft">Variant</p>
-            <h1><?= e(($variant['manufacturer_name'] ?? '') . ' ' . ($variant['model_name'] ?? '') . ' ' . ($variant['variant_name'] ?? '')) ?></h1>
+            <h1><?= e(trim($brandName . ' ' . $modelName . ' ' . $variantName)) ?></h1>
             <p>Complete specifications, features, and pricing.</p>
             <div class="pill-row">
                 <?php if (!empty($variant['fuel_type'])): ?><span class="pill">Fuel: <?= e($variant['fuel_type']) ?></span><?php endif; ?>
                 <?php if (!empty($variant['transmission'])): ?><span class="pill">Transmission: <?= e($variant['transmission']) ?></span><?php endif; ?>
                 <?php if (!empty($variant['body_type'])): ?><span class="pill">Body: <?= e($variant['body_type']) ?></span><?php endif; ?>
             </div>
-            <?php if (!empty($variant['ex_showroom_price'])): ?>
+            <?php if ($hasPrice): ?>
                 <div class="price" style="margin-top: 16px; font-size: 1.5rem; font-weight: bold; color: var(--color-primary);">
-                    <?= format_price((float) $variant['ex_showroom_price']) ?>
+                    <?= format_price((float) $priceValue) ?>
                 </div>
+            <?php else: ?>
+                <span class="badge badge-soft" style="margin-top: 12px; background:#e5e7eb; color:#4b5563;">Price not available</span>
             <?php endif; ?>
+            <div class="hero-media" style="margin-top:16px;">
+                <img src="<?= e($primaryImage) ?>" alt="<?= e($brandName . ' ' . $modelName . ' ' . $variantName) ?>" style="width:100%;max-width:520px;border-radius:12px;object-fit:cover;aspect-ratio:16/9;" onerror="this.src='/assets/img/no-car-image.png';">
+            </div>
             <div class="card-footer" style="padding: 0; margin-top: 16px;">
-                <button class="btn btn-primary" type="button" data-compare-add="<?= e($variant['model_name'] ?? '') ?>" data-compare-label="<?= e($variant['variant_name'] ?? '') ?>">Add to Compare</button>
-                <a class="btn btn-outline" href="compare.php?ids=<?= $variantId ?>">Compare This</a>
-                <button class="btn btn-outline" type="button" data-shortlist-add="<?= e($variant['model_name'] ?? '') ?>" data-shortlist-label="<?= e($variant['variant_name'] ?? '') ?>">Shortlist</button>
-                <button class="btn btn-outline" type="button" onclick="navigator.share({title: '<?= e($variant['variant_name'] ?? '') ?>', url: window.location.href})">Share</button>
+                <button class="btn btn-primary" type="button" data-compare-add="<?= e($variantSlug) ?>" data-compare-label="<?= e($variantName) ?>">Add to Compare</button>
+                <a class="btn btn-outline" href="compare.php?ids=<?= urlencode($variantSlug) ?>">Compare This</a>
+                <button class="btn btn-outline" type="button" data-shortlist-add="<?= e($modelName) ?>" data-shortlist-label="<?= e($variantName) ?>">Shortlist</button>
+                <button class="btn btn-outline" type="button" onclick="navigator.share({title: '<?= e($variantName) ?>', url: window.location.href})">Share</button>
             </div>
         </div>
     </div>
@@ -217,25 +245,32 @@ render_breadcrumbs($breadcrumbs);
 <div class="container" style="padding: 0 0 32px;">
     <div class="filter-shell" style="grid-template-columns: 320px 1fr;">
         <aside class="sticky-summary">
-            <?php if (!empty($variant['ex_showroom_price'])): ?>
+            <?php if ($hasPrice): ?>
                 <p class="muted">Ex-showroom</p>
-                <h3><?= format_price((float) $variant['ex_showroom_price']) ?></h3>
+                <h3><?= format_price((float) $priceValue) ?></h3>
+            <?php else: ?>
+                <span class="badge badge-soft" style="background:#e5e7eb; color:#4b5563;">Price not available</span>
             <?php endif; ?>
             <div class="card-footer" style="padding:0; margin-top:12px;">
-                <button class="btn btn-primary" type="button" data-compare-add="<?= e($variant['model_name'] ?? '') ?>" data-compare-label="<?= e($variant['variant_name'] ?? '') ?>">Add to Compare</button>
+                <button class="btn btn-primary" type="button" data-compare-add="<?= e($variantSlug) ?>" data-compare-label="<?= e($variantName) ?>">Add to Compare</button>
                 <button class="btn btn-outline" type="button" data-fav-toggle data-id="<?= (int) $variantId ?>" data-active="<?= $isFavorite ? '1' : '0' ?>"><?= $isFavorite ? 'Remove Favorite' : 'Save Favorite' ?></button>
             </div>
             <div style="margin-top:16px;">
                 <p class="muted">Other variants</p>
                 <?php
-                $otherVariants = array_values(array_filter($modelVariants, static fn($v, $idx) => ($idx + 1) !== $variantId, ARRAY_FILTER_USE_BOTH));
+                $otherVariants = array_values(array_filter(
+                    $modelVariants,
+                    static fn($v) => ($v['slug'] ?? $v['id'] ?? null) !== ($variantSlug ?: $variantId)
+                ));
                 if (empty($otherVariants)):
                 ?>
                     <p class="muted">No other variants listed.</p>
                 <?php else: ?>
                     <ul style="padding-left:16px;">
-                <?php foreach ($otherVariants as $idx => $other): $otherId = isset($other['id']) ? (int) $other['id'] : ($idx + 1); ?>
-                    <li><a class="muted" href="variant.php?variant_id=<?= (int) $otherId ?>&model_name=<?= urlencode($variant['model_name'] ?? '') ?>"><?= e($other['name'] ?? '') ?></a></li>
+                <?php foreach ($otherVariants as $idx => $other):
+                    $otherSlug = $other['slug'] ?? slugify($other['name'] ?? (string) ($other['variant'] ?? ''));
+                ?>
+                    <li><a class="muted" href="variant.php?variant_slug=<?= urlencode($otherSlug) ?>"><?= e($other['name'] ?? $other['variant'] ?? '') ?></a></li>
                 <?php endforeach; ?>
             </ul>
         <?php endif; ?>
@@ -260,11 +295,11 @@ render_breadcrumbs($breadcrumbs);
             <section class="section" style="padding-top:16px;">
                 <div class="card">
                     <h2>Pricing</h2>
-                    <?php if (!empty($variant['ex_showroom_price'])): ?>
+                    <?php if ($hasPrice): ?>
                         <p class="muted">Ex-Showroom Price</p>
-                        <p class="price"><?= format_price((float) $variant['ex_showroom_price']) ?></p>
+                        <p class="price"><?= format_price((float) $priceValue) ?></p>
                     <?php else: ?>
-                        <p class="muted">Pricing information not available.</p>
+                        <span class="badge badge-soft" style="background:#e5e7eb; color:#4b5563;">Price not available</span>
                     <?php endif; ?>
                 </div>
             </section>
@@ -277,14 +312,14 @@ render_breadcrumbs($breadcrumbs);
         <h2>Similar Cars</h2>
         <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
             <?php
-            $similarCars = car_service()->getModelsByBrand($variant['manufacturer_name'] ?? '');
-            $similarCars = array_filter($similarCars, static fn($car) => $car['model'] !== $variant['model_name']);
+            $similarCars = car_service()->getModelsByBrand($brandName);
+            $similarCars = array_filter($similarCars, static fn($car) => ($car['model'] ?? '') !== $modelName);
             $similarCars = array_slice($similarCars, 0, 3); // Limit to 3 similar cars
             foreach ($similarCars as $car):
             ?>
                 <article class="card car-card">
                     <div class="card-top">
-                        <p class="muted"><?= e($car['make'] ?? $variant['manufacturer_name']) ?></p>
+                        <p class="muted"><?= e($car['make'] ?? $brandName) ?></p>
                         <h3><?= e($car['model'] ?? '') ?></h3>
                         <?php if (!empty($car['segment'])): ?>
                             <span class="badge badge-soft"><?= e($car['segment']) ?></span>
@@ -319,8 +354,13 @@ render_breadcrumbs($breadcrumbs);
                         </div>
                     </div>
                     <div class="card-footer">
-                        <a href="model.php?model_name=<?= urlencode($car['model'] ?? '') ?>" class="btn btn-primary">View Variants</a>
-                        <button class="btn btn-outline" type="button" data-compare-add="<?= e($car['model'] ?? '') ?>" data-compare-label="<?= e($car['make'] . ' ' . $car['model']) ?>">Add to Compare</button>
+                        <?php
+                        $carBrand = $car['make'] ?? $brandName;
+                        $carModelSlug = $car['slug'] ?? slugify($car['model'] ?? '');
+                        $carBrandSlug = $car['brand_slug'] ?? slugify($carBrand);
+                        ?>
+                        <a href="model.php?brandSlug=<?= urlencode($carBrandSlug) ?>&modelSlug=<?= urlencode($carModelSlug) ?>" class="btn btn-primary">View Variants</a>
+                        <button class="btn btn-outline" type="button" data-compare-add="<?= e($carModelSlug) ?>" data-compare-label="<?= e(($car['make'] ?? $carBrand) . ' ' . ($car['model'] ?? '')) ?>">Add to Compare</button>
                     </div>
                 </article>
             <?php endforeach; ?>

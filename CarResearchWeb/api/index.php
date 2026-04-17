@@ -85,6 +85,24 @@ try {
             $controller = new \App\Controllers\FiltersController(repo());
             $controller->handle($method);
             break;
+        case 'health':
+            try {
+                $pdo = get_db();
+                $dbOk = $pdo->query('SELECT 1')->fetchColumn() == 1;
+                $version = $pdo->query('SELECT VERSION()')->fetchColumn();
+                echo json_encode([
+                    'ok' => true,
+                    'data' => [
+                        'db' => $dbOk,
+                        'db_name' => DB_NAME,
+                        'version' => $version,
+                    ],
+                ]);
+            } catch (Throwable $e) {
+                http_response_code(500);
+                echo json_encode(['ok' => false, 'error' => ['code' => 'DB_UNAVAILABLE', 'message' => $e->getMessage()]]);
+            }
+            break;
         default:
             http_response_code(404);
             echo json_encode(['ok' => false, 'error' => ['code' => 'NOT_FOUND', 'message' => 'Endpoint not found']]);

@@ -11,6 +11,7 @@ SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci;
 SET @current_db := DATABASE();
 
 -- Helper: drop index if it exists
+DROP PROCEDURE IF EXISTS drop_index_if_exists;
 DELIMITER //
 CREATE PROCEDURE drop_index_if_exists(IN tbl VARCHAR(128), IN idx VARCHAR(128))
 BEGIN
@@ -29,6 +30,7 @@ END//
 DELIMITER ;
 
 -- Helper: drop FK if present then add ON DELETE CASCADE
+DROP PROCEDURE IF EXISTS replace_fk_with_cascade;
 DELIMITER //
 CREATE PROCEDURE replace_fk_with_cascade(
   IN tbl VARCHAR(128),
@@ -72,6 +74,7 @@ END//
 DELIMITER ;
 
 -- Helper: ensure unique index if missing
+DROP PROCEDURE IF EXISTS ensure_unique_idx;
 DELIMITER //
 CREATE PROCEDURE ensure_unique_idx(
   IN tbl VARCHAR(128),

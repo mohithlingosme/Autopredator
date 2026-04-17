@@ -15,8 +15,18 @@ function render_car_card(array $car): void
     $min = $car['price_range']['min'] ?? ($car['price_numeric'] ?? 0);
     $max = $car['price_range']['max'] ?? ($car['price_numeric'] ?? 0);
     $modelName = $car['model'] ?? $car['name'] ?? '';
+    $brandSlug = $car['brand_slug'] ?? $car['manufacturer_slug'] ?? slugify($brand);
+    $modelSlug = $car['slug'] ?? slugify($modelName);
+    $imageUrl = $car['image_url'] ?? $car['thumbnail_url'] ?? null;
+    if ($imageUrl === null && isset($car['images'][0]['image_url'])) {
+        $imageUrl = $car['images'][0]['image_url'];
+    }
+    $imageUrl = $imageUrl ?: '/assets/img/no-car-image.png';
     ?>
 <article class="card car-card">
+    <div class="card-media" style="width:100%; margin-bottom:12px;">
+        <img src="<?= e($imageUrl) ?>" alt="<?= e($brand . ' ' . $title) ?>" style="width:100%; border-radius:12px; object-fit:cover; aspect-ratio:16/9;" onerror="this.src='/assets/img/no-car-image.png';">
+    </div>
     <div class="card-top">
         <p class="muted"><?= e($brand) ?></p>
         <h3><?= e($title) ?></h3>
@@ -30,6 +40,11 @@ function render_car_card(array $car): void
                 <div class="stat">
                     <p class="muted">Price</p>
                     <strong><?= format_price((float) $min) ?><?php if ($max && $max !== $min): ?> - <?= format_price((float) $max) ?><?php endif; ?></strong>
+                </div>
+            <?php else: ?>
+                <div class="stat">
+                    <p class="muted">Price</p>
+                    <strong class="muted">Price not available</strong>
                 </div>
             <?php endif; ?>
             <?php if ($fuel): ?>
@@ -65,9 +80,9 @@ function render_car_card(array $car): void
         </div>
     </div>
     <div class="card-footer">
-        <a href="model.php?model_name=<?= urlencode($modelName) ?>" class="btn btn-primary">View Variants</a>
-        <button class="btn btn-outline" type="button" data-compare-add="<?= e($modelName) ?>" data-compare-label="<?= e($brand . ' ' . $title) ?>">Add to Compare</button>
-        <button class="btn btn-outline" type="button" data-favorite-toggle="<?= e($modelName) ?>" data-favorite-label="<?= e($brand . ' ' . $title) ?>">Add to Favorites</button>
+        <a href="model.php?brandSlug=<?= urlencode($brandSlug) ?>&modelSlug=<?= urlencode($modelSlug) ?>" class="btn btn-primary">View Variants</a>
+        <button class="btn btn-outline" type="button" data-compare-add="<?= e($modelSlug) ?>" data-compare-label="<?= e($brand . ' ' . $title) ?>">Add to Compare</button>
+        <button class="btn btn-outline" type="button" data-favorite-toggle="<?= e($modelSlug) ?>" data-favorite-label="<?= e($brand . ' ' . $title) ?>">Add to Favorites</button>
     </div>
 </article>
 <?php

@@ -92,6 +92,30 @@ class JsonCarRepository implements CarRepositoryInterface
     }
 
     /**
+     * @return array<int, array<string, mixed>>
+     */
+    public function getModelsByBrandSlug(string $brandSlug): array
+    {
+        $this->bootstrap();
+        $slug = $this->slugify($brandSlug);
+
+        $brandName = null;
+        foreach ($this->modelsByMake as $makeKey => $models) {
+            $candidate = $models[0]['make'] ?? $makeKey;
+            if ($this->slugify((string) $candidate) === $slug) {
+                $brandName = $candidate;
+                break;
+            }
+        }
+
+        if ($brandName === null) {
+            return [];
+        }
+
+        return $this->getModelsByMake($brandName);
+    }
+
+    /**
      * @return array<string, mixed>|null
      */
     public function getModelByName(string $modelName): ?array
@@ -133,6 +157,39 @@ class JsonCarRepository implements CarRepositoryInterface
                         return $variant;
                     }
                     $variant['id'] = $this->buildVariantId($model, $variant);
+                    return $variant;
+                }, $variants);
+            }
+        }
+
+        return [];
+    }
+
+    /**
+     * @return array<int, array<string, mixed>>
+     */
+    public function getVariantsByModelSlug(string $modelSlug): array
+    {
+        $this->bootstrap();
+        $needle = $this->slugify($modelSlug);
+
+        foreach ($this->dataset as $model) {
+            $name = $model['model'] ?? null;
+            $make = $model['make'] ?? '';
+            if (!is_string($name)) {
+                continue;
+            }
+            $slugLong = $this->slugify($make . ' ' . $name);
+            $slugShort = $this->slugify($name);
+            if ($slugLong === $needle || $slugShort === $needle) {
+                $variants = is_array($model['variants'] ?? null) ? $model['variants'] : [];
+                return array_map(function ($variant) use ($model) {
+                    if (!is_array($variant)) {
+                        return $variant;
+                    }
+                    $variant['id'] = $this->buildVariantId($model, $variant);
+                    $variant['model'] = $model['model'] ?? '';
+                    $variant['brand'] = $model['make'] ?? '';
                     return $variant;
                 }, $variants);
             }
@@ -247,6 +304,15 @@ class JsonCarRepository implements CarRepositoryInterface
         return array_slice($results, $offset, $limit);
     }
 
+    /**
+     * @param array<string, mixed> $filters
+     * @return array<int, array<string, mixed>>
+     */
+    public function searchVariants(array $filters): array
+    {
+        return $this->search($filters);
+    }
+
     public function getVariantById(int $id): ?array
     {
         $all = $this->search([
@@ -272,6 +338,17 @@ class JsonCarRepository implements CarRepositoryInterface
         $key = strtolower(trim($slug));
 
         return $this->modelSlugMap[$key] ?? null;
+    }
+
+    /**
+     * DB-compatible alias for variant slug lookup.
+     *
+     * @return array<string, mixed>|null
+     */
+    public function getVariantBySlug(string $slug): ?array
+    {
+        // In JSON mode, variant "key" is generated id; slug lookup delegates to generic slug map.
+        return $this->getVariantByKey($slug) ?? $this->getBySlug($slug);
     }
 
     private function bootstrap(): void

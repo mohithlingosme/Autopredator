@@ -23,6 +23,17 @@ final class CarService
     }
 
     /**
+     * @return array<int, array<string, mixed>>
+     */
+    public function getModelsByBrandSlug(string $brandSlug): array
+    {
+        if (method_exists($this->repo, 'getModelsByBrandSlug')) {
+            return $this->repo->getModelsByBrandSlug($brandSlug);
+        }
+        return $this->repo->getModelsByMake($brandSlug);
+    }
+
+    /**
      * @return array<string, mixed>|null
      */
     public function findBrandByIdOrName(int $id = 0, string $name = ''): ?array
@@ -66,11 +77,25 @@ final class CarService
     }
 
     /**
+     * @return array<int, array<string, mixed>>
+     */
+    public function getVariantsByModelSlug(string $modelSlug): array
+    {
+        if (method_exists($this->repo, 'getVariantsByModelSlug')) {
+            return $this->repo->getVariantsByModelSlug($modelSlug);
+        }
+        return $this->repo->getVariantsByModel($modelSlug);
+    }
+
+    /**
      * @param array<string, mixed> $filters
      * @return array<int, array<string, mixed>>
      */
     public function searchVariants(array $filters): array
     {
+        if (method_exists($this->repo, 'searchVariants')) {
+            return $this->repo->searchVariants($filters);
+        }
         return $this->repo->search($filters);
     }
 
