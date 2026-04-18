@@ -1,0 +1,10 @@
+{
+  "description": "Deprecated raw data.json organized into structured files. Use these instead:",
+  "brands": "brands.json (61 brands with profiles)",
+  "cars_clean": "scraper/cars_clean.json (structured variants data)",
+  "cars_summary": "cars_summary.json (model overviews/prices/specs)",
+  "detailed_profiles": {
+    "xuv700": "XUV700.json"
+  },
+  "features": "../app/Repositories/features.json"
+}

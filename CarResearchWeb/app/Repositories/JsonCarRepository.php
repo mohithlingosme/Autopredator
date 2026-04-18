@@ -11,8 +11,8 @@ use App\Support\Logger;
  */
 class JsonCarRepository implements CarRepositoryInterface
 {
-    private const FILE_CARSET = 'new_carset.json';
-    private const FILE_LEGACY = 'data.json';
+private const FILE_CARSET = '../scraper/cars_clean.json';
+    private const FILE_LEGACY = 'data_index.json';
 
     /** @var array<int, array<string, mixed>> */
     private array $dataset = [];
