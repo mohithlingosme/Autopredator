@@ -1,8 +1,8 @@
 <?php
 declare(strict_types=1);
 
-use App\Data\DetailRepository;
-use App\Data\JsonLoader;
+use App\Repositories\DetailRepository;
+use App\Support\JsonLoader;
 use App\Repositories\JsonCarRepository;
 use PHPUnit\Framework\TestCase;
 
