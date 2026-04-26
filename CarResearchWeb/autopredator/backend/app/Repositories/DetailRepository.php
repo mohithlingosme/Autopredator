@@ -1,8 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Data;
+namespace App\Repositories;
 
+use App\Support\JsonLoader;
 use App\Support\Logger;
 
 /**
@@ -80,3 +81,4 @@ final class DetailRepository
         return $cleaned;
     }
 }
+

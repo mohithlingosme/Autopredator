@@ -4,7 +4,7 @@ declare(strict_types=1);
 require_once __DIR__ . '/includes/header.php';
 require_once __DIR__ . '/includes/config.php';
 require_once __DIR__ . '/includes/search_helpers.php';
-require_once __DIR__ . '/includes/repository.php';
+require_once __DIR__ . '/includes/bootstrap.php';
 require_once __DIR__ . '/views/partials/filter_panel.php';
 require_once __DIR__ . '/views/partials/pagination.php';
 require_once __DIR__ . '/views/partials/empty_state.php';
@@ -45,7 +45,6 @@ foreach (car_service()->getFeaturedFamilies(50) as $fam) {
             <p>Filter by price, body type, fuel, and more. Persisted query params keep your back button happy.</p>
             <?php include __DIR__ . '/views/partials/search_bar.php'; ?>
         </div>
-    </div>
 </section>
 
 <section class="section">
@@ -71,7 +70,6 @@ foreach (car_service()->getFeaturedFamilies(50) as $fam) {
                         </select>
                         <button class="btn btn-outline" type="button" data-filter-toggle>Filters</button>
                     </div>
-                </div>
 
                 <?php if (!empty($filters) && array_filter($filters, fn($v) => $v !== '' && $v !== 0)): ?>
                     <div class="chip-row">
@@ -121,7 +119,6 @@ foreach (car_service()->getFeaturedFamilies(50) as $fam) {
                 <?php endif; ?>
             </main>
         </div>
-    </div>
 </section>
 
 <script>
@@ -142,4 +139,3 @@ function removeFilter(filter) {
 
 <?php
 require_once __DIR__ . '/includes/footer.php';
-?>

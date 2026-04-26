@@ -9,8 +9,7 @@
   "autoload": {
     "files": [
       "app/Support/Autoload.php",
-      "includes/helpers.php",
-      "includes/repository.php"
+      "includes/helpers.php"
     ]
   }
 }

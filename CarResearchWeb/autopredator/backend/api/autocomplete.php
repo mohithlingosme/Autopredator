@@ -7,7 +7,7 @@ declare(strict_types=1);
  */
 
 require_once __DIR__ . '/../includes/config.php';
-require_once __DIR__ . '/../includes/repository.php';
+require_once __DIR__ . '/../includes/bootstrap.php';
 
 header('Content-Type: application/json; charset=utf-8');
 

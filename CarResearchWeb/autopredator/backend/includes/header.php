@@ -6,7 +6,7 @@ require_once __DIR__ . '/seo_helpers.php';
 require_once __DIR__ . '/structured_data.php';
 require_once __DIR__ . '/auth.php';
 require_once __DIR__ . '/config.php';
-require_once __DIR__ . '/repository.php';
+require_once __DIR__ . '/bootstrap.php';
 require_once __DIR__ . '/../views/layout.php';
 
 $page_title = $page_title ?? 'Autopredator - Car Research Platform';
@@ -44,13 +44,25 @@ try {
         }
     }
     // Get variants, body types, fuel types from repository
-    $allVariants = get_all_variants();
-    foreach ($allVariants as $variant) {
-        if (!empty($variant['variant_name'])) {
-            $suggestions['variants'][] = $variant['variant_name'];
+    $allVariants = [];
+    if (function_exists('car_service')) {
+        foreach ($brands as $man) {
+            foreach (car_service()->getModelsByBrand($man['name']) as $m) {
+                foreach ($m['variants'] ?? [] as $variant) {
+                    $allVariants[] = array_merge($variant, [
+                        'brand' => $man['name'],
+                        'model' => $m['model'] ?? '',
+                    ]);
+                }
+            }
         }
-        if (!empty($variant['body_type'])) {
-            $suggestions['body_types'][] = $variant['body_type'];
+    }
+    foreach ($allVariants as $variant) {
+        if (!empty($variant['name'])) {
+            $suggestions['variants'][] = $variant['name'];
+        }
+        if (!empty($variant['segment'])) {
+            $suggestions['body_types'][] = $variant['segment'];
         }
         if (!empty($variant['fuel_type'])) {
             $suggestions['fuel_types'][] = $variant['fuel_type'];

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Data;
+namespace App\Support;
 
 use App\Support\Logger;
 use JsonException;
@@ -96,3 +96,4 @@ final class JsonLoader
         return $targetDir . basename($candidate);
     }
 }
+

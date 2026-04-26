@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 require_once __DIR__ . '/includes/auth.php';
-require_once __DIR__ . '/includes/car_repository.php';
+require_once __DIR__ . '/includes/bootstrap.php';
 require_once __DIR__ . '/includes/header.php';
 
 auth_require_login('/login.php?redirect=/my_garage.php');

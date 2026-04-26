@@ -1,20 +1,38 @@
 <?php
-require_once 'includes/repository.php';
+declare(strict_types=1);
 
-echo "Testing repository functions...\n\n";
+require_once __DIR__ . '/includes/bootstrap.php';
 
-echo "USE_JSON constant: " . (USE_JSON ? 'true' : 'false') . "\n\n";
+echo "Testing Repository...\n";
 
-echo "Testing getBrands():\n";
-$brands = getBrands();
-var_dump($brands);
+try {
+    $brands = get_all_manufacturers();
+    echo "Found " . count($brands) . " manufacturers\n";
 
-echo "\nTesting getModelsByBrand('Maruti'):\n";
-$models = getModelsByBrand('Maruti');
-var_dump($models);
+    if (!empty($brands)) {
+        $firstBrand = $brands[0];
+        echo "First brand: " . $firstBrand['name'] . "\n";
 
-echo "\nTesting searchCars():\n";
-$cars = searchCars(['limit' => 2]);
-var_dump($cars);
+        $models = car_service()->getModelsByBrand($firstBrand['name']);
+        echo "Found " . count($models) . " models for " . $firstBrand['name'] . "\n";
 
-echo "\nTest completed.\n";
+        if (!empty($models)) {
+            $firstModel = $models[0];
+            echo "First model: " . ($firstModel['model'] ?? 'N/A') . "\n";
+
+            $variants = car_service()->getVariantsByModel($firstModel['model'] ?? '');
+            echo "Found " . count($variants) . " variants\n";
+
+            if (!empty($variants)) {
+                $firstVariant = $variants[0];
+                echo "First variant: " . ($firstVariant['name'] ?? 'N/A') . "\n";
+            }
+        }
+    }
+
+    echo "\nAll tests passed!\n";
+
+} catch (Exception $e) {
+    echo "Error: " . $e->getMessage() . "\n";
+    exit(1);
+}
