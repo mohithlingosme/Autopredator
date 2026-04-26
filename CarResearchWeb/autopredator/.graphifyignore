@@ -1,0 +1,45 @@
+# Graphify output (keep out of analysis and git)
+graphify-out/
+.graphify/
+
+# Python
+venv/
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.cache/
+
+# Node
+node_modules/
+
+# PHP / Composer (vendor is huge; include only if you really need it)
+backend/vendor/
+
+# Artifacts / binaries
+*.zip
+*.7z
+*.tar
+*.gz
+*.rar
+*.exe
+*.dll
+*.so
+*.dylib
+*.pdf
+*.doc
+*.docx
+*.ppt
+*.pptx
+*.xls
+*.xlsx
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.mp4
+*.mov
+*.avi
+

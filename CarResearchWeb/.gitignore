@@ -27,3 +27,10 @@ Thumbs.db
 
 # Docker
 docker-compose.override.yml
+# Graphify
+graphify-out/
+.graphify/
+autopredator/graphify-out/
+autopredator/.graphify/
+autopredator/graph.json
+autopredator/graph.html
