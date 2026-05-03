@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  scrapers:
+    build: .
+    volumes:
+      - ./scrapers:/app/scrapers
+      - ./scrape_output:/app/scrape_output
+    environment:
+      - DISPLAY=:99
+    command: python run_scrapers.py --limited --proxy
+    privileged: true  # for Chrome/selenium
+
+  ollama:
+    image: ollama/ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama:/root/.ollama
+    command: serve
+
+volumes:
+  ollama:
+

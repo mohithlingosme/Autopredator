@@ -1,0 +1,33 @@
+FROM python:3.11-slim
+
+# Install system deps for Selenium/Chrome/Playwright
+RUN apt-get update && apt-get install -y wget gnupg unzip curl xvfb \
+    libxi6 libgconf-2-4 libnss3 libgdk-pixbuf2.0-0 libgtk-3-0 libdrm2 libasound2 \
+    libxss1 libxkbfile1 fonts-liberation libappindicator3-1 libxrandr2 libxcomposite1 \
+    libxcursor1 libxdamage1 libxi6 libxtst6 libnss3 libatk-bridge2.0-0 libcups2 \
+    libdrm2 libxrandr2 libgbm1 libxss1 libasound2 xdg-utils default-jre && \
+    rm -rf /var/lib/apt/lists/*
+
+# Chrome for Selenium
+RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add - \
+    && echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list \
+    && apt-get update \
+    && apt-get install -y google-chrome-stable \
+    && rm -rf /var/lib/apt/lists/*
+
+# Playwright Chromium
+RUN pip install playwright && playwright install chromium --with-deps
+
+WORKDIR /app
+
+# Copy scrapers
+COPY scrapers /app/scrapers
+COPY run_scrapers.py /app/
+
+# Install Python deps
+RUN pip install selenium webdriver-manager playwright tabula-py camelot-py[cv] pandas beautifulsoup4 lxml pypdf requests
+
+EXPOSE 8080
+
+CMD ["python", "run_scrapers.py", "--limited"]
+

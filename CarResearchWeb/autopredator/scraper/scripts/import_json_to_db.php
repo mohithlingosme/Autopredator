@@ -15,36 +15,60 @@ require_once __DIR__ . '/../includes/json_car_repository.php';
 class JsonToDbImporter
 {
     private PDO $pdo;
-    private array $jsonData;
+    private string $inputFile;
+    private string $dataType; // 'cars', 'siam', 'vahan'
+    private array $dataRecords = [];
 
-    public function __construct(PDO $pdo, array $jsonData)
+    public function __construct(PDO $pdo, string $inputFile, string $dataType = 'cars')
     {
         $this->pdo = $pdo;
-        $this->jsonData = $jsonData;
+        $this->inputFile = $inputFile;
+        $this->dataType = $dataType;
+        $this->loadData();
     }
 
-    public function import(): array
+    private function loadData(): void
+    {
+        if (str_ends_with($this->inputFile, '.jsonl')) {
+            // JSONL line-by-line
+            $handle = fopen($this->inputFile, 'r');
+            while (($line = fgets($handle)) !== false) {
+                $this->dataRecords[] = json_decode($line, true);
+            }
+            fclose($handle);
+        } else {
+            // JSON array
+            $this->dataRecords = json_decode(file_get_contents($this->inputFile), true) ?? [];
+        }
+    }
+
+public function import(): array
     {
         $stats = [
-            'manufacturers' => 0,
-            'model_families' => 0,
-            'models' => 0,
-            'variants' => 0,
-            'specs' => 0,
+            'records_processed' => 0,
+            'records_inserted' => 0,
             'errors' => []
         ];
 
         try {
             $this->pdo->beginTransaction();
 
-            // Import manufacturers
-            $manufacturerMap = $this->importManufacturers($stats);
+            switch ($this->dataType) {
+                case 'cars':
+                    $stats = array_merge($stats, $this->importCars());
+                    break;
+                case 'siam':
+                    $stats = array_merge($stats, $this->importSiamSales());
+                    break;
+                case 'vahan':
+                    $stats = array_merge($stats, $this->importVahanRegistrations());
+                    break;
+                default:
+                    throw new InvalidArgumentException("Unknown data type: " . $this->dataType);
+            }
 
-            // Import model families and models
-            $modelMap = $this->importModelFamiliesAndModels($manufacturerMap, $stats);
-
-            // Import variants and specs
-            $this->importVariantsAndSpecs($modelMap, $stats);
+            // Run migrations
+            $this->runMigrations();
 
             $this->pdo->commit();
 

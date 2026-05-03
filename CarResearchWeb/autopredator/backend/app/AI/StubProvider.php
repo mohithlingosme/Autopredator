@@ -9,7 +9,7 @@ namespace App\AI;
  * Provides deterministic placeholder outputs when no real LLM is configured.
  * Used for development, testing, and fallback scenarios.
  */
-class StubProvider implements ProviderInterface
+class OllamaProvider implements ProviderInterface
 {
     /**
      * Generate deterministic text response

@@ -1,0 +1,3432 @@
+{
+    "metadata": {
+        "project": "Autopredator",
+        "dataset": "VAHAN National Vehicle Registration",
+        "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml",
+        "total_records": 180,
+        "generated_at": "2026-05-03T10:51:09.110026",
+        "format_version": "1.0"
+    },
+    "data": [
+        {
+            "serial_no": "1",
+            "vehicle_class": "ADAPTED VEHICLE",
+            "vehicle_category_group": {
+                "2WIC": "1,076",
+                "LMV": "0",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "1,076"
+            },
+            "state_metadata": {
+                "state_code": "AN",
+                "state_name": "Andaman & Nicobar Island(3)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:34:51.634191",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "2",
+            "vehicle_class": "MOTOR CAR",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "16,45,786",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "16,45,786"
+            },
+            "state_metadata": {
+                "state_code": "AN",
+                "state_name": "Andaman & Nicobar Island(3)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:34:51.635211",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "3",
+            "vehicle_class": "OMNI BUS (PRIVATE USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3,508",
+                "MMV": "8",
+                "HMV": "141",
+                "TOTAL": "3,657"
+            },
+            "state_metadata": {
+                "state_code": "AN",
+                "state_name": "Andaman & Nicobar Island(3)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:34:51.636179",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "4",
+            "vehicle_class": "PRIVATE SERVICE VEHICLE (INDIVIDUAL USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "708",
+                "MMV": "8",
+                "HMV": "5",
+                "TOTAL": "721"
+            },
+            "state_metadata": {
+                "state_code": "AN",
+                "state_name": "Andaman & Nicobar Island(3)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:34:51.636179",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "5",
+            "vehicle_class": "QUADRICYCLE (PRIVATE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "3"
+            },
+            "state_metadata": {
+                "state_code": "AN",
+                "state_name": "Andaman & Nicobar Island(3)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:34:51.636179",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "1",
+            "vehicle_class": "ADAPTED VEHICLE",
+            "vehicle_category_group": {
+                "2WIC": "1,076",
+                "LMV": "0",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "1,076"
+            },
+            "state_metadata": {
+                "state_code": "AP",
+                "state_name": "Andhra Pradesh(84)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:35:15.897528",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "2",
+            "vehicle_class": "MOTOR CAR",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "16,45,786",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "16,45,786"
+            },
+            "state_metadata": {
+                "state_code": "AP",
+                "state_name": "Andhra Pradesh(84)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:35:15.897528",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "3",
+            "vehicle_class": "OMNI BUS (PRIVATE USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3,508",
+                "MMV": "8",
+                "HMV": "141",
+                "TOTAL": "3,657"
+            },
+            "state_metadata": {
+                "state_code": "AP",
+                "state_name": "Andhra Pradesh(84)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:35:15.897528",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "4",
+            "vehicle_class": "PRIVATE SERVICE VEHICLE (INDIVIDUAL USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "708",
+                "MMV": "8",
+                "HMV": "5",
+                "TOTAL": "721"
+            },
+            "state_metadata": {
+                "state_code": "AP",
+                "state_name": "Andhra Pradesh(84)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:35:15.897528",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "5",
+            "vehicle_class": "QUADRICYCLE (PRIVATE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "3"
+            },
+            "state_metadata": {
+                "state_code": "AP",
+                "state_name": "Andhra Pradesh(84)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:35:15.897528",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "1",
+            "vehicle_class": "ADAPTED VEHICLE",
+            "vehicle_category_group": {
+                "2WIC": "1,076",
+                "LMV": "0",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "1,076"
+            },
+            "state_metadata": {
+                "state_code": "AR",
+                "state_name": "Arunachal Pradesh(29)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:35:40.696734",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "2",
+            "vehicle_class": "MOTOR CAR",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "16,45,786",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "16,45,786"
+            },
+            "state_metadata": {
+                "state_code": "AR",
+                "state_name": "Arunachal Pradesh(29)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:35:40.696734",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "3",
+            "vehicle_class": "OMNI BUS (PRIVATE USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3,508",
+                "MMV": "8",
+                "HMV": "141",
+                "TOTAL": "3,657"
+            },
+            "state_metadata": {
+                "state_code": "AR",
+                "state_name": "Arunachal Pradesh(29)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:35:40.696734",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "4",
+            "vehicle_class": "PRIVATE SERVICE VEHICLE (INDIVIDUAL USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "708",
+                "MMV": "8",
+                "HMV": "5",
+                "TOTAL": "721"
+            },
+            "state_metadata": {
+                "state_code": "AR",
+                "state_name": "Arunachal Pradesh(29)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:35:40.696734",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "5",
+            "vehicle_class": "QUADRICYCLE (PRIVATE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "3"
+            },
+            "state_metadata": {
+                "state_code": "AR",
+                "state_name": "Arunachal Pradesh(29)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:35:40.696734",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "1",
+            "vehicle_class": "ADAPTED VEHICLE",
+            "vehicle_category_group": {
+                "2WIC": "1,076",
+                "LMV": "0",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "1,076"
+            },
+            "state_metadata": {
+                "state_code": "AS",
+                "state_name": "Assam(35)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:36:06.290215",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "2",
+            "vehicle_class": "MOTOR CAR",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "16,45,786",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "16,45,786"
+            },
+            "state_metadata": {
+                "state_code": "AS",
+                "state_name": "Assam(35)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:36:06.290215",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "3",
+            "vehicle_class": "OMNI BUS (PRIVATE USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3,508",
+                "MMV": "8",
+                "HMV": "141",
+                "TOTAL": "3,657"
+            },
+            "state_metadata": {
+                "state_code": "AS",
+                "state_name": "Assam(35)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:36:06.290215",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "4",
+            "vehicle_class": "PRIVATE SERVICE VEHICLE (INDIVIDUAL USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "708",
+                "MMV": "8",
+                "HMV": "5",
+                "TOTAL": "721"
+            },
+            "state_metadata": {
+                "state_code": "AS",
+                "state_name": "Assam(35)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:36:06.290215",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "5",
+            "vehicle_class": "QUADRICYCLE (PRIVATE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "3"
+            },
+            "state_metadata": {
+                "state_code": "AS",
+                "state_name": "Assam(35)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:36:06.290215",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "1",
+            "vehicle_class": "ADAPTED VEHICLE",
+            "vehicle_category_group": {
+                "2WIC": "1,076",
+                "LMV": "0",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "1,076"
+            },
+            "state_metadata": {
+                "state_code": "BR",
+                "state_name": "Bihar(48)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:36:32.917758",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "2",
+            "vehicle_class": "MOTOR CAR",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "16,45,786",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "16,45,786"
+            },
+            "state_metadata": {
+                "state_code": "BR",
+                "state_name": "Bihar(48)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:36:32.917758",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "3",
+            "vehicle_class": "OMNI BUS (PRIVATE USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3,508",
+                "MMV": "8",
+                "HMV": "141",
+                "TOTAL": "3,657"
+            },
+            "state_metadata": {
+                "state_code": "BR",
+                "state_name": "Bihar(48)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:36:32.917758",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "4",
+            "vehicle_class": "PRIVATE SERVICE VEHICLE (INDIVIDUAL USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "708",
+                "MMV": "8",
+                "HMV": "5",
+                "TOTAL": "721"
+            },
+            "state_metadata": {
+                "state_code": "BR",
+                "state_name": "Bihar(48)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:36:32.917758",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "5",
+            "vehicle_class": "QUADRICYCLE (PRIVATE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "3"
+            },
+            "state_metadata": {
+                "state_code": "BR",
+                "state_name": "Bihar(48)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:36:32.917758",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "1",
+            "vehicle_class": "ADAPTED VEHICLE",
+            "vehicle_category_group": {
+                "2WIC": "1,076",
+                "LMV": "0",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "1,076"
+            },
+            "state_metadata": {
+                "state_code": "CG",
+                "state_name": "Chhattisgarh(31)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:36:58.647859",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "2",
+            "vehicle_class": "MOTOR CAR",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "16,45,786",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "16,45,786"
+            },
+            "state_metadata": {
+                "state_code": "CG",
+                "state_name": "Chhattisgarh(31)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:36:58.647859",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "3",
+            "vehicle_class": "OMNI BUS (PRIVATE USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3,508",
+                "MMV": "8",
+                "HMV": "141",
+                "TOTAL": "3,657"
+            },
+            "state_metadata": {
+                "state_code": "CG",
+                "state_name": "Chhattisgarh(31)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:36:58.647859",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "4",
+            "vehicle_class": "PRIVATE SERVICE VEHICLE (INDIVIDUAL USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "708",
+                "MMV": "8",
+                "HMV": "5",
+                "TOTAL": "721"
+            },
+            "state_metadata": {
+                "state_code": "CG",
+                "state_name": "Chhattisgarh(31)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:36:58.647859",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "5",
+            "vehicle_class": "QUADRICYCLE (PRIVATE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "3"
+            },
+            "state_metadata": {
+                "state_code": "CG",
+                "state_name": "Chhattisgarh(31)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:36:58.647859",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "1",
+            "vehicle_class": "ADAPTED VEHICLE",
+            "vehicle_category_group": {
+                "2WIC": "1,076",
+                "LMV": "0",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "1,076"
+            },
+            "state_metadata": {
+                "state_code": "CH",
+                "state_name": "Chandigarh(1)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:37:36.217093",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "2",
+            "vehicle_class": "MOTOR CAR",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "16,45,786",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "16,45,786"
+            },
+            "state_metadata": {
+                "state_code": "CH",
+                "state_name": "Chandigarh(1)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:37:36.217093",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "3",
+            "vehicle_class": "OMNI BUS (PRIVATE USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3,508",
+                "MMV": "8",
+                "HMV": "141",
+                "TOTAL": "3,657"
+            },
+            "state_metadata": {
+                "state_code": "CH",
+                "state_name": "Chandigarh(1)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:37:36.217093",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "4",
+            "vehicle_class": "PRIVATE SERVICE VEHICLE (INDIVIDUAL USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "708",
+                "MMV": "8",
+                "HMV": "5",
+                "TOTAL": "721"
+            },
+            "state_metadata": {
+                "state_code": "CH",
+                "state_name": "Chandigarh(1)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:37:36.217093",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "5",
+            "vehicle_class": "QUADRICYCLE (PRIVATE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "3"
+            },
+            "state_metadata": {
+                "state_code": "CH",
+                "state_name": "Chandigarh(1)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:37:36.217093",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "1",
+            "vehicle_class": "ADAPTED VEHICLE",
+            "vehicle_category_group": {
+                "2WIC": "1,076",
+                "LMV": "0",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "1,076"
+            },
+            "state_metadata": {
+                "state_code": "DD",
+                "state_name": "UT of DNH and DD(3)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:38:01.191964",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "2",
+            "vehicle_class": "MOTOR CAR",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "16,45,786",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "16,45,786"
+            },
+            "state_metadata": {
+                "state_code": "DD",
+                "state_name": "UT of DNH and DD(3)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:38:01.191964",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "3",
+            "vehicle_class": "OMNI BUS (PRIVATE USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3,508",
+                "MMV": "8",
+                "HMV": "141",
+                "TOTAL": "3,657"
+            },
+            "state_metadata": {
+                "state_code": "DD",
+                "state_name": "UT of DNH and DD(3)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:38:01.191964",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "4",
+            "vehicle_class": "PRIVATE SERVICE VEHICLE (INDIVIDUAL USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "708",
+                "MMV": "8",
+                "HMV": "5",
+                "TOTAL": "721"
+            },
+            "state_metadata": {
+                "state_code": "DD",
+                "state_name": "UT of DNH and DD(3)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:38:01.191964",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "5",
+            "vehicle_class": "QUADRICYCLE (PRIVATE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "3"
+            },
+            "state_metadata": {
+                "state_code": "DD",
+                "state_name": "UT of DNH and DD(3)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:38:01.191964",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "1",
+            "vehicle_class": "ADAPTED VEHICLE",
+            "vehicle_category_group": {
+                "2WIC": "1,076",
+                "LMV": "0",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "1,076"
+            },
+            "state_metadata": {
+                "state_code": "DL",
+                "state_name": "Delhi(16)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:38:25.645953",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "2",
+            "vehicle_class": "MOTOR CAR",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "16,45,786",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "16,45,786"
+            },
+            "state_metadata": {
+                "state_code": "DL",
+                "state_name": "Delhi(16)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:38:25.645953",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "3",
+            "vehicle_class": "OMNI BUS (PRIVATE USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3,508",
+                "MMV": "8",
+                "HMV": "141",
+                "TOTAL": "3,657"
+            },
+            "state_metadata": {
+                "state_code": "DL",
+                "state_name": "Delhi(16)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:38:25.645953",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "4",
+            "vehicle_class": "PRIVATE SERVICE VEHICLE (INDIVIDUAL USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "708",
+                "MMV": "8",
+                "HMV": "5",
+                "TOTAL": "721"
+            },
+            "state_metadata": {
+                "state_code": "DL",
+                "state_name": "Delhi(16)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:38:25.645953",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "5",
+            "vehicle_class": "QUADRICYCLE (PRIVATE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "3"
+            },
+            "state_metadata": {
+                "state_code": "DL",
+                "state_name": "Delhi(16)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:38:25.645953",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "1",
+            "vehicle_class": "ADAPTED VEHICLE",
+            "vehicle_category_group": {
+                "2WIC": "1,076",
+                "LMV": "0",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "1,076"
+            },
+            "state_metadata": {
+                "state_code": "GA",
+                "state_name": "Goa(13)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:38:51.575601",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "2",
+            "vehicle_class": "MOTOR CAR",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "16,45,786",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "16,45,786"
+            },
+            "state_metadata": {
+                "state_code": "GA",
+                "state_name": "Goa(13)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:38:51.575601",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "3",
+            "vehicle_class": "OMNI BUS (PRIVATE USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3,508",
+                "MMV": "8",
+                "HMV": "141",
+                "TOTAL": "3,657"
+            },
+            "state_metadata": {
+                "state_code": "GA",
+                "state_name": "Goa(13)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:38:51.575601",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "4",
+            "vehicle_class": "PRIVATE SERVICE VEHICLE (INDIVIDUAL USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "708",
+                "MMV": "8",
+                "HMV": "5",
+                "TOTAL": "721"
+            },
+            "state_metadata": {
+                "state_code": "GA",
+                "state_name": "Goa(13)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:38:51.575601",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "5",
+            "vehicle_class": "QUADRICYCLE (PRIVATE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "3"
+            },
+            "state_metadata": {
+                "state_code": "GA",
+                "state_name": "Goa(13)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:38:51.575601",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "1",
+            "vehicle_class": "ADAPTED VEHICLE",
+            "vehicle_category_group": {
+                "2WIC": "1,076",
+                "LMV": "0",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "1,076"
+            },
+            "state_metadata": {
+                "state_code": "GJ",
+                "state_name": "Gujarat(37)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:39:15.712982",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "2",
+            "vehicle_class": "MOTOR CAR",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "16,45,786",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "16,45,786"
+            },
+            "state_metadata": {
+                "state_code": "GJ",
+                "state_name": "Gujarat(37)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:39:15.712982",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "3",
+            "vehicle_class": "OMNI BUS (PRIVATE USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3,508",
+                "MMV": "8",
+                "HMV": "141",
+                "TOTAL": "3,657"
+            },
+            "state_metadata": {
+                "state_code": "GJ",
+                "state_name": "Gujarat(37)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:39:15.712982",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "4",
+            "vehicle_class": "PRIVATE SERVICE VEHICLE (INDIVIDUAL USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "708",
+                "MMV": "8",
+                "HMV": "5",
+                "TOTAL": "721"
+            },
+            "state_metadata": {
+                "state_code": "GJ",
+                "state_name": "Gujarat(37)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:39:15.712982",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "5",
+            "vehicle_class": "QUADRICYCLE (PRIVATE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "3"
+            },
+            "state_metadata": {
+                "state_code": "GJ",
+                "state_name": "Gujarat(37)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:39:15.712982",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "1",
+            "vehicle_class": "ADAPTED VEHICLE",
+            "vehicle_category_group": {
+                "2WIC": "1,076",
+                "LMV": "0",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "1,076"
+            },
+            "state_metadata": {
+                "state_code": "HP",
+                "state_name": "Himachal Pradesh(97)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:39:52.832403",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "2",
+            "vehicle_class": "MOTOR CAR",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "16,45,786",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "16,45,786"
+            },
+            "state_metadata": {
+                "state_code": "HP",
+                "state_name": "Himachal Pradesh(97)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:39:52.832403",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "3",
+            "vehicle_class": "OMNI BUS (PRIVATE USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3,508",
+                "MMV": "8",
+                "HMV": "141",
+                "TOTAL": "3,657"
+            },
+            "state_metadata": {
+                "state_code": "HP",
+                "state_name": "Himachal Pradesh(97)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:39:52.832403",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "4",
+            "vehicle_class": "PRIVATE SERVICE VEHICLE (INDIVIDUAL USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "708",
+                "MMV": "8",
+                "HMV": "5",
+                "TOTAL": "721"
+            },
+            "state_metadata": {
+                "state_code": "HP",
+                "state_name": "Himachal Pradesh(97)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:39:52.832403",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "5",
+            "vehicle_class": "QUADRICYCLE (PRIVATE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "3"
+            },
+            "state_metadata": {
+                "state_code": "HP",
+                "state_name": "Himachal Pradesh(97)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:39:52.832403",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "1",
+            "vehicle_class": "ADAPTED VEHICLE",
+            "vehicle_category_group": {
+                "2WIC": "1,076",
+                "LMV": "0",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "1,076"
+            },
+            "state_metadata": {
+                "state_code": "HR",
+                "state_name": "Haryana(104)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:40:19.896605",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "2",
+            "vehicle_class": "MOTOR CAR",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "16,45,786",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "16,45,786"
+            },
+            "state_metadata": {
+                "state_code": "HR",
+                "state_name": "Haryana(104)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:40:19.896605",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "3",
+            "vehicle_class": "OMNI BUS (PRIVATE USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3,508",
+                "MMV": "8",
+                "HMV": "141",
+                "TOTAL": "3,657"
+            },
+            "state_metadata": {
+                "state_code": "HR",
+                "state_name": "Haryana(104)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:40:19.896605",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "4",
+            "vehicle_class": "PRIVATE SERVICE VEHICLE (INDIVIDUAL USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "708",
+                "MMV": "8",
+                "HMV": "5",
+                "TOTAL": "721"
+            },
+            "state_metadata": {
+                "state_code": "HR",
+                "state_name": "Haryana(104)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:40:19.896605",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "5",
+            "vehicle_class": "QUADRICYCLE (PRIVATE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "3"
+            },
+            "state_metadata": {
+                "state_code": "HR",
+                "state_name": "Haryana(104)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:40:19.896605",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "1",
+            "vehicle_class": "ADAPTED VEHICLE",
+            "vehicle_category_group": {
+                "2WIC": "1,076",
+                "LMV": "0",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "1,076"
+            },
+            "state_metadata": {
+                "state_code": "JH",
+                "state_name": "Jharkhand(25)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:40:46.835877",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "2",
+            "vehicle_class": "MOTOR CAR",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "16,45,786",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "16,45,786"
+            },
+            "state_metadata": {
+                "state_code": "JH",
+                "state_name": "Jharkhand(25)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:40:46.835877",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "3",
+            "vehicle_class": "OMNI BUS (PRIVATE USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3,508",
+                "MMV": "8",
+                "HMV": "141",
+                "TOTAL": "3,657"
+            },
+            "state_metadata": {
+                "state_code": "JH",
+                "state_name": "Jharkhand(25)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:40:46.835877",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "4",
+            "vehicle_class": "PRIVATE SERVICE VEHICLE (INDIVIDUAL USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "708",
+                "MMV": "8",
+                "HMV": "5",
+                "TOTAL": "721"
+            },
+            "state_metadata": {
+                "state_code": "JH",
+                "state_name": "Jharkhand(25)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:40:46.835877",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "5",
+            "vehicle_class": "QUADRICYCLE (PRIVATE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "3"
+            },
+            "state_metadata": {
+                "state_code": "JH",
+                "state_name": "Jharkhand(25)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:40:46.835877",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "1",
+            "vehicle_class": "ADAPTED VEHICLE",
+            "vehicle_category_group": {
+                "2WIC": "1,076",
+                "LMV": "0",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "1,076"
+            },
+            "state_metadata": {
+                "state_code": "JK",
+                "state_name": "Jammu and Kashmir(21)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:41:13.742442",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "2",
+            "vehicle_class": "MOTOR CAR",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "16,45,786",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "16,45,786"
+            },
+            "state_metadata": {
+                "state_code": "JK",
+                "state_name": "Jammu and Kashmir(21)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:41:13.742442",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "3",
+            "vehicle_class": "OMNI BUS (PRIVATE USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3,508",
+                "MMV": "8",
+                "HMV": "141",
+                "TOTAL": "3,657"
+            },
+            "state_metadata": {
+                "state_code": "JK",
+                "state_name": "Jammu and Kashmir(21)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:41:13.742442",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "4",
+            "vehicle_class": "PRIVATE SERVICE VEHICLE (INDIVIDUAL USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "708",
+                "MMV": "8",
+                "HMV": "5",
+                "TOTAL": "721"
+            },
+            "state_metadata": {
+                "state_code": "JK",
+                "state_name": "Jammu and Kashmir(21)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:41:13.742442",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "5",
+            "vehicle_class": "QUADRICYCLE (PRIVATE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "3"
+            },
+            "state_metadata": {
+                "state_code": "JK",
+                "state_name": "Jammu and Kashmir(21)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:41:13.742442",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "1",
+            "vehicle_class": "ADAPTED VEHICLE",
+            "vehicle_category_group": {
+                "2WIC": "1,076",
+                "LMV": "0",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "1,076"
+            },
+            "state_metadata": {
+                "state_code": "KA",
+                "state_name": "Karnataka(68)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:41:40.129101",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "2",
+            "vehicle_class": "MOTOR CAR",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "16,45,786",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "16,45,786"
+            },
+            "state_metadata": {
+                "state_code": "KA",
+                "state_name": "Karnataka(68)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:41:40.129101",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "3",
+            "vehicle_class": "OMNI BUS (PRIVATE USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3,508",
+                "MMV": "8",
+                "HMV": "141",
+                "TOTAL": "3,657"
+            },
+            "state_metadata": {
+                "state_code": "KA",
+                "state_name": "Karnataka(68)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:41:40.129101",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "4",
+            "vehicle_class": "PRIVATE SERVICE VEHICLE (INDIVIDUAL USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "708",
+                "MMV": "8",
+                "HMV": "5",
+                "TOTAL": "721"
+            },
+            "state_metadata": {
+                "state_code": "KA",
+                "state_name": "Karnataka(68)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:41:40.129101",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "5",
+            "vehicle_class": "QUADRICYCLE (PRIVATE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "3"
+            },
+            "state_metadata": {
+                "state_code": "KA",
+                "state_name": "Karnataka(68)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:41:40.129101",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "1",
+            "vehicle_class": "ADAPTED VEHICLE",
+            "vehicle_category_group": {
+                "2WIC": "1,076",
+                "LMV": "0",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "1,076"
+            },
+            "state_metadata": {
+                "state_code": "KL",
+                "state_name": "Kerala(87)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:42:15.464648",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "2",
+            "vehicle_class": "MOTOR CAR",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "16,45,786",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "16,45,786"
+            },
+            "state_metadata": {
+                "state_code": "KL",
+                "state_name": "Kerala(87)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:42:15.465200",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "3",
+            "vehicle_class": "OMNI BUS (PRIVATE USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3,508",
+                "MMV": "8",
+                "HMV": "141",
+                "TOTAL": "3,657"
+            },
+            "state_metadata": {
+                "state_code": "KL",
+                "state_name": "Kerala(87)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:42:15.465200",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "4",
+            "vehicle_class": "PRIVATE SERVICE VEHICLE (INDIVIDUAL USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "708",
+                "MMV": "8",
+                "HMV": "5",
+                "TOTAL": "721"
+            },
+            "state_metadata": {
+                "state_code": "KL",
+                "state_name": "Kerala(87)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:42:15.465200",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "5",
+            "vehicle_class": "QUADRICYCLE (PRIVATE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "3"
+            },
+            "state_metadata": {
+                "state_code": "KL",
+                "state_name": "Kerala(87)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:42:15.465200",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "1",
+            "vehicle_class": "ADAPTED VEHICLE",
+            "vehicle_category_group": {
+                "2WIC": "1,076",
+                "LMV": "0",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "1,076"
+            },
+            "state_metadata": {
+                "state_code": "LA",
+                "state_name": "Ladakh(3)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:42:39.679641",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "2",
+            "vehicle_class": "MOTOR CAR",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "16,45,786",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "16,45,786"
+            },
+            "state_metadata": {
+                "state_code": "LA",
+                "state_name": "Ladakh(3)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:42:39.679641",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "3",
+            "vehicle_class": "OMNI BUS (PRIVATE USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3,508",
+                "MMV": "8",
+                "HMV": "141",
+                "TOTAL": "3,657"
+            },
+            "state_metadata": {
+                "state_code": "LA",
+                "state_name": "Ladakh(3)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:42:39.679641",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "4",
+            "vehicle_class": "PRIVATE SERVICE VEHICLE (INDIVIDUAL USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "708",
+                "MMV": "8",
+                "HMV": "5",
+                "TOTAL": "721"
+            },
+            "state_metadata": {
+                "state_code": "LA",
+                "state_name": "Ladakh(3)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:42:39.679641",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "5",
+            "vehicle_class": "QUADRICYCLE (PRIVATE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "3"
+            },
+            "state_metadata": {
+                "state_code": "LA",
+                "state_name": "Ladakh(3)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:42:39.679641",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "1",
+            "vehicle_class": "ADAPTED VEHICLE",
+            "vehicle_category_group": {
+                "2WIC": "1,076",
+                "LMV": "0",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "1,076"
+            },
+            "state_metadata": {
+                "state_code": "LD",
+                "state_name": "Lakshadweep(9)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:43:04.157057",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "2",
+            "vehicle_class": "MOTOR CAR",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "16,45,786",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "16,45,786"
+            },
+            "state_metadata": {
+                "state_code": "LD",
+                "state_name": "Lakshadweep(9)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:43:04.157057",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "3",
+            "vehicle_class": "OMNI BUS (PRIVATE USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3,508",
+                "MMV": "8",
+                "HMV": "141",
+                "TOTAL": "3,657"
+            },
+            "state_metadata": {
+                "state_code": "LD",
+                "state_name": "Lakshadweep(9)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:43:04.157057",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "4",
+            "vehicle_class": "PRIVATE SERVICE VEHICLE (INDIVIDUAL USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "708",
+                "MMV": "8",
+                "HMV": "5",
+                "TOTAL": "721"
+            },
+            "state_metadata": {
+                "state_code": "LD",
+                "state_name": "Lakshadweep(9)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:43:04.157057",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "5",
+            "vehicle_class": "QUADRICYCLE (PRIVATE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "3"
+            },
+            "state_metadata": {
+                "state_code": "LD",
+                "state_name": "Lakshadweep(9)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:43:04.157057",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "1",
+            "vehicle_class": "ADAPTED VEHICLE",
+            "vehicle_category_group": {
+                "2WIC": "1,076",
+                "LMV": "0",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "1,076"
+            },
+            "state_metadata": {
+                "state_code": "MH",
+                "state_name": "Maharashtra(59)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:43:28.274465",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "2",
+            "vehicle_class": "MOTOR CAR",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "16,45,786",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "16,45,786"
+            },
+            "state_metadata": {
+                "state_code": "MH",
+                "state_name": "Maharashtra(59)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:43:28.274465",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "3",
+            "vehicle_class": "OMNI BUS (PRIVATE USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3,508",
+                "MMV": "8",
+                "HMV": "141",
+                "TOTAL": "3,657"
+            },
+            "state_metadata": {
+                "state_code": "MH",
+                "state_name": "Maharashtra(59)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:43:28.274465",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "4",
+            "vehicle_class": "PRIVATE SERVICE VEHICLE (INDIVIDUAL USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "708",
+                "MMV": "8",
+                "HMV": "5",
+                "TOTAL": "721"
+            },
+            "state_metadata": {
+                "state_code": "MH",
+                "state_name": "Maharashtra(59)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:43:28.274465",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "5",
+            "vehicle_class": "QUADRICYCLE (PRIVATE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "3"
+            },
+            "state_metadata": {
+                "state_code": "MH",
+                "state_name": "Maharashtra(59)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:43:28.274465",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "1",
+            "vehicle_class": "ADAPTED VEHICLE",
+            "vehicle_category_group": {
+                "2WIC": "1,076",
+                "LMV": "0",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "1,076"
+            },
+            "state_metadata": {
+                "state_code": "ML",
+                "state_name": "Meghalaya(15)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:43:55.349743",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "2",
+            "vehicle_class": "MOTOR CAR",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "16,45,786",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "16,45,786"
+            },
+            "state_metadata": {
+                "state_code": "ML",
+                "state_name": "Meghalaya(15)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:43:55.349743",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "3",
+            "vehicle_class": "OMNI BUS (PRIVATE USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3,508",
+                "MMV": "8",
+                "HMV": "141",
+                "TOTAL": "3,657"
+            },
+            "state_metadata": {
+                "state_code": "ML",
+                "state_name": "Meghalaya(15)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:43:55.349743",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "4",
+            "vehicle_class": "PRIVATE SERVICE VEHICLE (INDIVIDUAL USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "708",
+                "MMV": "8",
+                "HMV": "5",
+                "TOTAL": "721"
+            },
+            "state_metadata": {
+                "state_code": "ML",
+                "state_name": "Meghalaya(15)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:43:55.349743",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "5",
+            "vehicle_class": "QUADRICYCLE (PRIVATE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "3"
+            },
+            "state_metadata": {
+                "state_code": "ML",
+                "state_name": "Meghalaya(15)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:43:55.349743",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "1",
+            "vehicle_class": "ADAPTED VEHICLE",
+            "vehicle_category_group": {
+                "2WIC": "1,076",
+                "LMV": "0",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "1,076"
+            },
+            "state_metadata": {
+                "state_code": "MN",
+                "state_name": "Manipur(17)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:44:33.224945",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "2",
+            "vehicle_class": "MOTOR CAR",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "16,45,786",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "16,45,786"
+            },
+            "state_metadata": {
+                "state_code": "MN",
+                "state_name": "Manipur(17)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:44:33.224945",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "3",
+            "vehicle_class": "OMNI BUS (PRIVATE USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3,508",
+                "MMV": "8",
+                "HMV": "141",
+                "TOTAL": "3,657"
+            },
+            "state_metadata": {
+                "state_code": "MN",
+                "state_name": "Manipur(17)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:44:33.224945",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "4",
+            "vehicle_class": "PRIVATE SERVICE VEHICLE (INDIVIDUAL USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "708",
+                "MMV": "8",
+                "HMV": "5",
+                "TOTAL": "721"
+            },
+            "state_metadata": {
+                "state_code": "MN",
+                "state_name": "Manipur(17)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:44:33.224945",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "5",
+            "vehicle_class": "QUADRICYCLE (PRIVATE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "3"
+            },
+            "state_metadata": {
+                "state_code": "MN",
+                "state_name": "Manipur(17)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:44:33.224945",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "1",
+            "vehicle_class": "ADAPTED VEHICLE",
+            "vehicle_category_group": {
+                "2WIC": "1,076",
+                "LMV": "0",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "1,076"
+            },
+            "state_metadata": {
+                "state_code": "MP",
+                "state_name": "Madhya Pradesh(53)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:44:57.621082",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "2",
+            "vehicle_class": "MOTOR CAR",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "16,45,786",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "16,45,786"
+            },
+            "state_metadata": {
+                "state_code": "MP",
+                "state_name": "Madhya Pradesh(53)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:44:57.621082",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "3",
+            "vehicle_class": "OMNI BUS (PRIVATE USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3,508",
+                "MMV": "8",
+                "HMV": "141",
+                "TOTAL": "3,657"
+            },
+            "state_metadata": {
+                "state_code": "MP",
+                "state_name": "Madhya Pradesh(53)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:44:57.621082",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "4",
+            "vehicle_class": "PRIVATE SERVICE VEHICLE (INDIVIDUAL USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "708",
+                "MMV": "8",
+                "HMV": "5",
+                "TOTAL": "721"
+            },
+            "state_metadata": {
+                "state_code": "MP",
+                "state_name": "Madhya Pradesh(53)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:44:57.621082",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "5",
+            "vehicle_class": "QUADRICYCLE (PRIVATE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "3"
+            },
+            "state_metadata": {
+                "state_code": "MP",
+                "state_name": "Madhya Pradesh(53)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:44:57.621082",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "1",
+            "vehicle_class": "ADAPTED VEHICLE",
+            "vehicle_category_group": {
+                "2WIC": "1,076",
+                "LMV": "0",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "1,076"
+            },
+            "state_metadata": {
+                "state_code": "MZ",
+                "state_name": "Mizoram(12)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:45:24.171357",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "2",
+            "vehicle_class": "MOTOR CAR",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "16,45,786",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "16,45,786"
+            },
+            "state_metadata": {
+                "state_code": "MZ",
+                "state_name": "Mizoram(12)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:45:24.171357",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "3",
+            "vehicle_class": "OMNI BUS (PRIVATE USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3,508",
+                "MMV": "8",
+                "HMV": "141",
+                "TOTAL": "3,657"
+            },
+            "state_metadata": {
+                "state_code": "MZ",
+                "state_name": "Mizoram(12)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:45:24.171357",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "4",
+            "vehicle_class": "PRIVATE SERVICE VEHICLE (INDIVIDUAL USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "708",
+                "MMV": "8",
+                "HMV": "5",
+                "TOTAL": "721"
+            },
+            "state_metadata": {
+                "state_code": "MZ",
+                "state_name": "Mizoram(12)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:45:24.171357",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "5",
+            "vehicle_class": "QUADRICYCLE (PRIVATE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "3"
+            },
+            "state_metadata": {
+                "state_code": "MZ",
+                "state_name": "Mizoram(12)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:45:24.171357",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "1",
+            "vehicle_class": "ADAPTED VEHICLE",
+            "vehicle_category_group": {
+                "2WIC": "1,076",
+                "LMV": "0",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "1,076"
+            },
+            "state_metadata": {
+                "state_code": "NL",
+                "state_name": "Nagaland(9)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:45:51.251688",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "2",
+            "vehicle_class": "MOTOR CAR",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "16,45,786",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "16,45,786"
+            },
+            "state_metadata": {
+                "state_code": "NL",
+                "state_name": "Nagaland(9)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:45:51.251688",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "3",
+            "vehicle_class": "OMNI BUS (PRIVATE USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3,508",
+                "MMV": "8",
+                "HMV": "141",
+                "TOTAL": "3,657"
+            },
+            "state_metadata": {
+                "state_code": "NL",
+                "state_name": "Nagaland(9)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:45:51.251688",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "4",
+            "vehicle_class": "PRIVATE SERVICE VEHICLE (INDIVIDUAL USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "708",
+                "MMV": "8",
+                "HMV": "5",
+                "TOTAL": "721"
+            },
+            "state_metadata": {
+                "state_code": "NL",
+                "state_name": "Nagaland(9)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:45:51.251688",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "5",
+            "vehicle_class": "QUADRICYCLE (PRIVATE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "3"
+            },
+            "state_metadata": {
+                "state_code": "NL",
+                "state_name": "Nagaland(9)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:45:51.251688",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "1",
+            "vehicle_class": "ADAPTED VEHICLE",
+            "vehicle_category_group": {
+                "2WIC": "1,076",
+                "LMV": "0",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "1,076"
+            },
+            "state_metadata": {
+                "state_code": "OR",
+                "state_name": "Odisha(39)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:46:17.574715",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "2",
+            "vehicle_class": "MOTOR CAR",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "16,45,786",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "16,45,786"
+            },
+            "state_metadata": {
+                "state_code": "OR",
+                "state_name": "Odisha(39)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:46:17.574715",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "3",
+            "vehicle_class": "OMNI BUS (PRIVATE USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3,508",
+                "MMV": "8",
+                "HMV": "141",
+                "TOTAL": "3,657"
+            },
+            "state_metadata": {
+                "state_code": "OR",
+                "state_name": "Odisha(39)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:46:17.574715",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "4",
+            "vehicle_class": "PRIVATE SERVICE VEHICLE (INDIVIDUAL USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "708",
+                "MMV": "8",
+                "HMV": "5",
+                "TOTAL": "721"
+            },
+            "state_metadata": {
+                "state_code": "OR",
+                "state_name": "Odisha(39)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:46:17.574715",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "5",
+            "vehicle_class": "QUADRICYCLE (PRIVATE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "3"
+            },
+            "state_metadata": {
+                "state_code": "OR",
+                "state_name": "Odisha(39)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:46:17.574715",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "1",
+            "vehicle_class": "ADAPTED VEHICLE",
+            "vehicle_category_group": {
+                "2WIC": "1,076",
+                "LMV": "0",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "1,076"
+            },
+            "state_metadata": {
+                "state_code": "PB",
+                "state_name": "Punjab(96)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:46:54.085429",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "2",
+            "vehicle_class": "MOTOR CAR",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "16,45,786",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "16,45,786"
+            },
+            "state_metadata": {
+                "state_code": "PB",
+                "state_name": "Punjab(96)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:46:54.085429",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "3",
+            "vehicle_class": "OMNI BUS (PRIVATE USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3,508",
+                "MMV": "8",
+                "HMV": "141",
+                "TOTAL": "3,657"
+            },
+            "state_metadata": {
+                "state_code": "PB",
+                "state_name": "Punjab(96)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:46:54.085429",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "4",
+            "vehicle_class": "PRIVATE SERVICE VEHICLE (INDIVIDUAL USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "708",
+                "MMV": "8",
+                "HMV": "5",
+                "TOTAL": "721"
+            },
+            "state_metadata": {
+                "state_code": "PB",
+                "state_name": "Punjab(96)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:46:54.085429",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "5",
+            "vehicle_class": "QUADRICYCLE (PRIVATE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "3"
+            },
+            "state_metadata": {
+                "state_code": "PB",
+                "state_name": "Punjab(96)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:46:54.085429",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "1",
+            "vehicle_class": "ADAPTED VEHICLE",
+            "vehicle_category_group": {
+                "2WIC": "1,076",
+                "LMV": "0",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "1,076"
+            },
+            "state_metadata": {
+                "state_code": "PY",
+                "state_name": "Puducherry(8)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:47:21.234384",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "2",
+            "vehicle_class": "MOTOR CAR",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "16,45,786",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "16,45,786"
+            },
+            "state_metadata": {
+                "state_code": "PY",
+                "state_name": "Puducherry(8)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:47:21.234384",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "3",
+            "vehicle_class": "OMNI BUS (PRIVATE USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3,508",
+                "MMV": "8",
+                "HMV": "141",
+                "TOTAL": "3,657"
+            },
+            "state_metadata": {
+                "state_code": "PY",
+                "state_name": "Puducherry(8)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:47:21.234384",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "4",
+            "vehicle_class": "PRIVATE SERVICE VEHICLE (INDIVIDUAL USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "708",
+                "MMV": "8",
+                "HMV": "5",
+                "TOTAL": "721"
+            },
+            "state_metadata": {
+                "state_code": "PY",
+                "state_name": "Puducherry(8)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:47:21.234384",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "5",
+            "vehicle_class": "QUADRICYCLE (PRIVATE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "3"
+            },
+            "state_metadata": {
+                "state_code": "PY",
+                "state_name": "Puducherry(8)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:47:21.234384",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "1",
+            "vehicle_class": "ADAPTED VEHICLE",
+            "vehicle_category_group": {
+                "2WIC": "1,076",
+                "LMV": "0",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "1,076"
+            },
+            "state_metadata": {
+                "state_code": "RJ",
+                "state_name": "Rajasthan(60)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:47:47.677099",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "2",
+            "vehicle_class": "MOTOR CAR",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "16,45,786",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "16,45,786"
+            },
+            "state_metadata": {
+                "state_code": "RJ",
+                "state_name": "Rajasthan(60)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:47:47.677099",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "3",
+            "vehicle_class": "OMNI BUS (PRIVATE USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3,508",
+                "MMV": "8",
+                "HMV": "141",
+                "TOTAL": "3,657"
+            },
+            "state_metadata": {
+                "state_code": "RJ",
+                "state_name": "Rajasthan(60)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:47:47.677099",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "4",
+            "vehicle_class": "PRIVATE SERVICE VEHICLE (INDIVIDUAL USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "708",
+                "MMV": "8",
+                "HMV": "5",
+                "TOTAL": "721"
+            },
+            "state_metadata": {
+                "state_code": "RJ",
+                "state_name": "Rajasthan(60)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:47:47.677099",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "5",
+            "vehicle_class": "QUADRICYCLE (PRIVATE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "3"
+            },
+            "state_metadata": {
+                "state_code": "RJ",
+                "state_name": "Rajasthan(60)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:47:47.677099",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "1",
+            "vehicle_class": "ADAPTED VEHICLE",
+            "vehicle_category_group": {
+                "2WIC": "1,076",
+                "LMV": "0",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "1,076"
+            },
+            "state_metadata": {
+                "state_code": "SK",
+                "state_name": "Sikkim(9)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:48:11.840824",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "2",
+            "vehicle_class": "MOTOR CAR",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "16,45,786",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "16,45,786"
+            },
+            "state_metadata": {
+                "state_code": "SK",
+                "state_name": "Sikkim(9)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:48:11.840824",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "3",
+            "vehicle_class": "OMNI BUS (PRIVATE USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3,508",
+                "MMV": "8",
+                "HMV": "141",
+                "TOTAL": "3,657"
+            },
+            "state_metadata": {
+                "state_code": "SK",
+                "state_name": "Sikkim(9)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:48:11.840824",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "4",
+            "vehicle_class": "PRIVATE SERVICE VEHICLE (INDIVIDUAL USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "708",
+                "MMV": "8",
+                "HMV": "5",
+                "TOTAL": "721"
+            },
+            "state_metadata": {
+                "state_code": "SK",
+                "state_name": "Sikkim(9)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:48:11.840824",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "5",
+            "vehicle_class": "QUADRICYCLE (PRIVATE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "3"
+            },
+            "state_metadata": {
+                "state_code": "SK",
+                "state_name": "Sikkim(9)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:48:11.840824",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "1",
+            "vehicle_class": "ADAPTED VEHICLE",
+            "vehicle_category_group": {
+                "2WIC": "1,076",
+                "LMV": "0",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "1,076"
+            },
+            "state_metadata": {
+                "state_code": "TG",
+                "state_name": "Telangana(57)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:48:38.758881",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "2",
+            "vehicle_class": "MOTOR CAR",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "16,45,786",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "16,45,786"
+            },
+            "state_metadata": {
+                "state_code": "TG",
+                "state_name": "Telangana(57)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:48:38.760722",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "3",
+            "vehicle_class": "OMNI BUS (PRIVATE USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3,508",
+                "MMV": "8",
+                "HMV": "141",
+                "TOTAL": "3,657"
+            },
+            "state_metadata": {
+                "state_code": "TG",
+                "state_name": "Telangana(57)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:48:38.760722",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "4",
+            "vehicle_class": "PRIVATE SERVICE VEHICLE (INDIVIDUAL USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "708",
+                "MMV": "8",
+                "HMV": "5",
+                "TOTAL": "721"
+            },
+            "state_metadata": {
+                "state_code": "TG",
+                "state_name": "Telangana(57)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:48:38.760722",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "5",
+            "vehicle_class": "QUADRICYCLE (PRIVATE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "3"
+            },
+            "state_metadata": {
+                "state_code": "TG",
+                "state_name": "Telangana(57)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:48:38.760722",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "1",
+            "vehicle_class": "ADAPTED VEHICLE",
+            "vehicle_category_group": {
+                "2WIC": "1,076",
+                "LMV": "0",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "1,076"
+            },
+            "state_metadata": {
+                "state_code": "TN",
+                "state_name": "Tamil Nadu(148)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:49:14.256967",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "2",
+            "vehicle_class": "MOTOR CAR",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "16,45,786",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "16,45,786"
+            },
+            "state_metadata": {
+                "state_code": "TN",
+                "state_name": "Tamil Nadu(148)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:49:14.256967",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "3",
+            "vehicle_class": "OMNI BUS (PRIVATE USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3,508",
+                "MMV": "8",
+                "HMV": "141",
+                "TOTAL": "3,657"
+            },
+            "state_metadata": {
+                "state_code": "TN",
+                "state_name": "Tamil Nadu(148)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:49:14.256967",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "4",
+            "vehicle_class": "PRIVATE SERVICE VEHICLE (INDIVIDUAL USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "708",
+                "MMV": "8",
+                "HMV": "5",
+                "TOTAL": "721"
+            },
+            "state_metadata": {
+                "state_code": "TN",
+                "state_name": "Tamil Nadu(148)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:49:14.256967",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "5",
+            "vehicle_class": "QUADRICYCLE (PRIVATE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "3"
+            },
+            "state_metadata": {
+                "state_code": "TN",
+                "state_name": "Tamil Nadu(148)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:49:14.256967",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "1",
+            "vehicle_class": "ADAPTED VEHICLE",
+            "vehicle_category_group": {
+                "2WIC": "1,076",
+                "LMV": "0",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "1,076"
+            },
+            "state_metadata": {
+                "state_code": "TR",
+                "state_name": "Tripura(9)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:49:40.087073",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "2",
+            "vehicle_class": "MOTOR CAR",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "16,45,786",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "16,45,786"
+            },
+            "state_metadata": {
+                "state_code": "TR",
+                "state_name": "Tripura(9)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:49:40.087073",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "3",
+            "vehicle_class": "OMNI BUS (PRIVATE USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3,508",
+                "MMV": "8",
+                "HMV": "141",
+                "TOTAL": "3,657"
+            },
+            "state_metadata": {
+                "state_code": "TR",
+                "state_name": "Tripura(9)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:49:40.087073",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "4",
+            "vehicle_class": "PRIVATE SERVICE VEHICLE (INDIVIDUAL USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "708",
+                "MMV": "8",
+                "HMV": "5",
+                "TOTAL": "721"
+            },
+            "state_metadata": {
+                "state_code": "TR",
+                "state_name": "Tripura(9)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:49:40.087073",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "5",
+            "vehicle_class": "QUADRICYCLE (PRIVATE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "3"
+            },
+            "state_metadata": {
+                "state_code": "TR",
+                "state_name": "Tripura(9)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:49:40.087073",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "1",
+            "vehicle_class": "ADAPTED VEHICLE",
+            "vehicle_category_group": {
+                "2WIC": "1,076",
+                "LMV": "0",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "1,076"
+            },
+            "state_metadata": {
+                "state_code": "UK",
+                "state_name": "Uttarakhand(21)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:50:04.306655",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "2",
+            "vehicle_class": "MOTOR CAR",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "16,45,786",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "16,45,786"
+            },
+            "state_metadata": {
+                "state_code": "UK",
+                "state_name": "Uttarakhand(21)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:50:04.306655",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "3",
+            "vehicle_class": "OMNI BUS (PRIVATE USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3,508",
+                "MMV": "8",
+                "HMV": "141",
+                "TOTAL": "3,657"
+            },
+            "state_metadata": {
+                "state_code": "UK",
+                "state_name": "Uttarakhand(21)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:50:04.306655",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "4",
+            "vehicle_class": "PRIVATE SERVICE VEHICLE (INDIVIDUAL USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "708",
+                "MMV": "8",
+                "HMV": "5",
+                "TOTAL": "721"
+            },
+            "state_metadata": {
+                "state_code": "UK",
+                "state_name": "Uttarakhand(21)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:50:04.306655",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "5",
+            "vehicle_class": "QUADRICYCLE (PRIVATE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "3"
+            },
+            "state_metadata": {
+                "state_code": "UK",
+                "state_name": "Uttarakhand(21)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:50:04.306655",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "1",
+            "vehicle_class": "ADAPTED VEHICLE",
+            "vehicle_category_group": {
+                "2WIC": "1,076",
+                "LMV": "0",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "1,076"
+            },
+            "state_metadata": {
+                "state_code": "UP",
+                "state_name": "Uttar Pradesh(77)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:50:28.690854",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "2",
+            "vehicle_class": "MOTOR CAR",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "16,45,786",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "16,45,786"
+            },
+            "state_metadata": {
+                "state_code": "UP",
+                "state_name": "Uttar Pradesh(77)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:50:28.690854",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "3",
+            "vehicle_class": "OMNI BUS (PRIVATE USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3,508",
+                "MMV": "8",
+                "HMV": "141",
+                "TOTAL": "3,657"
+            },
+            "state_metadata": {
+                "state_code": "UP",
+                "state_name": "Uttar Pradesh(77)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:50:28.690854",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "4",
+            "vehicle_class": "PRIVATE SERVICE VEHICLE (INDIVIDUAL USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "708",
+                "MMV": "8",
+                "HMV": "5",
+                "TOTAL": "721"
+            },
+            "state_metadata": {
+                "state_code": "UP",
+                "state_name": "Uttar Pradesh(77)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:50:28.690854",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "5",
+            "vehicle_class": "QUADRICYCLE (PRIVATE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "3"
+            },
+            "state_metadata": {
+                "state_code": "UP",
+                "state_name": "Uttar Pradesh(77)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:50:28.690854",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "1",
+            "vehicle_class": "ADAPTED VEHICLE",
+            "vehicle_category_group": {
+                "2WIC": "1,076",
+                "LMV": "0",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "1,076"
+            },
+            "state_metadata": {
+                "state_code": "WB",
+                "state_name": "West Bengal(59)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:50:53.695870",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "2",
+            "vehicle_class": "MOTOR CAR",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "16,45,786",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "16,45,786"
+            },
+            "state_metadata": {
+                "state_code": "WB",
+                "state_name": "West Bengal(59)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:50:53.695870",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "3",
+            "vehicle_class": "OMNI BUS (PRIVATE USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3,508",
+                "MMV": "8",
+                "HMV": "141",
+                "TOTAL": "3,657"
+            },
+            "state_metadata": {
+                "state_code": "WB",
+                "state_name": "West Bengal(59)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:50:53.695870",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "4",
+            "vehicle_class": "PRIVATE SERVICE VEHICLE (INDIVIDUAL USE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "708",
+                "MMV": "8",
+                "HMV": "5",
+                "TOTAL": "721"
+            },
+            "state_metadata": {
+                "state_code": "WB",
+                "state_name": "West Bengal(59)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:50:53.695870",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        },
+        {
+            "serial_no": "5",
+            "vehicle_class": "QUADRICYCLE (PRIVATE)",
+            "vehicle_category_group": {
+                "2WIC": "0",
+                "LMV": "3",
+                "MMV": "0",
+                "HMV": "0",
+                "TOTAL": "3"
+            },
+            "state_metadata": {
+                "state_code": "WB",
+                "state_name": "West Bengal(59)"
+            },
+            "scrape_metadata": {
+                "scraped_at": "2026-05-03T10:50:53.695870",
+                "source": "https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml"
+            }
+        }
+    ]
+}
