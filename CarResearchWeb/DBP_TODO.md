@@ -12,9 +12,12 @@ Permit categories
 Public reports
 Registration analytics
 Scrappage and compliance notifications
+
+
+
 SIAM (Society of Indian Automobile Manufacturers)
 Monthly sales reports
-Model-wise sales data
+Model-wise sales dataQQ
 Production volumes
 Domestic sales
 Export data
@@ -30,6 +33,7 @@ Tax policies
 Emission norms
 Safety mandates
 Recall notices
+
 TIER 2: OEM / MANUFACTURER SOURCES
 Major OEM websites:
 Maruti Suzuki
@@ -52,6 +56,7 @@ Volvo India
 BYD India
 Citroen India
 Jeep India
+
 Required OEM Data:
 Brand catalogs
 Model catalogs
@@ -68,6 +73,7 @@ Dealer locations
 Offers/promotions
 Finance calculators
 Insurance integrations
+
 TIER 3: AUTOMOTIVE MARKETPLACES
 Core:
 CarDekho
@@ -111,6 +117,8 @@ Insurance
 Regional pricing
 Dealer reviews
 Lead forms
+
+
 TIER 5: INSURANCE SOURCES
 Sources:
 PolicyBazaar
