@@ -387,7 +387,7 @@ class VahanUltimateScraper:
     # ===============================
     def save_live_json(self, all_data):
         with open(
-            "vahan_vehicle_registration_live.json",
+            "scraper/vahan_vehicle_registration_live.json",
             "w",
             encoding="utf-8"
         ) as f:
