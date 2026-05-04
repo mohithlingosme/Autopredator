@@ -1,262 +1,423 @@
-# CarResearchWeb - Indian Car Research Platform
+# AutoPredator Research Platform
 
-A full-featured PHP web application for researching Indian-market vehicles with brand/model/variant listings, search, comparison flows, and AI-assisted features.
+## Overview
 
-## Quick Start
+AutoPredator Research is an AI-powered Indian automotive intelligence and new car research platform designed to help users discover, compare, analyze, and make smarter vehicle purchasing decisions.
 
-### Option 1: Using setup.bat (Windows - Recommended)
-```powershell
-cd autopredator\backend
-setup.bat
-```
-Then open http://localhost:8000 in your browser.
+The platform focuses initially on:
 
-### Option 2: PHP Built-in Server
-```powershell
-cd autopredator\backend
-composer install
-php -S localhost:8000
-```
-Open http://localhost:8000 in your browser.
+* New car research
+* Variant comparison
+* Pricing intelligence
+* Buyer persona recommendations
+* Dealer lead generation
+* Ownership cost estimation
+* Insurance and finance insights
+* SEO-driven automotive content
 
-### Option 3: Docker
-```powershell
-cd autopredator\backend
-docker-compose up --build
-```
-Open http://localhost:8000 in your browser.
+AutoPredator is architected as the foundational phase of a much larger automotive ecosystem, eventually expanding into:
 
-## Prerequisites
+* Used vehicle intelligence
+* Fleet management
+* Commercial vehicle research
+* Insurance marketplace
+* Financing marketplace
+* EV infrastructure intelligence
+* Spare parts ecosystem
+* Regulatory compliance intelligence
 
-- **PHP 8.1+** (CLI and web SAPI) - Works with XAMPP/Apache or PHP built-in server
-- **Composer** - For installing dependencies
-- **MySQL 8.0+** (optional) - For database mode
-- **Python 3.10+** (optional) - For legacy JSON regeneration
+---
 
-## Project Structure
+# Core Mission
 
-```
-CarResearchWeb/
-├── autopredator/
-│   ├── backend/          # PHP web app + APIs + admin
-│   ├── scraper/         # Data scraping/ETL scripts
-│   ├── ml/              # ML/LLM services
-│   ├── data/            # Datasets and JSON files
-│   ├── docs/            # Design and ops documentation
-│   └── tests/           # Unit and e2e tests
-├── graphify-out/        # Architecture graph (generated)
-└── README.md           # This file
-```
+### Build India’s smartest automotive research and ownership intelligence platform.
 
-## Configuration
+---
 
-### Environment Variables
+# Key Features
 
-Create a `.env` file in `autopredator/backend/`:
+## Vehicle Research Engine
 
-```env
-# Application
-APP_ENV=local
-USE_JSON=true
+* Brand pages
+* Model pages
+* Variant pages
+* Technical specifications
+* Feature analysis
+* Brochures
+* Pricing
+* EV comparisons
+* Fuel comparisons
+* Safety comparisons
+* Commercial vehicle pathways
 
-# Database (when USE_JSON=false)
-DB_HOST=localhost
-DB_PORT=3306
-DB_NAME=autopredator_cars
-DB_USER=root
-DB_PASS=your_password
+---
 
-# AI Features (all disabled by default)
-AI_ENABLED=false
-AI_CONTENT_ENABLED=false
-AI_SUPPORT_ENABLED=false
+## AI-Powered Buyer Intelligence
 
-# Graphify (optional)
-GRAPHIFY_AUTO_GENERATE=false
-```
+* Personalized recommendations
+* Budget-fit analysis
+* Family suitability
+* Commercial suitability
+* Urban vs rural recommendations
+* Predictive ownership costs
+* Demand forecasting
 
-### Data Modes
+---
 
-The app supports two data modes:
-- **JSON Mode** (default): `USE_JSON=true` - Uses `data/new_carset.json` as primary source
-- **Database Mode**: `USE_JSON=false` - Uses MySQL `autopredator_cars` database
+## Comparison Engine
 
-## Features
+* Variant vs variant
+* Segment comparisons
+* Price comparisons
+* Feature breakdowns
+* Ownership cost calculators
+* Fuel efficiency comparisons
+* EV total cost comparisons
 
-### Core Pages
-- **Home** (`index.php`) - Featured brands, families, and variants
-- **Brands** (`brand.php`) - All manufacturers with per-brand listings
-- **Models** (`model.php`) - Model overview and variants
-- **Variants** (`variant.php`) - Detailed variant specifications
-- **Search** (`search.php`) - Filterable search (brand, body type, fuel, transmission, budget)
-- **Compare** (`compare.php`) - Side-by-side vehicle comparison
-- **My Garage** (`my_garage.php`) - Saved vehicles shortlist
-- **Favourites** (`favourites.php`) - Bookmarked vehicles
+---
 
-### API Endpoints
-- `api/autocomplete.php` - Search suggestions
-- `api/details.php?slug=xuv700` - Safe detail fetch via allowlist
-- `api/search.php` - Search with filters
-- `api/brands.php` - Brand listings
-- `api/models.php` - Model data
-- `api/variants.php` - Variant details
-- `api/favorites.php` - Favorites management
+## Dealer Monetization System
 
-### Admin Features
-- `admin/index.php` - Admin dashboard
-- `admin/login.php` - Admin authentication
-- `admin/billing.php` - Billing management
+* Dealer listings
+* Dealer inventory
+* Lead capture
+* Subscription plans
+* Sponsored rankings
+* SLA performance scoring
+* Conversion tracking
 
-## Database Setup
+---
 
-### Option 1: JSON Mode (Default - Recommended for Development)
+## Insurance & Finance Marketplace
 
-No database setup required. The app uses JSON files:
-- `data/new_carset.json` - Primary dataset (make/model/segment/variants)
-- `data/data.json` - Legacy dataset
-- `data/details_index.json` - Detail sheet allowlist
+* Insurance comparisons
+* Loan calculators
+* EMI estimators
+* Quote requests
+* Partner lender integrations
+* Policy renewals
+* Ownership financial planning
 
-### Option 2: MySQL Database
+---
 
-1. Create the database:
-```sql
-CREATE DATABASE autopredator_cars;
-```
+## SEO Content Ecosystem
 
-2. Apply schema:
-```powershell
-mysql -u root -p autopredator_cars < autopredator/docs/db-schema-complete.sql
-```
+* Brand landing pages
+* Budget pages
+* Fuel type pages
+* Comparison pages
+* Buying guides
+* Fleet guides
+* Commercial guides
+* Regional pricing pages
 
-3. Apply hardening migration:
-```powershell
-mysql -u root -p autopredator_cars < autopredator/docs/db-schema.sql
-```
+---
 
-4. Seed data:
-```powershell
-mysql -u root -p autopredator_cars < autopredator/data/db/seeds/...
-```
+# Technical Stack
 
-5. Configure environment:
-```
-USE_JSON=false
-DB_HOST=localhost
-DB_PORT=3306
-DB_NAME=autopredator_cars
-DB_USER=root
-DB_PASS=your_password
-```
+## Frontend
 
-### Database Schema
+* Next.js
+* Tailwind CSS
+* Responsive mobile-first design
+* SEO optimization
+* Progressive Web App architecture
 
-Key tables:
-- `brands` - Vehicle manufacturers
-- `models` - Model families
-- `variants` - Individual variants
-- `variant_price_history` - Price tracking
-- `images` - Vehicle images
-- `features` - Feature definitions
-- `vehicle_specs` - Technical specifications
+---
 
-## Testing
+## Backend
 
-### Run All Tests
-```powershell
-cd autopredator/backend
-composer install
-./vendor/bin/phpunit
-```
+* Python scraping pipelines
+* FastAPI / API layer
+* MySQL / MariaDB
+* SQL normalization pipelines
+* AI enrichment pipelines
+* Redis caching
+* Celery scheduling
+* Admin dashboards
 
-### Run E2E Tests (Playwright)
-```powershell
-cd autopredator/backend
-npx playwright test
-```
+---
 
-### Lint and Type Check
-```powershell
-cd autopredator/backend
-composer lint
-composer typecheck
-composer format
-```
+## AI Layer
 
-## AI Features
+* Ollama / local LLM deployment
+* Attribute extraction
+* Recommendation engines
+* Buyer persona matching
+* SEO content generation
+* Predictive analytics
+* Data confidence scoring
 
-AI features are disabled by default. To enable:
+---
 
-```env
-AI_ENABLED=true
-AI_CONTENT_ENABLED=true
-AI_SUPPORT_ENABLED=true
-```
+# Data Sources
 
-AI-powered features include:
-- Content generation for vehicle descriptions
-- Support chat assistance
-- Spec extraction from unstructured data
+## Primary
 
-## CI/CD
+* OEM websites
+* Brochure PDFs
+* CarDekho
+* CarWale
+* ZigWheels
+* SIAM
+* VAHAN / mParivahan
+* Dealer inventories
 
-### GitHub Actions
+---
 
-- **CI** (`.github/workflows/ci.yml`): Runs on PRs/pushes to main
-  - PHP 8.2 lint + PHPUnit
-  - Node.js (if present): npm ci/lint/test/build
-  - Python (if present): pytest
+## Secondary
 
-- **Security** (`.github/workflows/security.yml`):
-  - Dependency review
-  - CodeQL analysis
-  - Trivy filesystem scan
+* Insurance providers
+* Finance providers
+* Review communities
+* Expert reviews
+* EV charging providers
+* Spare parts ecosystems
 
-- **Deploy** (`.github/workflows/deploy.yml`):
-  - SSH deployment on manual dispatch or push to main
+---
 
-### Release
+# Database Architecture
 
-Tag `vX.Y.Z` to trigger Docker build/push to GHCR.
+The platform is built on a modular enterprise-grade automotive intelligence schema including:
 
-## Security Notes
+## Core Modules
 
-- All output is escaped via `e()` function (UTF-8, ENT_QUOTES|ENT_SUBSTITUTE)
-- Security headers: X-Content-Type-Options, X-Frame-Options, Referrer-Policy
-- Detail JSON served only via slug allowlist in `data/details_index.json`
-- Strict slug validation: `/^[a-z0-9]+(?:-[a-z0-9]+)*$/`
+* Brands
+* Models
+* Variants
+* Specifications
+* Features
+* Pricing
+* Dealers
+* Insurance
+* Finance
+* AI metadata
+* Buyer personas
+* SEO pages
+* Compliance layers
+* Fleet modules
+* EV infrastructure
 
-## Common Tasks
+---
 
-### Add a New Vehicle
+# Development Phases
 
-1. **JSON Mode**: Add entry to `data/new_carset.json`
-2. **Database Mode**: Use seed scripts with UPSERT patterns
-3. Add detail sheet to `data/` if needed
-4. Register in `data/details_index.json` with slug pattern `/^[a-z0-9]+(?:-[a-z0-9]+)*$/`
+## Phase 1: MVP (Current Focus)
 
-### Regenerate Graphify (Architecture Graph)
+### Deliver:
 
-```powershell
+* New car research platform
+* Comparison engine
+* SEO content pages
+* AI recommendations
+* Dealer leads
+* Basic insurance/finance integrations
+
+---
+
+## Phase 2: Expansion
+
+* Used car intelligence
+* Ownership cost ecosystem
+* Advanced finance
+* Insurance marketplace
+* Enhanced AI personalization
+
+---
+
+## Phase 3: Advanced
+
+* Commercial vehicles
+* Fleet intelligence
+* EV infrastructure
+* Spare parts ecosystem
+* Compliance intelligence
+* Full automotive SaaS ecosystem
+
+---
+
+# Revenue Streams
+
+## Immediate
+
+* Dealer leads
+* Sponsored listings
+* Affiliate insurance
+* Affiliate finance
+* Premium SEO pages
+* Featured promotions
+
+---
+
+## Medium-Term
+
+* Subscription plans
+* Dealer SaaS dashboards
+* Data monetization
+* Premium research tools
+
+---
+
+## Long-Term
+
+* Fleet SaaS
+* Insurance marketplace
+* Financing marketplace
+* Commercial analytics
+* API licensing
+* Automotive intelligence SaaS
+
+---
+
+# Competitive Advantage
+
+## Traditional competitors:
+
+* CarDekho
+* CarWale
+* ZigWheels
+
+---
+
+## AutoPredator Differentiation:
+
+### Data + AI + Ownership + Commercial Intelligence
+
+* Better structured data
+* AI-first recommendations
+* Future-ready architecture
+* Commercial expansion
+* Dealer monetization
+* Compliance integration
+* Ownership lifecycle intelligence
+
+---
+
+# Installation Blueprint
+
+```bash
+git clone <repository_url>
 cd autopredator
-graphify update .
+pip install -r requirements.txt
+npm install
+cp .env.example .env
+python manage.py migrate
+python manage.py seed
+npm run dev
 ```
 
-### Clear Cache
+---
 
-```powershell
-# Remove Graphify outputs
-Remove-Item -Recurse -Force .\autopredator\graphify-out -ErrorAction SilentlyContinue
-Remove-Item -Recurse -Force .\autopredator\.graphify -ErrorAction SilentlyContinue
+# Core Directory Structure
+
+```bash
+/autopredator
+    /frontend
+    /backend
+    /scrapers
+    /ai_pipelines
+    /database
+    /seo_content
+    /admin_dashboard
+    /dealer_portal
+    /insurance_finance
+    /docs
 ```
 
-## Documentation
+---
 
-- [GRAPHIFY.md](autopredator/docs/GRAPHIFY.md) - Architecture graph setup
-- [DATA_SCHEMA.md](autopredator/docs/DATA_SCHEMA.md) - Data schema details
-- [TESTING.md](autopredator/docs/TESTING.md) - Testing guide
-- [MONETIZATION.md](autopredator/docs/MONETIZATION.md) - Billing/monetization
-- [INCIDENT_RESPONSE.md](autopredator/docs/INCIDENT_RESPONSE.md) - Incident handling
+# Scraper System Objectives
 
-## License
+* Daily automated updates
+* OEM data ingestion
+* Pricing normalization
+* PDF parsing
+* Variant enrichment
+* Duplicate suppression
+* Confidence scoring
+* Change detection
+* Regulatory updates
 
-Proprietary - All rights reserved
+---
+
+# AI Objectives
+
+* Vehicle recommendations
+* Persona fitment
+* Predictive pricing
+* Market demand
+* Ownership cost prediction
+* Commercial viability scoring
+* SEO content automation
+
+---
+
+# Security & Compliance
+
+* Data encryption
+* Role-based admin controls
+* Audit logging
+* Source governance
+* API performance monitoring
+* Privacy-first architecture
+* Regulatory adaptability
+
+---
+
+# Long-Term Vision
+
+### Create India’s largest automotive intelligence ecosystem.
+
+By integrating:
+
+* Vehicle research
+* Ownership
+* Finance
+* Insurance
+* Commercial intelligence
+* EV ecosystem
+* Dealer ecosystems
+* AI infrastructure
+
+---
+
+# Current Priority
+
+## Focus:
+
+### AutoPredator Research Core
+
+* Launch fast
+* Populate aggressively
+* Capture SEO traffic
+* Monetize dealer leads
+* Build proprietary data assets
+
+---
+
+# Contributors
+
+* Founder / Product Architect
+* Data Engineering
+* AI Infrastructure
+* SEO Strategy
+* Automotive Research
+* Dealer Monetization
+
+---
+
+# Final Strategic Statement
+
+AutoPredator is not simply a vehicle listing platform.
+
+## It is an automotive intelligence infrastructure designed to evolve from:
+
+### Research Platform → Ownership Platform → Commercial Platform → Full Automotive Ecosystem.
+
+---
+
+# Status
+
+## Active Development
+
+### Phase 1: New Car Research & Buyer Intelligence Platform

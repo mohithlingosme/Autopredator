@@ -1,38 +1,135 @@
-mParivahan / VAHAN
-Vehicle registration data
-State-wise registration trends
-Fuel type trends
-Vehicle class records
-Manufacturer/model registry
-Homologation references
-Tax validity
-Insurance validity
-Fitness certificate validity
-Permit categories
-Public reports
-Registration analytics
-Scrappage and compliance notifications
 
-
-
-SIAM (Society of Indian Automobile Manufacturers)
-Monthly sales reports
-Model-wise sales dataQQ
-Production volumes
-Domestic sales
-Export data
-State-wise sales
-Segment-wise market data
-OEM annual reports
-Industry statistics
-Ministry / Policy
+*SIAM (Society of Indian Automobile Manufacturers)*
+     **Sales & Market Performance**
+         Monthly domestic sales reports (OEM-wise)
+         Model-wise sales data (PV, CV, 2W, 3W)
+Variant/fuel-type specific sales trends
+Wholesale vs retail sales tracking
+State-wise sales distribution
+Urban vs rural market penetration
+Segment-wise market performance:
+Hatchbacks
+Sedans
+SUVs
+MUVs
+Trucks (LCV/MCV/HCV)
+Buses
+EVs
+Category growth trends (YoY, MoM, CAGR)
+Dealer dispatch volumes
+Market share by manufacturer
+Competitive benchmarking reports
+Consumer demand trend analysis
+Registration vs production correlation
+Production & Manufacturing Intelligence
+Monthly production volumes
+Plant-wise manufacturing output
+OEM capacity utilization
+Component sourcing trends
+Localization percentages
+CKD/SKD import data
+Supply chain bottleneck indicators
+Semiconductor dependency metrics
+Battery production ecosystem data
+Commercial vehicle manufacturing trends
+Seasonal production forecasting
+Export-oriented production analysis
+Export & Trade Intelligence
+OEM-wise export reports
+Destination country analysis
+Segment-wise export performance
+Trade policy impact reports
+Import-export tariff structures
+International homologation compliance
+Global demand comparison
+Trade agreements affecting auto sector
+Foreign market entry analytics
+OEM Strategic Intelligence
+Annual reports
+Investor presentations
+Product launch timelines
+Discontinuation records
+Dealer network expansion
+Manufacturing investments
+R&D expenditure
+EV roadmap disclosures
+Hydrogen/flex-fuel strategy
+Recall performance records
+Corporate sustainability goals
+M&A activity
+Brand portfolio evolution
+Government / Ministry / Regulatory Intelligence
+Ministry of Road Transport & Highways (MoRTH)
 CMVR regulations
-FAME subsidies
-EV incentives
-Tax policies
-Emission norms
+Type approval requirements
+Vehicle homologation standards
+AIS standards
+Bharat NCAP updates
 Safety mandates
+Crash test regulations
+Fitness & inspection policies
+Vehicle scrappage policy
+Permit structures
+National logistics policy
+Fleet modernization schemes
+Taxation & Fiscal Policies
+GST slabs by vehicle category
+Road tax structures
+State registration tax comparison
+Import duties
+Luxury cess
+Green taxes
+Battery manufacturing incentives
+PLI schemes
+Corporate tax benefits for OEMs
+Used vehicle taxation frameworks
+EV & Alternative Fuel Policies
+FAME I / II / III subsidy structures
+State EV policy incentives
+Charging infrastructure subsidies
+Battery swapping policy
+Hydrogen mobility incentives
+Flex-fuel regulations
+CNG/LNG commercial vehicle support
+Biofuel mandates
+Carbon credit frameworks
+Green mobility adoption metrics
+Environmental & Compliance Data
+BS4 / BS6 / BS7 transition policies
+Emission norms
+Corporate Average Fuel Efficiency (CAFE)
+Carbon emission targets
+Recycling compliance
+Battery disposal norms
+ESG regulations
+Sustainability reporting
+Fuel economy standards
+Safety, Legal & Recall Ecosystem
+Mandatory safety features timeline
+ADAS regulations
+Airbag mandates
+ABS/CBS mandates
 Recall notices
+Defect investigations
+Consumer complaints
+Legal disputes
+Warranty regulations
+Product liability frameworks
+Insurance-linked compliance
+Cybersecurity mandates for connected vehicles
+Market Research & Forecasting Enhancements
+Industry whitepapers
+SIAM forecasts
+NITI Aayog reports
+McKinsey/Bain automotive reports
+Deloitte mobility studies
+EV adoption forecasts
+Used vehicle market reports
+Fleet ownership trends
+Telematics adoption
+Financing penetration
+Leasing market data
+Insurance ecosystem analytics
 
 TIER 2: OEM / MANUFACTURER SOURCES
 Major OEM websites:
